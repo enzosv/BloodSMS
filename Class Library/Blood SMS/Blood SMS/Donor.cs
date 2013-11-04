@@ -52,6 +52,7 @@ namespace Blood_SMS
             
         }
 
+        //I think these methods should be in a donorList class
         List<Donor> donors;
         List<Donor> getViableDonors()
         {
