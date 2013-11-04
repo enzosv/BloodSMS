@@ -51,5 +51,27 @@ namespace Blood_SMS
             times_donated = 0;
             
         }
+
+        List<Donor> donors;
+        List<Donor> getViableDonors()
+        {
+            List<Donor> viable = new List<Donor>();
+            foreach(Donor d in donors)
+            {
+                if (d.is_viable && d.is_voluntary && d.is_contactable)
+                    viable.Add(d);
+            }
+            return viable;
+        }
+
+        void Contact()
+        {
+            times_contacted++;
+        }
+
+        void Donate()
+        {
+            times_donated++;
+        }
     }
 }

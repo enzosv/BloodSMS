@@ -39,6 +39,21 @@ namespace Blood_SMS
             reason_for_removal = "";
         }
 
+        void Assign(string PATIENT_NAME, int PATIENT_AGE, DateTime DATE_REMOVED)
+        {
+            is_assigned = true;
+            date_removed = DATE_REMOVED;
+            patient_name = PATIENT_NAME;
+            patient_age = PATIENT_AGE;
+            reason_for_removal = "Released to: " + patient_name + " on " + date_removed;
+        }
+
+        void Quarantine(string reason, DateTime DATE_REMOVED)
+        {
+            is_quarantined = true;
+            date_removed = DATE_REMOVED;
+            reason_for_removal = reason;
+        }
         //get set all the shit
 
     }
