@@ -8,7 +8,7 @@ namespace Blood_SMS
     public class Donor
     {
         int donor_id;
-        int blood_type_id;
+        string bloodtype;
         string name;
         string street;
         string city;
@@ -27,11 +27,12 @@ namespace Blood_SMS
         DateTime next_available;
         bool is_voluntary;
 
+
         //Register new donor
-        public Donor(int DONOR_ID, int BLOOD_TYPE_ID, string NAME, string STREET, string CITY, string PROVINCE, string EMAIL, string CELLPHONE, DateTime DATE_REGISTERED, bool IS_VIABLE, DateTime BIRTH_DATE, string REASON_FOR_DEFERRAL, bool IS_CONTACTABLE, int AGE, DateTime NEXT_AVAILABLE, bool IS_VOLUNTARY)
+        public Donor(int DONOR_ID, string BLOODTYPE, string NAME, string STREET, string CITY, string PROVINCE, string EMAIL, string CELLPHONE, DateTime DATE_REGISTERED, bool IS_VIABLE, DateTime BIRTH_DATE, string REASON_FOR_DEFERRAL, bool IS_CONTACTABLE, int AGE, DateTime NEXT_AVAILABLE, bool IS_VOLUNTARY)
         {
             donor_id = DONOR_ID;
-            blood_type_id = BLOOD_TYPE_ID;
+            bloodtype = BLOODTYPE;
             name = NAME;
             street = STREET;
             city = CITY;
@@ -56,13 +57,13 @@ namespace Blood_SMS
         List<Donor> donors;
         List<Donor> getViableDonors()
         {
-            List<Donor> viable = new List<Donor>();
+            List<Donor> viableDonors = new List<Donor>();
             foreach(Donor d in donors)
             {
                 if (d.is_viable && d.is_voluntary && d.is_contactable)
                     viable.Add(d);
             }
-            return viable;
+            return viableDonors;
         }
 
         void Contact()
