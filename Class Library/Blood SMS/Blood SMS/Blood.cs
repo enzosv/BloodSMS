@@ -7,7 +7,6 @@ namespace Blood_SMS
 {
     public class Blood
     {
-        public int blood_type_id;
         public int donor_id;
         public DateTime date_donated;
         public DateTime date_expire;
@@ -24,9 +23,8 @@ namespace Blood_SMS
         //Record Blood Ins
         //Create
 
-        public Blood(int BLOOD_TYPE_ID, int DONOR_ID, DateTime DATE_DONATED, DateTime DATE_EXPIRE, string COMPONENT)
+        public Blood(int DONOR_ID, DateTime DATE_DONATED, DateTime DATE_EXPIRE, string COMPONENT)
         {
-            blood_type_id = BLOOD_TYPE_ID;
             donor_id = DONOR_ID;
             date_donated = DATE_DONATED;
             date_expire = DATE_EXPIRE;
