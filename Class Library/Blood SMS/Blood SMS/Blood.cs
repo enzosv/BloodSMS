@@ -7,21 +7,27 @@ namespace Blood_SMS
 {
     public class Blood
     {
-        public int donor_id;
-        public DateTime date_donated;
-        public DateTime date_expire;
-        public string component;
+        int donor_id;
+        DateTime date_donated;
+        DateTime date_expire;
+        string component;
 
-        public bool is_assigned;
-        public string patient_name;
-        public int patient_age;
+        bool is_assigned;
+        string patient_name;
+        int patient_age;
 
-        public int age;
-        public bool is_quarantined;
-        public string reason_for_removal;
-        public DateTime date_removed;
+        int age;
+        bool is_quarantined;
+        string reason_for_removal;
+        DateTime date_removed;
+
+        public int Donor_id { get; set; }
+        public DateTime Date_removed { get; set; }
+
         //Record Blood Ins
         //Create
+
+        int Donor_id { get; set; }
 
         public Blood(int DONOR_ID, DateTime DATE_DONATED, DateTime DATE_EXPIRE, string COMPONENT)
         {

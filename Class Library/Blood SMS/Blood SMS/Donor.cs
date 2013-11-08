@@ -28,7 +28,8 @@ namespace Blood_SMS
         DateTime next_available;
         bool is_voluntary;
 
-
+        int Donor_id { get; set; }
+        bloodType Blood_type { get; set; }
         //Register new donor
         public Donor(int DONOR_ID, 
             bloodType BLOOD_TYPE, 

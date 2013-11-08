@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Blood_SMS
 {
-    public static enum bloodType { A, B, O };
+    enum bloodType { A, B, O };
     public class Storage
     {
         List<Blood> bloodList;
@@ -34,9 +34,9 @@ namespace Blood_SMS
         {
             foreach (Blood b in bloodList)
             {
-                if (b.date_removed == null)
+                if (b.Date_removed == null)
                 {
-                    bloodTypes[(int)findDonor(b.donor_id).blood_type].Add(b);
+                    bloodTypes[(int)findDonor(b.Donor_id).blood_type].Add(b);
                 }
             }
         }
