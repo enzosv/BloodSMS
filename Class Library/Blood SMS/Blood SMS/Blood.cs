@@ -24,13 +24,18 @@ namespace Blood_SMS
 
         public int Blood_id { get; set; }
         public int Donor_id { get; set; }
+        public DateTime Date_donated { get; set; }
+        public DateTime Date_expire { get; set; }
+        public int Age { get; set; }
+        public string Patient_name { get; set; }
+        public int Patient_age { get; set; }
+        public bool Is_assigned { get; set; }
+        public string Component { get; set; }
+        public bool Is_quarantined { get; set; }
+        public string Reason_for_removal { get; set; }
         public DateTime Date_removed { get; set; }
 
-        //public string Patient_name { get; set; }
-        //public int Patient_age { get; set; }
-        //public bool Is_assigned { get; set; }
-        //public string Reason_for_removal { get; set; }
-        public string Component { get; set; }
+        
 
         //Record Blood Ins
         //Create
@@ -42,6 +47,7 @@ namespace Blood_SMS
             date_expire = DATE_EXPIRE;
             component = COMPONENT;
 
+            date_removed = DateTime.MinValue;
             is_assigned = false;
             patient_name = "";
             patient_age = 0;
@@ -53,10 +59,15 @@ namespace Blood_SMS
         public void Assign(string PATIENT_NAME, int PATIENT_AGE)
         {
             is_assigned = true;
-           
             patient_name = PATIENT_NAME;
             patient_age = PATIENT_AGE;
             
+        }
+
+        public void Release(string PATIENT_NAME, int PATIENT_AGE, DateTime DATE_REMOVED)
+        {
+            Assign(PATIENT_NAME, PATIENT_AGE);
+            Release(DATE_REMOVED);
         }
 
         public void Release(DateTime DATE_REMOVED)

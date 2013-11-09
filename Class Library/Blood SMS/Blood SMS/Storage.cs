@@ -17,13 +17,25 @@ namespace Blood_SMS
 
         Storage(string host, string db, string user, string pass)
         {
-            bloodList = new List<Blood>();
-            bloodTypes = new List<Blood>[Enum.GetNames(typeof(bloodType)).Length];
-            donorList = new List<Donor>();
-
             connectionString = string.Format("Server={0};Database={1};Uid={2};Pwd={3}", host, db, user, pass);
         }
 
+        void getDonorSQL()
+        {
+            donorList = new List<Donor>();
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+
+            string query = "Select * from Donor";
+            MySqlCommand command = new MySqlCommand(query, conn);
+            MySqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+
+            }
+            reader.Close();
+            conn.Close();
+        }
         void getBloodSQL()
         {
             bloodList = new List<Blood>();
@@ -82,39 +94,40 @@ namespace Blood_SMS
 
         bool AddBlood(DateTime date_donated, DateTime date_expire, int donor_id, string component)
         {
-            Blood newBlood = new Blood(donor_id, date_donated, date_expire, component);
-            bloodList.Add(newBlood);
+            Blood x = new Blood(donor_id, date_donated, date_expire, component);
+            bloodList.Add(x);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
+            string query = "Insert into blood " +
+                "(donor_id, patient_name, patient_age, date_donated, date_expire, date_removed, is_assigned, age, is_quarantined, reason_for_removal, component) " +
+                "Values(?a, ?b, ?c, ?d, ?e, ?f, ?g, ?h, ?i, ?j, ?k)";
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            comm.Parameters.AddWithValue("?a", x.Donor_id);
+            comm.Parameters.AddWithValue("?b", x.Patient_name);
+            comm.Parameters.AddWithValue("?c", x.Patient_age);
+            comm.Parameters.AddWithValue("?d", x.Date_donated);
+            comm.Parameters.AddWithValue("?e", x.Date_expire);
+            comm.Parameters.AddWithValue("?f", x.Date_removed);
+            comm.Parameters.AddWithValue("?g", x.Is_assigned);
+            comm.Parameters.AddWithValue("?h", x.Age);
+            comm.Parameters.AddWithValue("?i", x.Is_quarantined);
+            comm.Parameters.AddWithValue("?j", x.Reason_for_removal);
+            comm.Parameters.AddWithValue("?k", x.Component);
 
-            //string query = "Insert into dormerlist " +
-            //    "(idNumber, firstName, mI, lastName, year, course, roomNumber, points, attendance, position) " +
-            //    "Values(?a, ?b, ?c, ?d, ?e, ?f, ?g, ?h, ?i, ?j)";
-            //MySqlCommand comm = new MySqlCommand(query, conn);
-            //comm.Parameters.AddWithValue("?a", x.IdNumber);
-            //comm.Parameters.AddWithValue("?b", x.FirstName);
-            //comm.Parameters.AddWithValue("?c", x.MI);
-            //comm.Parameters.AddWithValue("?d", x.LastName);
-            //comm.Parameters.AddWithValue("?e", x.Year);
-            //comm.Parameters.AddWithValue("?f", x.Course);
-            //comm.Parameters.AddWithValue("?g", x.RoomNumber);
-            //comm.Parameters.AddWithValue("?h", x.Points);
-            //comm.Parameters.AddWithValue("?i", x.Attendance);
-            //comm.Parameters.AddWithValue("?j", x.Position);
 
+            int affectedRows = comm.ExecuteNonQuery();
 
-            //int affectedRows = comm.ExecuteNonQuery();
-
-            //if (affectedRows > 0)
-            //{
-            //    return true;
-            //}
+            if (affectedRows > 0)
+            {
+                return true;
+            }
             return false;
         }
 
         void getBloodInInventory()
         {
+            bloodTypes = new List<Blood>[Enum.GetNames(typeof(bloodType)).Length];
             foreach (Blood b in bloodList)
             {
                 if (b.Date_removed == null)
