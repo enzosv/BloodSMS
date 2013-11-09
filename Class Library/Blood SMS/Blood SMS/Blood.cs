@@ -7,6 +7,7 @@ namespace Blood_SMS
 {
     public class Blood
     {
+        int blood_id;
         int donor_id;
         DateTime date_donated;
         DateTime date_expire;
@@ -21,13 +22,18 @@ namespace Blood_SMS
         string reason_for_removal;
         DateTime date_removed;
 
+        public int Blood_id { get; set; }
         public int Donor_id { get; set; }
         public DateTime Date_removed { get; set; }
 
+        //public string Patient_name { get; set; }
+        //public int Patient_age { get; set; }
+        //public bool Is_assigned { get; set; }
+        //public string Reason_for_removal { get; set; }
+        public string Component { get; set; }
+
         //Record Blood Ins
         //Create
-
-        int Donor_id { get; set; }
 
         public Blood(int DONOR_ID, DateTime DATE_DONATED, DateTime DATE_EXPIRE, string COMPONENT)
         {
@@ -44,16 +50,25 @@ namespace Blood_SMS
             reason_for_removal = "";
         }
 
-        void Assign(string PATIENT_NAME, int PATIENT_AGE, DateTime DATE_REMOVED)
+        public void Assign(string PATIENT_NAME, int PATIENT_AGE)
         {
             is_assigned = true;
-            date_removed = DATE_REMOVED;
+           
             patient_name = PATIENT_NAME;
             patient_age = PATIENT_AGE;
-            reason_for_removal = "Released to: " + patient_name + " on " + date_removed;
+            
         }
 
-        void Quarantine(string reason, DateTime DATE_REMOVED)
+        public void Release(DateTime DATE_REMOVED)
+        {
+            if (is_assigned)
+            {
+                date_removed = DATE_REMOVED;
+                reason_for_removal = "Released to: " + patient_name + " on " + date_removed;
+            }
+        }
+
+        public void Quarantine(string reason, DateTime DATE_REMOVED)
         {
             is_quarantined = true;
             date_removed = DATE_REMOVED;

@@ -35,22 +35,44 @@ namespace Blood_SMS
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                //int idNumber = (int)reader.GetValue(0);
-                //string firstName = reader.GetValue(1).ToString();
-                //string mI = reader.GetValue(2).ToString();
-                //string lastName = reader.GetValue(3).ToString();
-                //int year = (int)reader.GetValue(4);
-                //string course = reader.GetValue(5).ToString();
-                //string roomNumber = reader.GetValue(6).ToString();
-                //int points = (int)reader.GetValue(7);
-                //int attendance = (int)reader.GetValue(8);
-                //string position = reader.GetValue(9).ToString();
+                int blood_id = reader.GetInt32(0);
+                int donor_id = reader.GetInt32(1);
+                string patient_name = reader.GetString(2);
+                int patient_age = reader.GetInt32(3);
+                DateTime date_donated = reader.GetDateTime(4);
+                DateTime date_expire = reader.GetDateTime(5);
+                DateTime date_removed = DateTime.MinValue;
+                if (reader.GetValue(6) != null)
+                    date_removed = reader.GetDateTime(6);
+                bool is_assigned = reader.GetBoolean(7);
+                int age = reader.GetInt32(8);
+                bool is_quarantined = reader.GetBoolean(9);
+                string reason_for_removal = reader.GetString(10);
+                string component = reader.GetString(11);
 
-                //Dormer x = new Dormer(idNumber, firstName, mI, lastName, year, course, roomNumber, points, attendance, position);
+                Blood x = new Blood(donor_id, date_donated, date_expire, component);
+                x.Blood_id = blood_id;
+                if (is_assigned)
+                {
+                    x.Assign(patient_name, patient_age);
+                }
+                if (date_removed != DateTime.MinValue)
+                {
+                    if (is_assigned)
+                    {
+                        x.Release(date_removed);
+                    }
+                    else if (is_quarantined)
+                    {
+                        x.Quarantine(reason_for_removal, date_removed);
+                    }
+                }
+                x.Component = component;
+                bloodList.Add(x);
             }
             reader.Close();
             conn.Close();
-            
+
         }
         void AddDonor(int donor_id, bloodType blood_type, string name, string street, string city, string province, string email, string cellphone, string reason_for_deferral, DateTime date_registered, DateTime next_available, DateTime birth_date, bool is_viable, bool is_contactable, bool is_voluntary)
         {
