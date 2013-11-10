@@ -14,9 +14,11 @@ namespace Blood_SMS
         List<Donor> donorList;
 
         string connectionString;
-        const string BLOOD_FIELDS = "blood_id,donor_id,patient_name,patient_age,date_donated,date_expire,date_removed,is_assigned,is_quarantined,reason_for_removal,component";
-        const string DONOR_FIELDS = "";
+        //const string BLOOD_FIELDS = "blood_id,donor_id,patient_name,patient_age,date_donated,date_expire,date_removed,is_assigned,is_quarantined,reason_for_removal,component";
+        //const string DONOR_FIELDS = "";
 
+        readonly string[] BLOOD_FIELDS = { "blood_id", "donor_id", "patient_name", "patient_age", "date_donated", "date_expire", "date_removed", "is_assigned", "is_quarantined", "reason_for_removal", "compoenent" };
+        readonly string[] DONOR_FIELDS = {};
         Storage(string host, string db, string user, string pass)
         {
             connectionString = string.Format("Server={0};Database={1};Uid={2};Pwd={3}", host, db, user, pass);
@@ -123,10 +125,9 @@ namespace Blood_SMS
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
-            string fields = "donor_id,patient_name,patient_age,date_donated,date_expire,date_removed,is_assigned,age,is_quarantined,reason_for_removal,component";
-            string query = "Insert into Donor (" + AddQuery(fields) + ")";
+            string query = "Insert into Donor (" + AddQuery(DONOR_FIELDS) + ")";
             MySqlCommand comm = new MySqlCommand(query, conn);
-            AddValue(comm, x, fields);
+            AddValue(comm, x, DONOR_FIELDS);
             return RowsAffected(comm);
         }
 
@@ -227,18 +228,17 @@ namespace Blood_SMS
          *  returns a string which assigns the values to be updated
          *</summary>
          *<param name="fields">
-         *  string containing all fields for an SQL table
+         *  string array containing all fields for an SQL table
          *</param>
          */
-        string UpdateQuery(string fields)
+        string UpdateQuery(string[] fields)
         {
-            string[] values = fields.Split(',');
             string valueParameters = "";
-            for (int i = 1; i < values.Length; i++)
+            for (int i = 1; i < fields.Length; i++)
             {
-                valueParameters += values[i] + "=@" + values[i] + ", ";
+                valueParameters += fields[i] + "=@" + fields[i] + ", ";
             }
-            valueParameters += "Where " + values[0] + "=@" + values[0];
+            valueParameters += "Where " + fields[0] + "=@" + fields[0];
             return valueParameters;
         }
 
@@ -247,22 +247,24 @@ namespace Blood_SMS
          *  returns a string which assigns the values to be populated
          *</summary>
          *<param name="fields">
-         *  string containing all fields for an SQL table
+         *  string array containing all fields for an SQL table
          *</param>
          */
-        string AddQuery(string fields)
+        string AddQuery(string[] fields)
         {
-            string[] values = fields.Split(',');
+            string fieldNames = "";
             string valueParameters = "";
-            for (int i = 0; i < values.Length; i++)
+            for (int i = 0; i < fields.Length; i++)
             {
-                valueParameters += "@" + values[i];
-                if (i < values.Length - 1)
+                fieldNames += fields[i];
+                valueParameters += "@" + fields[i];
+                if (i < fields.Length - 1)
                 {
+                    fieldNames += ", ";
                     valueParameters += ", ";
                 }
             }
-            return fields + ") Values(" + valueParameters;
+            return fieldNames + ") Values(" + valueParameters;
         }
 
         /*
@@ -276,15 +278,14 @@ namespace Blood_SMS
          *  Object where properties will be taken from
          *</param>
          *<param name="fields">
-         *  string containing all fields for an SQL table
+         *  string array containing all fields for an SQL table
          *</param>
          */
-        void AddValue(MySqlCommand comm, Object x, string fields)
+        void AddValue(MySqlCommand comm, Object x, string[] fields)
         {
-            string[] values = fields.Split(',');
-            for (int i = 0; i < values.Length; i++)
+            for (int i = 0; i < fields.Length; i++)
             {
-                comm.Parameters.AddWithValue("@" + values[i], GetPropValue(x, Capitalize(values[i])));
+                comm.Parameters.AddWithValue("@" + fields[i], GetPropValue(x, Capitalize(fields[i])));
             }
         }
 
