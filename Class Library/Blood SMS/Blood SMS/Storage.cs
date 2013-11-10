@@ -99,21 +99,24 @@ namespace Blood_SMS
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
-            string query = "Insert into blood " +
-                "(donor_id, patient_name, patient_age, date_donated, date_expire, date_removed, is_assigned, age, is_quarantined, reason_for_removal, component) " +
-                "Values(?a, ?b, ?c, ?d, ?e, ?f, ?g, ?h, ?i, ?j, ?k)";
+            string fields = "donor_id,patient_name,patient_age,date_donated,date_expire,date_removed,is_assigned,age,is_quarantined,reason_for_removal,component";
+            string query = "Insert into blood (" + AddQuery(fields) + ")";
+                
+                //"donor_id, patient_name, patient_age, date_donated, date_expire, date_removed, is_assigned, age, is_quarantined, reason_for_removal, component) " +
+                //"Values(@donor_id, ?b, ?c, ?d, ?e, ?f, ?g, ?h, ?i, ?j, ?k)";
             MySqlCommand comm = new MySqlCommand(query, conn);
-            comm.Parameters.AddWithValue("?a", x.Donor_id);
-            comm.Parameters.AddWithValue("?b", x.Patient_name);
-            comm.Parameters.AddWithValue("?c", x.Patient_age);
-            comm.Parameters.AddWithValue("?d", x.Date_donated);
-            comm.Parameters.AddWithValue("?e", x.Date_expire);
-            comm.Parameters.AddWithValue("?f", x.Date_removed);
-            comm.Parameters.AddWithValue("?g", x.Is_assigned);
-            comm.Parameters.AddWithValue("?h", x.Age);
-            comm.Parameters.AddWithValue("?i", x.Is_quarantined);
-            comm.Parameters.AddWithValue("?j", x.Reason_for_removal);
-            comm.Parameters.AddWithValue("?k", x.Component);
+            AddValue(comm, x, fields);
+            //comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
+            //comm.Parameters.AddWithValue("?b", x.Patient_name);
+            //comm.Parameters.AddWithValue("?c", x.Patient_age);
+            //comm.Parameters.AddWithValue("?d", x.Date_donated);
+            //comm.Parameters.AddWithValue("?e", x.Date_expire);
+            //comm.Parameters.AddWithValue("?f", x.Date_removed);
+            //comm.Parameters.AddWithValue("?g", x.Is_assigned);
+            //comm.Parameters.AddWithValue("?h", x.Age);
+            //comm.Parameters.AddWithValue("?i", x.Is_quarantined);
+            //comm.Parameters.AddWithValue("?j", x.Reason_for_removal);
+            //comm.Parameters.AddWithValue("?k", x.Component);
 
 
             int affectedRows = comm.ExecuteNonQuery();
@@ -123,6 +126,42 @@ namespace Blood_SMS
                 return true;
             }
             return false;
+        }
+
+        string AddQuery(string fields)
+        {
+            string[] values = fields.Split(',');
+            string valueParameters = "";
+            for (int i = 0; i < values.Length; i++)
+            {
+                valueParameters += "@" + values[i];
+                if (i < values.Length - 1)
+                {
+                    valueParameters += ", ";
+                }
+            }
+            return fields + ") Values(" + valueParameters;
+        }
+
+        void AddValue(MySqlCommand comm, Blood x, string fields)
+        {
+            string[] values = fields.Split(',');
+            for (int i = 0; i < values.Length; i++)
+            {
+                comm.Parameters.AddWithValue("@" + values[i], GetPropValue(x, Capitalize(values[i])));
+            }
+        }
+
+        //http://stackoverflow.com/questions/1196991/get-property-value-from-string-using-reflection-in-c-sharp
+        object GetPropValue(object src, string propName)
+        {
+            return src.GetType().GetProperty(propName).GetValue(src, null);
+        }
+
+        //http://stackoverflow.com/questions/4135317/make-first-letter-of-a-string-upper-case
+        string Capitalize(string s)
+        {
+            return s.First().ToString().ToUpper() + String.Join("", s.Skip(1));
         }
 
         void getBloodInInventory()
