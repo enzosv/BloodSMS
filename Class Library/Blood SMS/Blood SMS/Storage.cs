@@ -62,8 +62,7 @@ namespace Blood_SMS
                 string reason_for_removal = reader.GetString(10);
                 string component = reader.GetString(11);
 
-                Blood x = new Blood(donor_id, date_donated, date_expire, component);
-                x.Blood_id = blood_id;
+                Blood x = new Blood(bloodList.Count, donor_id, date_donated, date_expire, component);
                 if (is_assigned)
                 {
                     x.Assign(patient_name, patient_age);
@@ -86,37 +85,53 @@ namespace Blood_SMS
             conn.Close();
 
         }
-        void AddDonor(int donor_id, bloodType blood_type, string name, string street, string city, string province, string email, string cellphone, string reason_for_deferral, DateTime date_registered, DateTime next_available, DateTime birth_date, bool is_viable, bool is_contactable, bool is_voluntary)
+        bool AddDonor(int donor_id, bloodType blood_type, string name, string street, string city, string province, string email, string cellphone, string reason_for_deferral, DateTime date_registered, DateTime next_available, DateTime birth_date, bool is_viable, bool is_contactable, bool is_voluntary)
         {
-            Donor newDonor = new Donor(donor_id, blood_type, name, street, city, province, email, cellphone, reason_for_deferral, date_registered, next_available, birth_date, is_viable, is_contactable, is_voluntary);
-            donorList.Add(newDonor);
-        }
-
-        bool AddBlood(DateTime date_donated, DateTime date_expire, int donor_id, string component)
-        {
-            Blood x = new Blood(donor_id, date_donated, date_expire, component);
-            bloodList.Add(x);
+            Donor x = new Donor(donorList.Count, blood_type, name, street, city, province, email, cellphone, reason_for_deferral, date_registered, next_available, birth_date, is_viable, is_contactable, is_voluntary);
+            donorList.Add(x);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
             string fields = "donor_id,patient_name,patient_age,date_donated,date_expire,date_removed,is_assigned,age,is_quarantined,reason_for_removal,component";
+            string query = "Insert into blood (" + AddQuery(fields) + ")";
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            AddValue(comm, x, fields);
+            int affectedRows = comm.ExecuteNonQuery();
+
+            if (affectedRows > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        bool AddBlood(DateTime date_donated, DateTime date_expire, int donor_id, string component)
+        {
+            Blood x = new Blood(bloodList.Count, donor_id, date_donated, date_expire, component);
+            bloodList.Add(x);
+
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+            string fields = "blood_id, donor_id,patient_name,patient_age,date_donated,date_expire,date_removed,is_assigned,age,is_quarantined,reason_for_removal,component";
             string query = "Insert into blood (" + AddQuery(fields) + ")";
                 
                 //"donor_id, patient_name, patient_age, date_donated, date_expire, date_removed, is_assigned, age, is_quarantined, reason_for_removal, component) " +
                 //"Values(@donor_id, ?b, ?c, ?d, ?e, ?f, ?g, ?h, ?i, ?j, ?k)";
             MySqlCommand comm = new MySqlCommand(query, conn);
             AddValue(comm, x, fields);
-            //comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
-            //comm.Parameters.AddWithValue("?b", x.Patient_name);
-            //comm.Parameters.AddWithValue("?c", x.Patient_age);
-            //comm.Parameters.AddWithValue("?d", x.Date_donated);
-            //comm.Parameters.AddWithValue("?e", x.Date_expire);
-            //comm.Parameters.AddWithValue("?f", x.Date_removed);
-            //comm.Parameters.AddWithValue("?g", x.Is_assigned);
-            //comm.Parameters.AddWithValue("?h", x.Age);
-            //comm.Parameters.AddWithValue("?i", x.Is_quarantined);
-            //comm.Parameters.AddWithValue("?j", x.Reason_for_removal);
-            //comm.Parameters.AddWithValue("?k", x.Component);
+            /*
+            comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
+            comm.Parameters.AddWithValue("?b", x.Patient_name);
+            comm.Parameters.AddWithValue("?c", x.Patient_age);
+            comm.Parameters.AddWithValue("?d", x.Date_donated);
+            comm.Parameters.AddWithValue("?e", x.Date_expire);
+            comm.Parameters.AddWithValue("?f", x.Date_removed);
+            comm.Parameters.AddWithValue("?g", x.Is_assigned);
+            comm.Parameters.AddWithValue("?h", x.Age);
+            comm.Parameters.AddWithValue("?i", x.Is_quarantined);
+            comm.Parameters.AddWithValue("?j", x.Reason_for_removal);
+            comm.Parameters.AddWithValue("?k", x.Component);
+             * */
 
 
             int affectedRows = comm.ExecuteNonQuery();
@@ -143,7 +158,7 @@ namespace Blood_SMS
             return fields + ") Values(" + valueParameters;
         }
 
-        void AddValue(MySqlCommand comm, Blood x, string fields)
+        void AddValue(MySqlCommand comm, Object x, string fields)
         {
             string[] values = fields.Split(',');
             for (int i = 0; i < values.Length; i++)

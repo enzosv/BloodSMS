@@ -40,8 +40,9 @@ namespace Blood_SMS
         //Record Blood Ins
         //Create
 
-        public Blood(int DONOR_ID, DateTime DATE_DONATED, DateTime DATE_EXPIRE, string COMPONENT)
+        public Blood(int BLOOD_ID, int DONOR_ID, DateTime DATE_DONATED, DateTime DATE_EXPIRE, string COMPONENT)
         {
+            blood_id = BLOOD_ID;
             donor_id = DONOR_ID;
             date_donated = DATE_DONATED;
             date_expire = DATE_EXPIRE;
