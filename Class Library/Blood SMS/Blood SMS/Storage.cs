@@ -22,6 +22,11 @@ namespace Blood_SMS
             connectionString = string.Format("Server={0};Database={1};Uid={2};Pwd={3}", host, db, user, pass);
         }
 
+        /*
+        *<summary>
+        *  Gets all rows from the SQL Donor table and adds them to the donorList
+        *</summary>
+        */
         void getDonorSQL()
         {
             donorList = new List<Donor>();
@@ -38,6 +43,12 @@ namespace Blood_SMS
             reader.Close();
             conn.Close();
         }
+
+        /*
+        *<summary>
+        *  Gets all rows from the SQL blood table and adds them to the bloodList
+        *</summary>
+        */
         void getBloodSQL()
         {
             bloodList = new List<Blood>();
@@ -68,14 +79,20 @@ namespace Blood_SMS
                 if (is_assigned)
                 {
                     x.Assign(patient_name, patient_age);
-                }
-                if (date_removed != DateTime.MinValue)
-                {
-                    if (is_assigned)
+                    if (date_removed != DateTime.MinValue)
                     {
                         x.Release(date_removed);
                     }
-                    else if (is_quarantined)
+                }
+
+                else if (!is_quarantined && date_expire < DateTime.Today)
+                {
+                    x.Quarantine("Expired on " + date_expire.ToShortDateString(), date_expire);
+                }
+
+                if (date_removed != DateTime.MinValue)
+                {
+                    if (is_quarantined)
                     {
                         x.Quarantine(reason_for_removal, date_removed);
                     }
@@ -87,6 +104,11 @@ namespace Blood_SMS
             conn.Close();
 
         }
+        /*
+        *<summary>
+        *  Creates donor object from parameters, adds it to the donorList and creates row in SQL
+        *</summary>
+        */
         bool AddDonor(int donor_id, bloodType blood_type, string name, string street, string city, string province, string email, string cellphone, string reason_for_deferral, DateTime date_registered, DateTime next_available, DateTime birth_date, bool is_viable, bool is_contactable, bool is_voluntary)
         {
             Donor x = new Donor(donorList.Count, blood_type, name, street, city, province, email, cellphone, reason_for_deferral, date_registered, next_available, birth_date, is_viable, is_contactable, is_voluntary);
@@ -101,6 +123,11 @@ namespace Blood_SMS
             return RowsAffected(comm);
         }
 
+        /*
+        *<summary>
+        *  Creates blood object from parameters, adds it to the bloodList and creates row in SQL
+        *</summary>
+        */
         bool AddBlood(DateTime date_donated, DateTime date_expire, int donor_id, string component)
         {
             Blood x = new Blood(bloodList.Count, donor_id, date_donated, date_expire, component);
@@ -133,6 +160,14 @@ namespace Blood_SMS
             return RowsAffected(comm);
         }
 
+        /*
+        *<summary>
+        *  Updates the sql table with the properties found in the supplied object
+        *</summary>
+        *<param name="x">
+        *  Blood object containing properties to be applied
+        *</param>
+        */
         bool UpdateBlood(Blood x)
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
@@ -143,6 +178,14 @@ namespace Blood_SMS
             return RowsAffected(comm);
         }
 
+        /*
+         *<summary>
+         *  Updates the sql table with the properties found in the supplied object
+         *</summary>
+         *<param name="x">
+         *  Donor object containing properties to be applied
+         *</param>
+         */
         bool UpdateDonor(Donor x)
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
@@ -154,16 +197,32 @@ namespace Blood_SMS
         }
 
         #region Utility Methods
-        bool RowsAffected (MySqlCommand comm){
-            int affectedRows = comm.ExecuteNonQuery();
 
-            if (affectedRows > 0)
+        /*
+         *<summary>
+         *  returns true if rows have been affected
+         *</summary>
+         *<param name="comm">
+         *  MySQLCommand where number of affected rows will be determined from
+         *</param>
+         */
+        bool RowsAffected (MySqlCommand comm){
+
+            if (comm.ExecuteNonQuery() > 0)
             {
                 return true;
             }
             return false;
         }
 
+        /*
+         *<summary>
+         *  returns a string which assigns the values to be updated
+         *</summary>
+         *<param name="fields">
+         *  string containing all fields for an SQL table
+         *</param>
+         */
         string UpdateQuery(string fields)
         {
             string[] values = fields.Split(',');
@@ -176,6 +235,14 @@ namespace Blood_SMS
             return valueParameters;
         }
 
+        /*
+         *<summary>
+         *  returns a string which assigns the values to be populated
+         *</summary>
+         *<param name="fields">
+         *  string containing all fields for an SQL table
+         *</param>
+         */
         string AddQuery(string fields)
         {
             string[] values = fields.Split(',');
@@ -191,6 +258,20 @@ namespace Blood_SMS
             return fields + ") Values(" + valueParameters;
         }
 
+        /*
+         *<summary>
+         *  iterates through all fields provided in the parameter and adds the value to the sql from the object's properties
+         *</summary>
+         *<param name="comm">
+         *  MySqlCommand object where parameters and values will be passed
+         *</param>
+         *<param name="x">
+         *  Object where properties will be taken from
+         *</param>
+         *<param name="fields">
+         *  string containing all fields for an SQL table
+         *</param>
+         */
         void AddValue(MySqlCommand comm, Object x, string fields)
         {
             string[] values = fields.Split(',');
@@ -200,12 +281,31 @@ namespace Blood_SMS
             }
         }
 
+        /*
+         *<summary>
+         *  returns a property of an object depending on the provided string
+         *</summary>
+         *<param name="src">
+         *  the object where the property will come from
+         *</param>
+         *<param name="propName">
+         *  the string which contains the name of the property to be used
+         *</param>
+         */
         //http://stackoverflow.com/questions/1196991/get-property-value-from-string-using-reflection-in-c-sharp
         object GetPropValue(object src, string propName)
         {
             return src.GetType().GetProperty(propName).GetValue(src, null);
         }
 
+        /*
+         *<summary>
+         *  Capitalizes the firs letter of the word provided in the parameter
+         *</summary>
+         *<param name="s">
+         *  A one word string in lowercase
+         *</param>
+         */
         //http://stackoverflow.com/questions/4135317/make-first-letter-of-a-string-upper-case
         string Capitalize(string s)
         {
@@ -213,6 +313,11 @@ namespace Blood_SMS
         }
         #endregion
 
+        /*
+         *<summary>
+         *  creates and populates blood types by iterating through each blood object in blood list and filtering them based on their blood types
+         *</summary>
+         */
         void getBloodInInventory()
         {
             bloodTypes = new List<Blood>[Enum.GetNames(typeof(bloodType)).Length];
@@ -225,6 +330,14 @@ namespace Blood_SMS
             }
         }
 
+        /*
+         *<summary>
+         *  Iterates through donorList and returns the donor object with the same id as provided in the parameter
+         *</summary>
+         *<param name="">
+         * 
+         *</param>
+         */
         Donor findDonor(int id)
         {
             foreach (Donor d in donorList)
@@ -237,6 +350,14 @@ namespace Blood_SMS
             return null;
         }
 
+        /*
+         *<summary>
+         *  Iterates through bloodList and returns the blood object with the same id as provided in the parameter
+         *</summary>
+         *<param name="">
+         * 
+         *</param>
+         */
         Blood findBlood(int id)
         {
             foreach (Blood b in bloodList)
@@ -249,6 +370,15 @@ namespace Blood_SMS
             return null;
         }
 
+        /*
+         *<summary>
+         *  Iterates through all donor objects in bloodList
+         *  and checks if any item matches id provided in parameter
+         *</summary>
+         *<param name="id">
+         *  an integer from the objects identifier
+         *</param>
+         */
         bool isDonorUnique(int id)
         {
             foreach (Donor d in donorList)
@@ -259,6 +389,15 @@ namespace Blood_SMS
             return true;
         }
 
+        /*
+         *<summary>
+         *  Iterates through all blood objects in bloodList
+         *  and checks if any item matches id provided in parameter
+         *</summary>
+         *<param name="id">
+         *  an integer from the objects identifier
+         *</param>
+         */
         bool isBloodUnique(int id)
         {
             foreach (Blood b in bloodList)
@@ -269,6 +408,11 @@ namespace Blood_SMS
             return true;
         }
 
+        /*
+         *<summary>
+         *  Creates a list of donors and populates it with viable donors
+         *</summary>
+         */
         List<Donor> getViableDonors()
         {
             List<Donor> viableDonors = new List<Donor>();

@@ -80,15 +80,15 @@ namespace Blood_SMS
             is_viable = IS_VIABLE;
             is_contactable = IS_CONTACTABLE;
             is_voluntary = IS_VOLUNTARY;
-
-            //http://stackoverflow.com/questions/9/how-do-i-calculate-someones-age-in-c
             
             times_contacted = 0;
             times_donated = 0;
+            Refresh();
         }
 
         public void Refresh()
         {
+            //http://stackoverflow.com/questions/9/how-do-i-calculate-someones-age-in-c
             age = DateTime.Today.Year - birth_date.Year;
             if (birth_date > DateTime.Today.AddYears(-age)) age--;
         }
