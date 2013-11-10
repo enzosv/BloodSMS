@@ -47,13 +47,24 @@ namespace Blood_SMS
             date_expire = DATE_EXPIRE;
             component = COMPONENT;
 
+            //set defaults
             date_removed = DateTime.MinValue;
             is_assigned = false;
             patient_name = "";
             patient_age = 0;
-            age = 0;
             is_quarantined = false;
             reason_for_removal = "";
+            Refresh();
+        }
+
+        public void Refresh()
+        {
+            TimeSpan span = DateTime.Today - date_donated;
+            age = span.Days;
+            if (!is_quarantined && date_expire < DateTime.Today)
+            {
+                Quarantine("Expired on " + date_expire.ToShortDateString(), date_expire);
+            }
         }
 
         public void Assign(string PATIENT_NAME, int PATIENT_AGE)
@@ -85,7 +96,6 @@ namespace Blood_SMS
             date_removed = DATE_REMOVED;
             reason_for_removal = reason;
         }
-        //get set all the shit
 
     }
 }

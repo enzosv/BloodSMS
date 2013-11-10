@@ -148,5 +148,16 @@ namespace Blood_SMS
             }
             return null;
         }
+
+        List<Donor> getViableDonors()
+        {
+            List<Donor> viableDonors = new List<Donor>();
+            foreach (Donor d in donorList)
+            {
+                if (d.Is_viable && d.Is_voluntary && d.Is_contactable)
+                    viableDonors.Add(d);
+            }
+            return viableDonors;
+        }
     }
 }

@@ -28,8 +28,25 @@ namespace Blood_SMS
         DateTime next_available;
         bool is_voluntary;
 
-        int Donor_id { get; set; }
-        bloodType Blood_type { get; set; }
+        public int Donor_id { get; set; }
+        public bloodType Blood_type { get; set; }
+        public string Name { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string Province { get; set; }
+        public string Email { get; set; }
+        public string Cellphone { get; set; }
+        public DateTime Last_donation { get; set; }
+        public int Times_donated { get; set; }
+        public int Times_contacted { get; set; }
+        public DateTime Date_registered { get; set; }
+        public DateTime Birth_date { get; set; }
+        public string Reason_for_deferral { get; set; }
+        public int Age { get; set; }
+        public DateTime Next_available { get; set; }
+        public bool Is_viable { get; set; }
+        public bool Is_voluntary { get; set; }
+        public bool Is_contactable { get; set; }
         //Register new donor
         public Donor(int DONOR_ID, 
             bloodType BLOOD_TYPE, 
@@ -65,23 +82,15 @@ namespace Blood_SMS
             is_voluntary = IS_VOLUNTARY;
 
             //http://stackoverflow.com/questions/9/how-do-i-calculate-someones-age-in-c
-            age = DateTime.Today.Year - BIRTH_DATE.Year;
-            if (BIRTH_DATE > DateTime.Today.AddYears(-age)) age--;
+            
             times_contacted = 0;
             times_donated = 0;
         }
 
-        //I think these methods should be in a donorList class
-        List<Donor> donors;
-        List<Donor> getViableDonors()
+        public void Refresh()
         {
-            List<Donor> viableDonors = new List<Donor>();
-            foreach(Donor d in donors)
-            {
-                if (d.is_viable && d.is_voluntary && d.is_contactable)
-                    viableDonors.Add(d);
-            }
-            return viableDonors;
+            age = DateTime.Today.Year - birth_date.Year;
+            if (birth_date > DateTime.Today.AddYears(-age)) age--;
         }
 
         void Contact()
