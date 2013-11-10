@@ -22,6 +22,10 @@ namespace Blood_SMS
         Storage(string host, string db, string user, string pass)
         {
             connectionString = string.Format("Server={0};Database={1};Uid={2};Pwd={3}", host, db, user, pass);
+            getDonorSQL();
+            getBloodSQL();
+            getBloodInInventory();
+            getViableDonors();
         }
 
         /*
@@ -77,27 +81,6 @@ namespace Blood_SMS
                 string component = reader.GetString(10);
 
                 Blood x = new Blood(blood_id, donor_id, date_donated, date_expire, component, patient_name, patient_age, date_removed, is_assigned, is_quarantined, reason_for_removal);
-                //if (is_assigned)
-                //{
-                //    x.Assign(patient_name, patient_age);
-                //    if (date_removed != DateTime.MinValue)
-                //    {
-                //        x.Release(date_removed);
-                //    }
-                //}
-
-                //else if (!is_quarantined && date_expire < DateTime.Today)
-                //{
-                //    x.Quarantine("Expired on " + date_expire.ToShortDateString(), date_expire);
-                //}
-
-                //if (date_removed != DateTime.MinValue)
-                //{
-                //    if (is_quarantined)
-                //    {
-                //        x.Quarantine(reason_for_removal, date_removed);
-                //    }
-                //}
 
                 //problem with this is that ids might change
                 x.Blood_id = bloodList.Count;
@@ -125,7 +108,7 @@ namespace Blood_SMS
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
-            string query = "Insert into Donor (" + AddQuery(DONOR_FIELDS) + ")";
+            string query = "Insert into Donor " + AddQuery(DONOR_FIELDS);
             MySqlCommand comm = new MySqlCommand(query, conn);
             AddValue(comm, x, DONOR_FIELDS);
             return RowsAffected(comm);
@@ -143,15 +126,14 @@ namespace Blood_SMS
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
-            //string fields = "blood_id,donor_id,patient_name,patient_age,date_donated,date_expire,date_removed,is_assigned,age,is_quarantined,reason_for_removal,component";
-            string query = "Insert into Blood (" + AddQuery(BLOOD_FIELDS) + ")";
-                
+            string query = "Insert into Blood " + AddQuery(BLOOD_FIELDS);
                 //"donor_id, patient_name, patient_age, date_donated, date_expire, date_removed, is_assigned, age, is_quarantined, reason_for_removal, component) " +
                 //"Values(@donor_id, ?b, ?c, ?d, ?e, ?f, ?g, ?h, ?i, ?j, ?k)";
             MySqlCommand comm = new MySqlCommand(query, conn);
             AddValue(comm, x, BLOOD_FIELDS);
+
             /*
-            comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
+             * comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
             comm.Parameters.AddWithValue("?b", x.Patient_name);
             comm.Parameters.AddWithValue("?c", x.Patient_age);
             comm.Parameters.AddWithValue("?d", x.Date_donated);
@@ -162,9 +144,7 @@ namespace Blood_SMS
             comm.Parameters.AddWithValue("?i", x.Is_quarantined);
             comm.Parameters.AddWithValue("?j", x.Reason_for_removal);
             comm.Parameters.AddWithValue("?k", x.Component);
-             * */
-
-
+             */
             return RowsAffected(comm);
         }
 
@@ -215,7 +195,6 @@ namespace Blood_SMS
          *</param>
          */
         bool RowsAffected (MySqlCommand comm){
-
             if (comm.ExecuteNonQuery() > 0)
             {
                 return true;
@@ -252,7 +231,7 @@ namespace Blood_SMS
          */
         string AddQuery(string[] fields)
         {
-            string fieldNames = "";
+            string fieldNames = "(";
             string valueParameters = "";
             for (int i = 0; i < fields.Length; i++)
             {
@@ -264,7 +243,7 @@ namespace Blood_SMS
                     valueParameters += ", ";
                 }
             }
-            return fieldNames + ") Values(" + valueParameters;
+            return fieldNames + ") Values(" + valueParameters + ")";
         }
 
         /*
