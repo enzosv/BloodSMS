@@ -35,8 +35,6 @@ namespace Blood_SMS
         public string Reason_for_removal { get; set; }
         public DateTime Date_removed { get; set; }
 
-        
-
         //Record Blood Ins
         //Create
 

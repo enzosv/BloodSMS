@@ -14,6 +14,8 @@ namespace Blood_SMS
         List<Donor> donorList;
 
         string connectionString;
+        const string BLOOD_FIELDS = "blood_id,donor_id,patient_name,patient_age,date_donated,date_expire,date_removed,is_assigned,age,is_quarantined,reason_for_removal,component";
+        const string DONOR_FIELDS = "";
 
         Storage(string host, string db, string user, string pass)
         {
@@ -93,16 +95,10 @@ namespace Blood_SMS
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
             string fields = "donor_id,patient_name,patient_age,date_donated,date_expire,date_removed,is_assigned,age,is_quarantined,reason_for_removal,component";
-            string query = "Insert into blood (" + AddQuery(fields) + ")";
+            string query = "Insert into Donor (" + AddQuery(fields) + ")";
             MySqlCommand comm = new MySqlCommand(query, conn);
             AddValue(comm, x, fields);
-            int affectedRows = comm.ExecuteNonQuery();
-
-            if (affectedRows > 0)
-            {
-                return true;
-            }
-            return false;
+            return RowsAffected(comm);
         }
 
         bool AddBlood(DateTime date_donated, DateTime date_expire, int donor_id, string component)
@@ -112,13 +108,13 @@ namespace Blood_SMS
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
-            string fields = "blood_id, donor_id,patient_name,patient_age,date_donated,date_expire,date_removed,is_assigned,age,is_quarantined,reason_for_removal,component";
-            string query = "Insert into blood (" + AddQuery(fields) + ")";
+            //string fields = "blood_id,donor_id,patient_name,patient_age,date_donated,date_expire,date_removed,is_assigned,age,is_quarantined,reason_for_removal,component";
+            string query = "Insert into Blood (" + AddQuery(BLOOD_FIELDS) + ")";
                 
                 //"donor_id, patient_name, patient_age, date_donated, date_expire, date_removed, is_assigned, age, is_quarantined, reason_for_removal, component) " +
                 //"Values(@donor_id, ?b, ?c, ?d, ?e, ?f, ?g, ?h, ?i, ?j, ?k)";
             MySqlCommand comm = new MySqlCommand(query, conn);
-            AddValue(comm, x, fields);
+            AddValue(comm, x, BLOOD_FIELDS);
             /*
             comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
             comm.Parameters.AddWithValue("?b", x.Patient_name);
@@ -134,6 +130,31 @@ namespace Blood_SMS
              * */
 
 
+            return RowsAffected(comm);
+        }
+
+        bool UpdateBlood(Blood x)
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+            string query = "UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS);
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            AddValue(comm, x, BLOOD_FIELDS);
+            return RowsAffected(comm);
+        }
+
+        bool UpdateDonor(Donor x)
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+            string query = "UPDATE Donor SET " + UpdateQuery(DONOR_FIELDS);
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            AddValue(comm, x, DONOR_FIELDS);
+            return RowsAffected(comm);
+        }
+
+        #region Utility Methods
+        bool RowsAffected (MySqlCommand comm){
             int affectedRows = comm.ExecuteNonQuery();
 
             if (affectedRows > 0)
@@ -141,6 +162,18 @@ namespace Blood_SMS
                 return true;
             }
             return false;
+        }
+
+        string UpdateQuery(string fields)
+        {
+            string[] values = fields.Split(',');
+            string valueParameters = "";
+            for (int i = 1; i < values.Length; i++)
+            {
+                valueParameters += values[i] + "=@" + values[i] + ", ";
+            }
+            valueParameters += "Where " + values[0] + "=@" + values[0];
+            return valueParameters;
         }
 
         string AddQuery(string fields)
@@ -178,6 +211,7 @@ namespace Blood_SMS
         {
             return s.First().ToString().ToUpper() + String.Join("", s.Skip(1));
         }
+        #endregion
 
         void getBloodInInventory()
         {
@@ -195,12 +229,44 @@ namespace Blood_SMS
         {
             foreach (Donor d in donorList)
             {
-                if (d.donor_id == id)
+                if (d.Donor_id == id)
                 {
                     return d;
                 }
             }
             return null;
+        }
+
+        Blood findBlood(int id)
+        {
+            foreach (Blood b in bloodList)
+            {
+                if (b.Blood_id == id)
+                {
+                    return b;
+                }
+            }
+            return null;
+        }
+
+        bool isDonorUnique(int id)
+        {
+            foreach (Donor d in donorList)
+            {
+                if (d.Donor_id == id)
+                    return false;
+            }
+            return true;
+        }
+
+        bool isBloodUnique(int id)
+        {
+            foreach (Blood b in bloodList)
+            {
+                if (b.Blood_id == id)
+                    return false;
+            }
+            return true;
         }
 
         List<Donor> getViableDonors()
