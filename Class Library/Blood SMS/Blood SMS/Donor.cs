@@ -86,6 +86,47 @@ namespace Blood_SMS
             Refresh();
         }
 
+        public Donor(int DONOR_ID,
+            bloodType BLOOD_TYPE,
+            string NAME,
+            string STREET,
+            string CITY,
+            string PROVINCE,
+            string EMAIL,
+            string CELLPHONE,
+            string REASON_FOR_DEFERRAL,
+            DateTime DATE_REGISTERED,
+            DateTime NEXT_AVAILABLE,
+            DateTime BIRTH_DATE,
+            bool IS_VIABLE,
+            bool IS_CONTACTABLE,
+            bool IS_VOLUNTARY,
+            int TIMES_CONTACTED,
+            int TIMES_DONATED
+            )
+        {
+            donor_id = DONOR_ID;
+            blood_type = BLOOD_TYPE;
+            name = NAME;
+            street = STREET;
+            city = CITY;
+            province = PROVINCE;
+            email = EMAIL;
+            cellphone = CELLPHONE;
+            reason_for_deferral = REASON_FOR_DEFERRAL;
+            date_registered = DATE_REGISTERED;
+            next_available = NEXT_AVAILABLE;
+            birth_date = BIRTH_DATE;
+            is_viable = IS_VIABLE;
+            is_contactable = IS_CONTACTABLE;
+            is_voluntary = IS_VOLUNTARY;
+
+            times_contacted = TIMES_CONTACTED;
+            times_donated = TIMES_DONATED;
+            Refresh();
+        }
+
+
         public void Refresh()
         {
             //http://stackoverflow.com/questions/9/how-do-i-calculate-someones-age-in-c

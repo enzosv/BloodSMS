@@ -14,7 +14,7 @@ namespace Blood_SMS
         List<Donor> donorList;
 
         string connectionString;
-        const string BLOOD_FIELDS = "blood_id,donor_id,patient_name,patient_age,date_donated,date_expire,date_removed,is_assigned,age,is_quarantined,reason_for_removal,component";
+        const string BLOOD_FIELDS = "blood_id,donor_id,patient_name,patient_age,date_donated,date_expire,date_removed,is_assigned,is_quarantined,reason_for_removal,component";
         const string DONOR_FIELDS = "";
 
         Storage(string host, string db, string user, string pass)
@@ -70,35 +70,42 @@ namespace Blood_SMS
                 if (reader.GetValue(6) != null)
                     date_removed = reader.GetDateTime(6);
                 bool is_assigned = reader.GetBoolean(7);
-                int age = reader.GetInt32(8);
-                bool is_quarantined = reader.GetBoolean(9);
-                string reason_for_removal = reader.GetString(10);
-                string component = reader.GetString(11);
+                bool is_quarantined = reader.GetBoolean(8);
+                string reason_for_removal = reader.GetString(9);
+                string component = reader.GetString(10);
 
-                Blood x = new Blood(bloodList.Count, donor_id, date_donated, date_expire, component);
-                if (is_assigned)
-                {
-                    x.Assign(patient_name, patient_age);
-                    if (date_removed != DateTime.MinValue)
-                    {
-                        x.Release(date_removed);
-                    }
-                }
+                Blood x = new Blood(blood_id, donor_id, date_donated, date_expire, component, patient_name, patient_age, date_removed, is_assigned, is_quarantined, reason_for_removal);
+                //if (is_assigned)
+                //{
+                //    x.Assign(patient_name, patient_age);
+                //    if (date_removed != DateTime.MinValue)
+                //    {
+                //        x.Release(date_removed);
+                //    }
+                //}
 
-                else if (!is_quarantined && date_expire < DateTime.Today)
-                {
-                    x.Quarantine("Expired on " + date_expire.ToShortDateString(), date_expire);
-                }
+                //else if (!is_quarantined && date_expire < DateTime.Today)
+                //{
+                //    x.Quarantine("Expired on " + date_expire.ToShortDateString(), date_expire);
+                //}
 
-                if (date_removed != DateTime.MinValue)
-                {
-                    if (is_quarantined)
-                    {
-                        x.Quarantine(reason_for_removal, date_removed);
-                    }
-                }
-                x.Component = component;
+                //if (date_removed != DateTime.MinValue)
+                //{
+                //    if (is_quarantined)
+                //    {
+                //        x.Quarantine(reason_for_removal, date_removed);
+                //    }
+                //}
+
+                //problem with this is that ids might change
+                x.Blood_id = bloodList.Count;
                 bloodList.Add(x);
+                
+                // or this? 
+                // problem with this is that some might be null
+                //bloodList[blood_id] = x;
+
+                //but they should be the same because deletes are not allowed
             }
             reader.Close();
             conn.Close();

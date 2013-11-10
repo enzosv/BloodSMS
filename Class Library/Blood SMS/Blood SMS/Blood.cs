@@ -56,6 +56,24 @@ namespace Blood_SMS
             Refresh();
         }
 
+        public Blood(int BLOOD_ID, int DONOR_ID, DateTime DATE_DONATED, DateTime DATE_EXPIRE, string COMPONENT, string PATIENT_NAME, int PATIENT_AGE, DateTime DATE_REMOVED, bool IS_ASSIGNED, bool IS_QUARANTINED, string REASON_FOR_REMOVAL )
+        {
+            blood_id = BLOOD_ID;
+            donor_id = DONOR_ID;
+            date_donated = DATE_DONATED;
+            date_expire = DATE_EXPIRE;
+            component = COMPONENT;
+
+            //set defaults
+            date_removed = DATE_REMOVED;
+            is_assigned = IS_ASSIGNED;
+            patient_name = PATIENT_NAME;
+            patient_age = PATIENT_AGE;
+            is_quarantined = IS_QUARANTINED;
+            reason_for_removal = REASON_FOR_REMOVAL;
+            Refresh();
+        }
+
         public void Refresh()
         {
             TimeSpan span = DateTime.Today - date_donated;
