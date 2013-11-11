@@ -148,6 +148,11 @@ namespace Blood_SMS
             return RowsAffected(comm);
         }
 		
+		void ExtractBlood(Blood x, DateTime date_added, DateTime date_expire, string component)
+		{
+			x.Extract();
+		}
+		
 		bool AddBlood(Blood a, DateTime date_added, DateTime date_expire, string component)
 		{
 			Blood x = new Blood(a, bloodList.Count, date_added, date_expire, component);
@@ -427,9 +432,6 @@ namespace Blood_SMS
             return viableDonors;
         }
 		
-		void ExtractBlood(Blood x)
-		{
-			
-		}
+		
     }
 }
