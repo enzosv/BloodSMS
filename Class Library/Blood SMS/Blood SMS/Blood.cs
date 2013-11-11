@@ -8,8 +8,8 @@ namespace Blood_SMS
     public class Blood
     {
         int blood_id;
-        int donor_id;
-        DateTime date_donated;
+        int taken_from;
+        DateTime date_added;
         DateTime date_expire;
         string component;
 
@@ -23,8 +23,8 @@ namespace Blood_SMS
         DateTime date_removed;
 
         public int Blood_id { get; set; }
-        public int Donor_id { get; set; }
-        public DateTime Date_donated { get; set; }
+        public int Taken_from { get; set; }
+        public DateTime Date_added { get; set; }
         public DateTime Date_expire { get; set; }
         public int Age { get; set; }
         public string Patient_name { get; set; }
@@ -38,15 +38,15 @@ namespace Blood_SMS
         //Record Blood Ins
         //Create
 
-        public Blood(int BLOOD_ID, int DONOR_ID, DateTime DATE_DONATED, DateTime DATE_EXPIRE, string COMPONENT)
+        public Blood(int BLOOD_ID, int TAKEN_FROM, DateTime DATE_ADDED, DateTime DATE_EXPIRE)
         {
             blood_id = BLOOD_ID;
-            donor_id = DONOR_ID;
-            date_donated = DATE_DONATED;
+            taken_from = TAKEN_FROM;
+            date_added = DATE_ADDED;
             date_expire = DATE_EXPIRE;
-            component = COMPONENT;
 
             //set defaults
+			component = "Whole";
             date_removed = DateTime.MinValue;
             is_assigned = false;
             patient_name = "";
@@ -56,15 +56,14 @@ namespace Blood_SMS
             Refresh();
         }
 
-        public Blood(int BLOOD_ID, int DONOR_ID, DateTime DATE_DONATED, DateTime DATE_EXPIRE, string COMPONENT, string PATIENT_NAME, int PATIENT_AGE, DateTime DATE_REMOVED, bool IS_ASSIGNED, bool IS_QUARANTINED, string REASON_FOR_REMOVAL )
+        public Blood(int BLOOD_ID, int TAKEN_FROM, DateTime DATE_ADDED, DateTime DATE_EXPIRE, string COMPONENT, string PATIENT_NAME, int PATIENT_AGE, DateTime DATE_REMOVED, bool IS_ASSIGNED, bool IS_QUARANTINED, string REASON_FOR_REMOVAL )
         {
             blood_id = BLOOD_ID;
-            donor_id = DONOR_ID;
-            date_donated = DATE_DONATED;
+            taken_from = TAKEN_FROM;
+            DATE_ADDED = DATE_ADDED;
             date_expire = DATE_EXPIRE;
             component = COMPONENT;
 
-            //set defaults
             date_removed = DATE_REMOVED;
             is_assigned = IS_ASSIGNED;
             patient_name = PATIENT_NAME;
@@ -73,6 +72,15 @@ namespace Blood_SMS
             reason_for_removal = REASON_FOR_REMOVAL;
             Refresh();
         }
+		
+		public Blood(Blood x, int BLOOD_ID, DateTime DATE_ADDED, DateTime DATE_EXPIRE, string COMPONENT)
+		{
+			blood_id = BLOOD_ID;
+			taken_from = x.Taken_from;
+			date_added = DATE_ADDED;
+			date_expire = DATE_EXPIRE;
+			component = COMPONENT;
+		}
 
         public void Refresh()
         {
@@ -113,6 +121,12 @@ namespace Blood_SMS
             date_removed = DATE_REMOVED;
             reason_for_removal = reason;
         }
+		
+		public void Extract(DateTime DATE_REMOVED)
+		{
+			date_removed = DATE_REMOVED;
+			
+		}
 
     }
 }

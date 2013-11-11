@@ -8,8 +8,8 @@ namespace Blood_SMS
     
     public class Donor
     {
-        public int donor_id;
-        public bloodType blood_type;
+        int donor_id;
+        bloodType blood_type;
         string name;
         string street;
         string city;

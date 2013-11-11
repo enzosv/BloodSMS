@@ -17,7 +17,7 @@ namespace Blood_SMS
         //const string BLOOD_FIELDS = "blood_id,donor_id,patient_name,patient_age,date_donated,date_expire,date_removed,is_assigned,is_quarantined,reason_for_removal,component";
         //const string DONOR_FIELDS = "";
 
-        readonly string[] BLOOD_FIELDS = { "blood_id", "donor_id", "patient_name", "patient_age", "date_donated", "date_expire", "date_removed", "is_assigned", "is_quarantined", "reason_for_removal", "compoenent" };
+        readonly string[] BLOOD_FIELDS = { "blood_id", "taken_from", "patient_name", "patient_age", "date_donated", "date_expire", "date_removed", "is_assigned", "is_quarantined", "reason_for_removal", "compoenent" };
         readonly string[] DONOR_FIELDS = {};
         Storage(string host, string db, string user, string pass)
         {
@@ -67,7 +67,7 @@ namespace Blood_SMS
             while (reader.Read())
             {
                 int blood_id = reader.GetInt32(0);
-                int donor_id = reader.GetInt32(1);
+                int taken_from = reader.GetInt32(1);
                 string patient_name = reader.GetString(2);
                 int patient_age = reader.GetInt32(3);
                 DateTime date_donated = reader.GetDateTime(4);
@@ -80,7 +80,7 @@ namespace Blood_SMS
                 string reason_for_removal = reader.GetString(9);
                 string component = reader.GetString(10);
 
-                Blood x = new Blood(blood_id, donor_id, date_donated, date_expire, component, patient_name, patient_age, date_removed, is_assigned, is_quarantined, reason_for_removal);
+                Blood x = new Blood(blood_id, taken_from, date_donated, date_expire, component, patient_name, patient_age, date_removed, is_assigned, is_quarantined, reason_for_removal);
 
                 //problem with this is that ids might change
                 x.Blood_id = bloodList.Count;
@@ -119,9 +119,9 @@ namespace Blood_SMS
         *  Creates blood object from parameters, adds it to the bloodList and creates row in SQL
         *</summary>
         */
-        bool AddBlood(DateTime date_donated, DateTime date_expire, int donor_id, string component)
+        bool AddBlood(DateTime date_added, DateTime date_expire, int taken_from)
         {
-            Blood x = new Blood(bloodList.Count, donor_id, date_donated, date_expire, component);
+            Blood x = new Blood(bloodList.Count, taken_from, date_added, date_expire);
             bloodList.Add(x);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
@@ -147,6 +147,19 @@ namespace Blood_SMS
              */
             return RowsAffected(comm);
         }
+		
+		bool AddBlood(Blood a, DateTime date_added, DateTime date_expire, string component)
+		{
+			Blood x = new Blood(a, bloodList.Count, date_added, date_expire, component);
+            bloodList.Add(x);
+
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+            string query = "Insert into Blood " + AddQuery(BLOOD_FIELDS);
+			MySqlCommand comm = new MySqlCommand(query, conn);
+            AddValue(comm, x, BLOOD_FIELDS);
+			return RowsAffected(comm);
+		}
 
         /*
         *<summary>
@@ -312,7 +325,10 @@ namespace Blood_SMS
             {
                 if (b.Date_removed == null)
                 {
-                    bloodTypes[(int)findDonor(b.Donor_id).blood_type].Add(b);
+					if(b.Component != "Whole")
+                    	bloodTypes[(int)findDonor(b.Taken_from).blood_type].Add(b);
+					else
+						bloodType[(int)findDonor(findBlood(b.Taken_from).Taken_from).blood_type].Add(b);
                 }
             }
         }
@@ -410,5 +426,10 @@ namespace Blood_SMS
             }
             return viableDonors;
         }
+		
+		void ExtractBlood(Blood x)
+		{
+			
+		}
     }
 }
