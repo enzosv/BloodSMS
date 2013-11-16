@@ -333,9 +333,9 @@ namespace Blood_SMS
                 if (b.Date_removed == null)
                 {
 					if(b.Component != "Whole")
-                    	bloodTypes[(int)findDonor(b.Taken_from).blood_type].Add(b);
+                    	bloodTypes[(int)findDonor(b.Taken_from).Blood_type].Add(b);
 					else
-						bloodType[(int)findDonor(findBlood(b.Taken_from).Taken_from).blood_type].Add(b);
+						bloodTypes[(int)findDonor(findBlood(b.Taken_from).Taken_from).Blood_type].Add(b);
                 }
             }
         }
