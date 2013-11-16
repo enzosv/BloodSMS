@@ -148,9 +148,11 @@ namespace Blood_SMS
             return RowsAffected(comm);
         }
 		
-		void ExtractBlood(Blood x, DateTime date_added, DateTime date_expire, string component)
+		void ExtractBlood(Blood x, DateTime date_added, DateTime date_expire)
 		{
-			x.Extract();
+			x.Extract(date_added);
+            AddBlood(x, date_added, date_expire, "Fresh Frozen Plasma");
+            AddBlood(x, date_added, date_expire, "Packed Red Cells");
 		}
 		
 		bool AddBlood(Blood a, DateTime date_added, DateTime date_expire, string component)

@@ -60,7 +60,7 @@ namespace Blood_SMS
         {
             blood_id = BLOOD_ID;
             taken_from = TAKEN_FROM;
-            DATE_ADDED = DATE_ADDED;
+            date_added = DATE_ADDED;
             date_expire = DATE_EXPIRE;
             component = COMPONENT;
 
@@ -80,11 +80,19 @@ namespace Blood_SMS
 			date_added = DATE_ADDED;
 			date_expire = DATE_EXPIRE;
 			component = COMPONENT;
+
+            date_removed = DateTime.MinValue;
+            is_assigned = false;
+            patient_name = "";
+            patient_age = 0;
+            is_quarantined = false;
+            reason_for_removal = "";
+            Refresh();
 		}
 
         public void Refresh()
         {
-            TimeSpan span = DateTime.Today - date_donated;
+            TimeSpan span = DateTime.Today - date_added;
             age = span.Days;
             if (!is_quarantined && date_expire < DateTime.Today)
             {
@@ -97,7 +105,6 @@ namespace Blood_SMS
             is_assigned = true;
             patient_name = PATIENT_NAME;
             patient_age = PATIENT_AGE;
-            
         }
 
         public void Release(string PATIENT_NAME, int PATIENT_AGE, DateTime DATE_REMOVED)
