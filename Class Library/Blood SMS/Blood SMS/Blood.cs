@@ -7,20 +7,20 @@ namespace Blood_SMS
 {
     public class Blood
     {
-        int blood_id;
-        int taken_from;
-        DateTime date_added;
-        DateTime date_expire;
+        int? blood_id;
+        int? taken_from;
+        DateTime? date_added;
+        DateTime? date_expire;
         string component;
 
-        bool is_assigned;
+        bool? is_assigned;
         string patient_name;
-        int patient_age;
+        int? patient_age;
 
         int age;
-        bool is_quarantined;
+        bool? is_quarantined;
         string reason_for_removal;
-        DateTime date_removed;
+        DateTime? date_removed;
 
         public int Blood_id { get; set; }
         public int Taken_from { get; set; }
@@ -56,7 +56,7 @@ namespace Blood_SMS
             Refresh();
         }
 
-        public Blood(int BLOOD_ID, int TAKEN_FROM, DateTime DATE_ADDED, DateTime DATE_EXPIRE, string COMPONENT, string PATIENT_NAME, int PATIENT_AGE, DateTime DATE_REMOVED, bool IS_ASSIGNED, bool IS_QUARANTINED, string REASON_FOR_REMOVAL )
+        public Blood(int? BLOOD_ID, int? TAKEN_FROM, DateTime? DATE_ADDED, DateTime? DATE_EXPIRE, string COMPONENT, string PATIENT_NAME, int? PATIENT_AGE, DateTime? DATE_REMOVED, bool? IS_ASSIGNED, bool? IS_QUARANTINED, string REASON_FOR_REMOVAL )
         {
             blood_id = BLOOD_ID;
             taken_from = TAKEN_FROM;
@@ -73,7 +73,7 @@ namespace Blood_SMS
             Refresh();
         }
 		
-		public Blood(Blood x, int BLOOD_ID, DateTime DATE_ADDED, DateTime DATE_EXPIRE, string COMPONENT)
+		public Blood(Blood x, int? BLOOD_ID, DateTime? DATE_ADDED, DateTime? DATE_EXPIRE, string COMPONENT)
 		{
 			blood_id = BLOOD_ID;
 			taken_from = x.Taken_from;
@@ -92,11 +92,11 @@ namespace Blood_SMS
 
         public void Refresh()
         {
-            TimeSpan span = DateTime.Today - date_added;
+            TimeSpan span = DateTime.Today - date_added.Value;
             age = span.Days;
-            if (!is_quarantined && date_expire < DateTime.Today)
+            if (!is_quarantined.Value && date_expire.Value < DateTime.Today)
             {
-                Quarantine("Expired on " + date_expire.ToShortDateString(), date_expire);
+                Quarantine("Expired on " + date_expire.Value.ToShortDateString(), date_expire);
             }
         }
 
@@ -115,14 +115,14 @@ namespace Blood_SMS
 
         public void Release(DateTime DATE_REMOVED)
         {
-            if (is_assigned)
+            if (is_assigned.Value)
             {
                 date_removed = DATE_REMOVED;
                 reason_for_removal = "Released to: " + patient_name + " on " + date_removed;
             }
         }
 
-        public void Quarantine(string reason, DateTime DATE_REMOVED)
+        public void Quarantine(string reason, DateTime? DATE_REMOVED)
         {
             is_quarantined = true;
             date_removed = DATE_REMOVED;

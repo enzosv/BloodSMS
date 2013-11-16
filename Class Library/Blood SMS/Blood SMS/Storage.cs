@@ -114,19 +114,17 @@ namespace Blood_SMS
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                int blood_id = reader.GetInt32(0);
-                int taken_from = reader.GetInt32(1);
-                string patient_name = reader.GetString(2);
-                int patient_age = reader.GetInt32(3);
-                DateTime date_donated = reader.GetDateTime(4);
-                DateTime date_expire = reader.GetDateTime(5);
-                DateTime date_removed = DateTime.MinValue;
-                if (reader.GetValue(6) != null)
-                    date_removed = reader.GetDateTime(6);
-                bool is_assigned = reader.GetBoolean(7);
-                bool is_quarantined = reader.GetBoolean(8);
-                string reason_for_removal = reader.GetString(9);
-                string component = reader.GetString(10);
+                int? blood_id = reader.GetValue(0) as int?;
+                int? taken_from = reader.GetValue(1) as int?;
+                string patient_name = reader.GetValue(2) as string;
+                int? patient_age = reader.GetValue(3) as int?;
+                DateTime? date_donated = reader.GetValue(4) as DateTime?;
+                DateTime? date_expire = reader.GetValue(5) as DateTime?;
+                DateTime? date_removed = reader.GetValue(6) as DateTime?;
+                bool? is_assigned = reader.GetValue(7) as bool?;
+                bool? is_quarantined = reader.GetValue(8) as bool?;
+                string reason_for_removal = reader.GetValue(9) as string;
+                string component = reader.GetValue(10) as string;
 
                 Blood x = new Blood(blood_id, taken_from, date_donated, date_expire, component, patient_name, patient_age, date_removed, is_assigned, is_quarantined, reason_for_removal);
 
