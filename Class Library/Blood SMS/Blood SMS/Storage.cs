@@ -7,6 +7,7 @@ using MySql.Data.MySqlClient;
 namespace Blood_SMS
 {
     enum bloodType { A, B, O };
+    enum contactMethod { home_landline, office_landline, email, cellphone };
     public class Storage
     {
         List<Blood> bloodList;
@@ -14,11 +15,9 @@ namespace Blood_SMS
         List<Donor> donorList;
 
         string connectionString;
-        //const string BLOOD_FIELDS = "blood_id,donor_id,patient_name,patient_age,date_donated,date_expire,date_removed,is_assigned,is_quarantined,reason_for_removal,component";
-        //const string DONOR_FIELDS = "";
 
         readonly string[] BLOOD_FIELDS = { "blood_id", "taken_from", "patient_name", "patient_age", "date_donated", "date_expire", "date_removed", "is_assigned", "is_quarantined", "reason_for_removal", "compoenent" };
-        readonly string[] DONOR_FIELDS = {};
+        readonly string[] DONOR_FIELDS = { "donor_id", "name", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "cellphone", "educational_attainment", "birth_date", "date_registered", "last_donation", "next_available", "times_donated", "is_contactable", "is_viable", "reason_for_deferral" };
         Storage(string host, string db, string user, string pass)
         {
             connectionString = string.Format("Server={0};Database={1};Uid={2};Pwd={3}", host, db, user, pass);
@@ -44,7 +43,56 @@ namespace Blood_SMS
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
+                int? DONOR_ID = reader.GetValue(0) as int?;
+                string NAME = reader.GetValue(1) as string;
+                bloodType? BLOOD_TYPE = reader.GetValue(2) as bloodType?;
+                string HOME_PROVINCE = reader.GetValue(3) as string;
+                string HOME_CITY = reader.GetValue(4) as string;
+                string HOME_STREET = reader.GetValue(5) as string;
+                string OFFICE_PROVINCE = reader.GetValue(6) as string;
+                string OFFICE_CITY = reader.GetValue(7) as string;
+                string OFFICE_STREET = reader.GetValue(8) as string;
+                contactMethod? PREFERRED_CONTACT_METHOD = reader.GetValue(9) as contactMethod?;
+                string HOME_LANDLINE = reader.GetValue(10) as string;
+                string OFFICE_LANDLINE = reader.GetValue(11) as string;
+                string EMAIL = reader.GetValue(12) as string;
+                string CELLPHONE = reader.GetValue(13) as string;
+                string EDUCATIONAL_ATTAINMENT = reader.GetValue(14) as string;
+                DateTime? BIRTH_DATE = reader.GetValue(15) as DateTime?;
+                DateTime? DATE_REGISTERED = reader.GetValue(16) as DateTime?;
+                DateTime? LAST_DONATION = reader.GetValue(17) as DateTime?;
+                DateTime? NEXT_AVAILABLE = reader.GetValue(18) as DateTime?;
+                int? TIMES_DONATED = reader.GetValue(19) as int?;
+                int? TIMES_CONTACTED = reader.GetValue(20) as int?;
+                bool? IS_CONTACTABLE = reader.GetValue(21) as bool?;
+                bool? IS_VIABLE = reader.GetValue(22) as bool?;
+                string REASON_FOR_DEFERRAL = reader.GetValue(23) as string;
 
+                new Donor(
+                    DONOR_ID,
+                    NAME,
+                    BLOOD_TYPE,
+                    HOME_PROVINCE,
+                    HOME_CITY,
+                    HOME_STREET,
+                    OFFICE_PROVINCE,
+                    OFFICE_CITY,
+                    OFFICE_STREET,
+                    PREFERRED_CONTACT_METHOD,
+                    HOME_LANDLINE,
+                    OFFICE_LANDLINE,
+                    EMAIL,
+                    CELLPHONE,
+                    EDUCATIONAL_ATTAINMENT,
+                    BIRTH_DATE,
+                    DATE_REGISTERED,
+                    LAST_DONATION,
+                     NEXT_AVAILABLE,
+                    TIMES_DONATED,
+                    TIMES_CONTACTED,
+                     IS_CONTACTABLE,
+                     IS_VIABLE,
+                    REASON_FOR_DEFERRAL);
             }
             reader.Close();
             conn.Close();
@@ -85,7 +133,7 @@ namespace Blood_SMS
                 //problem with this is that ids might change
                 x.Blood_id = bloodList.Count;
                 bloodList.Add(x);
-                
+
                 // or this? 
                 // problem with this is that some might be null
                 //bloodList[blood_id] = x;
@@ -101,17 +149,58 @@ namespace Blood_SMS
         *  Creates donor object from parameters, adds it to the donorList and creates row in SQL
         *</summary>
         */
-        bool AddDonor(int donor_id, bloodType blood_type, string name, string street, string city, string province, string email, string cellphone, string reason_for_deferral, DateTime date_registered, DateTime next_available, DateTime birth_date, bool is_viable, bool is_contactable, bool is_voluntary)
+        bool AddDonor(
+        string NAME,
+        bloodType BLOOD_TYPE,
+        string HOME_PROVINCE,
+        string HOME_CITY,
+        string HOME_STREET,
+        string OFFICE_PROVINCE,
+        string OFFICE_CITY,
+        string OFFICE_STREET,
+        contactMethod PREFERRED_CONTACT_METHOD,
+        string HOME_LANDLINE,
+        string OFFICE_LANDLINE,
+        string EMAIL,
+        string CELLPHONE,
+        string EDUCATIONAL_ATTAINMENT,
+        DateTime BIRTH_DATE,
+        DateTime DATE_REGISTERED,
+        bool IS_CONTACTABLE,
+        bool IS_VIABLE,
+        string REASON_FOR_DEFERRAL
+            )
         {
-            Donor x = new Donor(donorList.Count, blood_type, name, street, city, province, email, cellphone, reason_for_deferral, date_registered, next_available, birth_date, is_viable, is_contactable, is_voluntary);
+            Donor x = new Donor(donorList.Count,
+                NAME,
+                BLOOD_TYPE,
+                HOME_PROVINCE,
+                HOME_CITY,
+                HOME_STREET,
+                OFFICE_PROVINCE,
+                OFFICE_CITY,
+                OFFICE_STREET,
+                PREFERRED_CONTACT_METHOD,
+                HOME_LANDLINE,
+                OFFICE_LANDLINE,
+                EMAIL,
+                CELLPHONE,
+                EDUCATIONAL_ATTAINMENT,
+                BIRTH_DATE,
+                DATE_REGISTERED,
+                IS_CONTACTABLE,
+                IS_VIABLE,
+                REASON_FOR_DEFERRAL
+            );
             donorList.Add(x);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
             string query = "Insert into Donor " + AddQuery(DONOR_FIELDS);
             MySqlCommand comm = new MySqlCommand(query, conn);
-            AddValue(comm, x, DONOR_FIELDS);
+            donorCommands(comm, x);
             return RowsAffected(comm);
+
         }
 
         /*
@@ -127,46 +216,35 @@ namespace Blood_SMS
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
             string query = "Insert into Blood " + AddQuery(BLOOD_FIELDS);
-                //"donor_id, patient_name, patient_age, date_donated, date_expire, date_removed, is_assigned, age, is_quarantined, reason_for_removal, component) " +
-                //"Values(@donor_id, ?b, ?c, ?d, ?e, ?f, ?g, ?h, ?i, ?j, ?k)";
+            //"donor_id, patient_name, patient_age, date_donated, date_expire, date_removed, is_assigned, age, is_quarantined, reason_for_removal, component) " +
+            //"Values(@donor_id, ?b, ?c, ?d, ?e, ?f, ?g, ?h, ?i, ?j, ?k)";
             MySqlCommand comm = new MySqlCommand(query, conn);
-            AddValue(comm, x, BLOOD_FIELDS);
+            //AddValue(comm, x, BLOOD_FIELDS);
+            bloodCommands(comm, x);
 
-            /*
-             * comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
-            comm.Parameters.AddWithValue("?b", x.Patient_name);
-            comm.Parameters.AddWithValue("?c", x.Patient_age);
-            comm.Parameters.AddWithValue("?d", x.Date_donated);
-            comm.Parameters.AddWithValue("?e", x.Date_expire);
-            comm.Parameters.AddWithValue("?f", x.Date_removed);
-            comm.Parameters.AddWithValue("?g", x.Is_assigned);
-            comm.Parameters.AddWithValue("?h", x.Age);
-            comm.Parameters.AddWithValue("?i", x.Is_quarantined);
-            comm.Parameters.AddWithValue("?j", x.Reason_for_removal);
-            comm.Parameters.AddWithValue("?k", x.Component);
-             */
+
             return RowsAffected(comm);
         }
-		
-		void ExtractBlood(Blood x, DateTime date_added, DateTime date_expire)
-		{
-			x.Extract(date_added);
+
+        void ExtractBlood(Blood x, DateTime date_added, DateTime date_expire)
+        {
+            x.Extract(date_added);
             AddBlood(x, date_added, date_expire, "Fresh Frozen Plasma");
             AddBlood(x, date_added, date_expire, "Packed Red Cells");
-		}
-		
-		bool AddBlood(Blood a, DateTime date_added, DateTime date_expire, string component)
-		{
-			Blood x = new Blood(a, bloodList.Count, date_added, date_expire, component);
+        }
+
+        bool AddBlood(Blood a, DateTime date_added, DateTime date_expire, string component)
+        {
+            Blood x = new Blood(a, bloodList.Count, date_added, date_expire, component);
             bloodList.Add(x);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
             string query = "Insert into Blood " + AddQuery(BLOOD_FIELDS);
-			MySqlCommand comm = new MySqlCommand(query, conn);
-            AddValue(comm, x, BLOOD_FIELDS);
-			return RowsAffected(comm);
-		}
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            bloodCommands(comm, x);
+            return RowsAffected(comm);
+        }
 
         /*
         *<summary>
@@ -182,7 +260,7 @@ namespace Blood_SMS
             conn.Open();
             string query = "UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS);
             MySqlCommand comm = new MySqlCommand(query, conn);
-            AddValue(comm, x, BLOOD_FIELDS);
+            bloodCommands(comm, x);
             return RowsAffected(comm);
         }
 
@@ -200,12 +278,54 @@ namespace Blood_SMS
             conn.Open();
             string query = "UPDATE Donor SET " + UpdateQuery(DONOR_FIELDS);
             MySqlCommand comm = new MySqlCommand(query, conn);
-            AddValue(comm, x, DONOR_FIELDS);
+            donorCommands(comm, x);
             return RowsAffected(comm);
         }
 
         #region Utility Methods
 
+        void bloodCommands(MySqlCommand comm, Blood x)
+        {
+            comm.Parameters.AddWithValue("@blood_id", x.Blood_id);
+            comm.Parameters.AddWithValue("@taken_from", x.Taken_from);
+            comm.Parameters.AddWithValue("@patient_name", x.Patient_name);
+            comm.Parameters.AddWithValue("@patient_age", x.Patient_age);
+            comm.Parameters.AddWithValue("@date_added", x.Date_added);
+            comm.Parameters.AddWithValue("@date_expire", x.Date_expire);
+            comm.Parameters.AddWithValue("@date_removed", x.Date_removed);
+            comm.Parameters.AddWithValue("@is_assigned", x.Is_assigned);
+            comm.Parameters.AddWithValue("@is_quarantined", x.Is_quarantined);
+            comm.Parameters.AddWithValue("@reason_for_removal", x.Reason_for_removal);
+        }
+
+        void donorCommands(MySqlCommand comm, Donor x)
+        {
+            comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
+            comm.Parameters.AddWithValue("@name", x.Name);
+            comm.Parameters.AddWithValue("@blood_type", x.Blood_type);
+            comm.Parameters.AddWithValue("@home_province", x.Home_province);
+            comm.Parameters.AddWithValue("@home_city", x.Home_city);
+            comm.Parameters.AddWithValue("@home_street", x.Home_street);
+            comm.Parameters.AddWithValue("@office_province", x.Office_province);
+            comm.Parameters.AddWithValue("@office_city", x.Office_city);
+            comm.Parameters.AddWithValue("@office_street", x.Office_street);
+            comm.Parameters.AddWithValue("@preferred_contact_method", x.Preferred_contact_method);
+            comm.Parameters.AddWithValue("@home_landline", x.Home_landline);
+            comm.Parameters.AddWithValue("@office_landline", x.Office_landline);
+            comm.Parameters.AddWithValue("@email", x.Email);
+            comm.Parameters.AddWithValue("@cellphone", x.Cellphone);
+            comm.Parameters.AddWithValue("@educational_attainment", x.Educational_attainment);
+            comm.Parameters.AddWithValue("@birth_date", x.Birth_date);
+            comm.Parameters.AddWithValue("@date_registered", x.Date_registered);
+            comm.Parameters.AddWithValue("@last_donation", x.Last_donation);
+            comm.Parameters.AddWithValue("@next_available", x.Next_available);
+            comm.Parameters.AddWithValue("@times_donated", x.Times_donated);
+            comm.Parameters.AddWithValue("@times_contacted", x.Times_contacted);
+            comm.Parameters.AddWithValue("@is_contactable", x.Is_contactable);
+            comm.Parameters.AddWithValue("@is_viable", x.Is_viable);
+            comm.Parameters.AddWithValue("@reason_for_deferral", x.Reason_for_deferral);
+
+        }
         /*
          *<summary>
          *  returns true if rows have been affected
@@ -214,7 +334,8 @@ namespace Blood_SMS
          *  MySQLCommand where number of affected rows will be determined from
          *</param>
          */
-        bool RowsAffected (MySqlCommand comm){
+        bool RowsAffected(MySqlCommand comm)
+        {
             if (comm.ExecuteNonQuery() > 0)
             {
                 return true;
@@ -265,7 +386,6 @@ namespace Blood_SMS
             }
             return fieldNames + ") Values(" + valueParameters + ")";
         }
-
         /*
          *<summary>
          *  iterates through all fields provided in the parameter and adds the value to the sql from the object's properties
@@ -279,7 +399,7 @@ namespace Blood_SMS
          *<param name="fields">
          *  string array containing all fields for an SQL table
          *</param>
-         */
+         
         void AddValue(MySqlCommand comm, Object x, string[] fields)
         {
             for (int i = 0; i < fields.Length; i++)
@@ -298,7 +418,7 @@ namespace Blood_SMS
          *<param name="propName">
          *  the string which contains the name of the property to be used
          *</param>
-         */
+
         //http://stackoverflow.com/questions/1196991/get-property-value-from-string-using-reflection-in-c-sharp
         object GetPropValue(object src, string propName)
         {
@@ -312,12 +432,13 @@ namespace Blood_SMS
          *<param name="s">
          *  A one word string in lowercase
          *</param>
-         */
+         
         //http://stackoverflow.com/questions/4135317/make-first-letter-of-a-string-upper-case
         string Capitalize(string s)
         {
             return s.First().ToString().ToUpper() + String.Join("", s.Skip(1));
         }
+        */
         #endregion
 
         /*
@@ -332,10 +453,10 @@ namespace Blood_SMS
             {
                 if (b.Date_removed == null)
                 {
-					if(b.Component != "Whole")
-                    	bloodTypes[(int)findDonor(b.Taken_from).Blood_type].Add(b);
-					else
-						bloodTypes[(int)findDonor(findBlood(b.Taken_from).Taken_from).Blood_type].Add(b);
+                    if (b.Component != "Whole")
+                        bloodTypes[(int)findDonor(b.Taken_from).Blood_type].Add(b);
+                    else
+                        bloodTypes[(int)findDonor(findBlood(b.Taken_from).Taken_from).Blood_type].Add(b);
                 }
             }
         }
@@ -428,12 +549,12 @@ namespace Blood_SMS
             List<Donor> viableDonors = new List<Donor>();
             foreach (Donor d in donorList)
             {
-                if (d.Is_viable && d.Is_voluntary && d.Is_contactable)
+                if (d.Is_viable && d.Is_contactable)
                     viableDonors.Add(d);
             }
             return viableDonors;
         }
-		
-		
+
+
     }
 }
