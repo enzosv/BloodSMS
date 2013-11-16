@@ -13,6 +13,7 @@ namespace Blood_SMS
         List<Blood> bloodList;
         List<Blood>[] bloodTypes;
         List<Donor> donorList;
+        List<Donor> viableDonors;
 
         string connectionString;
 
@@ -21,10 +22,10 @@ namespace Blood_SMS
         Storage(string host, string db, string user, string pass)
         {
             connectionString = string.Format("Server={0};Database={1};Uid={2};Pwd={3}", host, db, user, pass);
+            viableDonors = new List<Donor>();
             getDonorSQL();
             getBloodSQL();
             getBloodInInventory();
-            getViableDonors();
         }
 
         /*
@@ -87,11 +88,11 @@ namespace Blood_SMS
                     BIRTH_DATE,
                     DATE_REGISTERED,
                     LAST_DONATION,
-                     NEXT_AVAILABLE,
+                    NEXT_AVAILABLE,
                     TIMES_DONATED,
                     TIMES_CONTACTED,
-                     IS_CONTACTABLE,
-                     IS_VIABLE,
+                    IS_CONTACTABLE,
+                    IS_VIABLE,
                     REASON_FOR_DEFERRAL);
             }
             reader.Close();
@@ -148,25 +149,25 @@ namespace Blood_SMS
         *</summary>
         */
         bool AddDonor(
-        string NAME,
-        bloodType BLOOD_TYPE,
-        string HOME_PROVINCE,
-        string HOME_CITY,
-        string HOME_STREET,
-        string OFFICE_PROVINCE,
-        string OFFICE_CITY,
-        string OFFICE_STREET,
-        contactMethod PREFERRED_CONTACT_METHOD,
-        string HOME_LANDLINE,
-        string OFFICE_LANDLINE,
-        string EMAIL,
-        string CELLPHONE,
-        string EDUCATIONAL_ATTAINMENT,
-        DateTime BIRTH_DATE,
-        DateTime DATE_REGISTERED,
-        bool IS_CONTACTABLE,
-        bool IS_VIABLE,
-        string REASON_FOR_DEFERRAL
+            string NAME,
+            bloodType BLOOD_TYPE,
+            string HOME_PROVINCE,
+            string HOME_CITY,
+            string HOME_STREET,
+            string OFFICE_PROVINCE,
+            string OFFICE_CITY,
+            string OFFICE_STREET,
+            contactMethod PREFERRED_CONTACT_METHOD,
+            string HOME_LANDLINE,
+            string OFFICE_LANDLINE,
+            string EMAIL,
+            string CELLPHONE,
+            string EDUCATIONAL_ATTAINMENT,
+            DateTime BIRTH_DATE,
+            DateTime DATE_REGISTERED,
+            bool IS_CONTACTABLE,
+            bool IS_VIABLE,
+            string REASON_FOR_DEFERRAL
             )
         {
             Donor x = new Donor(donorList.Count,
@@ -191,6 +192,8 @@ namespace Blood_SMS
                 REASON_FOR_DEFERRAL
             );
             donorList.Add(x);
+            if (x.Is_viable && x.Is_contactable)
+                viableDonors.Add(x);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
@@ -210,6 +213,8 @@ namespace Blood_SMS
         {
             Blood x = new Blood(bloodList.Count, taken_from, date_added, date_expire);
             bloodList.Add(x);
+
+            SortBlood(x);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
@@ -231,10 +236,21 @@ namespace Blood_SMS
             AddBlood(x, date_added, date_expire, "Packed Red Cells");
         }
 
+        //doesn't work for update yet
+        void SortBlood(Blood b)
+        {
+            if (b.Component != "Whole")
+                bloodTypes[(int)findDonor(b.Taken_from).Blood_type].Add(b);
+            else
+                bloodTypes[(int)findDonor(findBlood(b.Taken_from).Taken_from).Blood_type].Add(b);
+        }
+
         bool AddBlood(Blood a, DateTime date_added, DateTime date_expire, string component)
         {
             Blood x = new Blood(a, bloodList.Count, date_added, date_expire, component);
             bloodList.Add(x);
+
+            SortBlood(x);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
@@ -449,12 +465,9 @@ namespace Blood_SMS
             bloodTypes = new List<Blood>[Enum.GetNames(typeof(bloodType)).Length];
             foreach (Blood b in bloodList)
             {
-                if (b.Date_removed == null)
+                if (b.Date_removed != DateTime.MinValue)
                 {
-                    if (b.Component != "Whole")
-                        bloodTypes[(int)findDonor(b.Taken_from).Blood_type].Add(b);
-                    else
-                        bloodTypes[(int)findDonor(findBlood(b.Taken_from).Taken_from).Blood_type].Add(b);
+                    SortBlood(b);
                 }
             }
         }
@@ -479,6 +492,18 @@ namespace Blood_SMS
             return null;
         }
 
+        List<Donor> findDonorsWithBloodType(bloodType blood_type)
+        {
+            List<Donor> typeDonors = new List<Donor>();
+            foreach (Donor d in viableDonors)
+            {
+                if (d.Blood_type == blood_type)
+                {
+                    typeDonors.Add(d);
+                }
+            }
+            return typeDonors;
+        }
         /*
          *<summary>
          *  Iterates through bloodList and returns the blood object with the same id as provided in the parameter
@@ -542,17 +567,13 @@ namespace Blood_SMS
          *  Creates a list of donors and populates it with viable donors
          *</summary>
          */
-        List<Donor> getViableDonors()
+        void getViableDonors()
         {
-            List<Donor> viableDonors = new List<Donor>();
             foreach (Donor d in donorList)
             {
                 if (d.Is_viable && d.Is_contactable)
                     viableDonors.Add(d);
             }
-            return viableDonors;
         }
-
-
     }
 }
