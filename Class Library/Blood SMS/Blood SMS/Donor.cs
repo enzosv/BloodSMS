@@ -116,8 +116,7 @@ namespace Blood_SMS
             Refresh();
         }
 
-        public Donor(int? DONOR_ID,
-        string NAME,
+        public Donor(string NAME,
         bloodType? BLOOD_TYPE,
         string HOME_PROVINCE,
         string HOME_CITY,
@@ -138,7 +137,6 @@ namespace Blood_SMS
         string REASON_FOR_DEFERRAL
             )
         {
-            donor_id = DONOR_ID;
             blood_type = BLOOD_TYPE;
             name = NAME;
             home_province = HOME_PROVINCE;

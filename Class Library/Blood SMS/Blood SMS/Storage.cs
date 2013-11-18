@@ -71,8 +71,7 @@ namespace Blood_SMS
                 bool? IS_VIABLE = reader.GetValue(22) as bool?;
                 string REASON_FOR_DEFERRAL = reader.GetValue(23) as string;
 
-                new Donor(
-                    DONOR_ID,
+                Donor x = new Donor(DONOR_ID,
                     NAME,
                     BLOOD_TYPE,
                     HOME_PROVINCE,
@@ -96,6 +95,7 @@ namespace Blood_SMS
                     IS_CONTACTABLE,
                     IS_VIABLE,
                     REASON_FOR_DEFERRAL);
+                donorList.Add(x);
             }
             reader.Close();
             conn.Close();
@@ -128,8 +128,7 @@ namespace Blood_SMS
             string REASON_FOR_DEFERRAL
             )
         {
-            Donor x = new Donor(donorList.Count,
-                NAME,
+            Donor x = new Donor(NAME,
                 BLOOD_TYPE,
                 HOME_PROVINCE,
                 HOME_CITY,
@@ -186,31 +185,40 @@ namespace Blood_SMS
             string EDUCATIONAL_ATTAINMENT,
             DateTime BIRTH_DATE,
             DateTime DATE_REGISTERED,
+            DateTime LAST_DONATION,
+            DateTime NEXT_AVAILABLE,
+            int TIMES_DONATED,
+            int TIMES_CONTACTED,
             bool IS_CONTACTABLE,
             bool IS_VIABLE,
             string REASON_FOR_DEFERRAL)
         {
             donorList.Remove(findDonor(DONOR_ID));
             Donor x = new Donor(DONOR_ID,
-                NAME,
-                BLOOD_TYPE,
-                HOME_PROVINCE,
-                HOME_CITY,
-                HOME_STREET,
-                OFFICE_PROVINCE,
-                OFFICE_CITY,
-                OFFICE_STREET,
-                PREFERRED_CONTACT_METHOD,
-                HOME_LANDLINE,
-                OFFICE_LANDLINE,
-                EMAIL,
-                CELLPHONE,
-                EDUCATIONAL_ATTAINMENT,
-                BIRTH_DATE,
-                DATE_REGISTERED,
-                IS_CONTACTABLE,
-                IS_VIABLE,
-                REASON_FOR_DEFERRAL);
+                    NAME,
+                    BLOOD_TYPE,
+                    HOME_PROVINCE,
+                    HOME_CITY,
+                    HOME_STREET,
+                    OFFICE_PROVINCE,
+                    OFFICE_CITY,
+                    OFFICE_STREET,
+                    PREFERRED_CONTACT_METHOD,
+                    HOME_LANDLINE,
+                    OFFICE_LANDLINE,
+                    EMAIL,
+                    CELLPHONE,
+                    EDUCATIONAL_ATTAINMENT,
+                    BIRTH_DATE,
+                    DATE_REGISTERED,
+                    LAST_DONATION,
+                    NEXT_AVAILABLE,
+                    TIMES_DONATED,
+                    TIMES_CONTACTED,
+                    IS_CONTACTABLE,
+                    IS_VIABLE,
+                    REASON_FOR_DEFERRAL);
+            donorList.Add(x);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
@@ -414,14 +422,14 @@ namespace Blood_SMS
         bool UpdateBlood(int blood_id, int taken_from, DateTime date_donated, DateTime date_expire, string component, string patient_name, int patient_age, DateTime date_removed, bool is_assigned, bool is_quarantined, string reason_for_removal)
         {
             removeBloodFromSort(findBlood(blood_id));
-            Blood a = new Blood(blood_id, taken_from, date_donated, date_expire, component, patient_name, patient_age, date_removed, is_assigned, is_quarantined, reason_for_removal);
-            SortBlood(a);
+            Blood x = new Blood(blood_id, taken_from, date_donated, date_expire, component, patient_name, patient_age, date_removed, is_assigned, is_quarantined, reason_for_removal);
+            SortBlood(x);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
             string query = "UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS);
             MySqlCommand comm = new MySqlCommand(query, conn);
-            bloodCommands(comm, a);
+            bloodCommands(comm, x);
             return RowsAffected(comm, conn);
         }
 
