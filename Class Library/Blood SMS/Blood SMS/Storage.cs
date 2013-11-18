@@ -17,8 +17,8 @@ namespace Blood_SMS
 
         string connectionString;
 
-        readonly string[] BLOOD_FIELDS = { "blood_id", "taken_from", "patient_name", "patient_age", "date_donated", "date_expire", "date_removed", "is_assigned", "is_quarantined", "reason_for_removal", "compoenent" };
-        readonly string[] DONOR_FIELDS = { "donor_id", "name", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "cellphone", "educational_attainment", "birth_date", "date_registered", "last_donation", "next_available", "times_donated", "is_contactable", "is_viable", "reason_for_deferral" };
+        readonly string[] BLOOD_FIELDS = {"taken_from", "patient_name", "patient_age", "date_donated", "date_expire", "date_removed", "is_assigned", "is_quarantined", "reason_for_removal", "compoenent" };
+        readonly string[] DONOR_FIELDS = {"name", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "cellphone", "educational_attainment", "birth_date", "date_registered", "last_donation", "next_available", "times_donated", "is_contactable", "is_viable", "reason_for_deferral" };
         Storage(string host, string db, string user, string pass)
         {
             connectionString = string.Format("Server={0};Database={1};Uid={2};Pwd={3}", host, db, user, pass);
@@ -130,7 +130,7 @@ namespace Blood_SMS
                 Blood x = new Blood(blood_id, taken_from, date_donated, date_expire, component, patient_name, patient_age, date_removed, is_assigned, is_quarantined, reason_for_removal);
 
                 //problem with this is that ids might change
-                x.Blood_id = bloodList.Count;
+                //x.Blood_id = bloodList.Count;
                 bloodList.Add(x);
 
                 // or this? 
@@ -200,7 +200,7 @@ namespace Blood_SMS
             string query = "Insert into Donor " + AddQuery(DONOR_FIELDS);
             MySqlCommand comm = new MySqlCommand(query, conn);
             donorCommands(comm, x);
-            return RowsAffected(comm);
+            return RowsAffected(comm, conn);
 
         }
 
@@ -226,7 +226,7 @@ namespace Blood_SMS
             bloodCommands(comm, x);
 
 
-            return RowsAffected(comm);
+            return RowsAffected(comm, conn);
         }
 
         void ExtractBlood(Blood x, DateTime date_added, DateTime date_expire)
@@ -257,7 +257,7 @@ namespace Blood_SMS
             string query = "Insert into Blood " + AddQuery(BLOOD_FIELDS);
             MySqlCommand comm = new MySqlCommand(query, conn);
             bloodCommands(comm, x);
-            return RowsAffected(comm);
+            return RowsAffected(comm, conn);
         }
 
         /*
@@ -275,7 +275,7 @@ namespace Blood_SMS
             string query = "UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS);
             MySqlCommand comm = new MySqlCommand(query, conn);
             bloodCommands(comm, x);
-            return RowsAffected(comm);
+            return RowsAffected(comm, conn);
         }
 
         /*
@@ -292,15 +292,18 @@ namespace Blood_SMS
             conn.Open();
             string query = "UPDATE Donor SET " + UpdateQuery(DONOR_FIELDS);
             MySqlCommand comm = new MySqlCommand(query, conn);
-            donorCommands(comm, x);
-            return RowsAffected(comm);
+            donorCommands(comm, x); 
+            return RowsAffected(comm, conn);
         }
 
         #region Utility Methods
 
         void bloodCommands(MySqlCommand comm, Blood x)
         {
+            long id = comm.LastInsertedId;
+            x.Blood_id = (int)id;
             comm.Parameters.AddWithValue("@blood_id", x.Blood_id);
+
             comm.Parameters.AddWithValue("@taken_from", x.Taken_from);
             comm.Parameters.AddWithValue("@patient_name", x.Patient_name);
             comm.Parameters.AddWithValue("@patient_age", x.Patient_age);
@@ -310,11 +313,15 @@ namespace Blood_SMS
             comm.Parameters.AddWithValue("@is_assigned", x.Is_assigned);
             comm.Parameters.AddWithValue("@is_quarantined", x.Is_quarantined);
             comm.Parameters.AddWithValue("@reason_for_removal", x.Reason_for_removal);
+            
         }
 
         void donorCommands(MySqlCommand comm, Donor x)
         {
+            long id = comm.LastInsertedId;
+            x.Donor_id = (int)id;
             comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
+
             comm.Parameters.AddWithValue("@name", x.Name);
             comm.Parameters.AddWithValue("@blood_type", x.Blood_type);
             comm.Parameters.AddWithValue("@home_province", x.Home_province);
@@ -338,7 +345,6 @@ namespace Blood_SMS
             comm.Parameters.AddWithValue("@is_contactable", x.Is_contactable);
             comm.Parameters.AddWithValue("@is_viable", x.Is_viable);
             comm.Parameters.AddWithValue("@reason_for_deferral", x.Reason_for_deferral);
-
         }
         /*
          *<summary>
@@ -348,12 +354,14 @@ namespace Blood_SMS
          *  MySQLCommand where number of affected rows will be determined from
          *</param>
          */
-        bool RowsAffected(MySqlCommand comm)
+        bool RowsAffected(MySqlCommand comm, MySqlConnection conn)
         {
             if (comm.ExecuteNonQuery() > 0)
             {
+                conn.Close();
                 return true;
             }
+            conn.Close();
             return false;
         }
 
@@ -560,6 +568,28 @@ namespace Blood_SMS
                     return false;
             }
             return true;
+        }
+
+        bool DeleteDonorWithId(int id)
+        {
+            donorList.Remove(findDonor(id));
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+            string query = "DELETE FROM Donor WHERE donor_id =@donor_id";
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            comm.Parameters.AddWithValue("@donor_id", id);
+            return RowsAffected(comm, conn);
+        }
+
+        bool DeleteBloodWithId(int id)
+        {
+            bloodList.Remove(findBlood(id));
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+            string query = "DELETE FROM Blood WHERE blood_id =@blood_id";
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            comm.Parameters.AddWithValue("@blood_id", id);
+            return RowsAffected(comm, conn);
         }
 
         /*
