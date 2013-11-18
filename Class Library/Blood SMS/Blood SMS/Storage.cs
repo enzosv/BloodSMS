@@ -28,6 +28,8 @@ namespace Blood_SMS
             getBloodInInventory();
         }
 
+        #region Donor methods
+
         /*
         *<summary>
         *  Gets all rows from the SQL Donor table and adds them to the donorList
@@ -101,50 +103,6 @@ namespace Blood_SMS
 
         /*
         *<summary>
-        *  Gets all rows from the SQL blood table and adds them to the bloodList
-        *</summary>
-        */
-        void getBloodSQL()
-        {
-            bloodList = new List<Blood>();
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-
-            string query = "Select * from Blood";
-            MySqlCommand command = new MySqlCommand(query, conn);
-            MySqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                int? blood_id = reader.GetValue(0) as int?;
-                int? taken_from = reader.GetValue(1) as int?;
-                string patient_name = reader.GetValue(2) as string;
-                int? patient_age = reader.GetValue(3) as int?;
-                DateTime? date_donated = reader.GetValue(4) as DateTime?;
-                DateTime? date_expire = reader.GetValue(5) as DateTime?;
-                DateTime? date_removed = reader.GetValue(6) as DateTime?;
-                bool? is_assigned = reader.GetValue(7) as bool?;
-                bool? is_quarantined = reader.GetValue(8) as bool?;
-                string reason_for_removal = reader.GetValue(9) as string;
-                string component = reader.GetValue(10) as string;
-
-                Blood x = new Blood(blood_id, taken_from, date_donated, date_expire, component, patient_name, patient_age, date_removed, is_assigned, is_quarantined, reason_for_removal);
-
-                //problem with this is that ids might change
-                //x.Blood_id = bloodList.Count;
-                bloodList.Add(x);
-
-                // or this? 
-                // problem with this is that some might be null
-                //bloodList[blood_id] = x;
-
-                //but they should be the same because deletes are not allowed
-            }
-            reader.Close();
-            conn.Close();
-
-        }
-        /*
-        *<summary>
         *  Creates donor object from parameters, adds it to the donorList and creates row in SQL
         *</summary>
         */
@@ -192,8 +150,8 @@ namespace Blood_SMS
                 REASON_FOR_DEFERRAL
             );
             donorList.Add(x);
-            if (x.Is_viable && x.Is_contactable)
-                viableDonors.Add(x);
+            //if (x.Is_viable && x.Is_contactable)
+            //    viableDonors.Add(x);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
@@ -202,80 +160,6 @@ namespace Blood_SMS
             donorCommands(comm, x);
             return RowsAffected(comm, conn);
 
-        }
-
-        /*
-        *<summary>
-        *  Creates blood object from parameters, adds it to the bloodList and creates row in SQL
-        *</summary>
-        */
-        bool AddBlood(DateTime date_added, DateTime date_expire, int taken_from)
-        {
-            Blood x = new Blood(bloodList.Count, taken_from, date_added, date_expire);
-            bloodList.Add(x);
-
-            SortBlood(x);
-
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-            string query = "Insert into Blood " + AddQuery(BLOOD_FIELDS);
-            //"donor_id, patient_name, patient_age, date_donated, date_expire, date_removed, is_assigned, age, is_quarantined, reason_for_removal, component) " +
-            //"Values(@donor_id, ?b, ?c, ?d, ?e, ?f, ?g, ?h, ?i, ?j, ?k)";
-            MySqlCommand comm = new MySqlCommand(query, conn);
-            //AddValue(comm, x, BLOOD_FIELDS);
-            bloodCommands(comm, x);
-
-
-            return RowsAffected(comm, conn);
-        }
-
-        void ExtractBlood(Blood x, DateTime date_added, DateTime date_expire)
-        {
-            x.Extract(date_added);
-            AddBlood(x, date_added, date_expire, "Fresh Frozen Plasma");
-            AddBlood(x, date_added, date_expire, "Packed Red Cells");
-        }
-
-        //doesn't work for update yet
-        void SortBlood(Blood b)
-        {
-            if (b.Component != "Whole")
-                bloodTypes[(int)findDonor(b.Taken_from).Blood_type].Add(b);
-            else
-                bloodTypes[(int)findDonor(findBlood(b.Taken_from).Taken_from).Blood_type].Add(b);
-        }
-
-        bool AddBlood(Blood a, DateTime date_added, DateTime date_expire, string component)
-        {
-            Blood x = new Blood(a.Blood_id, bloodList.Count, date_added, date_expire, component);
-            bloodList.Add(x);
-
-            SortBlood(x);
-
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-            string query = "Insert into Blood " + AddQuery(BLOOD_FIELDS);
-            MySqlCommand comm = new MySqlCommand(query, conn);
-            bloodCommands(comm, x);
-            return RowsAffected(comm, conn);
-        }
-
-        /*
-        *<summary>
-        *  Updates the sql table with the properties found in the supplied object
-        *</summary>
-        *<param name="x">
-        *  Blood object containing properties to be applied
-        *</param>
-        */
-        bool UpdateBlood(Blood x)
-        {
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-            string query = "UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS);
-            MySqlCommand comm = new MySqlCommand(query, conn);
-            bloodCommands(comm, x);
-            return RowsAffected(comm, conn);
         }
 
         /*
@@ -292,28 +176,71 @@ namespace Blood_SMS
             conn.Open();
             string query = "UPDATE Donor SET " + UpdateQuery(DONOR_FIELDS);
             MySqlCommand comm = new MySqlCommand(query, conn);
-            donorCommands(comm, x); 
+            donorCommands(comm, x);
             return RowsAffected(comm, conn);
         }
 
-        #region Utility Methods
-
-        void bloodCommands(MySqlCommand comm, Blood x)
+        /*
+         *<summary>
+         *  Iterates through donorList and returns the donor object with the same id as provided in the parameter
+         *</summary>
+         *<param name="">
+         * 
+         *</param>
+         */
+        Donor findDonor(int id)
         {
-            long id = comm.LastInsertedId;
-            x.Blood_id = (int)id;
-            comm.Parameters.AddWithValue("@blood_id", x.Blood_id);
+            foreach (Donor d in donorList)
+            {
+                if (d.Donor_id == id)
+                {
+                    return d;
+                }
+            }
+            return null;
+        }
 
-            comm.Parameters.AddWithValue("@taken_from", x.Taken_from);
-            comm.Parameters.AddWithValue("@patient_name", x.Patient_name);
-            comm.Parameters.AddWithValue("@patient_age", x.Patient_age);
-            comm.Parameters.AddWithValue("@date_added", x.Date_added);
-            comm.Parameters.AddWithValue("@date_expire", x.Date_expire);
-            comm.Parameters.AddWithValue("@date_removed", x.Date_removed);
-            comm.Parameters.AddWithValue("@is_assigned", x.Is_assigned);
-            comm.Parameters.AddWithValue("@is_quarantined", x.Is_quarantined);
-            comm.Parameters.AddWithValue("@reason_for_removal", x.Reason_for_removal);
-            
+        List<Donor> findDonorsWithBloodType(bloodType blood_type)
+        {
+            List<Donor> typeDonors = new List<Donor>();
+            foreach (Donor d in viableDonors)
+            {
+                if (d.Blood_type == blood_type)
+                {
+                    typeDonors.Add(d);
+                }
+            }
+            return typeDonors;
+        }
+
+        /*
+         *<summary>
+         *  Iterates through all donor objects in bloodList
+         *  and checks if any item matches id provided in parameter
+         *</summary>
+         *<param name="id">
+         *  an integer from the objects identifier
+         *</param>
+         */
+        bool isDonorUnique(int id)
+        {
+            foreach (Donor d in donorList)
+            {
+                if (d.Donor_id == id)
+                    return false;
+            }
+            return true;
+        }
+
+        bool DeleteDonorWithId(int id)
+        {
+            donorList.Remove(findDonor(id));
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+            string query = "DELETE FROM Donor WHERE donor_id =@donor_id";
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            comm.Parameters.AddWithValue("@donor_id", id);
+            return RowsAffected(comm, conn);
         }
 
         void donorCommands(MySqlCommand comm, Donor x)
@@ -346,6 +273,270 @@ namespace Blood_SMS
             comm.Parameters.AddWithValue("@is_viable", x.Is_viable);
             comm.Parameters.AddWithValue("@reason_for_deferral", x.Reason_for_deferral);
         }
+
+        /*
+         *<summary>
+         *  Creates a list of donors and populates it with viable donors
+         *</summary>
+         */
+        void getViableDonors()
+        {
+            foreach (Donor d in donorList)
+            {
+                if (d.Is_viable && d.Is_contactable)
+                    viableDonors.Add(d);
+            }
+        }
+
+        #endregion
+
+        #region Blood methods
+
+        /*
+        *<summary>
+        *  Gets all rows from the SQL blood table and adds them to the bloodList
+        *</summary>
+        */
+        void getBloodSQL()
+        {
+            bloodList = new List<Blood>();
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+
+            string query = "Select * from Blood";
+            MySqlCommand command = new MySqlCommand(query, conn);
+            MySqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int? blood_id = reader.GetValue(0) as int?;
+                int? taken_from = reader.GetValue(1) as int?;
+                string patient_name = reader.GetValue(2) as string;
+                int? patient_age = reader.GetValue(3) as int?;
+                DateTime? date_donated = reader.GetValue(4) as DateTime?;
+                DateTime? date_expire = reader.GetValue(5) as DateTime?;
+                DateTime? date_removed = reader.GetValue(6) as DateTime?;
+                bool? is_assigned = reader.GetValue(7) as bool?;
+                bool? is_quarantined = reader.GetValue(8) as bool?;
+                string reason_for_removal = reader.GetValue(9) as string;
+                string component = reader.GetValue(10) as string;
+
+                Blood x = new Blood(blood_id, taken_from, date_donated, date_expire, component, patient_name, patient_age, date_removed, is_assigned, is_quarantined, reason_for_removal);
+                bloodList.Add(x);
+            }
+            reader.Close();
+            conn.Close();
+
+        }
+
+        /*
+        *<summary>
+        *  Creates blood object from parameters, adds it to the bloodList and creates row in SQL
+        *</summary>
+        */
+        bool AddBlood(DateTime date_added, DateTime date_expire, int taken_from)
+        {
+            Blood x = new Blood(bloodList.Count, taken_from, date_added, date_expire);
+            bloodList.Add(x);
+
+            SortBlood(x);
+
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+            string query = "Insert into Blood " + AddQuery(BLOOD_FIELDS);
+            //"donor_id, patient_name, patient_age, date_donated, date_expire, date_removed, is_assigned, age, is_quarantined, reason_for_removal, component) " +
+            //"Values(@donor_id, ?b, ?c, ?d, ?e, ?f, ?g, ?h, ?i, ?j, ?k)";
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            //AddValue(comm, x, BLOOD_FIELDS);
+            bloodCommands(comm, x);
+
+
+            return RowsAffected(comm, conn);
+        }
+
+        /*summary
+         * for extracted blood
+         */
+        bool AddBlood(Blood a, DateTime date_added, DateTime date_expire, string component)
+        {
+            Blood x = new Blood(a.Blood_id, bloodList.Count, date_added, date_expire, component);
+            bloodList.Add(x);
+
+            SortBlood(x);
+
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+            string query = "Insert into Blood " + AddQuery(BLOOD_FIELDS);
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            bloodCommands(comm, x);
+            return RowsAffected(comm, conn);
+        }
+
+        /*
+       *<summary>
+       *  Updates the sql table with the properties found in the supplied object
+       *</summary>
+       *<param name="x">
+       *  Blood object containing properties to be applied
+       *</param>
+       */
+        bool UpdateBlood(Blood x)
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+            string query = "UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS);
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            bloodCommands(comm, x);
+            return RowsAffected(comm, conn);
+        }
+
+        int getBloodRemovedOn(DateTime date)
+        {
+            int count = 0;
+            foreach (Blood b in bloodList)
+            {
+                if (b.Is_removed)
+                {
+                    if (b.Date_removed == date)
+                    {
+                        count++;
+                    }
+                }
+            }
+            return count;
+        }
+
+        int getBloodReleasedOn(DateTime date)
+        {
+            int count = 0;
+            foreach (Blood b in bloodList)
+            {
+                if (b.Is_assigned && b.Is_removed)
+                {
+                    if (b.Date_removed == date)
+                    {
+                        count++;
+                    }
+                }
+            }
+            return count;
+        }
+
+        int getBloodQuarantinedOn(DateTime date)
+        {
+            int count = 0;
+            foreach (Blood b in bloodList)
+            {
+                if (b.Is_quarantined && b.Is_removed)
+                {
+                    if (b.Date_removed == date)
+                        count++;
+                }
+            }
+            return count;
+        }
+
+        int getBloodAddedOn(DateTime date)
+        {
+            int count = 0;
+            foreach (Blood b in bloodList)
+            {
+                if (b.Component == "Whole" && b.Date_added == date)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        void ExtractBlood(Blood x, DateTime date_added, DateTime date_expire)
+        {
+            x.Extract(date_added);
+            AddBlood(x, date_added, date_expire, "Fresh Frozen Plasma");
+            AddBlood(x, date_added, date_expire, "Packed Red Cells");
+        }
+
+        //doesn't work for update yet
+        void SortBlood(Blood b)
+        {
+            if (b.Component != "Whole")
+                bloodTypes[(int)findDonor(b.Taken_from).Blood_type].Add(b);
+            else
+                bloodTypes[(int)findDonor(findBlood(b.Taken_from).Taken_from).Blood_type].Add(b);
+        }
+
+        void bloodCommands(MySqlCommand comm, Blood x)
+        {
+            long id = comm.LastInsertedId;
+            x.Blood_id = (int)id;
+            comm.Parameters.AddWithValue("@blood_id", x.Blood_id);
+
+            comm.Parameters.AddWithValue("@taken_from", x.Taken_from);
+            comm.Parameters.AddWithValue("@patient_name", x.Patient_name);
+            comm.Parameters.AddWithValue("@patient_age", x.Patient_age);
+            comm.Parameters.AddWithValue("@date_added", x.Date_added);
+            comm.Parameters.AddWithValue("@date_expire", x.Date_expire);
+            comm.Parameters.AddWithValue("@date_removed", x.Date_removed);
+            comm.Parameters.AddWithValue("@is_assigned", x.Is_assigned);
+            comm.Parameters.AddWithValue("@is_quarantined", x.Is_quarantined);
+            comm.Parameters.AddWithValue("@reason_for_removal", x.Reason_for_removal);
+
+        }
+
+        void getBloodInInventory()
+        {
+            bloodTypes = new List<Blood>[Enum.GetNames(typeof(bloodType)).Length];
+            foreach (Blood b in bloodList)
+            {
+                if (b.Date_removed != DateTime.MinValue)
+                {
+                    SortBlood(b);
+                }
+            }
+        }
+
+        bool isBloodUnique(int id)
+        {
+            foreach (Blood b in bloodList)
+            {
+                if (b.Blood_id == id)
+                    return false;
+            }
+            return true;
+        }
+
+        bool DeleteBloodWithId(int id)
+        {
+            bloodList.Remove(findBlood(id));
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+            string query = "DELETE FROM Blood WHERE blood_id =@blood_id";
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            comm.Parameters.AddWithValue("@blood_id", id);
+            return RowsAffected(comm, conn);
+        }
+
+        /*
+         *<summary>
+         *  Iterates through bloodList and returns the blood object with the same id as provided in the parameter
+         *</summary>
+         *<param name="">
+         * 
+         *</param>
+         */
+        Blood findBlood(int id)
+        {
+            foreach (Blood b in bloodList)
+            {
+                if (b.Blood_id == id)
+                {
+                    return b;
+                }
+            }
+            return null;
+        }
+        #endregion
+
+        #region Utility Methods
         /*
          *<summary>
          *  returns true if rows have been affected
@@ -462,207 +653,6 @@ namespace Blood_SMS
         }
         */
         #endregion
-
-        /*
-         *<summary>
-         *  creates and populates blood types by iterating through each blood object in blood list and filtering them based on their blood types
-         *</summary>
-         */
-        void getBloodInInventory()
-        {
-            bloodTypes = new List<Blood>[Enum.GetNames(typeof(bloodType)).Length];
-            foreach (Blood b in bloodList)
-            {
-                if (b.Date_removed != DateTime.MinValue)
-                {
-                    SortBlood(b);
-                }
-            }
-        }
-
-        /*
-         *<summary>
-         *  Iterates through donorList and returns the donor object with the same id as provided in the parameter
-         *</summary>
-         *<param name="">
-         * 
-         *</param>
-         */
-        Donor findDonor(int id)
-        {
-            foreach (Donor d in donorList)
-            {
-                if (d.Donor_id == id)
-                {
-                    return d;
-                }
-            }
-            return null;
-        }
-
-        List<Donor> findDonorsWithBloodType(bloodType blood_type)
-        {
-            List<Donor> typeDonors = new List<Donor>();
-            foreach (Donor d in viableDonors)
-            {
-                if (d.Blood_type == blood_type)
-                {
-                    typeDonors.Add(d);
-                }
-            }
-            return typeDonors;
-        }
-        /*
-         *<summary>
-         *  Iterates through bloodList and returns the blood object with the same id as provided in the parameter
-         *</summary>
-         *<param name="">
-         * 
-         *</param>
-         */
-        Blood findBlood(int id)
-        {
-            foreach (Blood b in bloodList)
-            {
-                if (b.Blood_id == id)
-                {
-                    return b;
-                }
-            }
-            return null;
-        }
-
-        /*
-         *<summary>
-         *  Iterates through all donor objects in bloodList
-         *  and checks if any item matches id provided in parameter
-         *</summary>
-         *<param name="id">
-         *  an integer from the objects identifier
-         *</param>
-         */
-        bool isDonorUnique(int id)
-        {
-            foreach (Donor d in donorList)
-            {
-                if (d.Donor_id == id)
-                    return false;
-            }
-            return true;
-        }
-
-        /*
-         *<summary>
-         *  Iterates through all blood objects in bloodList
-         *  and checks if any item matches id provided in parameter
-         *</summary>
-         *<param name="id">
-         *  an integer from the objects identifier
-         *</param>
-         */
-        bool isBloodUnique(int id)
-        {
-            foreach (Blood b in bloodList)
-            {
-                if (b.Blood_id == id)
-                    return false;
-            }
-            return true;
-        }
-
-        bool DeleteDonorWithId(int id)
-        {
-            donorList.Remove(findDonor(id));
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-            string query = "DELETE FROM Donor WHERE donor_id =@donor_id";
-            MySqlCommand comm = new MySqlCommand(query, conn);
-            comm.Parameters.AddWithValue("@donor_id", id);
-            return RowsAffected(comm, conn);
-        }
-
-        bool DeleteBloodWithId(int id)
-        {
-            bloodList.Remove(findBlood(id));
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-            string query = "DELETE FROM Blood WHERE blood_id =@blood_id";
-            MySqlCommand comm = new MySqlCommand(query, conn);
-            comm.Parameters.AddWithValue("@blood_id", id);
-            return RowsAffected(comm, conn);
-        }
-
-        /*
-         *<summary>
-         *  Creates a list of donors and populates it with viable donors
-         *</summary>
-         */
-        void getViableDonors()
-        {
-            foreach (Donor d in donorList)
-            {
-                if (d.Is_viable && d.Is_contactable)
-                    viableDonors.Add(d);
-            }
-        }
-
-        int getBloodRemovedOn(DateTime date)
-        {
-            int count = 0;
-            foreach (Blood b in bloodList)
-            {
-                if (b.Is_removed)
-                {
-                    if (b.Date_removed == date)
-                    {
-                        count++;
-                    }
-                }
-            }
-            return count;
-        }
-
-        int getBloodReleasedOn(DateTime date)
-        {
-            int count = 0;
-            foreach (Blood b in bloodList)
-            {
-                if (b.Is_assigned && b.Is_removed)
-                {
-                    if (b.Date_removed == date)
-                    {
-                        count++;
-                    }
-                }
-            }
-            return count;
-        }
-
-        int getBloodQuarantinedOn(DateTime date)
-        {
-            int count = 0;
-            foreach (Blood b in bloodList)
-            {
-                if (b.Is_quarantined && b.Is_removed)
-                {
-                    if(b.Date_removed == date)
-                        count++;
-                }
-            }
-            return count;
-        }
-
-        int getBloodAddedOn(DateTime date)
-        {
-            int count = 0;
-            foreach (Blood b in bloodList)
-            {
-                if (b.Component == "Whole" && b.Date_added == date)
-                {
-                    count++;
-                }
-            }
-            return count;
-        }
+ 
     }
 }
