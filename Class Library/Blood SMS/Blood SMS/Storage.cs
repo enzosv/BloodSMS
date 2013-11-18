@@ -6,8 +6,8 @@ using MySql.Data.MySqlClient;
 
 namespace Blood_SMS
 {
-    enum bloodType { A, B, O };
-    enum contactMethod { home_landline, office_landline, email, cellphone };
+    public enum bloodType { A, B, O };
+    public enum contactMethod { home_landline, office_landline, email, cellphone };
     public class Storage
     {
         List<Blood> bloodList;
@@ -247,7 +247,7 @@ namespace Blood_SMS
 
         bool AddBlood(Blood a, DateTime date_added, DateTime date_expire, string component)
         {
-            Blood x = new Blood(a, bloodList.Count, date_added, date_expire, component);
+            Blood x = new Blood(a.Blood_id, bloodList.Count, date_added, date_expire, component);
             bloodList.Add(x);
 
             SortBlood(x);

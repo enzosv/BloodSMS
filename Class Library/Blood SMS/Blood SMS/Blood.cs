@@ -47,15 +47,10 @@ namespace Blood_SMS
 
             //set defaults
 			component = "Whole";
-            date_removed = DateTime.MinValue;
-            is_assigned = false;
-            patient_name = "";
-            patient_age = 0;
-            is_quarantined = false;
-            reason_for_removal = "";
-            Refresh();
+            setDefaults();
         }
 
+        //From SQL
         public Blood(int? BLOOD_ID, int? TAKEN_FROM, DateTime? DATE_ADDED, DateTime? DATE_EXPIRE, string COMPONENT, string PATIENT_NAME, int? PATIENT_AGE, DateTime? DATE_REMOVED, bool? IS_ASSIGNED, bool? IS_QUARANTINED, string REASON_FOR_REMOVAL )
         {
             blood_id = BLOOD_ID;
@@ -73,14 +68,20 @@ namespace Blood_SMS
             Refresh();
         }
 		
-		public Blood(Blood x, int? BLOOD_ID, DateTime? DATE_ADDED, DateTime? DATE_EXPIRE, string COMPONENT)
+        //From extract
+		public Blood(int? TAKEN_FROM, int? BLOOD_ID, DateTime? DATE_ADDED, DateTime? DATE_EXPIRE, string COMPONENT)
 		{
 			blood_id = BLOOD_ID;
-			taken_from = x.Taken_from;
+			taken_from = TAKEN_FROM;
 			date_added = DATE_ADDED;
 			date_expire = DATE_EXPIRE;
 			component = COMPONENT;
 
+            setDefaults();
+		}
+
+        void setDefaults()
+        {
             date_removed = DateTime.MinValue;
             is_assigned = false;
             patient_name = "";
@@ -88,7 +89,7 @@ namespace Blood_SMS
             is_quarantined = false;
             reason_for_removal = "";
             Refresh();
-		}
+        }
 
         public void Refresh()
         {
@@ -96,7 +97,7 @@ namespace Blood_SMS
             age = span.Days;
             if (!is_quarantined.Value && date_expire.Value < DateTime.Today)
             {
-                Quarantine("Expired on " + date_expire.Value.ToShortDateString(), date_expire);
+                Quarantine("Expired on " + date_expire.Value.ToShortDateString(), date_expire.Value);
             }
         }
 
@@ -113,16 +114,18 @@ namespace Blood_SMS
             Release(DATE_REMOVED);
         }
 
-        public void Release(DateTime DATE_REMOVED)
+        public bool Release(DateTime DATE_REMOVED)
         {
             if (is_assigned.Value)
             {
                 date_removed = DATE_REMOVED;
-                reason_for_removal = "Released to: " + patient_name + " on " + date_removed;
+                reason_for_removal = "Released to: " + patient_name + " on " + date_removed.Value.ToShortDateString();
+                return true;
             }
+            return false;
         }
 
-        public void Quarantine(string reason, DateTime? DATE_REMOVED)
+        public void Quarantine(string reason, DateTime DATE_REMOVED)
         {
             is_quarantined = true;
             date_removed = DATE_REMOVED;
@@ -132,7 +135,7 @@ namespace Blood_SMS
 		public void Extract(DateTime DATE_REMOVED)
 		{
 			date_removed = DATE_REMOVED;
-			
+            reason_for_removal = "Extracted to multiple components on: " + date_removed.Value.ToShortDateString();
 		}
 
     }
