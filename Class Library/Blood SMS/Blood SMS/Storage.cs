@@ -575,5 +575,64 @@ namespace Blood_SMS
                     viableDonors.Add(d);
             }
         }
+
+        int getBloodRemovedOn(DateTime date)
+        {
+            int count = 0;
+            foreach (Blood b in bloodList)
+            {
+                if (b.Date_removed != DateTime.MinValue)
+                {
+                    if (b.Date_removed == date)
+                    {
+                        count++;
+                    }
+                }
+            }
+            return count;
+        }
+
+        int getBloodReleasedOn(DateTime date)
+        {
+            int count = 0;
+            foreach (Blood b in bloodList)
+            {
+                if (b.Is_assigned && b.Date_removed != DateTime.MinValue)
+                {
+                    if (b.Date_removed == date)
+                    {
+                        count++;
+                    }
+                }
+            }
+            return count;
+        }
+
+        int getBloodQuarantinedOn(DateTime date)
+        {
+            int count = 0;
+            foreach (Blood b in bloodList)
+            {
+                if (b.Is_quarantined)
+                {
+                    if(b.Date_removed == date)
+                        count++;
+                }
+            }
+            return count;
+        }
+
+        int getBloodAddedOn(DateTime date)
+        {
+            int count = 0;
+            foreach (Blood b in bloodList)
+            {
+                if (b.Component == "Whole" && b.Date_added == date)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
     }
 }
