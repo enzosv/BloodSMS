@@ -581,7 +581,7 @@ namespace Blood_SMS
             int count = 0;
             foreach (Blood b in bloodList)
             {
-                if (b.Date_removed != DateTime.MinValue)
+                if (b.Is_removed)
                 {
                     if (b.Date_removed == date)
                     {
@@ -597,7 +597,7 @@ namespace Blood_SMS
             int count = 0;
             foreach (Blood b in bloodList)
             {
-                if (b.Is_assigned && b.Date_removed != DateTime.MinValue)
+                if (b.Is_assigned && b.Is_removed)
                 {
                     if (b.Date_removed == date)
                     {
@@ -613,7 +613,7 @@ namespace Blood_SMS
             int count = 0;
             foreach (Blood b in bloodList)
             {
-                if (b.Is_quarantined)
+                if (b.Is_quarantined && b.Is_removed)
                 {
                     if(b.Date_removed == date)
                         count++;

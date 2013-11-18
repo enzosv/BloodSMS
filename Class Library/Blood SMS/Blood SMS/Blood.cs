@@ -16,17 +16,19 @@ namespace Blood_SMS
         bool? is_assigned;
         string patient_name;
         int? patient_age;
-
-        int age;
+        
         bool? is_quarantined;
         string reason_for_removal;
         DateTime? date_removed;
+
+        int age;
+        bool is_removed;
 
         public int Blood_id { get; set; }
         public int Taken_from { get; set; }
         public DateTime Date_added { get; set; }
         public DateTime Date_expire { get; set; }
-        public int Age { get; set; }
+        
         public string Patient_name { get; set; }
         public int Patient_age { get; set; }
         public bool Is_assigned { get; set; }
@@ -34,6 +36,9 @@ namespace Blood_SMS
         public bool Is_quarantined { get; set; }
         public string Reason_for_removal { get; set; }
         public DateTime Date_removed { get; set; }
+
+        public int Age { get; set; }
+        public bool Is_removed { get; set; }
 
         //Record Blood Ins
         //Create
@@ -65,6 +70,13 @@ namespace Blood_SMS
             patient_age = PATIENT_AGE;
             is_quarantined = IS_QUARANTINED;
             reason_for_removal = REASON_FOR_REMOVAL;
+
+            if (date_removed != DateTime.MinValue)
+            {
+                is_removed = true;
+            }
+            else
+                is_removed = false;
             Refresh();
         }
 		
@@ -88,6 +100,7 @@ namespace Blood_SMS
             patient_age = 0;
             is_quarantined = false;
             reason_for_removal = "";
+            is_removed = false;
             Refresh();
         }
 
@@ -112,6 +125,7 @@ namespace Blood_SMS
         {
             Assign(PATIENT_NAME, PATIENT_AGE);
             Release(DATE_REMOVED);
+            is_removed = true;
         }
 
         public bool Release(DateTime DATE_REMOVED)
@@ -120,6 +134,7 @@ namespace Blood_SMS
             {
                 date_removed = DATE_REMOVED;
                 reason_for_removal = "Released to: " + patient_name + " on " + date_removed.Value.ToShortDateString();
+                is_removed = true;
                 return true;
             }
             return false;
@@ -130,12 +145,14 @@ namespace Blood_SMS
             is_quarantined = true;
             date_removed = DATE_REMOVED;
             reason_for_removal = reason;
+            is_removed = true;
         }
 		
 		public void Extract(DateTime DATE_REMOVED)
 		{
 			date_removed = DATE_REMOVED;
             reason_for_removal = "Extracted to multiple components on: " + date_removed.Value.ToShortDateString();
+            is_removed = true;
 		}
 
     }
