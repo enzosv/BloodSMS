@@ -170,8 +170,48 @@ namespace Blood_SMS
          *  Donor object containing properties to be applied
          *</param>
          */
-        bool UpdateDonor(Donor x)
+        bool UpdateDonor(int DONOR_ID, string NAME,
+            bloodType BLOOD_TYPE,
+            string HOME_PROVINCE,
+            string HOME_CITY,
+            string HOME_STREET,
+            string OFFICE_PROVINCE,
+            string OFFICE_CITY,
+            string OFFICE_STREET,
+            contactMethod PREFERRED_CONTACT_METHOD,
+            string HOME_LANDLINE,
+            string OFFICE_LANDLINE,
+            string EMAIL,
+            string CELLPHONE,
+            string EDUCATIONAL_ATTAINMENT,
+            DateTime BIRTH_DATE,
+            DateTime DATE_REGISTERED,
+            bool IS_CONTACTABLE,
+            bool IS_VIABLE,
+            string REASON_FOR_DEFERRAL)
         {
+            donorList.Remove(findDonor(DONOR_ID));
+            Donor x = new Donor(DONOR_ID,
+                NAME,
+                BLOOD_TYPE,
+                HOME_PROVINCE,
+                HOME_CITY,
+                HOME_STREET,
+                OFFICE_PROVINCE,
+                OFFICE_CITY,
+                OFFICE_STREET,
+                PREFERRED_CONTACT_METHOD,
+                HOME_LANDLINE,
+                OFFICE_LANDLINE,
+                EMAIL,
+                CELLPHONE,
+                EDUCATIONAL_ATTAINMENT,
+                BIRTH_DATE,
+                DATE_REGISTERED,
+                IS_CONTACTABLE,
+                IS_VIABLE,
+                REASON_FOR_DEFERRAL);
+
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
             string query = "UPDATE Donor SET " + UpdateQuery(DONOR_FIELDS);
@@ -523,6 +563,7 @@ namespace Blood_SMS
             }
             bloodList.Remove(b);
         }
+
         /*
          *<summary>
          *  Iterates through bloodList and returns the blood object with the same id as provided in the parameter
