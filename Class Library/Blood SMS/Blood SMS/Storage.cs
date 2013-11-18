@@ -321,7 +321,8 @@ namespace Blood_SMS
                 string component = reader.GetValue(10) as string;
 
                 Blood x = new Blood(blood_id, taken_from, date_donated, date_expire, component, patient_name, patient_age, date_removed, is_assigned, is_quarantined, reason_for_removal);
-                bloodList.Add(x);
+                
+                SortBlood(x);
             }
             reader.Close();
             conn.Close();
@@ -336,20 +337,13 @@ namespace Blood_SMS
         bool AddBlood(DateTime date_added, DateTime date_expire, int taken_from)
         {
             Blood x = new Blood(bloodList.Count, taken_from, date_added, date_expire);
-            bloodList.Add(x);
-
             SortBlood(x);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
             string query = "Insert into Blood " + AddQuery(BLOOD_FIELDS);
-            //"donor_id, patient_name, patient_age, date_donated, date_expire, date_removed, is_assigned, age, is_quarantined, reason_for_removal, component) " +
-            //"Values(@donor_id, ?b, ?c, ?d, ?e, ?f, ?g, ?h, ?i, ?j, ?k)";
             MySqlCommand comm = new MySqlCommand(query, conn);
-            //AddValue(comm, x, BLOOD_FIELDS);
             bloodCommands(comm, x);
-
-
             return RowsAffected(comm, conn);
         }
 
@@ -359,8 +353,6 @@ namespace Blood_SMS
         bool AddBlood(Blood a, DateTime date_added, DateTime date_expire, string component)
         {
             Blood x = new Blood(a.Blood_id, bloodList.Count, date_added, date_expire, component);
-            bloodList.Add(x);
-
             SortBlood(x);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
@@ -379,13 +371,17 @@ namespace Blood_SMS
        *  Blood object containing properties to be applied
        *</param>
        */
-        bool UpdateBlood(Blood x)
+        bool UpdateBlood(int blood_id, int taken_from, DateTime date_donated, DateTime date_expire, string component, string patient_name, int patient_age, DateTime date_removed, bool is_assigned, bool is_quarantined, string reason_for_removal)
         {
+            removeBloodFromSort(findBlood(blood_id));
+            Blood a = new Blood(blood_id, taken_from, date_donated, date_expire, component, patient_name, patient_age, date_removed, is_assigned, is_quarantined, reason_for_removal);
+            SortBlood(a);
+
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
             string query = "UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS);
             MySqlCommand comm = new MySqlCommand(query, conn);
-            bloodCommands(comm, x);
+            bloodCommands(comm, a);
             return RowsAffected(comm, conn);
         }
 
@@ -435,7 +431,7 @@ namespace Blood_SMS
             return count;
         }
 
-        int getBloodAddedOn(DateTime date)
+        int getWholeBloodAddedOn(DateTime date)
         {
             int count = 0;
             foreach (Blood b in bloodList)
@@ -455,10 +451,10 @@ namespace Blood_SMS
             AddBlood(x, date_added, date_expire, "Packed Red Cells");
         }
 
-        //doesn't work for update yet
         void SortBlood(Blood b)
         {
-            if (b.Component != "Whole")
+            bloodList.Add(b);
+            if (b.Component == "Whole")
                 bloodTypes[(int)findDonor(b.Taken_from).Blood_type].Add(b);
             else
                 bloodTypes[(int)findDonor(findBlood(b.Taken_from).Taken_from).Blood_type].Add(b);
@@ -487,7 +483,7 @@ namespace Blood_SMS
             bloodTypes = new List<Blood>[Enum.GetNames(typeof(bloodType)).Length];
             foreach (Blood b in bloodList)
             {
-                if (b.Date_removed != DateTime.MinValue)
+                if (!b.Is_removed)
                 {
                     SortBlood(b);
                 }
@@ -506,7 +502,7 @@ namespace Blood_SMS
 
         bool DeleteBloodWithId(int id)
         {
-            bloodList.Remove(findBlood(id));
+            removeBloodFromSort(findBlood(id));
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
             string query = "DELETE FROM Blood WHERE blood_id =@blood_id";
@@ -515,6 +511,18 @@ namespace Blood_SMS
             return RowsAffected(comm, conn);
         }
 
+        void removeBloodFromSort(Blood b)
+        {
+            foreach (List<Blood> bType in bloodTypes)
+            {
+                if (bType.Contains(b))
+                {
+                    bType.Remove(b);
+                    break;
+                }
+            }
+            bloodList.Remove(b);
+        }
         /*
          *<summary>
          *  Iterates through bloodList and returns the blood object with the same id as provided in the parameter
@@ -656,3 +664,4 @@ namespace Blood_SMS
  
     }
 }
+
