@@ -14,6 +14,7 @@ namespace Blood_SMS
         List<Blood>[] bloodTypes;
         List<Donor> donorList;
         List<Donor> viableDonors;
+		List<City> cities;
 
         string connectionString;
 
@@ -21,13 +22,48 @@ namespace Blood_SMS
         readonly string[] DONOR_FIELDS = {"name", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "cellphone", "educational_attainment", "birth_date", "date_registered", "last_donation", "next_available", "times_donated", "is_contactable", "is_viable", "reason_for_deferral" };
         Storage(string host, string db, string user, string pass)
         {
+			cities = new List<City>();
+			GenerateCities();
             connectionString = string.Format("Server={0};Database={1};Uid={2};Pwd={3}", host, db, user, pass);
             viableDonors = new List<Donor>();
             getDonorSQL();
             getBloodSQL();
             getBloodInInventory();
         }
-
+		
+		void GenerateCities()
+		{
+			cities.Add(new City("Quezon City", 4500));
+			cities.Add(new City("Caloocan", 11300));
+			cities.Add(new City("Las Pinas", 34900));
+			cities.Add(new City("Makati", 12300));
+			cities.Add(new City("Malabon", 11600));
+			cities.Add(new City("Mandaluyong", 9600));
+			cities.Add(new City("Marikina", 30400));
+			cities.Add(new City("Muntinlupa", 15400));
+			cities.Add(new City("Navotas", 25200));
+			cities.Add(new City("Paranaque", 16400));
+			cities.Add(new City("Pasay", 10100));
+			cities.Add(new City("San Juan", 14500));
+			cities.Add(new City("Taguig", 21300));
+			cities.Add(new City("Valenzuela", 14500));
+			cities.Add(new City("Pateros", 12900));
+			cities.Add(new City("Manila", 10100));
+		}
+		
+		
+		int findCityDistance(string name)
+		{
+			int distance = 0;
+			foreach(City c in cities)
+			{
+				if(c.name == name)
+				{
+					distance = c.distance;
+				}
+			}
+			return distance;
+		}
         #region Donor methods
 
         /*
@@ -335,7 +371,18 @@ namespace Blood_SMS
                     viableDonors.Add(d);
             }
         }
-
+		
+		void sortByDistance()
+		{
+			int previousDistance = 0;
+			foreach(Donor d in viableDonors)
+			{
+				if(findCityDistance(d.Home_city) < previousDistance)
+				{
+					//what pano to pag data table?
+				}
+			}
+		}
         #endregion
 
         #region Blood methods
