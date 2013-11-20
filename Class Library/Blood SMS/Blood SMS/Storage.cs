@@ -8,6 +8,25 @@ namespace Blood_SMS
 {
     public enum bloodType { A, B, O };
     public enum contactMethod { home_landline, office_landline, email, cellphone };
+	public enum city { QuezonCity, SanJuan, Manila, Caloocan, Mandaluyong, Malabon, Pateros, Makati, Valenzuela, Navotas, Pasay, Taguig, Paranaque, Muntinlupa, LasPinas, Other};
+	/*
+	 * Quezon City 4.5km
+Marikina 9.6
+San Juan 10.1
+Manila 10.1
+Caloocan 11.3km
+Mandaluyong 11.6
+Malabon 12.3
+Pateros 12.9
+Makati 13.7km
+Valenzuela 14.5
+Navotas 15.4
+Pasay 16.4
+Taguig 21.3
+Paranaque 25.2
+Muntinlupa 30.4km
+las pinas 34.9km
+*/
     public class Storage
     {
         List<Blood> bloodList;
@@ -31,39 +50,6 @@ namespace Blood_SMS
             getBloodInInventory();
         }
 		
-		void GenerateCities()
-		{
-			cities.Add(new City("Quezon City", 4500));
-			cities.Add(new City("Caloocan", 11300));
-			cities.Add(new City("Las Pinas", 34900));
-			cities.Add(new City("Makati", 12300));
-			cities.Add(new City("Malabon", 11600));
-			cities.Add(new City("Mandaluyong", 9600));
-			cities.Add(new City("Marikina", 30400));
-			cities.Add(new City("Muntinlupa", 15400));
-			cities.Add(new City("Navotas", 25200));
-			cities.Add(new City("Paranaque", 16400));
-			cities.Add(new City("Pasay", 10100));
-			cities.Add(new City("San Juan", 14500));
-			cities.Add(new City("Taguig", 21300));
-			cities.Add(new City("Valenzuela", 14500));
-			cities.Add(new City("Pateros", 12900));
-			cities.Add(new City("Manila", 10100));
-		}
-		
-		
-		int findCityDistance(string name)
-		{
-			int distance = 0;
-			foreach(City c in cities)
-			{
-				if(c.name == name)
-				{
-					distance = c.distance;
-				}
-			}
-			return distance;
-		}
         #region Donor methods
 
         /*
@@ -377,10 +363,7 @@ namespace Blood_SMS
 			int previousDistance = 0;
 			foreach(Donor d in viableDonors)
 			{
-				if(findCityDistance(d.Home_city) < previousDistance)
-				{
-					//what pano to pag data table?
-				}
+				
 			}
 		}
         #endregion
