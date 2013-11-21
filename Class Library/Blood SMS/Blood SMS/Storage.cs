@@ -121,7 +121,7 @@ las pinas 34.9km
                     IS_CONTACTABLE,
                     IS_VIABLE,
                     REASON_FOR_DEFERRAL);
-                donorList.Add(x);
+                sortDonor(x);
             }
             reader.Close();
             conn.Close();
@@ -174,7 +174,7 @@ las pinas 34.9km
                 IS_VIABLE,
                 REASON_FOR_DEFERRAL
             );
-            donorList.Add(x);
+			
             //if (x.Is_viable && x.Is_contactable)
             //    viableDonors.Add(x);
 
@@ -219,7 +219,7 @@ las pinas 34.9km
             bool IS_VIABLE,
             string REASON_FOR_DEFERRAL)
         {
-            donorList.Remove(findDonor(DONOR_ID));
+            unsortDonor(findDonor(DONOR_ID));
             Donor x = new Donor(DONOR_ID,
                     NAME,
                     BLOOD_TYPE,
@@ -244,7 +244,7 @@ las pinas 34.9km
                     IS_CONTACTABLE,
                     IS_VIABLE,
                     REASON_FOR_DEFERRAL);
-            donorList.Add(x);
+            
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
@@ -305,10 +305,18 @@ las pinas 34.9km
             }
             return true;
         }
-
+		
+		void unsortDonor(Donor d)
+		{
+			donorList.Remove(d);
+			if(viableDonors.Contains(d))
+				viableDonors.Remove(d);
+			else if(bannedDonors.Contains(d))
+				bannedDonors.Remove(d);
+		}
         bool DeleteDonorWithId(int id)
         {
-            donorList.Remove(findDonor(id));
+			unsortDonor(findDonor(id));
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
             string query = "DELETE FROM Donor WHERE donor_id =@donor_id";
@@ -346,20 +354,8 @@ las pinas 34.9km
             comm.Parameters.AddWithValue("@is_contactable", x.Is_contactable);
             comm.Parameters.AddWithValue("@is_viable", x.Is_viable);
             comm.Parameters.AddWithValue("@reason_for_deferral", x.Reason_for_deferral);
-        }
-
-        /*
-         *<summary>
-         *  Creates a list of donors and populates it with viable donors
-         *</summary>
-         */
-        void getViableDonors()
-        {
-            foreach (Donor d in donorList)
-            {
-                if (d.Is_viable && d.Is_contactable)
-                    viableDonors.Add(d);
-            }
+			
+			sortDonor(x);
         }
 		
 		void sortByDistance()
@@ -368,6 +364,20 @@ las pinas 34.9km
 			foreach(Donor d in viableDonors)
 			{
 				
+			}
+		}
+		
+		void sortDonor(Donor d)
+		{
+			//check out splice
+			donorList.Add(d);
+			if (d.Is_viable && d.Is_contactable)
+			{
+                viableDonors.Add(d);
+			}
+			else
+			{
+				bannedDonors.Add(d);
 			}
 		}
         #endregion
@@ -537,6 +547,8 @@ las pinas 34.9km
         {
 			if (!b.Is_removed)
             {
+				if(quarantinedBlood.Contains(b))
+					quarantinedBlood.Remove(b);
 	            availableBlood.Add(b);
 	            if (b.Component == "Whole")
 	                bloodTypes[(int)findDonor(b.Taken_from).Blood_type].Add(b);
@@ -544,7 +556,11 @@ las pinas 34.9km
 	                bloodTypes[(int)findDonor(findBlood(b.Taken_from).Taken_from).Blood_type].Add(b);
 			}
 			else
+			{
+				if(availableBlood.Contains(b))
+					availableBlood.Remove(b);
 				quarantinedBlood.Add(b);
+			}
         }
 
         void bloodCommands(MySqlCommand comm, Blood x)

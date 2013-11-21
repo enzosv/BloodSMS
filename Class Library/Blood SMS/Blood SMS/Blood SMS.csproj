@@ -48,7 +48,6 @@
     <Compile Include="BloodType.cs" />
     <Compile Include="Donor.cs" />
     <Compile Include="DonorList.cs" />
-    <Compile Include="OMC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Storage.cs" />
   </ItemGroup>
