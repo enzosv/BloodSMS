@@ -31,12 +31,16 @@ las pinas 34.9km
     {
         List<Blood> bloodList;
         List<Blood>[] bloodTypes;
+		List<Blood> availableBlood;
+		List<Blood> quarantinedBlood;
         List<Donor> donorList;
         List<Donor> viableDonors;
-		List<City> cities;
+		List<Donor> bannedDonors;
 
         string connectionString;
-
+	
+		const int MINIMUMBLOODVALUE = 20;
+		const int MINIMUMEXPIRYALERTVALUE = 3;
         readonly string[] BLOOD_FIELDS = {"taken_from", "patient_name", "patient_age", "date_donated", "date_expire", "date_removed", "is_assigned", "is_quarantined", "reason_for_removal", "compoenent" };
         readonly string[] DONOR_FIELDS = {"name", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "cellphone", "educational_attainment", "birth_date", "date_registered", "last_donation", "next_available", "times_donated", "is_contactable", "is_viable", "reason_for_deferral" };
         Storage(string host, string db, string user, string pass)
@@ -531,11 +535,16 @@ las pinas 34.9km
 
         void SortBlood(Blood b)
         {
-            bloodList.Add(b);
-            if (b.Component == "Whole")
-                bloodTypes[(int)findDonor(b.Taken_from).Blood_type].Add(b);
-            else
-                bloodTypes[(int)findDonor(findBlood(b.Taken_from).Taken_from).Blood_type].Add(b);
+			if (!b.Is_removed)
+            {
+	            availableBlood.Add(b);
+	            if (b.Component == "Whole")
+	                bloodTypes[(int)findDonor(b.Taken_from).Blood_type].Add(b);
+	            else
+	                bloodTypes[(int)findDonor(findBlood(b.Taken_from).Taken_from).Blood_type].Add(b);
+			}
+			else
+				quarantinedBlood.Add(b);
         }
 
         void bloodCommands(MySqlCommand comm, Blood x)
@@ -561,10 +570,7 @@ las pinas 34.9km
             bloodTypes = new List<Blood>[Enum.GetNames(typeof(bloodType)).Length];
             foreach (Blood b in bloodList)
             {
-                if (!b.Is_removed)
-                {
-                    SortBlood(b);
-                }
+            	SortBlood(b);
             }
         }
 
@@ -739,6 +745,44 @@ las pinas 34.9km
             return s.First().ToString().ToUpper() + String.Join("", s.Skip(1));
         }
         */
+		
+		/*void AlertLowLevel(bloodType blood_type)
+		{
+			foreach(Blood b in bloodTypes[(int)blood_type])
+			{
+				
+			}
+		}*/
+		
+		bool AlertLowLevel(bloodType blood_type)
+		{
+			if(bloodTypes[(int)blood_type] < MINIMUMBLOODVALUE)
+				return true;
+			return false;
+		}
+		
+		bool AlertNearExpiration(Blood b)
+		{
+			if(DateTime.Now - b.Date_expire < MINIMUMEXPIRYALERTVALUE)
+				return true;
+			return false;
+		}
+		
+		void CheckExpirations()
+		{
+			foreach(Blood b in availableBlood)
+			{
+				AlertNearExpiration(b);
+			}
+		}
+		
+		void CheckLowLevel()
+		{
+			foreach (bloodType blood_type in (bloodType[]) Enum.GetValues(typeof(bloodType)))
+			{
+				AlertLowLevel(blood_type);
+			}
+		}
         #endregion
  
     }
