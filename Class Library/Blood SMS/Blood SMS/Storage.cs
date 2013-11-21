@@ -45,10 +45,9 @@ las pinas 34.9km
         readonly string[] DONOR_FIELDS = {"name", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "cellphone", "educational_attainment", "birth_date", "date_registered", "last_donation", "next_available", "times_donated", "is_contactable", "is_viable", "reason_for_deferral" };
         Storage(string host, string db, string user, string pass)
         {
-			cities = new List<City>();
-			GenerateCities();
             connectionString = string.Format("Server={0};Database={1};Uid={2};Pwd={3}", host, db, user, pass);
             viableDonors = new List<Donor>();
+			bloodTypes = new List<Blood>[Enum.GetNames(typeof(bloodType)).Length];
             getDonorSQL();
             getBloodSQL();
             getBloodInInventory();
@@ -429,7 +428,6 @@ las pinas 34.9km
         bool AddBlood(DateTime date_added, DateTime date_expire, int taken_from)
         {
             Blood x = new Blood(bloodList.Count, taken_from, date_added, date_expire);
-            SortBlood(x);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
@@ -445,7 +443,6 @@ las pinas 34.9km
         bool AddBlood(Blood a, DateTime date_added, DateTime date_expire, string component)
         {
             Blood x = new Blood(a.Blood_id, bloodList.Count, date_added, date_expire, component);
-            SortBlood(x);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
@@ -465,9 +462,8 @@ las pinas 34.9km
        */
         bool UpdateBlood(int blood_id, int taken_from, DateTime date_donated, DateTime date_expire, string component, string patient_name, int patient_age, DateTime date_removed, bool is_assigned, bool is_quarantined, string reason_for_removal)
         {
-            removeBloodFromSort(findBlood(blood_id));
+            UnSortBlood(findBlood(blood_id));
             Blood x = new Blood(blood_id, taken_from, date_donated, date_expire, component, patient_name, patient_age, date_removed, is_assigned, is_quarantined, reason_for_removal);
-            SortBlood(x);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
@@ -539,16 +535,35 @@ las pinas 34.9km
         void ExtractBlood(Blood x, DateTime date_added, DateTime date_expire)
         {
             x.Extract(date_added);
+			UnSortBlood(x);
             AddBlood(x, date_added, date_expire, "Fresh Frozen Plasma");
             AddBlood(x, date_added, date_expire, "Packed Red Cells");
         }
-
+		
+		void UnSortBlood(Blood b)
+		{
+			//won't be able to find extracted blood..
+			bloodList.Remove(b);
+			if(availableBlood.Contains(b))
+			{
+				availableBlood.Remove(b);
+				foreach (List<Blood> bType in bloodTypes)
+	            {
+	                if (bType.Contains(b))
+	                {
+	                    bType.Remove(b);
+	                    break;
+	                }
+	            }
+			}
+			else if(quarantinedBlood.Contains(b))
+				quarantinedBlood.Remove(b);
+		}
+		
         void SortBlood(Blood b)
         {
 			if (!b.Is_removed)
             {
-				if(quarantinedBlood.Contains(b))
-					quarantinedBlood.Remove(b);
 	            availableBlood.Add(b);
 	            if (b.Component == "Whole")
 	                bloodTypes[(int)findDonor(b.Taken_from).Blood_type].Add(b);
@@ -557,8 +572,6 @@ las pinas 34.9km
 			}
 			else
 			{
-				if(availableBlood.Contains(b))
-					availableBlood.Remove(b);
 				quarantinedBlood.Add(b);
 			}
         }
@@ -578,12 +591,12 @@ las pinas 34.9km
             comm.Parameters.AddWithValue("@is_assigned", x.Is_assigned);
             comm.Parameters.AddWithValue("@is_quarantined", x.Is_quarantined);
             comm.Parameters.AddWithValue("@reason_for_removal", x.Reason_for_removal);
-
+			SortBlood(x);
         }
 
         void getBloodInInventory()
         {
-            bloodTypes = new List<Blood>[Enum.GetNames(typeof(bloodType)).Length];
+            
             foreach (Blood b in bloodList)
             {
             	SortBlood(b);
@@ -602,26 +615,13 @@ las pinas 34.9km
 
         bool DeleteBloodWithId(int id)
         {
-            removeBloodFromSort(findBlood(id));
+            UnSortBlood(findBlood(id));
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
             string query = "DELETE FROM Blood WHERE blood_id =@blood_id";
             MySqlCommand comm = new MySqlCommand(query, conn);
             comm.Parameters.AddWithValue("@blood_id", id);
             return RowsAffected(comm, conn);
-        }
-
-        void removeBloodFromSort(Blood b)
-        {
-            foreach (List<Blood> bType in bloodTypes)
-            {
-                if (bType.Contains(b))
-                {
-                    bType.Remove(b);
-                    break;
-                }
-            }
-            bloodList.Remove(b);
         }
 
         /*
