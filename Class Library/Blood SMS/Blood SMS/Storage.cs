@@ -33,7 +33,9 @@ las pinas 34.9km
         List<Blood>[] bloodTypes;
 		List<Blood> availableBlood;
 		List<Blood> quarantinedBlood;
+        List<Blood> usedBlood;
         List<Donor> donorList;
+        List<Donor>[] donorTypes;
         List<Donor> viableDonors;
 		List<Donor> bannedDonors;
 
@@ -46,11 +48,20 @@ las pinas 34.9km
         Storage(string host, string db, string user, string pass)
         {
             connectionString = string.Format("Server={0};Database={1};Uid={2};Pwd={3}", host, db, user, pass);
-            viableDonors = new List<Donor>();
+
+            bloodList = new List<Blood>();
 			bloodTypes = new List<Blood>[Enum.GetNames(typeof(bloodType)).Length];
+            availableBlood = new List<Blood>();
+            quarantinedBlood = new List<Blood>();
+            usedBlood = new List<Blood>();
+
+            donorList = new List<Donor>();
+            donorTypes = new List<Donor>[Enum.GetNames(typeof(bloodType)).Length];
+            viableDonors = new List<Donor>();
+            bannedDonors = new List<Donor>();
+            
             getDonorSQL();
             getBloodSQL();
-            getBloodInInventory();
         }
 		
         #region Donor methods
@@ -62,7 +73,6 @@ las pinas 34.9km
         */
         void getDonorSQL()
         {
-            donorList = new List<Donor>();
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
 
@@ -273,19 +283,6 @@ las pinas 34.9km
             return null;
         }
 
-        List<Donor> findDonorsWithBloodType(bloodType blood_type)
-        {
-            List<Donor> typeDonors = new List<Donor>();
-            foreach (Donor d in viableDonors)
-            {
-                if (d.Blood_type == blood_type)
-                {
-                    typeDonors.Add(d);
-                }
-            }
-            return typeDonors;
-        }
-
         /*
          *<summary>
          *  Iterates through all donor objects in bloodList
@@ -308,11 +305,22 @@ las pinas 34.9km
 		void unsortDonor(Donor d)
 		{
 			donorList.Remove(d);
-			if(viableDonors.Contains(d))
-				viableDonors.Remove(d);
-			else if(bannedDonors.Contains(d))
-				bannedDonors.Remove(d);
+            if (viableDonors.Contains(d))
+            {
+                viableDonors.Remove(d);
+                foreach (List<Donor> dType in donorTypes)
+                {
+                    if (dType.Contains(d))
+                    {
+                        dType.Remove(d);
+                        break;
+                    }
+                }
+            }
+            else if (bannedDonors.Contains(d))
+                bannedDonors.Remove(d);
 		}
+
         bool DeleteDonorWithId(int id)
         {
 			unsortDonor(findDonor(id));
@@ -368,11 +376,11 @@ las pinas 34.9km
 		
 		void sortDonor(Donor d)
 		{
-			//check out splice
 			donorList.Add(d);
 			if (d.Is_viable && d.Is_contactable)
 			{
                 viableDonors.Add(d);
+                donorTypes[(int)d.Blood_type].Add(d);
 			}
 			else
 			{
@@ -390,7 +398,6 @@ las pinas 34.9km
         */
         void getBloodSQL()
         {
-            bloodList = new List<Blood>();
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
 
@@ -412,12 +419,10 @@ las pinas 34.9km
                 string component = reader.GetValue(10) as string;
 
                 Blood x = new Blood(blood_id, taken_from, date_donated, date_expire, component, patient_name, patient_age, date_removed, is_assigned, is_quarantined, reason_for_removal);
-                
                 SortBlood(x);
             }
             reader.Close();
             conn.Close();
-
         }
 
         /*
@@ -462,7 +467,7 @@ las pinas 34.9km
        */
         bool UpdateBlood(int blood_id, int taken_from, DateTime date_donated, DateTime date_expire, string component, string patient_name, int patient_age, DateTime date_removed, bool is_assigned, bool is_quarantined, string reason_for_removal)
         {
-            UnSortBlood(findBlood(blood_id));
+            UnsortBlood(findBlood(blood_id));
             Blood x = new Blood(blood_id, taken_from, date_donated, date_expire, component, patient_name, patient_age, date_removed, is_assigned, is_quarantined, reason_for_removal);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
@@ -473,6 +478,7 @@ las pinas 34.9km
             return RowsAffected(comm, conn);
         }
 
+        #region bloodGraphMethods
         int getBloodRemovedOn(DateTime date)
         {
             int count = 0;
@@ -531,33 +537,37 @@ las pinas 34.9km
             }
             return count;
         }
+        #endregion
 
         void ExtractBlood(Blood x, DateTime date_added, DateTime date_expire)
         {
             x.Extract(date_added);
-			UnSortBlood(x);
+            UnsortBlood(x);
             AddBlood(x, date_added, date_expire, "Fresh Frozen Plasma");
             AddBlood(x, date_added, date_expire, "Packed Red Cells");
         }
 		
-		void UnSortBlood(Blood b)
+		void UnsortBlood(Blood b)
 		{
 			//won't be able to find extracted blood..
 			bloodList.Remove(b);
-			if(availableBlood.Contains(b))
-			{
-				availableBlood.Remove(b);
-				foreach (List<Blood> bType in bloodTypes)
-	            {
-	                if (bType.Contains(b))
-	                {
-	                    bType.Remove(b);
-	                    break;
-	                }
-	            }
-			}
-			else if(quarantinedBlood.Contains(b))
-				quarantinedBlood.Remove(b);
+            if (availableBlood.Contains(b))
+            {
+                availableBlood.Remove(b);
+                foreach (List<Blood> bType in bloodTypes)
+                {
+                    if (bType.Contains(b))
+                    {
+                        bType.Remove(b);
+                        break;
+                    }
+                }
+            }
+            else if (quarantinedBlood.Contains(b))
+                quarantinedBlood.Remove(b);
+            else if (usedBlood.Contains(b))
+                usedBlood.Remove(b);
+
 		}
 		
         void SortBlood(Blood b)
@@ -570,10 +580,14 @@ las pinas 34.9km
 	            else
 	                bloodTypes[(int)findDonor(findBlood(b.Taken_from).Taken_from).Blood_type].Add(b);
 			}
-			else
-			{
-				quarantinedBlood.Add(b);
-			}
+            else if (b.Is_quarantined)
+            {
+                quarantinedBlood.Add(b);
+            }
+            else
+            {
+                usedBlood.Add(b);
+            }
         }
 
         void bloodCommands(MySqlCommand comm, Blood x)
@@ -594,15 +608,6 @@ las pinas 34.9km
 			SortBlood(x);
         }
 
-        void getBloodInInventory()
-        {
-            
-            foreach (Blood b in bloodList)
-            {
-            	SortBlood(b);
-            }
-        }
-
         bool isBloodUnique(int id)
         {
             foreach (Blood b in bloodList)
@@ -615,7 +620,7 @@ las pinas 34.9km
 
         bool DeleteBloodWithId(int id)
         {
-            UnSortBlood(findBlood(id));
+            UnsortBlood(findBlood(id));
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
             string query = "DELETE FROM Blood WHERE blood_id =@blood_id";
@@ -708,59 +713,6 @@ las pinas 34.9km
             }
             return fieldNames + ") Values(" + valueParameters + ")";
         }
-        /*
-         *<summary>
-         *  iterates through all fields provided in the parameter and adds the value to the sql from the object's properties
-         *</summary>
-         *<param name="comm">
-         *  MySqlCommand object where parameters and values will be passed
-         *</param>
-         *<param name="x">
-         *  Object where properties will be taken from
-         *</param>
-         *<param name="fields">
-         *  string array containing all fields for an SQL table
-         *</param>
-         
-        void AddValue(MySqlCommand comm, Object x, string[] fields)
-        {
-            for (int i = 0; i < fields.Length; i++)
-            {
-                comm.Parameters.AddWithValue("@" + fields[i], GetPropValue(x, Capitalize(fields[i])));
-            }
-        }
-
-        /*
-         *<summary>
-         *  returns a property of an object depending on the provided string
-         *</summary>
-         *<param name="src">
-         *  the object where the property will come from
-         *</param>
-         *<param name="propName">
-         *  the string which contains the name of the property to be used
-         *</param>
-
-        //http://stackoverflow.com/questions/1196991/get-property-value-from-string-using-reflection-in-c-sharp
-        object GetPropValue(object src, string propName)
-        {
-            return src.GetType().GetProperty(propName).GetValue(src, null);
-        }
-
-        /*
-         *<summary>
-         *  Capitalizes the firs letter of the word provided in the parameter
-         *</summary>
-         *<param name="s">
-         *  A one word string in lowercase
-         *</param>
-         
-        //http://stackoverflow.com/questions/4135317/make-first-letter-of-a-string-upper-case
-        string Capitalize(string s)
-        {
-            return s.First().ToString().ToUpper() + String.Join("", s.Skip(1));
-        }
-        */
 		
 		/*void AlertLowLevel(bloodType blood_type)
 		{
@@ -772,14 +724,15 @@ las pinas 34.9km
 		
 		bool AlertLowLevel(bloodType blood_type)
 		{
-			if(bloodTypes[(int)blood_type] < MINIMUMBLOODVALUE)
+			if(bloodTypes[(int)blood_type].Count < MINIMUMBLOODVALUE)
 				return true;
 			return false;
 		}
 		
 		bool AlertNearExpiration(Blood b)
 		{
-			if(DateTime.Now - b.Date_expire < MINIMUMEXPIRYALERTVALUE)
+            TimeSpan span = DateTime.Now - b.Date_expire;
+			if(span.TotalDays < MINIMUMEXPIRYALERTVALUE)
 				return true;
 			return false;
 		}
