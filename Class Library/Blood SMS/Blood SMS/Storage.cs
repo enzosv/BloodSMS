@@ -8,9 +8,9 @@ namespace Blood_SMS
 {
     public enum bloodType { A, B, O };
     public enum contactMethod { home_landline, office_landline, email, cellphone };
-	public enum city { QuezonCity, SanJuan, Manila, Caloocan, Mandaluyong, Malabon, Pateros, Makati, Valenzuela, Navotas, Pasay, Taguig, Paranaque, Muntinlupa, LasPinas, Other};
-	/*
-	 * Quezon City 4.5km
+    public enum city { QuezonCity, SanJuan, Manila, Caloocan, Mandaluyong, Malabon, Pateros, Makati, Valenzuela, Navotas, Pasay, Taguig, Paranaque, Muntinlupa, LasPinas, Other };
+    /*
+     * Quezon City 4.5km
 Marikina 9.6
 San Juan 10.1
 Manila 10.1
@@ -31,26 +31,26 @@ las pinas 34.9km
     {
         List<Blood> bloodList;
         List<Blood>[] bloodTypes;
-		List<Blood> availableBlood;
-		List<Blood> quarantinedBlood;
+        List<Blood> availableBlood;
+        List<Blood> quarantinedBlood;
         List<Blood> usedBlood;
         List<Donor> donorList;
         List<Donor>[] donorTypes;
         List<Donor> viableDonors;
-		List<Donor> bannedDonors;
+        List<Donor> bannedDonors;
 
         string connectionString;
-	
-		const int MINIMUMBLOODVALUE = 20;
-		const int MINIMUMEXPIRYALERTVALUE = 3;
-        readonly string[] BLOOD_FIELDS = {"taken_from", "patient_name", "patient_age", "date_donated", "date_expire", "date_removed", "is_assigned", "is_quarantined", "reason_for_removal", "compoenent" };
-        readonly string[] DONOR_FIELDS = {"name", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "cellphone", "educational_attainment", "birth_date", "date_registered", "last_donation", "next_available", "times_donated", "is_contactable", "is_viable", "reason_for_deferral" };
+
+        const int MINIMUMBLOODVALUE = 20;
+        const int MINIMUMEXPIRYALERTVALUE = 3;
+        readonly string[] BLOOD_FIELDS = { "taken_from", "patient_name", "patient_age", "date_donated", "date_expire", "date_removed", "is_assigned", "is_quarantined", "reason_for_removal", "compoenent" };
+        readonly string[] DONOR_FIELDS = { "name", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "cellphone", "educational_attainment", "birth_date", "date_registered", "last_donation", "next_available", "times_donated", "is_contactable", "is_viable", "reason_for_deferral" };
         Storage(string host, string db, string user, string pass)
         {
             connectionString = string.Format("Server={0};Database={1};Uid={2};Pwd={3}", host, db, user, pass);
 
             bloodList = new List<Blood>();
-			bloodTypes = new List<Blood>[Enum.GetNames(typeof(bloodType)).Length];
+            bloodTypes = new List<Blood>[Enum.GetNames(typeof(bloodType)).Length];
             availableBlood = new List<Blood>();
             quarantinedBlood = new List<Blood>();
             usedBlood = new List<Blood>();
@@ -59,11 +59,11 @@ las pinas 34.9km
             donorTypes = new List<Donor>[Enum.GetNames(typeof(bloodType)).Length];
             viableDonors = new List<Donor>();
             bannedDonors = new List<Donor>();
-            
+
             getDonorSQL();
             getBloodSQL();
         }
-		
+
         #region Donor methods
 
         /*
@@ -183,7 +183,7 @@ las pinas 34.9km
                 IS_VIABLE,
                 REASON_FOR_DEFERRAL
             );
-			
+
             //if (x.Is_viable && x.Is_contactable)
             //    viableDonors.Add(x);
 
@@ -253,7 +253,7 @@ las pinas 34.9km
                     IS_CONTACTABLE,
                     IS_VIABLE,
                     REASON_FOR_DEFERRAL);
-            
+
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
@@ -301,10 +301,10 @@ las pinas 34.9km
             }
             return true;
         }
-		
-		void unsortDonor(Donor d)
-		{
-			donorList.Remove(d);
+
+        void unsortDonor(Donor d)
+        {
+            donorList.Remove(d);
             if (viableDonors.Contains(d))
             {
                 viableDonors.Remove(d);
@@ -319,11 +319,11 @@ las pinas 34.9km
             }
             else if (bannedDonors.Contains(d))
                 bannedDonors.Remove(d);
-		}
+        }
 
         bool DeleteDonorWithId(int id)
         {
-			unsortDonor(findDonor(id));
+            unsortDonor(findDonor(id));
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
             string query = "DELETE FROM Donor WHERE donor_id =@donor_id";
@@ -361,32 +361,41 @@ las pinas 34.9km
             comm.Parameters.AddWithValue("@is_contactable", x.Is_contactable);
             comm.Parameters.AddWithValue("@is_viable", x.Is_viable);
             comm.Parameters.AddWithValue("@reason_for_deferral", x.Reason_for_deferral);
-			
-			sortDonor(x);
+
+            sortDonor(x);
         }
-		
-		void sortByDistance()
-		{
-			int previousDistance = 0;
-			foreach(Donor d in viableDonors)
-			{
-				
-			}
-		}
-		
-		void sortDonor(Donor d)
-		{
-			donorList.Add(d);
-			if (d.Is_viable && d.Is_contactable)
-			{
+
+        List<Donor> getClosestByType(int count, bloodType blood_type)
+        {
+            List<Donor> closestByType = new List<Donor>();
+            for (int i = 0; i < Enum.GetNames(typeof(city)).Length; i++)
+            {
+                foreach (Donor d in donorTypes[(int)blood_type])
+                {
+                    if (d.Home_city == ((city)i).ToString())
+                    {
+                        closestByType.Add(d);
+                        if (closestByType.Count >= count)
+                            return closestByType;
+                    }
+                }
+            }
+            return closestByType;
+        }
+
+        void sortDonor(Donor d)
+        {
+            donorList.Add(d);
+            if (d.Is_viable && d.Is_contactable)
+            {
                 viableDonors.Add(d);
                 donorTypes[(int)d.Blood_type].Add(d);
-			}
-			else
-			{
-				bannedDonors.Add(d);
-			}
-		}
+            }
+            else
+            {
+                bannedDonors.Add(d);
+            }
+        }
         #endregion
 
         #region Blood methods
@@ -546,11 +555,10 @@ las pinas 34.9km
             AddBlood(x, date_added, date_expire, "Fresh Frozen Plasma");
             AddBlood(x, date_added, date_expire, "Packed Red Cells");
         }
-		
-		void UnsortBlood(Blood b)
-		{
-			//won't be able to find extracted blood..
-			bloodList.Remove(b);
+
+        void UnsortBlood(Blood b)
+        {
+            bloodList.Remove(b);
             if (availableBlood.Contains(b))
             {
                 availableBlood.Remove(b);
@@ -568,18 +576,18 @@ las pinas 34.9km
             else if (usedBlood.Contains(b))
                 usedBlood.Remove(b);
 
-		}
-		
+        }
+
         void SortBlood(Blood b)
         {
-			if (!b.Is_removed)
+            if (!b.Is_removed)
             {
-	            availableBlood.Add(b);
-	            if (b.Component == "Whole")
-	                bloodTypes[(int)findDonor(b.Taken_from).Blood_type].Add(b);
-	            else
-	                bloodTypes[(int)findDonor(findBlood(b.Taken_from).Taken_from).Blood_type].Add(b);
-			}
+                availableBlood.Add(b);
+                if (b.Component == "Whole")
+                    bloodTypes[(int)findDonor(b.Taken_from).Blood_type].Add(b);
+                else
+                    bloodTypes[(int)findDonor(findBlood(b.Taken_from).Taken_from).Blood_type].Add(b);
+            }
             else if (b.Is_quarantined)
             {
                 quarantinedBlood.Add(b);
@@ -605,7 +613,7 @@ las pinas 34.9km
             comm.Parameters.AddWithValue("@is_assigned", x.Is_assigned);
             comm.Parameters.AddWithValue("@is_quarantined", x.Is_quarantined);
             comm.Parameters.AddWithValue("@reason_for_removal", x.Reason_for_removal);
-			SortBlood(x);
+            SortBlood(x);
         }
 
         bool isBloodUnique(int id)
@@ -713,47 +721,47 @@ las pinas 34.9km
             }
             return fieldNames + ") Values(" + valueParameters + ")";
         }
-		
-		/*void AlertLowLevel(bloodType blood_type)
-		{
-			foreach(Blood b in bloodTypes[(int)blood_type])
-			{
+
+        /*void AlertLowLevel(bloodType blood_type)
+        {
+            foreach(Blood b in bloodTypes[(int)blood_type])
+            {
 				
-			}
-		}*/
-		
-		bool AlertLowLevel(bloodType blood_type)
-		{
-			if(bloodTypes[(int)blood_type].Count < MINIMUMBLOODVALUE)
-				return true;
-			return false;
-		}
-		
-		bool AlertNearExpiration(Blood b)
-		{
+            }
+        }*/
+
+        bool AlertLowLevel(bloodType blood_type)
+        {
+            if (bloodTypes[(int)blood_type].Count < MINIMUMBLOODVALUE)
+                return true;
+            return false;
+        }
+
+        bool AlertNearExpiration(Blood b)
+        {
             TimeSpan span = DateTime.Now - b.Date_expire;
-			if(span.TotalDays < MINIMUMEXPIRYALERTVALUE)
-				return true;
-			return false;
-		}
-		
-		void CheckExpirations()
-		{
-			foreach(Blood b in availableBlood)
-			{
-				AlertNearExpiration(b);
-			}
-		}
-		
-		void CheckLowLevel()
-		{
-			foreach (bloodType blood_type in (bloodType[]) Enum.GetValues(typeof(bloodType)))
-			{
-				AlertLowLevel(blood_type);
-			}
-		}
+            if (span.TotalDays < MINIMUMEXPIRYALERTVALUE)
+                return true;
+            return false;
+        }
+
+        void CheckExpirations()
+        {
+            foreach (Blood b in availableBlood)
+            {
+                AlertNearExpiration(b);
+            }
+        }
+
+        void CheckLowLevel()
+        {
+            foreach (bloodType blood_type in (bloodType[])Enum.GetValues(typeof(bloodType)))
+            {
+                AlertLowLevel(blood_type);
+            }
+        }
         #endregion
- 
+
     }
 }
 
