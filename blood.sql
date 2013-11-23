@@ -12,7 +12,7 @@ USE `BSMS` ;
 DROP TABLE IF EXISTS `BSMS`.`donor` ;
 
 CREATE TABLE IF NOT EXISTS `BSMS`.`donor` (
-  `donor_id` INT NOT NULL,
+  `donor_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `blood_type` ENUM('A','B','O') NOT NULL,
   `home_province` VARCHAR(45) NOT NULL DEFAULT '',
@@ -47,7 +47,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `BSMS`.`blood` ;
 
 CREATE TABLE IF NOT EXISTS `BSMS`.`blood` (
-  `blood_id` INT NOT NULL,
+  `blood_id` INT NOT NULL AUTO_INCREMENT,
   `taken_from` INT NOT NULL,
   `patient_name` VARCHAR(45) NOT NULL DEFAULT '',
   `patient_age` INT NOT NULL DEFAULT 0,
