@@ -15,21 +15,36 @@ namespace BloodSMSApp
         int bloodCount;
         int donorCount;
         int[] bloodTypeCount;
-        TimeSpan span;
         List<string> notifications;
+        enum graphCommand { Add, Remove, Release, Quarantine, Use };
+        graphCommand command;
+
         public MainMenu()
         {
             InitializeComponent();
-            storage = new Storage("localhost", "bsms", "root", "root");
-
+            InitializeValues();
             RefreshCount();
             RefreshNotifications();
+        }
+
+        void InitializeValues()
+        {
+            storage = new Storage("localhost", "bsms", "root", "root");
+            bloodTypeCount = new int[Enum.GetNames(typeof(bloodType)).Length];
+            notifications = new List<string>();
+            command = graphCommand.Add;
+            dateTo.MaxDate = DateTime.Now;
+
+            //set this to date of install upon install
+            dateFrom.MinDate = new DateTime(2013, 9, 1);
+            //chart1.ChartAreas[0].AxisX.Maximum = 366;
+            chart1.ChartAreas[0].AxisY.Maximum = 1200;
+            
         }
 
         void RefreshCount()
         {
             bloodCount = storage.availableBlood.Count;
-            bloodTypeCount = new int[Enum.GetNames(typeof(bloodType)).Length];
             for (int i = 0; i < bloodTypeCount.Length; i++)
             {
                 bloodTypeCount[i] = storage.bloodTypes[i].Count;
@@ -38,7 +53,7 @@ namespace BloodSMSApp
 
         void RefreshNotifications()
         {
-            notifications = new List<string>();
+            notifications.Clear();
             //check low level
             foreach (bloodType blood_type in (bloodType[])Enum.GetValues(typeof(bloodType)))
             {
@@ -83,6 +98,11 @@ namespace BloodSMSApp
         private void MainMenu_Load(object sender, EventArgs e)
         {
             DisplayOverview();
+        }
+
+        void tabPage2_Click(object sender, EventArgs e)
+        {
+            RefreshGraph();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -139,12 +159,8 @@ namespace BloodSMSApp
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void tabPage3_Click(object sender, EventArgs e)
-        {
-
+            if (tabControl1.SelectedIndex == 1)
+                RefreshGraph();
         }
 
         private void button9_Click_1(object sender, EventArgs e)
@@ -185,10 +201,139 @@ namespace BloodSMSApp
 
         private void addedButton_Click(object sender, EventArgs e)
         {
-
+            command = graphCommand.Add;
+            RefreshGraph();
         }
 
+        private void dateFrom_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                dateTo.MinDate = dateFrom.Value.AddMonths(1);
+            }
+            catch
+            {
+                dateFrom.Value = dateTo.Value.AddMonths(-1);
+            }
+            RefreshGraph();
+        }
 
+        private void dateTo_ValueChanged(object sender, EventArgs e)
+        {
+            dateFrom.MaxDate = dateTo.Value.AddMonths(-1);
+            RefreshGraph();
+        }
+
+        void RefreshGraph()
+        {
+            TimeSpan span = dateTo.Value - dateFrom.Value;
+            chart1.ChartAreas[0].AxisX.Maximum = span.TotalDays;
+            listBox1.Items.Clear();
+            switch (command)
+            {
+                case graphCommand.Add:
+                    for (DateTime day = dateFrom.Value; day <= dateTo.Value; day = day.AddDays(1))
+                    {
+                        
+                        string xValue = day.ToString("MMM d");
+                        listBox1.Items.Add(xValue);
+                        chart1.Series["Total"].Points.AddY(storage.getWholeBloodAddedOn(day));
+                        chart1.Series["AB+"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.ABp));
+                        chart1.Series["AB-"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.ABn));
+                        chart1.Series["A+"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.Ap));
+                        chart1.Series["A-"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.An));
+                        chart1.Series["B+"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.Bp));
+                        chart1.Series["B-"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.Bn));
+                        chart1.Series["O+"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.Op));
+                        chart1.Series["O+"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.On));
+                    }
+                    break;
+                case graphCommand.Remove:
+                    for (DateTime day = dateFrom.Value; day <= dateTo.Value; day = day.AddDays(1))
+                    {
+                        string xValue = day.ToString("MMM d");
+                        chart1.Series["Total"].Points.AddXY(xValue, storage.getBloodRemovedOn(day));
+                        chart1.Series["AB+"].Points.AddXY(xValue, storage.getBloodTypeRemovedOn(day, bloodType.ABp));
+                        chart1.Series["AB-"].Points.AddXY(xValue, storage.getBloodTypeRemovedOn(day, bloodType.ABn));
+                        chart1.Series["A+"].Points.AddXY(xValue, storage.getBloodTypeRemovedOn(day, bloodType.Ap));
+                        chart1.Series["A-"].Points.AddXY(xValue, storage.getBloodTypeRemovedOn(day, bloodType.An));
+                        chart1.Series["B+"].Points.AddXY(xValue, storage.getBloodTypeRemovedOn(day, bloodType.Bp));
+                        chart1.Series["B-"].Points.AddXY(xValue, storage.getBloodTypeRemovedOn(day, bloodType.Bn));
+                        chart1.Series["O+"].Points.AddXY(xValue, storage.getBloodTypeRemovedOn(day, bloodType.Op));
+                        chart1.Series["O+"].Points.AddXY(xValue, storage.getBloodTypeRemovedOn(day, bloodType.On));
+                    }
+                    break;
+                case graphCommand.Use:
+                    for (DateTime day = dateFrom.Value; day <= dateTo.Value; day = day.AddDays(1))
+                    {
+                        string xValue = day.ToString("MMM d");
+                        chart1.Series["Total"].Points.AddXY(xValue, storage.getBloodUsedOn(day));
+                        chart1.Series["AB+"].Points.AddXY(xValue, storage.getBloodTypeUsedOn(day, bloodType.ABp));
+                        chart1.Series["AB-"].Points.AddXY(xValue, storage.getBloodTypeUsedOn(day, bloodType.ABn));
+                        chart1.Series["A+"].Points.AddXY(xValue, storage.getBloodTypeUsedOn(day, bloodType.Ap));
+                        chart1.Series["A-"].Points.AddXY(xValue, storage.getBloodTypeUsedOn(day, bloodType.An));
+                        chart1.Series["B+"].Points.AddXY(xValue, storage.getBloodTypeUsedOn(day, bloodType.Bp));
+                        chart1.Series["B-"].Points.AddXY(xValue, storage.getBloodTypeUsedOn(day, bloodType.Bn));
+                        chart1.Series["O+"].Points.AddXY(xValue, storage.getBloodTypeUsedOn(day, bloodType.Op));
+                        chart1.Series["O+"].Points.AddXY(xValue, storage.getBloodTypeUsedOn(day, bloodType.On));
+                    }
+                    break;
+                case graphCommand.Quarantine:
+                    for (DateTime day = dateFrom.Value; day <= dateTo.Value; day = day.AddDays(1))
+                    {
+                        string xValue = day.ToString("MMM d");
+                        chart1.Series["Total"].Points.AddXY(xValue, storage.getBloodQuarantinedOn(day));
+                        chart1.Series["AB+"].Points.AddXY(xValue, storage.getBloodTypeQuarantinedOn(day, bloodType.ABp));
+                        chart1.Series["AB-"].Points.AddXY(xValue, storage.getBloodTypeQuarantinedOn(day, bloodType.ABn));
+                        chart1.Series["A+"].Points.AddXY(xValue, storage.getBloodTypeQuarantinedOn(day, bloodType.Ap));
+                        chart1.Series["A-"].Points.AddXY(xValue, storage.getBloodTypeQuarantinedOn(day, bloodType.An));
+                        chart1.Series["B+"].Points.AddXY(xValue, storage.getBloodTypeQuarantinedOn(day, bloodType.Bp));
+                        chart1.Series["B-"].Points.AddXY(xValue, storage.getBloodTypeQuarantinedOn(day, bloodType.Bn));
+                        chart1.Series["O+"].Points.AddXY(xValue, storage.getBloodTypeQuarantinedOn(day, bloodType.Op));
+                        chart1.Series["O+"].Points.AddXY(xValue, storage.getBloodTypeQuarantinedOn(day, bloodType.On));
+                    }
+                    break;
+                case graphCommand.Release:
+                    for(DateTime day = dateFrom.Value; day <= dateTo.Value; day = day.AddDays(1))
+                    {
+                        string xValue = day.ToString("MMM d");
+                        chart1.Series["Total"].Points.AddXY(xValue, storage.getBloodReleasedOn(day));
+                        chart1.Series["AB+"].Points.AddXY(xValue, storage.getBloodTypeReleasedOn(day, bloodType.ABp));
+                        chart1.Series["AB-"].Points.AddXY(xValue, storage.getBloodTypeReleasedOn(day, bloodType.ABn));
+                        chart1.Series["A+"].Points.AddXY(xValue, storage.getBloodTypeReleasedOn(day, bloodType.Ap));
+                        chart1.Series["A-"].Points.AddXY(xValue, storage.getBloodTypeReleasedOn(day, bloodType.An));
+                        chart1.Series["B+"].Points.AddXY(xValue, storage.getBloodTypeReleasedOn(day, bloodType.Bp));
+                        chart1.Series["B-"].Points.AddXY(xValue, storage.getBloodTypeReleasedOn(day, bloodType.Bn));
+                        chart1.Series["O+"].Points.AddXY(xValue, storage.getBloodTypeReleasedOn(day, bloodType.Op));
+                        chart1.Series["O+"].Points.AddXY(xValue, storage.getBloodTypeReleasedOn(day, bloodType.On));
+                    }
+                    break;
+            }
+        }
+
+        private void removedButton_Click(object sender, EventArgs e)
+        {
+            command = graphCommand.Remove;
+            RefreshGraph();
+        }
+
+        private void releasedButton_Click(object sender, EventArgs e)
+        {
+            command = graphCommand.Release;
+            RefreshGraph();
+        }
+
+        private void quarantinedButton_Click(object sender, EventArgs e)
+        {
+            command = graphCommand.Quarantine;
+            RefreshGraph();
+        }
+
+        private void usedButton_Click(object sender, EventArgs e)
+        {
+            command = graphCommand.Use;
+            RefreshGraph();
+        }
 
     }
 }

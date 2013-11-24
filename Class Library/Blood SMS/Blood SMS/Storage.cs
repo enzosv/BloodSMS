@@ -506,7 +506,7 @@ las pinas 34.9km
         }
 
         #region bloodGraphMethods
-        int getBloodRemovedOn(DateTime date)
+        public int getBloodRemovedOn(DateTime date)
         {
             int count = 0;
             foreach (Blood b in bloodList)
@@ -522,7 +522,7 @@ las pinas 34.9km
             return count;
         }
 
-        int getBloodTypeRemovedOn(DateTime date, bloodType blood_type)
+        public int getBloodTypeRemovedOn(DateTime date, bloodType blood_type)
         {
             int count = 0;
             foreach (Blood b in bloodList)
@@ -537,7 +537,7 @@ las pinas 34.9km
             }
             return count;
         }
-        int getBloodUsedOn(DateTime date)
+        public int getBloodUsedOn(DateTime date)
         {
             int count = 0;
             foreach (Blood b in bloodList)
@@ -553,7 +553,7 @@ las pinas 34.9km
             return count;
         }
 
-        int getBloodTypeUsedOn(DateTime date, bloodType blood_type)
+        public int getBloodTypeUsedOn(DateTime date, bloodType blood_type)
         {
             int count = 0;
             foreach (Blood b in bloodList)
@@ -569,7 +569,7 @@ las pinas 34.9km
             return count;
         }
 
-        int getBloodReleasedOn(DateTime date)
+        public int getBloodReleasedOn(DateTime date)
         {
             int count = 0;
             foreach (Blood b in bloodList)
@@ -585,7 +585,7 @@ las pinas 34.9km
             return count;
         }
 
-        int getBloodTypeReleasedOn(DateTime date, bloodType blood_type)
+        public int getBloodTypeReleasedOn(DateTime date, bloodType blood_type)
         {
             int count = 0;
             foreach (Blood b in bloodList)
@@ -601,7 +601,7 @@ las pinas 34.9km
             return count;
         }
 
-        int getBloodQuarantinedOn(DateTime date)
+        public int getBloodQuarantinedOn(DateTime date)
         {
             int count = 0;
             foreach (Blood b in bloodList)
@@ -615,7 +615,7 @@ las pinas 34.9km
             return count;
         }
 
-        int getBloodTypeQuarantinedOn(DateTime date, bloodType blood_type)
+        public int getBloodTypeQuarantinedOn(DateTime date, bloodType blood_type)
         {
             int count = 0;
             foreach (Blood b in bloodList)
@@ -631,7 +631,7 @@ las pinas 34.9km
             return count;
         }
 
-        int getWholeBloodAddedOn(DateTime date)
+        public int getWholeBloodAddedOn(DateTime date)
         {
             int count = 0;
             foreach (Blood b in bloodList)
@@ -644,7 +644,7 @@ las pinas 34.9km
             return count;
         }
 
-        int getBloodTypeAddedOn(DateTime date, bloodType blood_type)
+        public int getWholeBloodTypeAddedOn(DateTime date, bloodType blood_type)
         {
             int count = 0;
             foreach (Blood b in bloodList)

@@ -32,14 +32,15 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series21 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series22 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series23 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series24 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series25 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series26 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series27 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -57,6 +58,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dateFrom = new System.Windows.Forms.DateTimePicker();
             this.addedButton = new System.Windows.Forms.Button();
             this.usedButton = new System.Windows.Forms.Button();
             this.releasedButton = new System.Windows.Forms.Button();
@@ -92,7 +94,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.dateFrom = new System.Windows.Forms.DateTimePicker();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -275,6 +277,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.listBox1);
             this.tabPage2.Controls.Add(this.dateFrom);
             this.tabPage2.Controls.Add(this.addedButton);
             this.tabPage2.Controls.Add(this.usedButton);
@@ -290,6 +293,18 @@
             this.tabPage2.Size = new System.Drawing.Size(673, 500);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // dateFrom
+            // 
+            this.dateFrom.CustomFormat = "MMMM yyyy";
+            this.dateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateFrom.Location = new System.Drawing.Point(562, 17);
+            this.dateFrom.Name = "dateFrom";
+            this.dateFrom.ShowUpDown = true;
+            this.dateFrom.Size = new System.Drawing.Size(105, 20);
+            this.dateFrom.TabIndex = 7;
+            this.dateFrom.Value = new System.DateTime(2013, 10, 1, 22, 23, 0, 0);
+            this.dateFrom.ValueChanged += new System.EventHandler(this.dateFrom_ValueChanged);
             // 
             // addedButton
             // 
@@ -309,6 +324,7 @@
             this.usedButton.TabIndex = 5;
             this.usedButton.Text = "Used";
             this.usedButton.UseVisualStyleBackColor = true;
+            this.usedButton.Click += new System.EventHandler(this.usedButton_Click);
             // 
             // releasedButton
             // 
@@ -318,6 +334,7 @@
             this.releasedButton.TabIndex = 4;
             this.releasedButton.Text = "Released";
             this.releasedButton.UseVisualStyleBackColor = true;
+            this.releasedButton.Click += new System.EventHandler(this.releasedButton_Click);
             // 
             // quarantinedButton
             // 
@@ -327,6 +344,7 @@
             this.quarantinedButton.TabIndex = 3;
             this.quarantinedButton.Text = "Quarantined";
             this.quarantinedButton.UseVisualStyleBackColor = true;
+            this.quarantinedButton.Click += new System.EventHandler(this.quarantinedButton_Click);
             // 
             // removedButton
             // 
@@ -336,6 +354,7 @@
             this.removedButton.TabIndex = 2;
             this.removedButton.Text = "Removed";
             this.removedButton.UseVisualStyleBackColor = true;
+            this.removedButton.Click += new System.EventHandler(this.removedButton_Click);
             // 
             // chart1
             // 
@@ -345,46 +364,51 @@
             this.chart1.Legends.Add(legend3);
             this.chart1.Location = new System.Drawing.Point(7, 60);
             this.chart1.Name = "chart1";
-            series17.ChartArea = "ChartArea1";
-            series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series17.Legend = "Legend1";
-            series17.Name = "AB+";
-            series18.ChartArea = "ChartArea1";
-            series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series18.Legend = "Legend1";
-            series18.Name = "AB-";
             series19.ChartArea = "ChartArea1";
             series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series19.Legend = "Legend1";
-            series19.Name = "A+";
+            series19.Name = "Total";
             series20.ChartArea = "ChartArea1";
             series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series20.Legend = "Legend1";
-            series20.Name = "A-";
+            series20.Name = "AB+";
             series21.ChartArea = "ChartArea1";
             series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series21.Legend = "Legend1";
-            series21.Name = "B+";
+            series21.Name = "AB-";
             series22.ChartArea = "ChartArea1";
             series22.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series22.Legend = "Legend1";
-            series22.Name = "B-";
+            series22.Name = "A+";
             series23.ChartArea = "ChartArea1";
             series23.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series23.Legend = "Legend1";
-            series23.Name = "O+";
+            series23.Name = "A-";
             series24.ChartArea = "ChartArea1";
             series24.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series24.Legend = "Legend1";
-            series24.Name = "O-";
-            this.chart1.Series.Add(series17);
-            this.chart1.Series.Add(series18);
+            series24.Name = "B+";
+            series25.ChartArea = "ChartArea1";
+            series25.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series25.Legend = "Legend1";
+            series25.Name = "B-";
+            series26.ChartArea = "ChartArea1";
+            series26.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series26.Legend = "Legend1";
+            series26.Name = "O+";
+            series27.ChartArea = "ChartArea1";
+            series27.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series27.Legend = "Legend1";
+            series27.Name = "O-";
             this.chart1.Series.Add(series19);
             this.chart1.Series.Add(series20);
             this.chart1.Series.Add(series21);
             this.chart1.Series.Add(series22);
             this.chart1.Series.Add(series23);
             this.chart1.Series.Add(series24);
+            this.chart1.Series.Add(series25);
+            this.chart1.Series.Add(series26);
+            this.chart1.Series.Add(series27);
             this.chart1.Size = new System.Drawing.Size(660, 434);
             this.chart1.TabIndex = 1;
             this.chart1.Text = "chart1";
@@ -398,6 +422,8 @@
             this.dateTo.ShowUpDown = true;
             this.dateTo.Size = new System.Drawing.Size(105, 20);
             this.dateTo.TabIndex = 0;
+            this.dateTo.Value = new System.DateTime(2013, 11, 1, 23, 9, 0, 0);
+            this.dateTo.ValueChanged += new System.EventHandler(this.dateTo_ValueChanged);
             // 
             // tabPage3
             // 
@@ -411,7 +437,6 @@
             this.tabPage3.Size = new System.Drawing.Size(673, 500);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.UseVisualStyleBackColor = true;
-            this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
             // 
             // button6
             // 
@@ -682,16 +707,13 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Blood SMS";
             // 
-            // dateFrom
+            // listBox1
             // 
-            this.dateFrom.CustomFormat = "MMMM yyyy";
-            this.dateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateFrom.Location = new System.Drawing.Point(562, 17);
-            this.dateFrom.Name = "dateFrom";
-            this.dateFrom.ShowUpDown = true;
-            this.dateFrom.Size = new System.Drawing.Size(105, 20);
-            this.dateFrom.TabIndex = 7;
-            this.dateFrom.Value = new System.DateTime(2013, 10, 24, 22, 23, 0, 0);
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(562, 227);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(95, 225);
+            this.listBox1.TabIndex = 8;
             // 
             // MainMenu
             // 
@@ -784,6 +806,7 @@
         private System.Windows.Forms.Button releasedButton;
         private System.Windows.Forms.Button quarantinedButton;
         private System.Windows.Forms.DateTimePicker dateFrom;
+        private System.Windows.Forms.ListBox listBox1;
 
     }
 }
