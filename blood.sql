@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS `BSMS`.`donor` ;
 CREATE TABLE IF NOT EXISTS `BSMS`.`donor` (
   `donor_id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
-  `blood_type` ENUM('A','B','O') NOT NULL,
+  `blood_type` ENUM('ABp','ABn','Ap','An','Bp','Bn','Op','On') NOT NULL,
   `home_province` VARCHAR(45) NOT NULL DEFAULT '',
   `home_city` VARCHAR(45) NOT NULL DEFAULT '',
   `home_street` VARCHAR(45) NOT NULL DEFAULT '',
