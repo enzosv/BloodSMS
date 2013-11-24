@@ -15,6 +15,8 @@ namespace BloodSMSApp
         int bloodCount;
         int donorCount;
         int[] bloodTypeCount;
+
+        List<string> notifications;
         public MainMenu()
         {
             InitializeComponent();
@@ -26,6 +28,26 @@ namespace BloodSMSApp
             {
                 bloodTypeCount[i] = storage.bloodTypes[i].Count;
             }
+
+            #region Notifications
+            notifications = new List<string>();
+            //check low level
+            foreach (bloodType blood_type in (bloodType[])Enum.GetValues(typeof(bloodType)))
+            {
+                if (storage.AlertLowLevel(blood_type))
+                {
+                    notifications.Add("Supply on " + blood_type.ToString() + " is critically low");
+                }
+            }
+            //check near expirations
+            foreach (Blood b in storage.availableBlood)
+            {
+                if (storage.AlertNearExpiration(b))
+                {
+                    notifications.Add("Blood with ID " + b.Blood_id + " is near expiration");
+                }
+            }
+            #endregion
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -44,6 +66,12 @@ namespace BloodSMSApp
             Bn.Text = "B- : " + bloodTypeCount[5];
             Op.Text = "O+ : " + bloodTypeCount[6];
             On.Text = "O- : " + bloodTypeCount[6];
+
+            //notifications
+            for(int i = 0; i< notifications.Count; i++)
+            {
+                notificationsBox.Items.Add(notifications[i]);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

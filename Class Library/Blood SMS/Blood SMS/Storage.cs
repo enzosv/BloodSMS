@@ -748,14 +748,14 @@ las pinas 34.9km
             }
         }*/
 
-        bool AlertLowLevel(bloodType blood_type)
+        public bool AlertLowLevel(bloodType blood_type)
         {
             if (bloodTypes[(int)blood_type].Count < MINIMUMBLOODVALUE)
                 return true;
             return false;
         }
 
-        bool AlertNearExpiration(Blood b)
+        public bool AlertNearExpiration(Blood b)
         {
             TimeSpan span = DateTime.Now - b.Date_expire;
             if (span.TotalDays < MINIMUMEXPIRYALERTVALUE)
@@ -763,7 +763,7 @@ las pinas 34.9km
             return false;
         }
 
-        void CheckExpirations()
+        public void CheckExpirations()
         {
             foreach (Blood b in availableBlood)
             {
@@ -771,7 +771,7 @@ las pinas 34.9km
             }
         }
 
-        void CheckLowLevel()
+        public void CheckLowLevel()
         {
             foreach (bloodType blood_type in (bloodType[])Enum.GetValues(typeof(bloodType)))
             {

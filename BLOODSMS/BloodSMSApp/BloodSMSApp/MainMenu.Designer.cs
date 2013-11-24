@@ -74,6 +74,7 @@
             this.Bn = new System.Windows.Forms.Label();
             this.Op = new System.Windows.Forms.Label();
             this.On = new System.Windows.Forms.Label();
+            this.notificationsBox = new System.Windows.Forms.ListBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -113,6 +114,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.notificationsBox);
             this.tabPage1.Controls.Add(this.On);
             this.tabPage1.Controls.Add(this.Op);
             this.tabPage1.Controls.Add(this.Bn);
@@ -536,6 +538,14 @@
             this.On.TabIndex = 11;
             this.On.Text = "O-: ";
             // 
+            // notificationsBox
+            // 
+            this.notificationsBox.FormattingEnabled = true;
+            this.notificationsBox.Location = new System.Drawing.Point(351, 42);
+            this.notificationsBox.Name = "notificationsBox";
+            this.notificationsBox.Size = new System.Drawing.Size(289, 303);
+            this.notificationsBox.TabIndex = 13;
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -616,6 +626,7 @@
         private System.Windows.Forms.Label Bp;
         private System.Windows.Forms.Label An;
         private System.Windows.Forms.Label Ap;
+        private System.Windows.Forms.ListBox notificationsBox;
 
     }
 }
