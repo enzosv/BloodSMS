@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `BSMS`.`donor` (
   `office_province` VARCHAR(45) NOT NULL DEFAULT '',
   `office_city` VARCHAR(45) NOT NULL DEFAULT '',
   `office_street` VARCHAR(45) NOT NULL DEFAULT '',
-  `preferred_contact_method` ENUM('home_landline', 'office_landline', 'cellphone', 'email') NOT NULL DEFAULT '',
+  `preferred_contact_method` ENUM('home_landline', 'office_landline', 'cellphone', 'email') NOT NULL,
   `home_landline` VARCHAR(45) NOT NULL DEFAULT '',
   `office_landline` VARCHAR(45) NOT NULL DEFAULT '',
   `email` VARCHAR(45) NOT NULL DEFAULT '',

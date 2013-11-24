@@ -18,7 +18,7 @@ namespace BloodSMSApp
         public MainMenu()
         {
             InitializeComponent();
-            storage = new Storage("host", "db", "root", "root");
+            storage = new Storage("localhost", "bsms", "root", "root");
             bloodCount = storage.AvailableBlood.Count;
             //donorCount = storage.ViableDonors.Count;
             bloodTypeCount = new int[Enum.GetNames(typeof(bloodType)).Length];
