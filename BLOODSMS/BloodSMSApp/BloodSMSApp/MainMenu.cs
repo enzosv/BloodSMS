@@ -15,7 +15,7 @@ namespace BloodSMSApp
         int bloodCount;
         int donorCount;
         int[] bloodTypeCount;
-
+        TimeSpan span;
         List<string> notifications;
         public MainMenu()
         {
@@ -56,12 +56,8 @@ namespace BloodSMSApp
                 }
             }
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private void MainMenu_Load(object sender, EventArgs e)
+        void DisplayOverview()
         {
             availableBloodLabel.Text = "Available Blood: " + bloodCount;
             ABp.Text = "AB+ : " + bloodTypeCount[0];
@@ -74,10 +70,19 @@ namespace BloodSMSApp
             On.Text = "O- : " + bloodTypeCount[6];
 
             //notifications
-            for(int i = 0; i< notifications.Count; i++)
-            { 
+            for (int i = 0; i < notifications.Count; i++)
+            {
                 notificationsBox.Items.Add(notifications[i]);
             }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainMenu_Load(object sender, EventArgs e)
+        {
+            DisplayOverview();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -177,6 +182,12 @@ namespace BloodSMSApp
             AddDonor a = new AddDonor();
             a.Show();
         }
+
+        private void addedButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
 
     }

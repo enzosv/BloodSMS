@@ -522,12 +522,75 @@ las pinas 34.9km
             return count;
         }
 
+        int getBloodTypeRemovedOn(DateTime date, bloodType blood_type)
+        {
+            int count = 0;
+            foreach (Blood b in bloodList)
+            {
+                if (b.Is_removed && findDonor(b.Taken_from).Blood_type == blood_type)
+                {
+                    if (b.Date_removed == date)
+                    {
+                        count++;
+                    }
+                }
+            }
+            return count;
+        }
+        int getBloodUsedOn(DateTime date)
+        {
+            int count = 0;
+            foreach (Blood b in bloodList)
+            {
+                if (b.Is_removed && b.Reason_for_removal.StartsWith("Extracted"))
+                {
+                    if (b.Date_removed == date)
+                    {
+                        count++;
+                    }
+                }
+            }
+            return count;
+        }
+
+        int getBloodTypeUsedOn(DateTime date, bloodType blood_type)
+        {
+            int count = 0;
+            foreach (Blood b in bloodList)
+            {
+                if (b.Is_removed && b.Reason_for_removal.StartsWith("Extracted") && findDonor(b.Taken_from).Blood_type == blood_type)
+                {
+                    if (b.Date_removed == date)
+                    {
+                        count++;
+                    }
+                }
+            }
+            return count;
+        }
+
         int getBloodReleasedOn(DateTime date)
         {
             int count = 0;
             foreach (Blood b in bloodList)
             {
                 if (b.Is_assigned && b.Is_removed)
+                {
+                    if (b.Date_removed == date)
+                    {
+                        count++;
+                    }
+                }
+            }
+            return count;
+        }
+
+        int getBloodTypeReleasedOn(DateTime date, bloodType blood_type)
+        {
+            int count = 0;
+            foreach (Blood b in bloodList)
+            {
+                if (b.Is_assigned && b.Is_removed && findDonor(b.Taken_from).Blood_type == blood_type)
                 {
                     if (b.Date_removed == date)
                     {
@@ -552,12 +615,41 @@ las pinas 34.9km
             return count;
         }
 
+        int getBloodTypeQuarantinedOn(DateTime date, bloodType blood_type)
+        {
+            int count = 0;
+            foreach (Blood b in bloodList)
+            {
+                if (b.Is_quarantined && b.Is_removed && findDonor(b.Taken_from).Blood_type == blood_type)
+                {
+                    if (b.Date_removed == date)
+                    {
+                        count++;
+                    }
+                }
+            }
+            return count;
+        }
+
         int getWholeBloodAddedOn(DateTime date)
         {
             int count = 0;
             foreach (Blood b in bloodList)
             {
                 if (b.Component == "Whole" && b.Date_added == date)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        int getBloodTypeAddedOn(DateTime date, bloodType blood_type)
+        {
+            int count = 0;
+            foreach (Blood b in bloodList)
+            {
+                if (b.Component == "Whole" && findDonor(b.Taken_from).Blood_type == blood_type && b.Date_added == date)
                 {
                     count++;
                 }

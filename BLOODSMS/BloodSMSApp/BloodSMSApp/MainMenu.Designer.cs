@@ -30,9 +30,26 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series19 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series20 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series21 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series22 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series23 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series24 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.notificationsBox = new System.Windows.Forms.ListBox();
+            this.On = new System.Windows.Forms.Label();
+            this.Op = new System.Windows.Forms.Label();
+            this.Bn = new System.Windows.Forms.Label();
+            this.Bp = new System.Windows.Forms.Label();
+            this.An = new System.Windows.Forms.Label();
+            this.Ap = new System.Windows.Forms.Label();
             this.ABn = new System.Windows.Forms.Label();
             this.ABp = new System.Windows.Forms.Label();
             this.availableBloodLabel = new System.Windows.Forms.Label();
@@ -40,6 +57,13 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.addedButton = new System.Windows.Forms.Button();
+            this.usedButton = new System.Windows.Forms.Button();
+            this.releasedButton = new System.Windows.Forms.Button();
+            this.quarantinedButton = new System.Windows.Forms.Button();
+            this.removedButton = new System.Windows.Forms.Button();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.dateTo = new System.Windows.Forms.DateTimePicker();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -68,17 +92,13 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.Ap = new System.Windows.Forms.Label();
-            this.An = new System.Windows.Forms.Label();
-            this.Bp = new System.Windows.Forms.Label();
-            this.Bn = new System.Windows.Forms.Label();
-            this.Op = new System.Windows.Forms.Label();
-            this.On = new System.Windows.Forms.Label();
-            this.notificationsBox = new System.Windows.Forms.ListBox();
+            this.dateFrom = new System.Windows.Forms.DateTimePicker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabPage4.SuspendLayout();
@@ -134,6 +154,68 @@
             this.tabPage1.Size = new System.Drawing.Size(673, 500);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // notificationsBox
+            // 
+            this.notificationsBox.FormattingEnabled = true;
+            this.notificationsBox.Location = new System.Drawing.Point(351, 42);
+            this.notificationsBox.Name = "notificationsBox";
+            this.notificationsBox.Size = new System.Drawing.Size(289, 303);
+            this.notificationsBox.TabIndex = 13;
+            // 
+            // On
+            // 
+            this.On.AutoSize = true;
+            this.On.Location = new System.Drawing.Point(196, 150);
+            this.On.Name = "On";
+            this.On.Size = new System.Drawing.Size(24, 13);
+            this.On.TabIndex = 11;
+            this.On.Text = "O-: ";
+            // 
+            // Op
+            // 
+            this.Op.AutoSize = true;
+            this.Op.Location = new System.Drawing.Point(196, 137);
+            this.Op.Name = "Op";
+            this.Op.Size = new System.Drawing.Size(27, 13);
+            this.Op.TabIndex = 10;
+            this.Op.Text = "O+: ";
+            // 
+            // Bn
+            // 
+            this.Bn.AutoSize = true;
+            this.Bn.Location = new System.Drawing.Point(196, 124);
+            this.Bn.Name = "Bn";
+            this.Bn.Size = new System.Drawing.Size(23, 13);
+            this.Bn.TabIndex = 9;
+            this.Bn.Text = "B-: ";
+            // 
+            // Bp
+            // 
+            this.Bp.AutoSize = true;
+            this.Bp.Location = new System.Drawing.Point(196, 111);
+            this.Bp.Name = "Bp";
+            this.Bp.Size = new System.Drawing.Size(26, 13);
+            this.Bp.TabIndex = 8;
+            this.Bp.Text = "B+: ";
+            // 
+            // An
+            // 
+            this.An.AutoSize = true;
+            this.An.Location = new System.Drawing.Point(196, 98);
+            this.An.Name = "An";
+            this.An.Size = new System.Drawing.Size(23, 13);
+            this.An.TabIndex = 7;
+            this.An.Text = "A-: ";
+            // 
+            // Ap
+            // 
+            this.Ap.AutoSize = true;
+            this.Ap.Location = new System.Drawing.Point(196, 85);
+            this.Ap.Name = "Ap";
+            this.Ap.Size = new System.Drawing.Size(26, 13);
+            this.Ap.TabIndex = 6;
+            this.Ap.Text = "A+: ";
             // 
             // ABn
             // 
@@ -193,6 +275,14 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.dateFrom);
+            this.tabPage2.Controls.Add(this.addedButton);
+            this.tabPage2.Controls.Add(this.usedButton);
+            this.tabPage2.Controls.Add(this.releasedButton);
+            this.tabPage2.Controls.Add(this.quarantinedButton);
+            this.tabPage2.Controls.Add(this.removedButton);
+            this.tabPage2.Controls.Add(this.chart1);
+            this.tabPage2.Controls.Add(this.dateTo);
             this.tabPage2.ImageIndex = 1;
             this.tabPage2.Location = new System.Drawing.Point(4, 70);
             this.tabPage2.Name = "tabPage2";
@@ -200,6 +290,115 @@
             this.tabPage2.Size = new System.Drawing.Size(673, 500);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
+            // 
+            // addedButton
+            // 
+            this.addedButton.Location = new System.Drawing.Point(7, 31);
+            this.addedButton.Name = "addedButton";
+            this.addedButton.Size = new System.Drawing.Size(75, 23);
+            this.addedButton.TabIndex = 6;
+            this.addedButton.Text = "Added";
+            this.addedButton.UseVisualStyleBackColor = true;
+            this.addedButton.Click += new System.EventHandler(this.addedButton_Click);
+            // 
+            // usedButton
+            // 
+            this.usedButton.Location = new System.Drawing.Point(331, 31);
+            this.usedButton.Name = "usedButton";
+            this.usedButton.Size = new System.Drawing.Size(75, 23);
+            this.usedButton.TabIndex = 5;
+            this.usedButton.Text = "Used";
+            this.usedButton.UseVisualStyleBackColor = true;
+            // 
+            // releasedButton
+            // 
+            this.releasedButton.Location = new System.Drawing.Point(169, 31);
+            this.releasedButton.Name = "releasedButton";
+            this.releasedButton.Size = new System.Drawing.Size(75, 23);
+            this.releasedButton.TabIndex = 4;
+            this.releasedButton.Text = "Released";
+            this.releasedButton.UseVisualStyleBackColor = true;
+            // 
+            // quarantinedButton
+            // 
+            this.quarantinedButton.Location = new System.Drawing.Point(250, 31);
+            this.quarantinedButton.Name = "quarantinedButton";
+            this.quarantinedButton.Size = new System.Drawing.Size(75, 23);
+            this.quarantinedButton.TabIndex = 3;
+            this.quarantinedButton.Text = "Quarantined";
+            this.quarantinedButton.UseVisualStyleBackColor = true;
+            // 
+            // removedButton
+            // 
+            this.removedButton.Location = new System.Drawing.Point(88, 31);
+            this.removedButton.Name = "removedButton";
+            this.removedButton.Size = new System.Drawing.Size(75, 23);
+            this.removedButton.TabIndex = 2;
+            this.removedButton.Text = "Removed";
+            this.removedButton.UseVisualStyleBackColor = true;
+            // 
+            // chart1
+            // 
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart1.Legends.Add(legend3);
+            this.chart1.Location = new System.Drawing.Point(7, 60);
+            this.chart1.Name = "chart1";
+            series17.ChartArea = "ChartArea1";
+            series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series17.Legend = "Legend1";
+            series17.Name = "AB+";
+            series18.ChartArea = "ChartArea1";
+            series18.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series18.Legend = "Legend1";
+            series18.Name = "AB-";
+            series19.ChartArea = "ChartArea1";
+            series19.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series19.Legend = "Legend1";
+            series19.Name = "A+";
+            series20.ChartArea = "ChartArea1";
+            series20.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series20.Legend = "Legend1";
+            series20.Name = "A-";
+            series21.ChartArea = "ChartArea1";
+            series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series21.Legend = "Legend1";
+            series21.Name = "B+";
+            series22.ChartArea = "ChartArea1";
+            series22.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series22.Legend = "Legend1";
+            series22.Name = "B-";
+            series23.ChartArea = "ChartArea1";
+            series23.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series23.Legend = "Legend1";
+            series23.Name = "O+";
+            series24.ChartArea = "ChartArea1";
+            series24.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series24.Legend = "Legend1";
+            series24.Name = "O-";
+            this.chart1.Series.Add(series17);
+            this.chart1.Series.Add(series18);
+            this.chart1.Series.Add(series19);
+            this.chart1.Series.Add(series20);
+            this.chart1.Series.Add(series21);
+            this.chart1.Series.Add(series22);
+            this.chart1.Series.Add(series23);
+            this.chart1.Series.Add(series24);
+            this.chart1.Size = new System.Drawing.Size(660, 434);
+            this.chart1.TabIndex = 1;
+            this.chart1.Text = "chart1";
+            // 
+            // dateTo
+            // 
+            this.dateTo.CustomFormat = "MMMM yyyy";
+            this.dateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTo.Location = new System.Drawing.Point(562, 43);
+            this.dateTo.Name = "dateTo";
+            this.dateTo.ShowUpDown = true;
+            this.dateTo.Size = new System.Drawing.Size(105, 20);
+            this.dateTo.TabIndex = 0;
             // 
             // tabPage3
             // 
@@ -484,67 +683,16 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Blood SMS";
             // 
-            // Ap
+            // dateFrom
             // 
-            this.Ap.AutoSize = true;
-            this.Ap.Location = new System.Drawing.Point(196, 85);
-            this.Ap.Name = "Ap";
-            this.Ap.Size = new System.Drawing.Size(26, 13);
-            this.Ap.TabIndex = 6;
-            this.Ap.Text = "A+: ";
-            // 
-            // An
-            // 
-            this.An.AutoSize = true;
-            this.An.Location = new System.Drawing.Point(196, 98);
-            this.An.Name = "An";
-            this.An.Size = new System.Drawing.Size(23, 13);
-            this.An.TabIndex = 7;
-            this.An.Text = "A-: ";
-            // 
-            // Bp
-            // 
-            this.Bp.AutoSize = true;
-            this.Bp.Location = new System.Drawing.Point(196, 111);
-            this.Bp.Name = "Bp";
-            this.Bp.Size = new System.Drawing.Size(26, 13);
-            this.Bp.TabIndex = 8;
-            this.Bp.Text = "B+: ";
-            // 
-            // Bn
-            // 
-            this.Bn.AutoSize = true;
-            this.Bn.Location = new System.Drawing.Point(196, 124);
-            this.Bn.Name = "Bn";
-            this.Bn.Size = new System.Drawing.Size(23, 13);
-            this.Bn.TabIndex = 9;
-            this.Bn.Text = "B-: ";
-            // 
-            // Op
-            // 
-            this.Op.AutoSize = true;
-            this.Op.Location = new System.Drawing.Point(196, 137);
-            this.Op.Name = "Op";
-            this.Op.Size = new System.Drawing.Size(27, 13);
-            this.Op.TabIndex = 10;
-            this.Op.Text = "O+: ";
-            // 
-            // On
-            // 
-            this.On.AutoSize = true;
-            this.On.Location = new System.Drawing.Point(196, 150);
-            this.On.Name = "On";
-            this.On.Size = new System.Drawing.Size(24, 13);
-            this.On.TabIndex = 11;
-            this.On.Text = "O-: ";
-            // 
-            // notificationsBox
-            // 
-            this.notificationsBox.FormattingEnabled = true;
-            this.notificationsBox.Location = new System.Drawing.Point(351, 42);
-            this.notificationsBox.Name = "notificationsBox";
-            this.notificationsBox.Size = new System.Drawing.Size(289, 303);
-            this.notificationsBox.TabIndex = 13;
+            this.dateFrom.CustomFormat = "MMMM yyyy";
+            this.dateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateFrom.Location = new System.Drawing.Point(562, 17);
+            this.dateFrom.Name = "dateFrom";
+            this.dateFrom.ShowUpDown = true;
+            this.dateFrom.Size = new System.Drawing.Size(105, 20);
+            this.dateFrom.TabIndex = 7;
+            this.dateFrom.Value = new System.DateTime(2013, 10, 24, 22, 23, 0, 0);
             // 
             // MainMenu
             // 
@@ -570,6 +718,8 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tabPage4.ResumeLayout(false);
@@ -627,6 +777,14 @@
         private System.Windows.Forms.Label An;
         private System.Windows.Forms.Label Ap;
         private System.Windows.Forms.ListBox notificationsBox;
+        private System.Windows.Forms.DateTimePicker dateTo;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Button removedButton;
+        private System.Windows.Forms.Button addedButton;
+        private System.Windows.Forms.Button usedButton;
+        private System.Windows.Forms.Button releasedButton;
+        private System.Windows.Forms.Button quarantinedButton;
+        private System.Windows.Forms.DateTimePicker dateFrom;
 
     }
 }
