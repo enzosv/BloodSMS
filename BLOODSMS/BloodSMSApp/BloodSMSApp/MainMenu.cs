@@ -237,7 +237,7 @@ namespace BloodSMSApp
                         
                         string xValue = day.ToString("MMM d");
                         listBox1.Items.Add(xValue);
-                        chart1.Series["Total"].Points.AddY(storage.getWholeBloodAddedOn(day));
+                        chart1.Series["Total"].Points.AddXY(xValue, storage.getWholeBloodAddedOn(day));
                         chart1.Series["AB+"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.ABp));
                         chart1.Series["AB-"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.ABn));
                         chart1.Series["A+"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.Ap));
