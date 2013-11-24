@@ -6,7 +6,7 @@ using MySql.Data.MySqlClient;
 
 namespace Blood_SMS
 {
-    public enum bloodType { A, B, O };
+    public enum bloodType { ABp, ABn, Ap, An, Bp, Bn, Op, On };
     public enum contactMethod { home_landline, office_landline, email, cellphone };
     public enum city { QuezonCity, SanJuan, Manila, Caloocan, Mandaluyong, Malabon, Pateros, Makati, Valenzuela, Navotas, Pasay, Taguig, Paranaque, Muntinlupa, LasPinas, Other };
     /*
@@ -39,13 +39,23 @@ las pinas 34.9km
         List<Donor> viableDonors;
         List<Donor> bannedDonors;
 
+        public List<Blood> BloodList { get; set; }
+        public List<Blood>[] BloodTypes { get; set; }
+        public List<Blood> AvailableBlood { get; set; }
+        public List<Blood> QuarantinedBlood { get; set; }
+        public List<Blood> UsedBlood { get; set; }
+        public List<Donor> DonorList { get; set; }
+        public List<Donor>[] DonorTypes { get; set; }
+        public List<Donor> ViableDonors { get; set; }
+        public List<Donor> BannedDonors { get; set; }
+
         string connectionString;
 
         const int MINIMUMBLOODVALUE = 20;
         const int MINIMUMEXPIRYALERTVALUE = 3;
         readonly string[] BLOOD_FIELDS = { "taken_from", "patient_name", "patient_age", "date_donated", "date_expire", "date_removed", "is_assigned", "is_quarantined", "reason_for_removal", "compoenent" };
         readonly string[] DONOR_FIELDS = { "name", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "cellphone", "educational_attainment", "birth_date", "date_registered", "last_donation", "next_available", "times_donated", "is_contactable", "is_viable", "reason_for_deferral" };
-        Storage(string host, string db, string user, string pass)
+        public Storage(string host, string db, string user, string pass)
         {
             connectionString = string.Format("Server={0};Database={1};Uid={2};Pwd={3}", host, db, user, pass);
 

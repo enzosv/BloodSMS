@@ -33,6 +33,11 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.ABn = new System.Windows.Forms.Label();
+            this.ABp = new System.Windows.Forms.Label();
+            this.availableBloodLabel = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -63,8 +68,16 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.Ap = new System.Windows.Forms.Label();
+            this.An = new System.Windows.Forms.Label();
+            this.Bp = new System.Windows.Forms.Label();
+            this.Bn = new System.Windows.Forms.Label();
+            this.Op = new System.Windows.Forms.Label();
+            this.On = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabPage4.SuspendLayout();
@@ -100,6 +113,17 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.On);
+            this.tabPage1.Controls.Add(this.Op);
+            this.tabPage1.Controls.Add(this.Bn);
+            this.tabPage1.Controls.Add(this.Bp);
+            this.tabPage1.Controls.Add(this.An);
+            this.tabPage1.Controls.Add(this.Ap);
+            this.tabPage1.Controls.Add(this.ABn);
+            this.tabPage1.Controls.Add(this.ABp);
+            this.tabPage1.Controls.Add(this.availableBloodLabel);
+            this.tabPage1.Controls.Add(this.pictureBox2);
+            this.tabPage1.Controls.Add(this.pictureBox1);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.ImageIndex = 0;
             this.tabPage1.Location = new System.Drawing.Point(4, 70);
@@ -109,10 +133,57 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // ABn
+            // 
+            this.ABn.AutoSize = true;
+            this.ABn.Location = new System.Drawing.Point(196, 72);
+            this.ABn.Name = "ABn";
+            this.ABn.Size = new System.Drawing.Size(30, 13);
+            this.ABn.TabIndex = 5;
+            this.ABn.Text = "AB-: ";
+            // 
+            // ABp
+            // 
+            this.ABp.AutoSize = true;
+            this.ABp.Location = new System.Drawing.Point(196, 59);
+            this.ABp.Name = "ABp";
+            this.ABp.Size = new System.Drawing.Size(33, 13);
+            this.ABp.TabIndex = 4;
+            this.ABp.Text = "AB+: ";
+            // 
+            // availableBloodLabel
+            // 
+            this.availableBloodLabel.AutoSize = true;
+            this.availableBloodLabel.Location = new System.Drawing.Point(193, 42);
+            this.availableBloodLabel.Name = "availableBloodLabel";
+            this.availableBloodLabel.Size = new System.Drawing.Size(86, 13);
+            this.availableBloodLabel.TabIndex = 3;
+            this.availableBloodLabel.Text = "Available Blood: ";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::BloodSMSApp.Properties.Resources.blood;
+            this.pictureBox2.Location = new System.Drawing.Point(34, 225);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(132, 10);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 2;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::BloodSMSApp.Properties.Resources.container;
+            this.pictureBox1.Location = new System.Drawing.Point(34, 42);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(132, 193);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(214, 105);
+            this.label1.Location = new System.Drawing.Point(3, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 13);
             this.label1.TabIndex = 0;
@@ -147,7 +218,7 @@
             this.button6.BackColor = System.Drawing.Color.DimGray;
             this.button6.FlatAppearance.BorderSize = 0;
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Geogrotesque Lg", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button6.ForeColor = System.Drawing.Color.White;
             this.button6.Location = new System.Drawing.Point(494, 25);
             this.button6.Name = "button6";
@@ -161,7 +232,7 @@
             this.button5.BackColor = System.Drawing.Color.DimGray;
             this.button5.FlatAppearance.BorderSize = 0;
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button5.Font = new System.Drawing.Font("Geogrotesque Lg", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.ForeColor = System.Drawing.Color.White;
             this.button5.Location = new System.Drawing.Point(575, 25);
             this.button5.Name = "button5";
@@ -176,7 +247,7 @@
             this.button4.BackColor = System.Drawing.Color.DimGray;
             this.button4.FlatAppearance.BorderSize = 0;
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("Geogrotesque Lg", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.ForeColor = System.Drawing.Color.White;
             this.button4.Location = new System.Drawing.Point(413, 25);
             this.button4.Name = "button4";
@@ -274,7 +345,7 @@
             this.button10.BackColor = System.Drawing.Color.DimGray;
             this.button10.FlatAppearance.BorderSize = 0;
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Font = new System.Drawing.Font("Geogrotesque Lg", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button10.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button10.ForeColor = System.Drawing.Color.White;
             this.button10.Location = new System.Drawing.Point(330, 23);
             this.button10.Name = "button10";
@@ -289,7 +360,7 @@
             this.button7.BackColor = System.Drawing.Color.DimGray;
             this.button7.FlatAppearance.BorderSize = 0;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("Geogrotesque Lg", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button7.ForeColor = System.Drawing.Color.White;
             this.button7.Location = new System.Drawing.Point(492, 23);
             this.button7.Name = "button7";
@@ -303,7 +374,7 @@
             this.button8.BackColor = System.Drawing.Color.DimGray;
             this.button8.FlatAppearance.BorderSize = 0;
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button8.Font = new System.Drawing.Font("Geogrotesque Lg", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button8.ForeColor = System.Drawing.Color.White;
             this.button8.Location = new System.Drawing.Point(573, 23);
             this.button8.Name = "button8";
@@ -318,7 +389,7 @@
             this.button9.BackColor = System.Drawing.Color.DimGray;
             this.button9.FlatAppearance.BorderSize = 0;
             this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button9.Font = new System.Drawing.Font("Geogrotesque Lg", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button9.ForeColor = System.Drawing.Color.White;
             this.button9.Location = new System.Drawing.Point(411, 23);
             this.button9.Name = "button9";
@@ -403,13 +474,67 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Infinity", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(30, 6);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(186, 50);
+            this.label2.Size = new System.Drawing.Size(264, 55);
             this.label2.TabIndex = 5;
             this.label2.Text = "Blood SMS";
+            // 
+            // Ap
+            // 
+            this.Ap.AutoSize = true;
+            this.Ap.Location = new System.Drawing.Point(196, 85);
+            this.Ap.Name = "Ap";
+            this.Ap.Size = new System.Drawing.Size(26, 13);
+            this.Ap.TabIndex = 6;
+            this.Ap.Text = "A+: ";
+            // 
+            // An
+            // 
+            this.An.AutoSize = true;
+            this.An.Location = new System.Drawing.Point(196, 98);
+            this.An.Name = "An";
+            this.An.Size = new System.Drawing.Size(23, 13);
+            this.An.TabIndex = 7;
+            this.An.Text = "A-: ";
+            // 
+            // Bp
+            // 
+            this.Bp.AutoSize = true;
+            this.Bp.Location = new System.Drawing.Point(196, 111);
+            this.Bp.Name = "Bp";
+            this.Bp.Size = new System.Drawing.Size(26, 13);
+            this.Bp.TabIndex = 8;
+            this.Bp.Text = "B+: ";
+            // 
+            // Bn
+            // 
+            this.Bn.AutoSize = true;
+            this.Bn.Location = new System.Drawing.Point(196, 124);
+            this.Bn.Name = "Bn";
+            this.Bn.Size = new System.Drawing.Size(23, 13);
+            this.Bn.TabIndex = 9;
+            this.Bn.Text = "B-: ";
+            // 
+            // Op
+            // 
+            this.Op.AutoSize = true;
+            this.Op.Location = new System.Drawing.Point(196, 137);
+            this.Op.Name = "Op";
+            this.Op.Size = new System.Drawing.Size(27, 13);
+            this.Op.TabIndex = 10;
+            this.Op.Text = "O+: ";
+            // 
+            // On
+            // 
+            this.On.AutoSize = true;
+            this.On.Location = new System.Drawing.Point(196, 150);
+            this.On.Name = "On";
+            this.On.Size = new System.Drawing.Size(24, 13);
+            this.On.TabIndex = 11;
+            this.On.Text = "O-: ";
             // 
             // MainMenu
             // 
@@ -433,6 +558,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tabPage4.ResumeLayout(false);
@@ -478,6 +605,17 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label availableBloodLabel;
+        private System.Windows.Forms.Label ABp;
+        private System.Windows.Forms.Label ABn;
+        private System.Windows.Forms.Label On;
+        private System.Windows.Forms.Label Op;
+        private System.Windows.Forms.Label Bn;
+        private System.Windows.Forms.Label Bp;
+        private System.Windows.Forms.Label An;
+        private System.Windows.Forms.Label Ap;
 
     }
 }

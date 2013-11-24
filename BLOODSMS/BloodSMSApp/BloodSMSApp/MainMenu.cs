@@ -6,14 +6,26 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
+using Blood_SMS;
 namespace BloodSMSApp
 {
     public partial class MainMenu : Form
     {
+        Storage storage;
+        int bloodCount;
+        int donorCount;
+        int[] bloodTypeCount;
         public MainMenu()
         {
             InitializeComponent();
+            storage = new Storage("host", "db", "root", "root");
+            bloodCount = storage.AvailableBlood.Count;
+            //donorCount = storage.ViableDonors.Count;
+            bloodTypeCount = new int[Enum.GetNames(typeof(bloodType)).Length];
+            for (int i = 0; i < bloodTypeCount.Length; i++)
+            {
+                bloodTypeCount[i] = storage.BloodTypes[i].Count;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -23,7 +35,15 @@ namespace BloodSMSApp
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-
+            availableBloodLabel.Text = "Available Blood: " + bloodCount;
+            ABp.Text = "AB+ : " + bloodTypeCount[0];
+            ABn.Text = "AB- : " + bloodTypeCount[1];
+            Ap.Text = "A+ : " + bloodTypeCount[2];
+            An.Text = "A- : " + bloodTypeCount[3];
+            Bp.Text = "B+ : " + bloodTypeCount[4];
+            Bn.Text = "B- : " + bloodTypeCount[5];
+            Op.Text = "O+ : " + bloodTypeCount[6];
+            On.Text = "O- : " + bloodTypeCount[6];
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -123,5 +143,7 @@ namespace BloodSMSApp
             AddDonor a = new AddDonor();
             a.Show();
         }
+
+
     }
 }
