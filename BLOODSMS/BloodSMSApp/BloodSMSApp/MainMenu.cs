@@ -21,22 +21,30 @@ namespace BloodSMSApp
         {
             InitializeComponent();
             storage = new Storage("localhost", "bsms", "root", "root");
+
+            RefreshCount();
+            RefreshNotifications();
+        }
+
+        void RefreshCount()
+        {
             bloodCount = storage.availableBlood.Count;
-            //donorCount = storage.ViableDonors.Count;
             bloodTypeCount = new int[Enum.GetNames(typeof(bloodType)).Length];
             for (int i = 0; i < bloodTypeCount.Length; i++)
             {
                 bloodTypeCount[i] = storage.bloodTypes[i].Count;
             }
+        }
 
-            #region Notifications
+        void RefreshNotifications()
+        {
             notifications = new List<string>();
             //check low level
             foreach (bloodType blood_type in (bloodType[])Enum.GetValues(typeof(bloodType)))
             {
                 if (storage.AlertLowLevel(blood_type))
                 {
-                    notifications.Add("Supply on " + blood_type.ToString() + " is critically low");
+                    notifications.Add("Supply on " + blood_type.ToString().Replace('p', '+').Replace('n', '-') + " is critically low");
                 }
             }
             //check near expirations
@@ -47,9 +55,7 @@ namespace BloodSMSApp
                     notifications.Add("Blood with ID " + b.Blood_id + " is near expiration");
                 }
             }
-            #endregion
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
 
@@ -69,7 +75,7 @@ namespace BloodSMSApp
 
             //notifications
             for(int i = 0; i< notifications.Count; i++)
-            {
+            { 
                 notificationsBox.Items.Add(notifications[i]);
             }
         }

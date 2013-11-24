@@ -763,21 +763,6 @@ las pinas 34.9km
             return false;
         }
 
-        public void CheckExpirations()
-        {
-            foreach (Blood b in availableBlood)
-            {
-                AlertNearExpiration(b);
-            }
-        }
-
-        public void CheckLowLevel()
-        {
-            foreach (bloodType blood_type in (bloodType[])Enum.GetValues(typeof(bloodType)))
-            {
-                AlertLowLevel(blood_type);
-            }
-        }
         #endregion
 
     }
