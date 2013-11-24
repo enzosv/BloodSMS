@@ -19,12 +19,12 @@ namespace BloodSMSApp
         {
             InitializeComponent();
             storage = new Storage("localhost", "bsms", "root", "root");
-            bloodCount = storage.AvailableBlood.Count;
+            bloodCount = storage.availableBlood.Count;
             //donorCount = storage.ViableDonors.Count;
             bloodTypeCount = new int[Enum.GetNames(typeof(bloodType)).Length];
             for (int i = 0; i < bloodTypeCount.Length; i++)
             {
-                bloodTypeCount[i] = storage.BloodTypes[i].Count;
+                bloodTypeCount[i] = storage.bloodTypes[i].Count;
             }
         }
 

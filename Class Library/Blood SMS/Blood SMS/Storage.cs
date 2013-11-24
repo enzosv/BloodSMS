@@ -29,25 +29,25 @@ las pinas 34.9km
 */
     public class Storage
     {
-        List<Blood> bloodList;
-        List<Blood>[] bloodTypes;
-        List<Blood> availableBlood;
-        List<Blood> quarantinedBlood;
-        List<Blood> usedBlood;
-        List<Donor> donorList;
-        List<Donor>[] donorTypes;
-        List<Donor> viableDonors;
-        List<Donor> bannedDonors;
+        public List<Blood> bloodList;
+        public List<Blood>[] bloodTypes;
+        public List<Blood> availableBlood;
+        public List<Blood> quarantinedBlood;
+        public List<Blood> usedBlood;
+        public List<Donor> donorList;
+        public List<Donor>[] donorTypes;
+        public List<Donor> viableDonors;
+        public List<Donor> bannedDonors;
 
-        public List<Blood> BloodList { get; set; }
-        public List<Blood>[] BloodTypes { get; set; }
-        public List<Blood> AvailableBlood { get; set; }
-        public List<Blood> QuarantinedBlood { get; set; }
-        public List<Blood> UsedBlood { get; set; }
-        public List<Donor> DonorList { get; set; }
-        public List<Donor>[] DonorTypes { get; set; }
-        public List<Donor> ViableDonors { get; set; }
-        public List<Donor> BannedDonors { get; set; }
+        //public List<Blood> BloodList { get; set; }
+        //public List<Blood>[] BloodTypes { get; set; }
+        //public List<Blood> AvailableBlood { get { return availableBlood; } set; }
+        //public List<Blood> QuarantinedBlood { get; set; }
+        //public List<Blood> UsedBlood { get; set; }
+        //public List<Donor> DonorList { get; set; }
+        //public List<Donor>[] DonorTypes { get; set; }
+        //public List<Donor> ViableDonors { get; set; }
+        //public List<Donor> BannedDonors { get; set; }
 
         string connectionString;
 
@@ -61,12 +61,20 @@ las pinas 34.9km
 
             bloodList = new List<Blood>();
             bloodTypes = new List<Blood>[Enum.GetNames(typeof(bloodType)).Length];
+            for (int i = 0; i < bloodTypes.Length; i++)
+            {
+                bloodTypes[i] = new List<Blood>();
+            }
             availableBlood = new List<Blood>();
             quarantinedBlood = new List<Blood>();
             usedBlood = new List<Blood>();
 
             donorList = new List<Donor>();
             donorTypes = new List<Donor>[Enum.GetNames(typeof(bloodType)).Length];
+            for (int i = 0; i < donorTypes.Length; i++)
+            {
+                donorTypes[i] = new List<Donor>();
+            }
             viableDonors = new List<Donor>();
             bannedDonors = new List<Donor>();
 
