@@ -158,29 +158,29 @@ namespace Blood_SMS
             times_donated++;
         }
 
-        public int? Donor_id { get { return donor_id; } set { donor_id = value; } }
+        public int Donor_id { get { return donor_id.Value; } set { donor_id = value; } }
         public string Name { get { return name; } set { name = value; } }
-        public bloodType? Blood_type { get { return blood_type; } set { blood_type = value; } }
+        public bloodType Blood_type { get { return blood_type.Value; } set { blood_type = value; } }
         public string Home_province { get { return home_province; } set { home_province = value; } }
         public string Home_city { get { return home_city; } set { home_city = value; } }
         public string Home_street { get { return home_street; } set { home_street = value; } }
         public string Office_province { get { return office_province; } set { office_province = value; } }
         public string Office_city { get { return office_city; } set { office_city = value; } }
         public string Office_street { get { return office_street; } set { office_street = value; } }
-        public contactMethod? Preferred_contact_method { get { return preferred_contact_method; } set { preferred_contact_method = value; } }
+        public contactMethod Preferred_contact_method { get { return preferred_contact_method.Value; } set { preferred_contact_method = value; } }
         public string Home_landline { get { return home_landline; } set { home_landline = value; } }
         public string Office_landline { get { return office_landline; } set { office_landline = value; } }
         public string Email { get { return email; } set { email = value; } }
         public string Cellphone { get { return cellphone; } set { cellphone = value; } }
         public string Educational_attainment { get { return educational_attainment; } set { educational_attainment = value; } }
-        public DateTime? Birth_date { get { return birth_date; } set { birth_date = value; } }
-        public DateTime? Date_registered { get { return date_registered; } set { date_registered = value; } }
-        public DateTime? Last_donation { get { return last_donation; } set { last_donation = value; } }
-        public DateTime? Next_available { get { return next_available; } set { next_available = value; } }
-        public int? Times_donated { get { return times_donated; } set { times_donated = value; } }
-        public int? Times_contacted { get { return times_contacted; } set { times_contacted = value; } }
-        public bool? Is_contactable { get { return is_contactable; } set { is_contactable = value; } }
-        public bool? Is_viable { get { return is_viable; } set { is_viable = value; } }
+        public DateTime Birth_date { get { return birth_date.Value; } set { birth_date = value; } }
+        public DateTime Date_registered { get { return date_registered.Value; } set { date_registered = value; } }
+        public DateTime Last_donation { get { return last_donation.Value; } set { last_donation = value; } }
+        public DateTime Next_available { get { return next_available.Value; } set { next_available = value; } }
+        public int Times_donated { get { return times_donated.Value; } set { times_donated = value; } }
+        public int Times_contacted { get { return times_contacted.Value; } set { times_contacted = value; } }
+        public bool Is_contactable { get { return is_contactable.Value; } set { is_contactable = value; } }
+        public bool Is_viable { get { return is_viable.Value; } set { is_viable = value; } }
         public string Reason_for_deferral { get { return reason_for_deferral; } set { reason_for_deferral = value; } }
 
         public int Age { get { return age; } set { age = value; } }

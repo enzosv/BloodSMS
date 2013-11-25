@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,8 +56,8 @@ las pinas 34.9km
         int BlOODTYPECOUNT = Enum.GetNames(typeof(bloodType)).Length;
         const int MINIMUMBLOODVALUE = 20;
         const int MINIMUMEXPIRYALERTVALUE = 3;
-        readonly string[] BLOOD_FIELDS = { "taken_from", "patient_name", "patient_age", "date_donated", "date_expire", "date_removed", "is_assigned", "is_quarantined", "reason_for_removal", "compoenent" };
-        readonly string[] DONOR_FIELDS = { "name", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "cellphone", "educational_attainment", "birth_date", "date_registered", "last_donation", "next_available", "times_donated", "is_contactable", "is_viable", "reason_for_deferral" };
+        readonly string[] BLOOD_FIELDS = { "blood_id", "taken_from", "patient_name", "patient_age", "date_donated", "date_expire", "date_removed", "is_assigned", "is_quarantined", "reason_for_removal", "compoenent" };
+        readonly string[] DONOR_FIELDS = { "donor_id", "name", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "cellphone", "educational_attainment", "birth_date", "date_registered", "last_donation", "next_available", "times_donated", "is_contactable", "is_viable", "reason_for_deferral" };
         public Storage(string host, string db, string user, string pass)
         {
             connectionString = string.Format("Server={0};Database={1};Uid={2};Pwd={3}", host, db, user, pass);
@@ -206,13 +207,12 @@ las pinas 34.9km
 
             //if (x.Is_viable && x.Is_contactable)
             //    viableDonors.Add(x);
-
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-            string query = "Insert into Donor " + AddQuery(DONOR_FIELDS);
-            MySqlCommand comm = new MySqlCommand(query, conn);
-            donorCommands(comm, x);
-            return RowsAffected(comm, conn);
+            if (donorCommands("Insert into donor " + AddQuery(DONOR_FIELDS), x) > 0)
+            {
+                sortDonor(x);
+                return true;
+            }
+            return false;
 
         }
 
@@ -279,7 +279,7 @@ las pinas 34.9km
             conn.Open();
             string query = "UPDATE Donor SET " + UpdateQuery(DONOR_FIELDS);
             MySqlCommand comm = new MySqlCommand(query, conn);
-            donorCommands(comm, x);
+            donorCommands(query, x);
             return RowsAffected(comm, conn);
         }
 
@@ -352,11 +352,15 @@ las pinas 34.9km
             return RowsAffected(comm, conn);
         }
 
-        void donorCommands(MySqlCommand comm, Donor x)
+        int donorCommands(string query, Donor x)
         {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            comm.CommandType = CommandType.Text;
             long id = comm.LastInsertedId;
             x.Donor_id = (int)id;
-            comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
+            //comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
             comm.Parameters.AddWithValue("@name", x.Name);
             comm.Parameters.AddWithValue("@blood_type", x.Blood_type);
             comm.Parameters.AddWithValue("@home_province", x.Home_province);
@@ -380,8 +384,11 @@ las pinas 34.9km
             comm.Parameters.AddWithValue("@is_contactable", x.Is_contactable);
             comm.Parameters.AddWithValue("@is_viable", x.Is_viable);
             comm.Parameters.AddWithValue("@reason_for_deferral", x.Reason_for_deferral);
+            
 
-            sortDonor(x);
+            comm.ExecuteNonQuery();
+            conn.Close();
+            return 1;
         }
 
         List<Donor> getClosestByType(int count, bloodType blood_type)
@@ -405,7 +412,7 @@ las pinas 34.9km
         void sortDonor(Donor d)
         {
             donorList.Add(d);
-            if (d.Is_viable.Value && d.Is_contactable.Value)
+            if (d.Is_viable && d.Is_contactable)
             {
                 viableDonors.Add(d);
                 donorTypes[(int)d.Blood_type].Add(d);

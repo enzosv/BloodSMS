@@ -24,21 +24,21 @@ namespace Blood_SMS
         int age;
         bool is_removed;
 
-        public int Blood_id { get; set; }
-        public int Taken_from { get; set; }
-        public DateTime Date_added { get; set; }
-        public DateTime Date_expire { get; set; }
+        public int Blood_id { get { return blood_id.Value; } set { blood_id = value; } }
+        public int Taken_from { get { return taken_from.Value; } set { taken_from = value; } }
+        public DateTime Date_added { get { return date_added.Value; } set { date_added = value; } }
+        public DateTime Date_expire { get { return date_expire.Value; } set { date_expire = value; } }
         
-        public string Patient_name { get; set; }
-        public int Patient_age { get; set; }
-        public bool Is_assigned { get; set; }
-        public string Component { get; set; }
-        public bool Is_quarantined { get; set; }
-        public string Reason_for_removal { get; set; }
-        public DateTime Date_removed { get; set; }
+        public string Patient_name { get{return patient_name;} set{ patient_name = value;} }
+        public int Patient_age { get { return patient_age.Value; } set { patient_age = value; } }
+        public bool Is_assigned { get { return is_assigned.Value; } set { is_assigned = value; } }
+        public string Component { get{return component;} set{ component = value;} }
+        public bool Is_quarantined { get { return is_quarantined.Value; } set { is_quarantined = value; } }
+        public string Reason_for_removal { get{return reason_for_removal;} set{ reason_for_removal = value;} }
+        public DateTime Date_removed { get { return date_removed.Value; } set { date_removed = value; } }
 
-        public int Age { get; set; }
-        public bool Is_removed { get; set; }
+        public int Age { get{return age;} set{ age = value;} }
+        public bool Is_removed { get{return is_removed;} set{ is_removed = value;} }
 
         //Record Blood Ins
         //Create
