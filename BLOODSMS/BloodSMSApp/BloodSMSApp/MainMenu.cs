@@ -31,12 +31,12 @@ namespace BloodSMSApp
             bloodTypeCount = new int[Enum.GetNames(typeof(bloodType)).Length];
             notifications = new List<string>();
             command = graphCommand.Add;
-            dateTo.MaxDate = DateTime.Now;
+            dateTo.MaxDate = DateTime.Now.AddYears(1);
 
-            dateFrom.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-1);
+            dateFrom.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddYears(-1);
             dateTo.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             //set this to date of install upon install
-            dateFrom.MinDate = new DateTime(2013, 9, 1);
+            dateFrom.MinDate = new DateTime(2010, 9, 1);
             //chart1.ChartAreas[0].AxisX.Maximum = 366;
             chart1.ChartAreas[0].AxisY.Maximum = 1200;
             
