@@ -164,7 +164,7 @@ namespace BloodSMSApp
 
         private void button9_Click_1(object sender, EventArgs e)
         {
-            AddDonor a = new AddDonor();
+            AddDonor a = new AddDonor(storage);
             a.Show();
         }
 
@@ -176,7 +176,7 @@ namespace BloodSMSApp
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            AddItem i = new AddItem();
+            AddItem i = new AddItem(storage);
             i.Show();
         }
 
@@ -194,12 +194,13 @@ namespace BloodSMSApp
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            AddDonor a = new AddDonor();
+            AddDonor a = new AddDonor(storage);
             a.Show();
         }
 
         private void addedButton_Click(object sender, EventArgs e)
         {
+            RefreshLegend(); 
             command = graphCommand.Add;
             RefreshGraph();
         }
@@ -235,10 +236,30 @@ namespace BloodSMSApp
             chart1.Series["O-"].Points.AddY(ints[7]);
         }
 
+        void RefreshLegend()
+        {
+            if (command == graphCommand.Summary)
+            {
+                chart1.Series[0].LegendText = "Total";
+                chart1.Series[1].LegendText = "AB+";
+                chart1.Series[2].LegendText = "AB-";
+                chart1.Series[3].LegendText = "A+";
+                chart1.Series[4].LegendText = "A-";
+                chart1.Series[5].Enabled = true;
+                chart1.Series[6].Enabled = true;
+                chart1.Series[7].Enabled = true;
+                chart1.Series[8].Enabled = true;
+            }
+        }
         void RefreshGraph()
         {
             TimeSpan span = dateTo.Value - dateFrom.Value;
             chart1.ChartAreas[0].AxisX.Maximum = span.TotalDays;
+            
+            //chart1.Series[5].LegendText = "B+";
+            //chart1.Series[6].LegendText = "B-";
+            //chart1.Series[7].LegendText = "O+";
+            //chart1.Series[8].LegendText = "O-";
             switch (command)
             {
                 case graphCommand.Add:
@@ -281,30 +302,60 @@ namespace BloodSMSApp
                         GetNumbers(storage.getBloodTypeReleasedOn(day));
                     }
                     break;
+                case graphCommand.Summary:
+                    chart1.Series[0].LegendText = "Added Blood";
+                    chart1.Series[1].LegendText = "Removed Blood";
+                    chart1.Series[2].LegendText = "Released Blood";
+                    chart1.Series[3].LegendText = "Used Blood";
+                    chart1.Series[4].LegendText = "Quarantined Blood";
+                    chart1.Series[5].Enabled = false;
+                    chart1.Series[6].Enabled = false;
+                    chart1.Series[7].Enabled = false;
+                    chart1.Series[8].Enabled = false;
+                    for (DateTime day = dateFrom.Value; day <= dateTo.Value; day = day.AddDays(1))
+                    {
+                        string xValue = day.ToString("MMM d");
+                        chart1.Series[0].Points.AddXY(xValue, storage.getWholeBloodAddedOn(day));
+                        chart1.Series[1].Points.AddXY(xValue, storage.getBloodRemovedOn(day));
+                        chart1.Series[2].Points.AddXY(xValue, storage.getBloodReleasedOn(day));
+                        chart1.Series[3].Points.AddXY(xValue, storage.getBloodUsedOn(day));
+                        chart1.Series[4].Points.AddXY(xValue, storage.getBloodQuarantinedOn(day));
+                    }
+                    break;
             }
         }
 
         private void removedButton_Click(object sender, EventArgs e)
         {
+            RefreshLegend(); 
             command = graphCommand.Remove;
             RefreshGraph();
         }
 
         private void releasedButton_Click(object sender, EventArgs e)
         {
+            RefreshLegend(); 
             command = graphCommand.Release;
             RefreshGraph();
         }
 
         private void quarantinedButton_Click(object sender, EventArgs e)
         {
+            RefreshLegend(); 
             command = graphCommand.Quarantine;
             RefreshGraph();
         }
 
         private void usedButton_Click(object sender, EventArgs e)
         {
+            RefreshLegend(); 
             command = graphCommand.Use;
+            RefreshGraph();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            command = graphCommand.Summary;
             RefreshGraph();
         }
 

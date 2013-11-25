@@ -6,7 +6,7 @@ using MySql.Data.MySqlClient;
 
 namespace Blood_SMS
 {
-    public enum graphCommand { Add, Remove, Release, Quarantine, Use };
+    public enum graphCommand { Add, Remove, Release, Quarantine, Use, Summary };
     public enum bloodType { ABp, ABn, Ap, An, Bp, Bn, Op, On };
     public enum contactMethod { home_landline, office_landline, email, cellphone };
     public enum city { QuezonCity, SanJuan, Manila, Caloocan, Mandaluyong, Malabon, Pateros, Makati, Valenzuela, Navotas, Pasay, Taguig, Paranaque, Muntinlupa, LasPinas, Other };
@@ -52,7 +52,7 @@ las pinas 34.9km
 
         string connectionString;
 
-        const int BlOODTYPECOUNT = Enum.GetNames(typeof(bloodType)).Length;
+        int BlOODTYPECOUNT = Enum.GetNames(typeof(bloodType)).Length;
         const int MINIMUMBLOODVALUE = 20;
         const int MINIMUMEXPIRYALERTVALUE = 3;
         readonly string[] BLOOD_FIELDS = { "taken_from", "patient_name", "patient_age", "date_donated", "date_expire", "date_removed", "is_assigned", "is_quarantined", "reason_for_removal", "compoenent" };
@@ -70,7 +70,7 @@ las pinas 34.9km
             availableBlood = new List<Blood>();
             quarantinedBlood = new List<Blood>();
             usedBlood = new List<Blood>();
-
+            
             donorList = new List<Donor>();
             donorTypes = new List<Donor>[BlOODTYPECOUNT];
             for (int i = 0; i < donorTypes.Length; i++)
@@ -161,7 +161,7 @@ las pinas 34.9km
         *  Creates donor object from parameters, adds it to the donorList and creates row in SQL
         *</summary>
         */
-        bool AddDonor(
+        public bool AddDonor(
             string NAME,
             bloodType BLOOD_TYPE,
             string HOME_PROVINCE,
@@ -291,7 +291,7 @@ las pinas 34.9km
          * 
          *</param>
          */
-        Donor findDonor(int id)
+        public Donor findDonor(int id)
         {
             foreach (Donor d in donorList)
             {
@@ -459,7 +459,7 @@ las pinas 34.9km
         *  Creates blood object from parameters, adds it to the bloodList and creates row in SQL
         *</summary>
         */
-        bool AddBlood(DateTime date_added, DateTime date_expire, int taken_from)
+        public bool AddBlood(DateTime date_added, DateTime date_expire, int taken_from)
         {
             Blood x = new Blood(bloodList.Count, taken_from, date_added, date_expire);
 
@@ -474,7 +474,7 @@ las pinas 34.9km
         /*summary
          * for extracted blood
          */
-        bool AddBlood(Blood a, DateTime date_added, DateTime date_expire, string component)
+        public bool AddBlood(Blood a, DateTime date_added, DateTime date_expire, string component)
         {
             Blood x = new Blood(a.Blood_id, bloodList.Count, date_added, date_expire, component);
 
