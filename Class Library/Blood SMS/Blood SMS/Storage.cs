@@ -6,6 +6,7 @@ using MySql.Data.MySqlClient;
 
 namespace Blood_SMS
 {
+    public enum graphCommand { Add, Remove, Release, Quarantine, Use };
     public enum bloodType { ABp, ABn, Ap, An, Bp, Bn, Op, On };
     public enum contactMethod { home_landline, office_landline, email, cellphone };
     public enum city { QuezonCity, SanJuan, Manila, Caloocan, Mandaluyong, Malabon, Pateros, Makati, Valenzuela, Navotas, Pasay, Taguig, Paranaque, Muntinlupa, LasPinas, Other };
@@ -51,6 +52,7 @@ las pinas 34.9km
 
         string connectionString;
 
+        const int BlOODTYPECOUNT = Enum.GetNames(typeof(bloodType)).Length;
         const int MINIMUMBLOODVALUE = 20;
         const int MINIMUMEXPIRYALERTVALUE = 3;
         readonly string[] BLOOD_FIELDS = { "taken_from", "patient_name", "patient_age", "date_donated", "date_expire", "date_removed", "is_assigned", "is_quarantined", "reason_for_removal", "compoenent" };
@@ -60,7 +62,7 @@ las pinas 34.9km
             connectionString = string.Format("Server={0};Database={1};Uid={2};Pwd={3}", host, db, user, pass);
 
             bloodList = new List<Blood>();
-            bloodTypes = new List<Blood>[Enum.GetNames(typeof(bloodType)).Length];
+            bloodTypes = new List<Blood>[BlOODTYPECOUNT];
             for (int i = 0; i < bloodTypes.Length; i++)
             {
                 bloodTypes[i] = new List<Blood>();
@@ -70,7 +72,7 @@ las pinas 34.9km
             usedBlood = new List<Blood>();
 
             donorList = new List<Donor>();
-            donorTypes = new List<Donor>[Enum.GetNames(typeof(bloodType)).Length];
+            donorTypes = new List<Donor>[BlOODTYPECOUNT];
             for (int i = 0; i < donorTypes.Length; i++)
             {
                 donorTypes[i] = new List<Donor>();
@@ -511,62 +513,106 @@ las pinas 34.9km
             int count = 0;
             foreach (Blood b in bloodList)
             {
-                if (b.Is_removed)
+                if (b.Is_removed && b.Date_removed == date)
                 {
-                    if (b.Date_removed == date)
-                    {
-                        count++;
-                    }
+                    count++;
                 }
             }
             return count;
         }
 
-        public int getBloodTypeRemovedOn(DateTime date, bloodType blood_type)
+        public int[] getAllBloodChangedOn(DateTime date)
         {
-            int count = 0;
+            int[] ints = new int[Enum.GetNames(typeof(graphCommand)).Length];
+            for (int i = 0; i < ints.Length; i++)
+            {
+                ints[i] = 0;
+            }
             foreach (Blood b in bloodList)
             {
-                if (b.Is_removed && findDonor(b.Taken_from).Blood_type == blood_type)
+                if (b.Is_removed && b.Date_removed == date)
                 {
-                    if (b.Date_removed == date)
-                    {
-                        count++;
-                    }
+                    ints[(int)graphCommand.Remove]++;
+                    if (b.Is_quarantined)
+                        ints[(int)graphCommand.Quarantine]++;
+                    else if (b.Reason_for_removal.StartsWith("Extracted"))
+                        ints[(int)graphCommand.Use]++;
+                    else if (b.Is_assigned)
+                        ints[(int)graphCommand.Release]++;
+                }
+                if (b.Component == "Whole" && b.Date_added == date)
+                {
+                    ints[(int)graphCommand.Add]++;
                 }
             }
-            return count;
+            return ints;
         }
+
+        public int[,] getAllBloodTypeChangedOn(DateTime date)
+        {
+            int[,] ints = new int[Enum.GetNames(typeof(graphCommand)).Length,BlOODTYPECOUNT];
+            for (int i = 0; i < Enum.GetNames(typeof(graphCommand)).Length; i++)
+            {
+                for(int j = 0; j<BlOODTYPECOUNT; j++)
+                    ints[i, j] = 0;
+            }
+            foreach (Blood b in bloodList)
+            {
+                if (b.Is_removed && b.Date_removed == date)
+                {
+                    ints[(int)graphCommand.Remove, (int)findDonor(b.Taken_from).Blood_type]++;
+                    if(b.Is_quarantined)
+                        ints[(int)graphCommand.Quarantine, (int)findDonor(b.Taken_from).Blood_type]++;
+                    else if (b.Reason_for_removal.StartsWith("Extracted"))
+                        ints[(int)graphCommand.Use, (int)findDonor(b.Taken_from).Blood_type]++;
+                    else if (b.Is_assigned)
+                        ints[(int)graphCommand.Release, (int)findDonor(b.Taken_from).Blood_type]++;
+                }
+                if (b.Component == "Whole" && b.Date_added == date)
+                {
+                    ints[(int)graphCommand.Add, (int)findDonor(b.Taken_from).Blood_type]++;
+                } 
+            }
+            return ints;
+        }
+
+        public int[] getBloodTypeRemovedOn(DateTime date)
+        {
+            int[] ints = new int[BlOODTYPECOUNT];
+            foreach (Blood b in bloodList)
+            {
+                if (b.Is_removed && b.Date_removed == date)
+                {
+                    ints[(int)findDonor(b.Taken_from).Blood_type]++;
+                }
+            }
+            return ints;
+        }
+
         public int getBloodUsedOn(DateTime date)
         {
             int count = 0;
             foreach (Blood b in bloodList)
             {
-                if (b.Is_removed && b.Reason_for_removal.StartsWith("Extracted"))
+                if (b.Is_removed && b.Reason_for_removal.StartsWith("Extracted") && b.Date_removed == date)
                 {
-                    if (b.Date_removed == date)
-                    {
-                        count++;
-                    }
+                    count++;
                 }
             }
             return count;
         }
 
-        public int getBloodTypeUsedOn(DateTime date, bloodType blood_type)
+        public int[] getBloodTypeUsedOn(DateTime date)
         {
-            int count = 0;
+            int[] ints = new int[BlOODTYPECOUNT];
             foreach (Blood b in bloodList)
             {
-                if (b.Is_removed && b.Reason_for_removal.StartsWith("Extracted") && findDonor(b.Taken_from).Blood_type == blood_type)
+                if (b.Is_removed && b.Reason_for_removal.StartsWith("Extracted") && b.Date_removed == date)
                 {
-                    if (b.Date_removed == date)
-                    {
-                        count++;
-                    }
+                    ints[(int)findDonor(b.Taken_from).Blood_type]++;
                 }
             }
-            return count;
+            return ints;
         }
 
         public int getBloodReleasedOn(DateTime date)
@@ -574,31 +620,25 @@ las pinas 34.9km
             int count = 0;
             foreach (Blood b in bloodList)
             {
-                if (b.Is_assigned && b.Is_removed)
+                if (b.Is_assigned && b.Is_removed && b.Date_removed == date)
                 {
-                    if (b.Date_removed == date)
-                    {
-                        count++;
-                    }
+                    count++;
                 }
             }
             return count;
         }
 
-        public int getBloodTypeReleasedOn(DateTime date, bloodType blood_type)
+        public int[] getBloodTypeReleasedOn(DateTime date)
         {
-            int count = 0;
+            int[] ints = new int[BlOODTYPECOUNT];
             foreach (Blood b in bloodList)
             {
-                if (b.Is_assigned && b.Is_removed && findDonor(b.Taken_from).Blood_type == blood_type)
+                if (b.Is_assigned && b.Is_removed && b.Date_removed == date)
                 {
-                    if (b.Date_removed == date)
-                    {
-                        count++;
-                    }
+                    ints[(int)findDonor(b.Taken_from).Blood_type]++;
                 }
             }
-            return count;
+            return ints;
         }
 
         public int getBloodQuarantinedOn(DateTime date)
@@ -606,29 +646,25 @@ las pinas 34.9km
             int count = 0;
             foreach (Blood b in bloodList)
             {
-                if (b.Is_quarantined && b.Is_removed)
+                if (b.Is_quarantined && b.Date_removed == date)
                 {
-                    if (b.Date_removed == date)
-                        count++;
+                    count++;
                 }
             }
             return count;
         }
 
-        public int getBloodTypeQuarantinedOn(DateTime date, bloodType blood_type)
+        public int[] getBloodTypeQuarantinedOn(DateTime date)
         {
-            int count = 0;
+            int[] ints = new int[BlOODTYPECOUNT];
             foreach (Blood b in bloodList)
             {
-                if (b.Is_quarantined && b.Is_removed && findDonor(b.Taken_from).Blood_type == blood_type)
+                if (b.Is_quarantined && b.Date_removed == date)
                 {
-                    if (b.Date_removed == date)
-                    {
-                        count++;
-                    }
+                    ints[(int)findDonor(b.Taken_from).Blood_type]++;
                 }
             }
-            return count;
+            return ints;
         }
 
         public int getWholeBloodAddedOn(DateTime date)
@@ -644,18 +680,41 @@ las pinas 34.9km
             return count;
         }
 
-        public int getWholeBloodTypeAddedOn(DateTime date, bloodType blood_type)
+        public int[] getWholeBloodTypeAddedOn(DateTime date)
         {
-            int count = 0;
+            int[] ints = new int[BlOODTYPECOUNT];
             foreach (Blood b in bloodList)
             {
-                if (b.Component == "Whole" && findDonor(b.Taken_from).Blood_type == blood_type && b.Date_added == date)
+                if (b.Component == "Whole" && b.Date_added == date)
                 {
-                    count++;
+                    ints[(int)findDonor(b.Taken_from).Blood_type]++;
                 }
             }
-            return count;
+            return ints;
         }
+
+        //List<int[]> getWholeBloodTypeAddedOn(DateTime dateFrom, DateTime dateTo)
+        //{
+        //    TimeSpan span = dateTo - dateFrom;
+        //    List<int[]> wholeBloodTypeAdded = new List<int[]>();
+        //    for (int i = 0; i < span.TotalDays; i++)
+        //    {
+        //        wholeBloodTypeAdded.Add(new int[BlOODTYPECOUNT]);
+        //    }
+
+                
+        //    foreach (Blood b in bloodList)
+        //    {
+        //        for (int i = 0; i < span.TotalDays; i++)
+        //        {
+        //            if (b.Component == "Whole")
+        //            {
+        //                wholeBloodTypeAdded[i][(int)findDonor(b.Taken_from).Blood_type]++;
+        //            }
+        //        }
+        //    }
+        //    return wholeBloodTypeAdded;
+        //}
         #endregion
 
         void ExtractBlood(Blood x, DateTime date_added, DateTime date_expire)

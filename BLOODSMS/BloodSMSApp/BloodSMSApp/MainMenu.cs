@@ -16,7 +16,6 @@ namespace BloodSMSApp
         int donorCount;
         int[] bloodTypeCount;
         List<string> notifications;
-        enum graphCommand { Add, Remove, Release, Quarantine, Use };
         graphCommand command;
 
         public MainMenu()
@@ -224,28 +223,30 @@ namespace BloodSMSApp
             RefreshGraph();
         }
 
+        void GetNumbers(int[] ints)
+        {
+            chart1.Series["AB+"].Points.AddY(ints[0]);
+            chart1.Series["AB-"].Points.AddY(ints[1]);
+            chart1.Series["A+"].Points.AddY(ints[2]);
+            chart1.Series["A-"].Points.AddY(ints[3]);
+            chart1.Series["B+"].Points.AddY(ints[4]);
+            chart1.Series["B-"].Points.AddY(ints[5]);
+            chart1.Series["O+"].Points.AddY(ints[6]);
+            chart1.Series["O+"].Points.AddY(ints[7]);
+        }
+
         void RefreshGraph()
         {
             TimeSpan span = dateTo.Value - dateFrom.Value;
             chart1.ChartAreas[0].AxisX.Maximum = span.TotalDays;
-            listBox1.Items.Clear();
             switch (command)
             {
                 case graphCommand.Add:
                     for (DateTime day = dateFrom.Value; day <= dateTo.Value; day = day.AddDays(1))
                     {
-                        
                         string xValue = day.ToString("MMM d");
-                        listBox1.Items.Add(xValue);
                         chart1.Series["Total"].Points.AddXY(xValue, storage.getWholeBloodAddedOn(day));
-                        chart1.Series["AB+"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.ABp));
-                        chart1.Series["AB-"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.ABn));
-                        chart1.Series["A+"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.Ap));
-                        chart1.Series["A-"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.An));
-                        chart1.Series["B+"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.Bp));
-                        chart1.Series["B-"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.Bn));
-                        chart1.Series["O+"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.Op));
-                        chart1.Series["O+"].Points.AddY(storage.getWholeBloodTypeAddedOn(day, bloodType.On));
+                        GetNumbers(storage.getWholeBloodTypeAddedOn(day));
                     }
                     break;
                 case graphCommand.Remove:
@@ -253,14 +254,7 @@ namespace BloodSMSApp
                     {
                         string xValue = day.ToString("MMM d");
                         chart1.Series["Total"].Points.AddXY(xValue, storage.getBloodRemovedOn(day));
-                        chart1.Series["AB+"].Points.AddXY(xValue, storage.getBloodTypeRemovedOn(day, bloodType.ABp));
-                        chart1.Series["AB-"].Points.AddXY(xValue, storage.getBloodTypeRemovedOn(day, bloodType.ABn));
-                        chart1.Series["A+"].Points.AddXY(xValue, storage.getBloodTypeRemovedOn(day, bloodType.Ap));
-                        chart1.Series["A-"].Points.AddXY(xValue, storage.getBloodTypeRemovedOn(day, bloodType.An));
-                        chart1.Series["B+"].Points.AddXY(xValue, storage.getBloodTypeRemovedOn(day, bloodType.Bp));
-                        chart1.Series["B-"].Points.AddXY(xValue, storage.getBloodTypeRemovedOn(day, bloodType.Bn));
-                        chart1.Series["O+"].Points.AddXY(xValue, storage.getBloodTypeRemovedOn(day, bloodType.Op));
-                        chart1.Series["O+"].Points.AddXY(xValue, storage.getBloodTypeRemovedOn(day, bloodType.On));
+                        GetNumbers(storage.getBloodTypeRemovedOn(day));
                     }
                     break;
                 case graphCommand.Use:
@@ -268,14 +262,7 @@ namespace BloodSMSApp
                     {
                         string xValue = day.ToString("MMM d");
                         chart1.Series["Total"].Points.AddXY(xValue, storage.getBloodUsedOn(day));
-                        chart1.Series["AB+"].Points.AddXY(xValue, storage.getBloodTypeUsedOn(day, bloodType.ABp));
-                        chart1.Series["AB-"].Points.AddXY(xValue, storage.getBloodTypeUsedOn(day, bloodType.ABn));
-                        chart1.Series["A+"].Points.AddXY(xValue, storage.getBloodTypeUsedOn(day, bloodType.Ap));
-                        chart1.Series["A-"].Points.AddXY(xValue, storage.getBloodTypeUsedOn(day, bloodType.An));
-                        chart1.Series["B+"].Points.AddXY(xValue, storage.getBloodTypeUsedOn(day, bloodType.Bp));
-                        chart1.Series["B-"].Points.AddXY(xValue, storage.getBloodTypeUsedOn(day, bloodType.Bn));
-                        chart1.Series["O+"].Points.AddXY(xValue, storage.getBloodTypeUsedOn(day, bloodType.Op));
-                        chart1.Series["O+"].Points.AddXY(xValue, storage.getBloodTypeUsedOn(day, bloodType.On));
+                        GetNumbers(storage.getBloodTypeUsedOn(day));
                     }
                     break;
                 case graphCommand.Quarantine:
@@ -283,14 +270,7 @@ namespace BloodSMSApp
                     {
                         string xValue = day.ToString("MMM d");
                         chart1.Series["Total"].Points.AddXY(xValue, storage.getBloodQuarantinedOn(day));
-                        chart1.Series["AB+"].Points.AddXY(xValue, storage.getBloodTypeQuarantinedOn(day, bloodType.ABp));
-                        chart1.Series["AB-"].Points.AddXY(xValue, storage.getBloodTypeQuarantinedOn(day, bloodType.ABn));
-                        chart1.Series["A+"].Points.AddXY(xValue, storage.getBloodTypeQuarantinedOn(day, bloodType.Ap));
-                        chart1.Series["A-"].Points.AddXY(xValue, storage.getBloodTypeQuarantinedOn(day, bloodType.An));
-                        chart1.Series["B+"].Points.AddXY(xValue, storage.getBloodTypeQuarantinedOn(day, bloodType.Bp));
-                        chart1.Series["B-"].Points.AddXY(xValue, storage.getBloodTypeQuarantinedOn(day, bloodType.Bn));
-                        chart1.Series["O+"].Points.AddXY(xValue, storage.getBloodTypeQuarantinedOn(day, bloodType.Op));
-                        chart1.Series["O+"].Points.AddXY(xValue, storage.getBloodTypeQuarantinedOn(day, bloodType.On));
+                        GetNumbers(storage.getBloodTypeQuarantinedOn(day));
                     }
                     break;
                 case graphCommand.Release:
@@ -298,14 +278,7 @@ namespace BloodSMSApp
                     {
                         string xValue = day.ToString("MMM d");
                         chart1.Series["Total"].Points.AddXY(xValue, storage.getBloodReleasedOn(day));
-                        chart1.Series["AB+"].Points.AddXY(xValue, storage.getBloodTypeReleasedOn(day, bloodType.ABp));
-                        chart1.Series["AB-"].Points.AddXY(xValue, storage.getBloodTypeReleasedOn(day, bloodType.ABn));
-                        chart1.Series["A+"].Points.AddXY(xValue, storage.getBloodTypeReleasedOn(day, bloodType.Ap));
-                        chart1.Series["A-"].Points.AddXY(xValue, storage.getBloodTypeReleasedOn(day, bloodType.An));
-                        chart1.Series["B+"].Points.AddXY(xValue, storage.getBloodTypeReleasedOn(day, bloodType.Bp));
-                        chart1.Series["B-"].Points.AddXY(xValue, storage.getBloodTypeReleasedOn(day, bloodType.Bn));
-                        chart1.Series["O+"].Points.AddXY(xValue, storage.getBloodTypeReleasedOn(day, bloodType.Op));
-                        chart1.Series["O+"].Points.AddXY(xValue, storage.getBloodTypeReleasedOn(day, bloodType.On));
+                        GetNumbers(storage.getBloodTypeReleasedOn(day));
                     }
                     break;
             }
