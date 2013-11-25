@@ -66,11 +66,17 @@
             this.educationalAttainmentField = new System.Windows.Forms.ComboBox();
             this.birthDateField = new System.Windows.Forms.DateTimePicker();
             this.nextAvailableField = new System.Windows.Forms.DateTimePicker();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.viableYes = new System.Windows.Forms.RadioButton();
+            this.viableNo = new System.Windows.Forms.RadioButton();
+            this.contactableNo = new System.Windows.Forms.RadioButton();
+            this.contactableYes = new System.Windows.Forms.RadioButton();
             this.AddDonorButton = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.defferalField = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -217,7 +223,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(44, 606);
+            this.label21.Location = new System.Drawing.Point(8, 11);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(76, 16);
             this.label21.TabIndex = 20;
@@ -237,7 +243,7 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(44, 622);
+            this.label24.Location = new System.Drawing.Point(8, 10);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(129, 16);
             this.label24.TabIndex = 23;
@@ -247,7 +253,7 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(298, 517);
+            this.label25.Location = new System.Drawing.Point(298, 461);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(121, 16);
             this.label25.TabIndex = 24;
@@ -358,6 +364,7 @@
             // hLandlineField
             // 
             this.hLandlineField.Location = new System.Drawing.Point(49, 382);
+            this.hLandlineField.MaxLength = 7;
             this.hLandlineField.Name = "hLandlineField";
             this.hLandlineField.Size = new System.Drawing.Size(200, 20);
             this.hLandlineField.TabIndex = 41;
@@ -365,9 +372,11 @@
             // oLandlineField
             // 
             this.oLandlineField.Location = new System.Drawing.Point(301, 382);
+            this.oLandlineField.MaxLength = 7;
             this.oLandlineField.Name = "oLandlineField";
             this.oLandlineField.Size = new System.Drawing.Size(200, 20);
             this.oLandlineField.TabIndex = 42;
+            this.oLandlineField.TextChanged += new System.EventHandler(this.oLandlineField_TextChanged);
             // 
             // emailField
             // 
@@ -379,9 +388,11 @@
             // cellphoneField
             // 
             this.cellphoneField.Location = new System.Drawing.Point(301, 428);
+            this.cellphoneField.MaxLength = 11;
             this.cellphoneField.Name = "cellphoneField";
             this.cellphoneField.Size = new System.Drawing.Size(200, 20);
             this.cellphoneField.TabIndex = 44;
+            this.cellphoneField.TextChanged += new System.EventHandler(this.cellphoneField_TextChanged);
             // 
             // educationalAttainmentField
             // 
@@ -400,54 +411,54 @@
             // 
             // nextAvailableField
             // 
-            this.nextAvailableField.Location = new System.Drawing.Point(402, 517);
+            this.nextAvailableField.Location = new System.Drawing.Point(301, 482);
             this.nextAvailableField.Name = "nextAvailableField";
-            this.nextAvailableField.Size = new System.Drawing.Size(99, 20);
+            this.nextAvailableField.Size = new System.Drawing.Size(200, 20);
             this.nextAvailableField.TabIndex = 47;
             // 
-            // radioButton1
+            // viableYes
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(159, 605);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(43, 17);
-            this.radioButton1.TabIndex = 51;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Yes";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.viableYes.AutoSize = true;
+            this.viableYes.Location = new System.Drawing.Point(141, 10);
+            this.viableYes.Name = "viableYes";
+            this.viableYes.Size = new System.Drawing.Size(43, 17);
+            this.viableYes.TabIndex = 51;
+            this.viableYes.TabStop = true;
+            this.viableYes.Text = "Yes";
+            this.viableYes.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // viableNo
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(210, 605);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(39, 17);
-            this.radioButton2.TabIndex = 52;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "No";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.viableNo.AutoSize = true;
+            this.viableNo.Location = new System.Drawing.Point(192, 10);
+            this.viableNo.Name = "viableNo";
+            this.viableNo.Size = new System.Drawing.Size(39, 17);
+            this.viableNo.TabIndex = 52;
+            this.viableNo.TabStop = true;
+            this.viableNo.Text = "No";
+            this.viableNo.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // contactableNo
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(210, 622);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(39, 17);
-            this.radioButton3.TabIndex = 54;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "No";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.contactableNo.AutoSize = true;
+            this.contactableNo.Location = new System.Drawing.Point(192, 10);
+            this.contactableNo.Name = "contactableNo";
+            this.contactableNo.Size = new System.Drawing.Size(39, 17);
+            this.contactableNo.TabIndex = 54;
+            this.contactableNo.TabStop = true;
+            this.contactableNo.Text = "No";
+            this.contactableNo.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // contactableYes
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(159, 622);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(43, 17);
-            this.radioButton4.TabIndex = 53;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Yes";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.contactableYes.AutoSize = true;
+            this.contactableYes.Location = new System.Drawing.Point(141, 10);
+            this.contactableYes.Name = "contactableYes";
+            this.contactableYes.Size = new System.Drawing.Size(43, 17);
+            this.contactableYes.TabIndex = 53;
+            this.contactableYes.TabStop = true;
+            this.contactableYes.Text = "Yes";
+            this.contactableYes.UseVisualStyleBackColor = true;
             // 
             // AddDonorButton
             // 
@@ -465,17 +476,57 @@
             this.AddDonorButton.UseVisualStyleBackColor = false;
             this.AddDonorButton.Click += new System.EventHandler(this.AddDonorButton_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel1.Controls.Add(this.viableNo);
+            this.panel1.Controls.Add(this.label21);
+            this.panel1.Controls.Add(this.viableYes);
+            this.panel1.Location = new System.Drawing.Point(37, 538);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(234, 37);
+            this.panel1.TabIndex = 59;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel2.Controls.Add(this.label24);
+            this.panel2.Controls.Add(this.contactableYes);
+            this.panel2.Controls.Add(this.contactableNo);
+            this.panel2.Location = new System.Drawing.Point(37, 581);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(234, 37);
+            this.panel2.TabIndex = 60;
+            // 
+            // defferalField
+            // 
+            this.defferalField.Location = new System.Drawing.Point(301, 544);
+            this.defferalField.Multiline = true;
+            this.defferalField.Name = "defferalField";
+            this.defferalField.Size = new System.Drawing.Size(200, 74);
+            this.defferalField.TabIndex = 61;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(298, 525);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(169, 16);
+            this.label16.TabIndex = 62;
+            this.label16.Text = "REASON FOR DEFFERAL";
+            // 
             // AddDonor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BloodSMSApp.Properties.Resources.addDonor_copy;
             this.ClientSize = new System.Drawing.Size(535, 703);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.defferalField);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.AddDonorButton);
-            this.Controls.Add(this.radioButton3);
-            this.Controls.Add(this.radioButton4);
-            this.Controls.Add(this.radioButton2);
-            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.nextAvailableField);
             this.Controls.Add(this.educationalAttainmentField);
             this.Controls.Add(this.cellphoneField);
@@ -497,9 +548,7 @@
             this.Controls.Add(this.dateRegisteredField);
             this.Controls.Add(this.nameField);
             this.Controls.Add(this.label25);
-            this.Controls.Add(this.label24);
             this.Controls.Add(this.label22);
-            this.Controls.Add(this.label21);
             this.Controls.Add(this.label20);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label15);
@@ -518,6 +567,10 @@
             this.Name = "AddDonor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AddDonor";
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -563,10 +616,14 @@
         private System.Windows.Forms.ComboBox educationalAttainmentField;
         private System.Windows.Forms.DateTimePicker birthDateField;
         private System.Windows.Forms.DateTimePicker nextAvailableField;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton viableYes;
+        private System.Windows.Forms.RadioButton viableNo;
+        private System.Windows.Forms.RadioButton contactableNo;
+        private System.Windows.Forms.RadioButton contactableYes;
         private System.Windows.Forms.Button AddDonorButton;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TextBox defferalField;
+        private System.Windows.Forms.Label label16;
     }
 }

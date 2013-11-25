@@ -43,9 +43,8 @@ namespace Blood_SMS
         //Record Blood Ins
         //Create
 
-        public Blood(int BLOOD_ID, int TAKEN_FROM, DateTime DATE_ADDED, DateTime DATE_EXPIRE)
+        public Blood(int TAKEN_FROM, DateTime DATE_ADDED, DateTime DATE_EXPIRE)
         {
-            blood_id = BLOOD_ID;
             taken_from = TAKEN_FROM;
             date_added = DATE_ADDED;
             date_expire = DATE_EXPIRE;
@@ -81,9 +80,8 @@ namespace Blood_SMS
         }
 		
         //From extract
-		public Blood(int? TAKEN_FROM, int? BLOOD_ID, DateTime? DATE_ADDED, DateTime? DATE_EXPIRE, string COMPONENT)
+		public Blood(int? TAKEN_FROM, DateTime? DATE_ADDED, DateTime? DATE_EXPIRE, string COMPONENT)
 		{
-			blood_id = BLOOD_ID;
 			taken_from = TAKEN_FROM;
 			date_added = DATE_ADDED;
 			date_expire = DATE_EXPIRE;

@@ -13,7 +13,6 @@ namespace BloodSMSApp
     {
         Storage storage;
         int bloodCount;
-        int donorCount;
         int[] bloodTypeCount;
         List<string> notifications;
         graphCommand command;
@@ -34,6 +33,8 @@ namespace BloodSMSApp
             command = graphCommand.Add;
             dateTo.MaxDate = DateTime.Now;
 
+            dateFrom.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-1);
+            dateTo.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             //set this to date of install upon install
             dateFrom.MinDate = new DateTime(2013, 9, 1);
             //chart1.ChartAreas[0].AxisX.Maximum = 366;
@@ -89,10 +90,6 @@ namespace BloodSMSApp
                 notificationsBox.Items.Add(notifications[i]);
             }
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
@@ -104,56 +101,11 @@ namespace BloodSMSApp
             RefreshGraph();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void button1_Click_1(object sender, EventArgs e)
         {
             Form1 f1 = new Form1();
             f1.Show();
             this.Hide();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -251,15 +203,11 @@ namespace BloodSMSApp
                 chart1.Series[8].Enabled = true;
             }
         }
+
         void RefreshGraph()
         {
             TimeSpan span = dateTo.Value - dateFrom.Value;
             chart1.ChartAreas[0].AxisX.Maximum = span.TotalDays;
-            
-            //chart1.Series[5].LegendText = "B+";
-            //chart1.Series[6].LegendText = "B-";
-            //chart1.Series[7].LegendText = "O+";
-            //chart1.Series[8].LegendText = "O-";
             switch (command)
             {
                 case graphCommand.Add:

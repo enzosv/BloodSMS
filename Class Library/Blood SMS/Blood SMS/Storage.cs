@@ -461,7 +461,7 @@ las pinas 34.9km
         */
         public bool AddBlood(DateTime date_added, DateTime date_expire, int taken_from)
         {
-            Blood x = new Blood(bloodList.Count, taken_from, date_added, date_expire);
+            Blood x = new Blood(taken_from, date_added, date_expire);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
@@ -476,7 +476,7 @@ las pinas 34.9km
          */
         public bool AddBlood(Blood a, DateTime date_added, DateTime date_expire, string component)
         {
-            Blood x = new Blood(a.Blood_id, bloodList.Count, date_added, date_expire, component);
+            Blood x = new Blood(a.Blood_id, date_added, date_expire, component);
 
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
