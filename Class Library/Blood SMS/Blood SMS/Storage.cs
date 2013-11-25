@@ -521,6 +521,7 @@ las pinas 34.9km
             return count;
         }
 
+        /*
         public int[] getAllBloodChangedOn(DateTime date)
         {
             int[] ints = new int[Enum.GetNames(typeof(graphCommand)).Length];
@@ -575,7 +576,7 @@ las pinas 34.9km
             }
             return ints;
         }
-
+        */
         public int[] getBloodTypeRemovedOn(DateTime date)
         {
             int[] ints = new int[BlOODTYPECOUNT];

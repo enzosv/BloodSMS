@@ -232,7 +232,7 @@ namespace BloodSMSApp
             chart1.Series["B+"].Points.AddY(ints[4]);
             chart1.Series["B-"].Points.AddY(ints[5]);
             chart1.Series["O+"].Points.AddY(ints[6]);
-            chart1.Series["O+"].Points.AddY(ints[7]);
+            chart1.Series["O-"].Points.AddY(ints[7]);
         }
 
         void RefreshGraph()
