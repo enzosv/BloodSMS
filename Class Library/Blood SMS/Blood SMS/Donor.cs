@@ -10,14 +10,14 @@ namespace Blood_SMS
     {
         int? donor_id;
         string name;
-        bloodType? blood_type;
+        bloodType blood_type;
         string home_province;
         string home_city;
         string home_street;
         string office_province;
         string office_city;
         string office_street;
-        contactMethod? preferred_contact_method;
+        contactMethod preferred_contact_method;
         string home_landline;
         string office_landline;
         string email;
@@ -40,14 +40,14 @@ namespace Blood_SMS
         //Register new donor
         public Donor(int? DONOR_ID,
         string NAME,
-        bloodType? BLOOD_TYPE,
+        bloodType BLOOD_TYPE,
         string HOME_PROVINCE,
         string HOME_CITY,
         string HOME_STREET,
         string OFFICE_PROVINCE,
         string OFFICE_CITY,
         string OFFICE_STREET,
-        contactMethod? PREFERRED_CONTACT_METHOD,
+        contactMethod PREFERRED_CONTACT_METHOD,
         string HOME_LANDLINE,
         string OFFICE_LANDLINE,
         string EMAIL,
@@ -92,14 +92,14 @@ namespace Blood_SMS
         }
 
         public Donor(string NAME,
-        bloodType? BLOOD_TYPE,
+        bloodType BLOOD_TYPE,
         string HOME_PROVINCE,
         string HOME_CITY,
         string HOME_STREET,
         string OFFICE_PROVINCE,
         string OFFICE_CITY,
         string OFFICE_STREET,
-        contactMethod? PREFERRED_CONTACT_METHOD,
+        contactMethod PREFERRED_CONTACT_METHOD,
         string HOME_LANDLINE,
         string OFFICE_LANDLINE,
         string EMAIL,
@@ -160,14 +160,14 @@ namespace Blood_SMS
 
         public int Donor_id { get { return donor_id.Value; } set { donor_id = value; } }
         public string Name { get { return name; } set { name = value; } }
-        public bloodType Blood_type { get { return blood_type.Value; } set { blood_type = value; } }
+        public bloodType Blood_type { get { return blood_type; } set { blood_type = value; } }
         public string Home_province { get { return home_province; } set { home_province = value; } }
         public string Home_city { get { return home_city; } set { home_city = value; } }
         public string Home_street { get { return home_street; } set { home_street = value; } }
         public string Office_province { get { return office_province; } set { office_province = value; } }
         public string Office_city { get { return office_city; } set { office_city = value; } }
         public string Office_street { get { return office_street; } set { office_street = value; } }
-        public contactMethod Preferred_contact_method { get { return preferred_contact_method.Value; } set { preferred_contact_method = value; } }
+        public contactMethod Preferred_contact_method { get { return preferred_contact_method; } set { preferred_contact_method = value; } }
         public string Home_landline { get { return home_landline; } set { home_landline = value; } }
         public string Office_landline { get { return office_landline; } set { office_landline = value; } }
         public string Email { get { return email; } set { email = value; } }

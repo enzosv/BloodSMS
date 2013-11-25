@@ -7,6 +7,28 @@ CREATE SCHEMA IF NOT EXISTS `BSMS` DEFAULT CHARACTER SET utf8 COLLATE utf8_gener
 USE `BSMS` ;
 
 -- -----------------------------------------------------
+-- Table `BSMS`.`blood`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `BSMS`.`blood` ;
+
+CREATE TABLE IF NOT EXISTS `BSMS`.`blood` (
+  `blood_id` INT NOT NULL AUTO_INCREMENT,
+  `taken_from` INT NOT NULL,
+  `patient_name` VARCHAR(45) NOT NULL DEFAULT '',
+  `patient_age` INT NOT NULL DEFAULT 0,
+  `date_added` DATETIME NOT NULL,
+  `date_expire` DATETIME NOT NULL,
+  `date_removed` DATETIME NULL,
+  `is_assigned` TINYINT(1) NOT NULL DEFAULT false,
+  `is_quarantined` TINYINT(1) NOT NULL DEFAULT false,
+  `reason_for_removal` TEXT NOT NULL,
+  `component` VARCHAR(45) NOT NULL DEFAULT 'whole',
+  PRIMARY KEY (`blood_id`),
+  UNIQUE INDEX `idBlood_UNIQUE` (`blood_id` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `BSMS`.`donor`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `BSMS`.`donor` ;
@@ -38,34 +60,6 @@ CREATE TABLE IF NOT EXISTS `BSMS`.`donor` (
   `reason_for_deferral` TEXT NOT NULL,
   PRIMARY KEY (`donor_id`),
   UNIQUE INDEX `idVolunteer_UNIQUE` (`donor_id` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `BSMS`.`blood`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `BSMS`.`blood` ;
-
-CREATE TABLE IF NOT EXISTS `BSMS`.`blood` (
-  `blood_id` INT NOT NULL AUTO_INCREMENT,
-  `taken_from` INT NOT NULL,
-  `patient_name` VARCHAR(45) NOT NULL DEFAULT '',
-  `patient_age` INT NOT NULL DEFAULT 0,
-  `date_added` DATETIME NOT NULL,
-  `date_expire` DATETIME NOT NULL,
-  `date_removed` DATETIME NULL,
-  `is_assigned` TINYINT(1) NOT NULL DEFAULT false,
-  `is_quarantined` TINYINT(1) NOT NULL DEFAULT false,
-  `reason_for_removal` TEXT NOT NULL,
-  `component` VARCHAR(45) NOT NULL DEFAULT 'whole',
-  PRIMARY KEY (`blood_id`),
-  UNIQUE INDEX `idBlood_UNIQUE` (`blood_id` ASC),
-  INDEX `fk_blood_donor1_idx` (`taken_from` ASC),
-  CONSTRAINT `fk_blood_donor1`
-    FOREIGN KEY (`taken_from`)
-    REFERENCES `BSMS`.`donor` (`donor_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 

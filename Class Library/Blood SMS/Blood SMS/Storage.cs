@@ -97,21 +97,21 @@ las pinas 34.9km
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
 
-            string query = "Select * from Donor";
+            string query = "Select * from donor";
             MySqlCommand command = new MySqlCommand(query, conn);
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
                 int? DONOR_ID = reader.GetValue(0) as int?;
                 string NAME = reader.GetValue(1) as string;
-                bloodType? BLOOD_TYPE = reader.GetValue(2) as bloodType?;
+                bloodType BLOOD_TYPE = (bloodType)Enum.Parse(typeof(bloodType), reader.GetValue(2).ToString(), true);
                 string HOME_PROVINCE = reader.GetValue(3) as string;
                 string HOME_CITY = reader.GetValue(4) as string;
                 string HOME_STREET = reader.GetValue(5) as string;
                 string OFFICE_PROVINCE = reader.GetValue(6) as string;
                 string OFFICE_CITY = reader.GetValue(7) as string;
                 string OFFICE_STREET = reader.GetValue(8) as string;
-                contactMethod? PREFERRED_CONTACT_METHOD = reader.GetValue(9) as contactMethod?;
+                contactMethod PREFERRED_CONTACT_METHOD = (contactMethod)Enum.Parse(typeof(contactMethod), reader.GetValue(9).ToString(), true);
                 string HOME_LANDLINE = reader.GetValue(10) as string;
                 string OFFICE_LANDLINE = reader.GetValue(11) as string;
                 string EMAIL = reader.GetValue(12) as string;
@@ -273,14 +273,50 @@ las pinas 34.9km
                     IS_CONTACTABLE,
                     IS_VIABLE,
                     REASON_FOR_DEFERRAL);
+            if (donorCommands("UPDATE donor SET " + UpdateQuery(DONOR_FIELDS), x) > 0)
+            {
+                sortDonor(x);
+                return true;
+            }
+            return false;
+        }
 
-
+        int donorCommands(string query, Donor x)
+        {
             MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-            string query = "UPDATE Donor SET " + UpdateQuery(DONOR_FIELDS);
             MySqlCommand comm = new MySqlCommand(query, conn);
-            donorCommands(query, x);
-            return RowsAffected(comm, conn);
+            comm.CommandType = CommandType.Text;
+            //long id = comm.LastInsertedId;
+            //x.Donor_id = (int)id;
+            //comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
+            comm.Parameters.AddWithValue("@name", x.Name);
+            comm.Parameters.AddWithValue("@blood_type", x.Blood_type);
+            comm.Parameters.AddWithValue("@home_province", x.Home_province);
+            comm.Parameters.AddWithValue("@home_city", x.Home_city);
+            comm.Parameters.AddWithValue("@home_street", x.Home_street);
+            comm.Parameters.AddWithValue("@office_province", x.Office_province);
+            comm.Parameters.AddWithValue("@office_city", x.Office_city);
+            comm.Parameters.AddWithValue("@office_street", x.Office_street);
+            comm.Parameters.AddWithValue("@preferred_contact_method", x.Preferred_contact_method);
+            comm.Parameters.AddWithValue("@home_landline", x.Home_landline);
+            comm.Parameters.AddWithValue("@office_landline", x.Office_landline);
+            comm.Parameters.AddWithValue("@email", x.Email);
+            comm.Parameters.AddWithValue("@cellphone", x.Cellphone);
+            comm.Parameters.AddWithValue("@educational_attainment", x.Educational_attainment);
+            comm.Parameters.AddWithValue("@birth_date", x.Birth_date);
+            comm.Parameters.AddWithValue("@date_registered", x.Date_registered);
+            comm.Parameters.AddWithValue("@last_donation", x.Last_donation);
+            comm.Parameters.AddWithValue("@next_available", x.Next_available);
+            comm.Parameters.AddWithValue("@times_donated", x.Times_donated);
+            comm.Parameters.AddWithValue("@times_contacted", x.Times_contacted);
+            comm.Parameters.AddWithValue("@is_contactable", x.Is_contactable);
+            comm.Parameters.AddWithValue("@is_viable", x.Is_viable);
+            comm.Parameters.AddWithValue("@reason_for_deferral", x.Reason_for_deferral);
+
+            conn.Open();
+            comm.ExecuteNonQuery();
+            conn.Close();
+            return 1;
         }
 
         /*
@@ -352,44 +388,7 @@ las pinas 34.9km
             return RowsAffected(comm, conn);
         }
 
-        int donorCommands(string query, Donor x)
-        {
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-            MySqlCommand comm = new MySqlCommand(query, conn);
-            comm.CommandType = CommandType.Text;
-            long id = comm.LastInsertedId;
-            x.Donor_id = (int)id;
-            //comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
-            comm.Parameters.AddWithValue("@name", x.Name);
-            comm.Parameters.AddWithValue("@blood_type", x.Blood_type);
-            comm.Parameters.AddWithValue("@home_province", x.Home_province);
-            comm.Parameters.AddWithValue("@home_city", x.Home_city);
-            comm.Parameters.AddWithValue("@home_street", x.Home_street);
-            comm.Parameters.AddWithValue("@office_province", x.Office_province);
-            comm.Parameters.AddWithValue("@office_city", x.Office_city);
-            comm.Parameters.AddWithValue("@office_street", x.Office_street);
-            comm.Parameters.AddWithValue("@preferred_contact_method", x.Preferred_contact_method);
-            comm.Parameters.AddWithValue("@home_landline", x.Home_landline);
-            comm.Parameters.AddWithValue("@office_landline", x.Office_landline);
-            comm.Parameters.AddWithValue("@email", x.Email);
-            comm.Parameters.AddWithValue("@cellphone", x.Cellphone);
-            comm.Parameters.AddWithValue("@educational_attainment", x.Educational_attainment);
-            comm.Parameters.AddWithValue("@birth_date", x.Birth_date);
-            comm.Parameters.AddWithValue("@date_registered", x.Date_registered);
-            comm.Parameters.AddWithValue("@last_donation", x.Last_donation);
-            comm.Parameters.AddWithValue("@next_available", x.Next_available);
-            comm.Parameters.AddWithValue("@times_donated", x.Times_donated);
-            comm.Parameters.AddWithValue("@times_contacted", x.Times_contacted);
-            comm.Parameters.AddWithValue("@is_contactable", x.Is_contactable);
-            comm.Parameters.AddWithValue("@is_viable", x.Is_viable);
-            comm.Parameters.AddWithValue("@reason_for_deferral", x.Reason_for_deferral);
-            
-
-            comm.ExecuteNonQuery();
-            conn.Close();
-            return 1;
-        }
+        
 
         List<Donor> getClosestByType(int count, bloodType blood_type)
         {
@@ -436,7 +435,7 @@ las pinas 34.9km
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
 
-            string query = "Select * from Blood";
+            string query = "Select * from blood";
             MySqlCommand command = new MySqlCommand(query, conn);
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
