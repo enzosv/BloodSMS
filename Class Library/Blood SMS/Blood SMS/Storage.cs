@@ -357,7 +357,6 @@ las pinas 34.9km
             long id = comm.LastInsertedId;
             x.Donor_id = (int)id;
             comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
-
             comm.Parameters.AddWithValue("@name", x.Name);
             comm.Parameters.AddWithValue("@blood_type", x.Blood_type);
             comm.Parameters.AddWithValue("@home_province", x.Home_province);
@@ -406,7 +405,7 @@ las pinas 34.9km
         void sortDonor(Donor d)
         {
             donorList.Add(d);
-            if (d.Is_viable && d.Is_contactable)
+            if (d.Is_viable.Value && d.Is_contactable.Value)
             {
                 viableDonors.Add(d);
                 donorTypes[(int)d.Blood_type].Add(d);
@@ -773,7 +772,6 @@ las pinas 34.9km
             long id = comm.LastInsertedId;
             x.Blood_id = (int)id;
             comm.Parameters.AddWithValue("@blood_id", x.Blood_id);
-
             comm.Parameters.AddWithValue("@taken_from", x.Taken_from);
             comm.Parameters.AddWithValue("@patient_name", x.Patient_name);
             comm.Parameters.AddWithValue("@patient_age", x.Patient_age);
@@ -875,7 +873,7 @@ las pinas 34.9km
          *  string array containing all fields for an SQL table
          *</param>
          */
-        string AddQuery(string[] fields)
+        public string AddQuery(string[] fields)
         {
             string fieldNames = "(";
             string valueParameters = "";

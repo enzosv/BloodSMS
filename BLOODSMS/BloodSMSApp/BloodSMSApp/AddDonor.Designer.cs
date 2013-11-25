@@ -430,6 +430,7 @@
             // viableNo
             // 
             this.viableNo.AutoSize = true;
+            this.viableNo.Checked = true;
             this.viableNo.Location = new System.Drawing.Point(192, 10);
             this.viableNo.Name = "viableNo";
             this.viableNo.Size = new System.Drawing.Size(39, 17);
@@ -441,6 +442,7 @@
             // contactableNo
             // 
             this.contactableNo.AutoSize = true;
+            this.contactableNo.Checked = true;
             this.contactableNo.Location = new System.Drawing.Point(192, 10);
             this.contactableNo.Name = "contactableNo";
             this.contactableNo.Size = new System.Drawing.Size(39, 17);
