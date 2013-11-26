@@ -41,33 +41,15 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `BSMS`.`donation`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `BSMS`.`donation` ;
-
-CREATE TABLE IF NOT EXISTS `BSMS`.`donation` (
-  `accession_number` VARCHAR(45) NOT NULL,
-  `donor_id` INT NULL,
-  `date` DATETIME NOT NULL,
-  `blood_type` INT NOT NULL DEFAULT 0,
-  PRIMARY KEY (`accession_number`),
-  INDEX `donor_id_idx` (`donor_id` ASC),
-  CONSTRAINT `donor_id`
-    FOREIGN KEY (`donor_id`)
-    REFERENCES `BSMS`.`donor` (`donor_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `BSMS`.`blood`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `BSMS`.`blood` ;
 
 CREATE TABLE IF NOT EXISTS `BSMS`.`blood` (
-  `blood_id` INT NOT NULL AUTO_INCREMENT,
   `accession_number` VARCHAR(45) NOT NULL DEFAULT '',
+  `blood_type` INT NOT NULL DEFAULT 0,
+  `date_added` DATETIME NOT NULL,
+  `donor_id` INT NULL,
   `patient_name` VARCHAR(45) NOT NULL DEFAULT '',
   `patient_age` INT NOT NULL DEFAULT 0,
   `date_expire` DATETIME NOT NULL,
@@ -76,12 +58,12 @@ CREATE TABLE IF NOT EXISTS `BSMS`.`blood` (
   `is_processed` TINYINT(1) NOT NULL DEFAULT 0,
   `is_quarantined` TINYINT(1) NOT NULL DEFAULT 0,
   `reason_for_removal` TEXT NOT NULL,
-  PRIMARY KEY (`blood_id`),
-  UNIQUE INDEX `idBlood_UNIQUE` (`blood_id` ASC),
   UNIQUE INDEX `accession_number_UNIQUE` (`accession_number` ASC),
-  CONSTRAINT `accession_number`
-    FOREIGN KEY (`accession_number`)
-    REFERENCES `BSMS`.`donation` (`accession_number`)
+  PRIMARY KEY (`accession_number`),
+  INDEX `donor_id_idx` (`donor_id` ASC),
+  CONSTRAINT `donor_id`
+    FOREIGN KEY (`donor_id`)
+    REFERENCES `BSMS`.`donor` (`donor_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

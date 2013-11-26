@@ -9,7 +9,8 @@ namespace Blood_SMS
 {
     public enum graphCommand { Add, Remove, Release, Quarantine, Use, Summary };
     public enum bloodType { ABp, ABn, Ap, An, Bp, Bn, Op, On };
-    public enum contactMethod { home_landline, office_landline, email, cellphone };
+    public enum contactMethod { none, email, cellphone };
+    public enum educationalAttainment { other, gradeschool, highschool, college };
     public enum city { QuezonCity, SanJuan, Manila, Caloocan, Mandaluyong, Malabon, Pateros, Makati, Valenzuela, Navotas, Pasay, Taguig, Paranaque, Muntinlupa, LasPinas, Other };
     /*
      * Quezon City 4.5km
@@ -56,26 +57,23 @@ las pinas 34.9km
         int BlOODTYPECOUNT = Enum.GetNames(typeof(bloodType)).Length;
         const int MINIMUMBLOODVALUE = 20;
         const int MINIMUMEXPIRYALERTVALUE = 3;
-        readonly string[] BLOOD_FIELDS = { "blood_id", "taken_from", "patient_name", "patient_age", "date_donated", "date_expire", "date_removed", "is_assigned", "is_quarantined", "reason_for_removal", "compoenent" };
-        readonly string[] DONOR_FIELDS = { "donor_id", "name", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "cellphone", "educational_attainment", "birth_date", "date_registered", "last_donation", "next_available", "times_donated", "is_contactable", "is_viable", "reason_for_deferral" };
+        readonly string[] BLOOD_FIELDS = { "accession_number", "blood_type", "patient_name", "patient_age", "date_added", "date_expire", "date_removed", "is_assigned", "is_processed", "is_quarantined", "reason_for_removal" };
+        readonly string[] DONOR_FIELDS = { "donor_id", "name", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "email", "cellphone", "educational_attainment", "birth_date", "date_registered", "next_available", "times_donated", "times_contacted", "is_contactable", "is_viable", "reason_for_deferral" };
         public Storage(string host, string db, string user, string pass)
         {
             connectionString = string.Format("Server={0};Database={1};Uid={2};Pwd={3}", host, db, user, pass);
 
             bloodList = new List<Blood>();
             bloodTypes = new List<Blood>[BlOODTYPECOUNT];
-            for (int i = 0; i < bloodTypes.Length; i++)
-            {
-                bloodTypes[i] = new List<Blood>();
-            }
             availableBlood = new List<Blood>();
             quarantinedBlood = new List<Blood>();
             usedBlood = new List<Blood>();
             
             donorList = new List<Donor>();
             donorTypes = new List<Donor>[BlOODTYPECOUNT];
-            for (int i = 0; i < donorTypes.Length; i++)
+            for (int i = 0; i < BlOODTYPECOUNT; i++)
             {
+                bloodTypes[i] = new List<Blood>();
                 donorTypes[i] = new List<Donor>();
             }
             viableDonors = new List<Donor>();
@@ -104,31 +102,29 @@ las pinas 34.9km
             {
                 int? DONOR_ID = reader.GetValue(0) as int?;
                 string NAME = reader.GetValue(1) as string;
-                bloodType BLOOD_TYPE = (bloodType)Enum.Parse(typeof(bloodType), reader.GetValue(2).ToString(), true);
+                int? BLOOD_TYPE = reader.GetValue(2) as int?;
                 string HOME_PROVINCE = reader.GetValue(3) as string;
                 string HOME_CITY = reader.GetValue(4) as string;
                 string HOME_STREET = reader.GetValue(5) as string;
                 string OFFICE_PROVINCE = reader.GetValue(6) as string;
                 string OFFICE_CITY = reader.GetValue(7) as string;
                 string OFFICE_STREET = reader.GetValue(8) as string;
-                contactMethod PREFERRED_CONTACT_METHOD = (contactMethod)Enum.Parse(typeof(contactMethod), reader.GetValue(9).ToString(), true);
+                int? PREFERRED_CONTACT_METHOD = reader.GetValue(9) as int?;
                 string HOME_LANDLINE = reader.GetValue(10) as string;
                 string OFFICE_LANDLINE = reader.GetValue(11) as string;
                 string EMAIL = reader.GetValue(12) as string;
                 string CELLPHONE = reader.GetValue(13) as string;
-                string EDUCATIONAL_ATTAINMENT = reader.GetValue(14) as string;
+                int? EDUCATIONAL_ATTAINMENT = reader.GetValue(14) as int?;
                 DateTime? BIRTH_DATE = reader.GetValue(15) as DateTime?;
                 DateTime? DATE_REGISTERED = reader.GetValue(16) as DateTime?;
-                DateTime? LAST_DONATION = reader.GetValue(17) as DateTime?;
-                DateTime? NEXT_AVAILABLE = reader.GetValue(18) as DateTime?;
-                int? TIMES_DONATED = reader.GetValue(19) as int?;
-                int? TIMES_CONTACTED = reader.GetValue(20) as int?;
-                bool? IS_CONTACTABLE = reader.GetValue(21) as bool?;
-                bool? IS_VIABLE = reader.GetValue(22) as bool?;
-                string REASON_FOR_DEFERRAL = reader.GetValue(23) as string;
+                DateTime? NEXT_AVAILABLE = reader.GetValue(17) as DateTime?;
+                int? TIMES_DONATED = reader.GetValue(18) as int?;
+                int? TIMES_CONTACTED = reader.GetValue(19) as int?;
+                bool? IS_CONTACTABLE = reader.GetValue(20) as bool?;
+                bool? IS_VIABLE = reader.GetValue(21) as bool?;
+                string REASON_FOR_DEFERRAL = reader.GetValue(22) as string;
 
-                Donor x = new Donor(DONOR_ID,
-                    NAME,
+                Donor x = new Donor(DONOR_ID, NAME,
                     BLOOD_TYPE,
                     HOME_PROVINCE,
                     HOME_CITY,
@@ -144,7 +140,6 @@ las pinas 34.9km
                     EDUCATIONAL_ATTAINMENT,
                     BIRTH_DATE,
                     DATE_REGISTERED,
-                    LAST_DONATION,
                     NEXT_AVAILABLE,
                     TIMES_DONATED,
                     TIMES_CONTACTED,
@@ -162,21 +157,22 @@ las pinas 34.9km
         *  Creates donor object from parameters, adds it to the donorList and creates row in SQL
         *</summary>
         */
+        //NEW REGISTRANT
         public bool AddDonor(
             string NAME,
-            bloodType BLOOD_TYPE,
+            int BLOOD_TYPE,
             string HOME_PROVINCE,
             string HOME_CITY,
             string HOME_STREET,
             string OFFICE_PROVINCE,
             string OFFICE_CITY,
             string OFFICE_STREET,
-            contactMethod PREFERRED_CONTACT_METHOD,
+            int PREFERRED_CONTACT_METHOD,
             string HOME_LANDLINE,
             string OFFICE_LANDLINE,
             string EMAIL,
             string CELLPHONE,
-            string EDUCATIONAL_ATTAINMENT,
+            int EDUCATIONAL_ATTAINMENT,
             DateTime BIRTH_DATE,
             DateTime DATE_REGISTERED,
             bool IS_CONTACTABLE,
@@ -205,15 +201,12 @@ las pinas 34.9km
                 REASON_FOR_DEFERRAL
             );
 
-            //if (x.Is_viable && x.Is_contactable)
-            //    viableDonors.Add(x);
             if (donorCommands("Insert into donor " + AddQuery(DONOR_FIELDS), x) > 0)
             {
                 sortDonor(x);
                 return true;
             }
             return false;
-
         }
 
         /*
@@ -225,22 +218,21 @@ las pinas 34.9km
          *</param>
          */
         bool UpdateDonor(int DONOR_ID, string NAME,
-            bloodType BLOOD_TYPE,
+            int BLOOD_TYPE,
             string HOME_PROVINCE,
             string HOME_CITY,
             string HOME_STREET,
             string OFFICE_PROVINCE,
             string OFFICE_CITY,
             string OFFICE_STREET,
-            contactMethod PREFERRED_CONTACT_METHOD,
+            int PREFERRED_CONTACT_METHOD,
             string HOME_LANDLINE,
             string OFFICE_LANDLINE,
             string EMAIL,
             string CELLPHONE,
-            string EDUCATIONAL_ATTAINMENT,
+            int EDUCATIONAL_ATTAINMENT,
             DateTime BIRTH_DATE,
             DateTime DATE_REGISTERED,
-            DateTime LAST_DONATION,
             DateTime NEXT_AVAILABLE,
             int TIMES_DONATED,
             int TIMES_CONTACTED,
@@ -248,7 +240,7 @@ las pinas 34.9km
             bool IS_VIABLE,
             string REASON_FOR_DEFERRAL)
         {
-            unsortDonor(findDonor(DONOR_ID));
+            
             Donor x = new Donor(DONOR_ID,
                     NAME,
                     BLOOD_TYPE,
@@ -266,7 +258,6 @@ las pinas 34.9km
                     EDUCATIONAL_ATTAINMENT,
                     BIRTH_DATE,
                     DATE_REGISTERED,
-                    LAST_DONATION,
                     NEXT_AVAILABLE,
                     TIMES_DONATED,
                     TIMES_CONTACTED,
@@ -275,6 +266,8 @@ las pinas 34.9km
                     REASON_FOR_DEFERRAL);
             if (donorCommands("UPDATE donor SET " + UpdateQuery(DONOR_FIELDS), x) > 0)
             {
+                unsortDonor(findDonor(DONOR_ID));
+                x.Donor_id = DONOR_ID;
                 sortDonor(x);
                 return true;
             }
@@ -283,6 +276,7 @@ las pinas 34.9km
 
         int donorCommands(string query, Donor x)
         {
+            //FIND A WAY TO SET THE ID
             MySqlConnection conn = new MySqlConnection(connectionString);
             MySqlCommand comm = new MySqlCommand(query, conn);
             comm.CommandType = CommandType.Text;
@@ -305,7 +299,6 @@ las pinas 34.9km
             comm.Parameters.AddWithValue("@educational_attainment", x.Educational_attainment);
             comm.Parameters.AddWithValue("@birth_date", x.Birth_date);
             comm.Parameters.AddWithValue("@date_registered", x.Date_registered);
-            comm.Parameters.AddWithValue("@last_donation", x.Last_donation);
             comm.Parameters.AddWithValue("@next_available", x.Next_available);
             comm.Parameters.AddWithValue("@times_donated", x.Times_donated);
             comm.Parameters.AddWithValue("@times_contacted", x.Times_contacted);
@@ -314,9 +307,9 @@ las pinas 34.9km
             comm.Parameters.AddWithValue("@reason_for_deferral", x.Reason_for_deferral);
 
             conn.Open();
-            comm.ExecuteNonQuery();
+            int rowsAffected = comm.ExecuteNonQuery();
             conn.Close();
-            return 1;
+            return rowsAffected;
         }
 
         /*
@@ -440,19 +433,20 @@ las pinas 34.9km
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-                int? blood_id = reader.GetValue(0) as int?;
-                int? taken_from = reader.GetValue(1) as int?;
-                string patient_name = reader.GetValue(2) as string;
-                int? patient_age = reader.GetValue(3) as int?;
-                DateTime? date_donated = reader.GetValue(4) as DateTime?;
-                DateTime? date_expire = reader.GetValue(5) as DateTime?;
-                DateTime? date_removed = reader.GetValue(6) as DateTime?;
-                bool? is_assigned = reader.GetValue(7) as bool?;
-                bool? is_quarantined = reader.GetValue(8) as bool?;
-                string reason_for_removal = reader.GetValue(9) as string;
-                string component = reader.GetValue(10) as string;
+                string accession_number = reader.GetValue(0) as string;
+                int? blood_type = reader.GetValue(1) as int?;
+                int? donor_id = reader.GetValue(2) as int?;
+                string patient_name = reader.GetValue(3) as string;
+                int? patient_age = reader.GetValue(4) as int?;
+                DateTime? date_added = reader.GetValue(5) as DateTime?;
+                DateTime? date_expire = reader.GetValue(6) as DateTime?;
+                DateTime? date_removed = reader.GetValue(7) as DateTime?;
+                bool? is_assigned = reader.GetValue(8) as bool?;
+                bool? is_processed = reader.GetValue(9) as bool?;
+                bool? is_quarantined = reader.GetValue(10) as bool?;
+                string reason_for_removal = reader.GetValue(11) as string;
 
-                Blood x = new Blood(blood_id, taken_from, date_donated, date_expire, component, patient_name, patient_age, date_removed, is_assigned, is_quarantined, reason_for_removal);
+                Blood x = new Blood(accession_number, blood_type, donor_id, patient_name, patient_age, date_added, date_expire, date_removed, is_assigned, is_processed, is_quarantined, reason_for_removal);
                 SortBlood(x);
             }
             reader.Close();
@@ -464,31 +458,17 @@ las pinas 34.9km
         *  Creates blood object from parameters, adds it to the bloodList and creates row in SQL
         *</summary>
         */
-        public bool AddBlood(DateTime date_added, DateTime date_expire, int taken_from)
+        //new donation
+        public bool AddBlood(string accession_number, int blood_type, int? donor_id, DateTime date_added, DateTime date_expire)
         {
-            Blood x = new Blood(taken_from, date_added, date_expire);
+            Blood x = new Blood(accession_number, blood_type, donor_id, date_added, date_expire);
 
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-            string query = "Insert into Blood " + AddQuery(BLOOD_FIELDS);
-            MySqlCommand comm = new MySqlCommand(query, conn);
-            bloodCommands(comm, x);
-            return RowsAffected(comm, conn);
-        }
-
-        /*summary
-         * for extracted blood
-         */
-        public bool AddBlood(Blood a, DateTime date_added, DateTime date_expire, string component)
-        {
-            Blood x = new Blood(a.Blood_id, date_added, date_expire, component);
-
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-            string query = "Insert into Blood " + AddQuery(BLOOD_FIELDS);
-            MySqlCommand comm = new MySqlCommand(query, conn);
-            bloodCommands(comm, x);
-            return RowsAffected(comm, conn);
+            if (bloodCommands("Insert into Blood " + AddQuery(BLOOD_FIELDS), x) > 0)
+            {
+                SortBlood(x);
+                return true;
+            }
+            return false;
         }
 
         /*
@@ -499,17 +479,42 @@ las pinas 34.9km
        *  Blood object containing properties to be applied
        *</param>
        */
-        bool UpdateBlood(int blood_id, int taken_from, DateTime date_donated, DateTime date_expire, string component, string patient_name, int patient_age, DateTime date_removed, bool is_assigned, bool is_quarantined, string reason_for_removal)
+        bool UpdateBlood(string accession_number, int blood_type, int? donor_id, string patient_name, int patient_age, DateTime date_added, DateTime date_expire, DateTime date_removed, bool is_assigned, bool is_processed, bool is_quarantined, string reason_for_removal)
         {
-            UnsortBlood(findBlood(blood_id));
-            Blood x = new Blood(blood_id, taken_from, date_donated, date_expire, component, patient_name, patient_age, date_removed, is_assigned, is_quarantined, reason_for_removal);
+            Blood x = new Blood(accession_number, blood_type, donor_id, patient_name, patient_age, date_added, date_expire, date_removed, is_assigned, is_processed, is_quarantined, reason_for_removal);
+            if (bloodCommands("UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS), x) > 0)
+            {
+                UnsortBlood(findBlood(accession_number));
+                SortBlood(x);
+                return true;
+            }
+            return false;
+        }
 
+        int bloodCommands(string query, Blood x)
+        {
             MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-            string query = "UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS);
             MySqlCommand comm = new MySqlCommand(query, conn);
-            bloodCommands(comm, x);
-            return RowsAffected(comm, conn);
+            comm.CommandType = CommandType.Text;
+
+            comm.Parameters.AddWithValue("@accession_number", x.Accession_number);
+            comm.Parameters.AddWithValue("@blood_type", x.Blood_type);
+            if (x.Donor_id.HasValue)
+                comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
+            comm.Parameters.AddWithValue("@patient_name", x.Patient_name);
+            comm.Parameters.AddWithValue("@patient_age", x.Patient_age);
+            comm.Parameters.AddWithValue("@date_added", x.Date_added);
+            comm.Parameters.AddWithValue("@date_expire", x.Date_expire);
+            comm.Parameters.AddWithValue("@date_removed", x.Date_removed);
+            comm.Parameters.AddWithValue("@is_assigned", x.Is_assigned);
+            comm.Parameters.AddWithValue("@is_processed", x.Is_processed);
+            comm.Parameters.AddWithValue("@is_quarantined", x.Is_quarantined);
+            comm.Parameters.AddWithValue("@reason_for_removal", x.Reason_for_removal);
+
+            conn.Open();
+            int rowsAffected = comm.ExecuteNonQuery();
+            conn.Close();
+            return rowsAffected;
         }
 
         #region bloodGraphMethods
@@ -589,7 +594,7 @@ las pinas 34.9km
             {
                 if (b.Is_removed && b.Date_removed == date)
                 {
-                    ints[(int)findDonor(b.Taken_from).Blood_type]++;
+                    ints[(int)b.Blood_type]++;
                 }
             }
             return ints;
@@ -615,7 +620,7 @@ las pinas 34.9km
             {
                 if (b.Is_removed && b.Reason_for_removal.StartsWith("Extracted") && b.Date_removed == date)
                 {
-                    ints[(int)findDonor(b.Taken_from).Blood_type]++;
+                    ints[(int)b.Blood_type]++;
                 }
             }
             return ints;
@@ -641,7 +646,7 @@ las pinas 34.9km
             {
                 if (b.Is_assigned && b.Is_removed && b.Date_removed == date)
                 {
-                    ints[(int)findDonor(b.Taken_from).Blood_type]++;
+                    ints[(int)b.Blood_type]++;
                 }
             }
             return ints;
@@ -667,18 +672,18 @@ las pinas 34.9km
             {
                 if (b.Is_quarantined && b.Date_removed == date)
                 {
-                    ints[(int)findDonor(b.Taken_from).Blood_type]++;
+                    ints[(int)b.Blood_type]++;
                 }
             }
             return ints;
         }
 
-        public int getWholeBloodAddedOn(DateTime date)
+        public int getBloodAddedOn(DateTime date)
         {
             int count = 0;
             foreach (Blood b in bloodList)
             {
-                if (b.Component == "Whole" && b.Date_added == date)
+                if (b.Date_added == date)
                 {
                     count++;
                 }
@@ -686,14 +691,14 @@ las pinas 34.9km
             return count;
         }
 
-        public int[] getWholeBloodTypeAddedOn(DateTime date)
+        public int[] getBloodTypeAddedOn(DateTime date)
         {
             int[] ints = new int[BlOODTYPECOUNT];
             foreach (Blood b in bloodList)
             {
-                if (b.Component == "Whole" && b.Date_added == date)
+                if (b.Date_added == date)
                 {
-                    ints[(int)findDonor(b.Taken_from).Blood_type]++;
+                    ints[(int)b.Blood_type]++;
                 }
             }
             return ints;
@@ -723,14 +728,6 @@ las pinas 34.9km
         //}
         #endregion
 
-        void ExtractBlood(Blood x, DateTime date_added, DateTime date_expire)
-        {
-            x.Extract(date_added);
-            UnsortBlood(x);
-            AddBlood(x, date_added, date_expire, "Fresh Frozen Plasma");
-            AddBlood(x, date_added, date_expire, "Packed Red Cells");
-        }
-
         void UnsortBlood(Blood b)
         {
             bloodList.Remove(b);
@@ -758,10 +755,7 @@ las pinas 34.9km
             if (!b.Is_removed)
             {
                 availableBlood.Add(b);
-                if (b.Component == "Whole")
-                    bloodTypes[(int)findDonor(b.Taken_from).Blood_type].Add(b);
-                else
-                    bloodTypes[(int)findDonor(findBlood(b.Taken_from).Taken_from).Blood_type].Add(b);
+                bloodTypes[(int)b.Blood_type].Add(b);
             }
             else if (b.Is_quarantined)
             {
@@ -773,41 +767,26 @@ las pinas 34.9km
             }
         }
 
-        void bloodCommands(MySqlCommand comm, Blood x)
-        {
-            long id = comm.LastInsertedId;
-            x.Blood_id = (int)id;
-            comm.Parameters.AddWithValue("@blood_id", x.Blood_id);
-            comm.Parameters.AddWithValue("@taken_from", x.Taken_from);
-            comm.Parameters.AddWithValue("@patient_name", x.Patient_name);
-            comm.Parameters.AddWithValue("@patient_age", x.Patient_age);
-            comm.Parameters.AddWithValue("@date_added", x.Date_added);
-            comm.Parameters.AddWithValue("@date_expire", x.Date_expire);
-            comm.Parameters.AddWithValue("@date_removed", x.Date_removed);
-            comm.Parameters.AddWithValue("@is_assigned", x.Is_assigned);
-            comm.Parameters.AddWithValue("@is_quarantined", x.Is_quarantined);
-            comm.Parameters.AddWithValue("@reason_for_removal", x.Reason_for_removal);
-            SortBlood(x);
-        }
+        
 
-        bool isBloodUnique(int id)
+        bool isBloodUnique(string id)
         {
             foreach (Blood b in bloodList)
             {
-                if (b.Blood_id == id)
+                if (b.Accession_number == id)
                     return false;
             }
             return true;
         }
 
-        bool DeleteBloodWithId(int id)
+        bool DeleteBloodWithAccessionNumber(string accession_number)
         {
-            UnsortBlood(findBlood(id));
+            UnsortBlood(findBlood(accession_number));
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
-            string query = "DELETE FROM Blood WHERE blood_id =@blood_id";
+            string query = "DELETE FROM Blood WHERE accession_number =@accession_number";
             MySqlCommand comm = new MySqlCommand(query, conn);
-            comm.Parameters.AddWithValue("@blood_id", id);
+            comm.Parameters.AddWithValue("@accession_number", accession_number);
             return RowsAffected(comm, conn);
         }
 
@@ -819,11 +798,11 @@ las pinas 34.9km
          * 
          *</param>
          */
-        Blood findBlood(int id)
+        Blood findBlood(string accession_number)
         {
             foreach (Blood b in bloodList)
             {
-                if (b.Blood_id == id)
+                if (b.Accession_number == accession_number)
                 {
                     return b;
                 }
