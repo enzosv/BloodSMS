@@ -23,8 +23,7 @@ namespace BloodSMSApp
         {
             InitializeComponent();
             InitializeValues();
-            RefreshCount();
-            RefreshNotifications();
+            RefreshOverview();
         }
 
         void InitializeValues()
@@ -37,9 +36,9 @@ namespace BloodSMSApp
 
             dateFrom.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddYears(-1);
             dateTo.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            
             //set this to date of install upon install
             dateFrom.MinDate = new DateTime(2010, 9, 1);
-            //chart1.ChartAreas[0].AxisX.Maximum = 366;
             chart1.ChartAreas[0].AxisY.Maximum = 1200;
 
             for (int i = 0; i < chart1.Series.Count; i++)
@@ -49,17 +48,14 @@ namespace BloodSMSApp
 
         }
 
-        void RefreshCount()
+        void RefreshOverview()
         {
             bloodCount = storage.availableBlood.Count;
             for (int i = 0; i < bloodTypeCount.Length; i++)
             {
                 bloodTypeCount[i] = storage.bloodTypes[i].Count;
             }
-        }
 
-        void RefreshNotifications()
-        {
             notifications.Clear();
             //check low level
             foreach (bloodType blood_type in (bloodType[])Enum.GetValues(typeof(bloodType)))
@@ -74,7 +70,7 @@ namespace BloodSMSApp
             {
                 if (storage.AlertNearExpiration(b))
                 {
-                    notifications.Add("Blood with ID " + b.Blood_id + " is near expiration");
+                    notifications.Add("Blood with Accession Number " + b.Accession_number + " is near expiration");
                 }
             }
         }
@@ -221,8 +217,8 @@ namespace BloodSMSApp
                     for (DateTime day = dateFrom.Value; day <= dateTo.Value; day = day.AddDays(1))
                     {
                         string xValue = day.ToString("MMM d");
-                        chart1.Series["Total"].Points.AddXY(xValue, storage.getWholeBloodAddedOn(day));
-                        GetNumbers(storage.getWholeBloodTypeAddedOn(day));
+                        chart1.Series["Total"].Points.AddXY(xValue, storage.getBloodAddedOn(day));
+                        GetNumbers(storage.getBloodTypeAddedOn(day));
                     }
                     break;
                 case graphCommand.Remove:
@@ -270,7 +266,7 @@ namespace BloodSMSApp
                     for (DateTime day = dateFrom.Value; day <= dateTo.Value; day = day.AddDays(1))
                     {
                         string xValue = day.ToString("MMM d");
-                        chart1.Series[0].Points.AddXY(xValue, storage.getWholeBloodAddedOn(day));
+                        chart1.Series[0].Points.AddXY(xValue, storage.getBloodAddedOn(day));
                         chart1.Series[1].Points.AddXY(xValue, storage.getBloodRemovedOn(day));
                         chart1.Series[2].Points.AddXY(xValue, storage.getBloodReleasedOn(day));
                         chart1.Series[3].Points.AddXY(xValue, storage.getBloodUsedOn(day));

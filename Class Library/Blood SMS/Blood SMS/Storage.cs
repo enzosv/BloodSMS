@@ -56,7 +56,7 @@ las pinas 34.9km
         string connectionString;
 
         int BlOODTYPECOUNT = Enum.GetNames(typeof(bloodType)).Length;
-        const int MINIMUMBLOODVALUE = 20;
+        const int MINIMUMBLOODVALUE = 5;
         const int MINIMUMEXPIRYALERTVALUE = 3;
         readonly string[] BLOOD_FIELDS = { "accession_number", "blood_type", "patient_name", "patient_age", "date_added", "date_expire", "date_removed", "is_assigned", "is_processed", "is_quarantined", "reason_for_removal" };
         readonly string[] DONOR_FIELDS = { "donor_id", "name", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "email", "cellphone", "educational_attainment", "birth_date", "date_registered", "next_available", "times_donated", "times_contacted", "is_contactable", "is_viable", "reason_for_deferral" };
@@ -883,14 +883,6 @@ las pinas 34.9km
             }
             return fieldNames + ") Values(" + valueParameters + ")";
         }
-
-        /*void AlertLowLevel(bloodType blood_type)
-        {
-            foreach(Blood b in bloodTypes[(int)blood_type])
-            {
-				
-            }
-        }*/
 
         public bool AlertLowLevel(bloodType blood_type)
         {
