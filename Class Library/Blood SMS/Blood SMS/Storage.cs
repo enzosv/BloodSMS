@@ -39,6 +39,7 @@ las pinas 34.9km
         public List<Blood> usedBlood;
         public List<Donor> donorList;
         public List<Donor>[] donorTypes;
+        public List<Donor> contactableDonors;
         public List<Donor> viableDonors;
         public List<Donor> bannedDonors;
 
@@ -76,6 +77,7 @@ las pinas 34.9km
                 bloodTypes[i] = new List<Blood>();
                 donorTypes[i] = new List<Donor>();
             }
+            contactableDonors = new List<Donor>();
             viableDonors = new List<Donor>();
             bannedDonors = new List<Donor>();
 
@@ -201,7 +203,8 @@ las pinas 34.9km
                 REASON_FOR_DEFERRAL
             );
 
-            if (donorCommands("Insert into donor " + AddQuery(DONOR_FIELDS), x) > 0)
+            //http://stackoverflow.com/questions/5228780/how-to-get-last-inserted-id
+            if (donorCommands("Insert into donor output donor_id" + AddQuery(DONOR_FIELDS), x) > 0)
             {
                 sortDonor(x);
                 return true;
@@ -306,7 +309,9 @@ las pinas 34.9km
             comm.Parameters.AddWithValue("@is_viable", x.Is_viable);
             comm.Parameters.AddWithValue("@reason_for_deferral", x.Reason_for_deferral);
 
+            
             conn.Open();
+            x.Donor_id = (int)comm.ExecuteScalar();
             int rowsAffected = comm.ExecuteNonQuery();
             conn.Close();
             return rowsAffected;
@@ -351,12 +356,32 @@ las pinas 34.9km
             return true;
         }
 
+        void sortDonor(Donor d)
+        {
+            donorList.Add(d);
+            if (d.Is_viable)
+            {
+                viableDonors.Add(d);
+                if (d.Is_contactable)
+                {
+                    contactableDonors.Add(d);
+                    donorTypes[(int)d.Blood_type].Add(d);
+                }
+            }
+            else
+            {
+                bannedDonors.Add(d);
+            }
+        }
+
         void unsortDonor(Donor d)
         {
             donorList.Remove(d);
             if (viableDonors.Contains(d))
             {
                 viableDonors.Remove(d);
+                if (contactableDonors.Contains(d))
+                    contactableDonors.Remove(d);
                 foreach (List<Donor> dType in donorTypes)
                 {
                     if (dType.Contains(d))
@@ -381,14 +406,14 @@ las pinas 34.9km
             return RowsAffected(comm, conn);
         }
 
-        
-
         List<Donor> getClosestByType(int count, bloodType blood_type)
         {
+            int cityCount = Enum.GetNames(typeof(city)).Length;
+            int bType = (int)blood_type;
             List<Donor> closestByType = new List<Donor>();
-            for (int i = 0; i < Enum.GetNames(typeof(city)).Length; i++)
+            for (int i = 0; i < cityCount; i++)
             {
-                foreach (Donor d in donorTypes[(int)blood_type])
+                foreach (Donor d in donorTypes[bType])
                 {
                     if (d.Home_city == ((city)i).ToString())
                     {
@@ -401,19 +426,7 @@ las pinas 34.9km
             return closestByType;
         }
 
-        void sortDonor(Donor d)
-        {
-            donorList.Add(d);
-            if (d.Is_viable && d.Is_contactable)
-            {
-                viableDonors.Add(d);
-                donorTypes[(int)d.Blood_type].Add(d);
-            }
-            else
-            {
-                bannedDonors.Add(d);
-            }
-        }
+        
         #endregion
 
         #region Blood methods
