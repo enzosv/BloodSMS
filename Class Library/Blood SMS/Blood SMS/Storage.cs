@@ -317,6 +317,23 @@ las pinas 34.9km
             return rowsAffected;
         }
 
+        bool DeleteDonorWithId(int id)
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            string query = "DELETE FROM Donor WHERE donor_id =@donor_id";
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            comm.Parameters.AddWithValue("@donor_id", id);
+            conn.Open();
+            int rowsAffected = comm.ExecuteNonQuery();
+            conn.Close();
+            if (rowsAffected > 0)
+            {
+                unsortDonor(findDonor(id));
+                return true;
+            }
+            return false;
+        }
+
         /*
          *<summary>
          *  Iterates through donorList and returns the donor object with the same id as provided in the parameter
@@ -395,16 +412,7 @@ las pinas 34.9km
                 bannedDonors.Remove(d);
         }
 
-        bool DeleteDonorWithId(int id)
-        {
-            unsortDonor(findDonor(id));
-            MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
-            string query = "DELETE FROM Donor WHERE donor_id =@donor_id";
-            MySqlCommand comm = new MySqlCommand(query, conn);
-            comm.Parameters.AddWithValue("@donor_id", id);
-            return RowsAffected(comm, conn);
-        }
+        
 
         List<Donor> getClosestByType(int count, bloodType blood_type)
         {
@@ -794,13 +802,20 @@ las pinas 34.9km
 
         bool DeleteBloodWithAccessionNumber(string accession_number)
         {
-            UnsortBlood(findBlood(accession_number));
+            
             MySqlConnection conn = new MySqlConnection(connectionString);
-            conn.Open();
             string query = "DELETE FROM Blood WHERE accession_number =@accession_number";
             MySqlCommand comm = new MySqlCommand(query, conn);
             comm.Parameters.AddWithValue("@accession_number", accession_number);
-            return RowsAffected(comm, conn);
+            conn.Open();
+            int rowsAffected = comm.ExecuteNonQuery();
+            conn.Close();
+            if (rowsAffected > 0)
+            {
+                UnsortBlood(findBlood(accession_number));
+                return true;
+            }
+            return false;
         }
 
         /*
@@ -824,26 +839,7 @@ las pinas 34.9km
         }
         #endregion
 
-        #region Utility Methods
-        /*
-         *<summary>
-         *  returns true if rows have been affected
-         *</summary>
-         *<param name="comm">
-         *  MySQLCommand where number of affected rows will be determined from
-         *</param>
-         */
-        bool RowsAffected(MySqlCommand comm, MySqlConnection conn)
-        {
-            if (comm.ExecuteNonQuery() > 0)
-            {
-                conn.Close();
-                return true;
-            }
-            conn.Close();
-            return false;
-        }
-
+        #region Utility Methods 
         /*
          *<summary>
          *  returns a string which assigns the values to be updated
