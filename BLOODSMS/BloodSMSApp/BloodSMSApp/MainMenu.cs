@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Blood_SMS;
+//using System.Web.UI.DataVisualization.Charting;
+
 namespace BloodSMSApp
 {
     public partial class MainMenu : Form
@@ -30,7 +32,7 @@ namespace BloodSMSApp
             storage = new Storage("localhost", "bsms", "root", "root");
             bloodTypeCount = new int[Enum.GetNames(typeof(bloodType)).Length];
             notifications = new List<string>();
-            command = graphCommand.Add;
+            command = graphCommand.Summary;
             dateTo.MaxDate = DateTime.Now.AddYears(1);
 
             dateFrom.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddYears(-1);
@@ -39,7 +41,12 @@ namespace BloodSMSApp
             dateFrom.MinDate = new DateTime(2010, 9, 1);
             //chart1.ChartAreas[0].AxisX.Maximum = 366;
             chart1.ChartAreas[0].AxisY.Maximum = 1200;
-            
+
+            for (int i = 0; i < chart1.Series.Count; i++)
+            {
+                //chart1.Series[i].XAxisType = chart DateTime;
+            }
+
         }
 
         void RefreshCount()
