@@ -9,7 +9,9 @@ namespace Blood_SMS
     public class Donor
     {
         int donor_id;
-        string name;
+        string last_name;
+        string first_name;
+        string middle_initial;
         bloodType blood_type;
         string home_province;
         string home_city;
@@ -33,9 +35,10 @@ namespace Blood_SMS
         string reason_for_deferral;
 
         int age;
+        string name;
 
         //FROM SQL
-        public Donor(int? DONOR_ID, string NAME,
+        public Donor(int? DONOR_ID, string LAST_NAME, string FIRST_NAME, string MIDDLE_INITIAL,
         int? BLOOD_TYPE,
         string HOME_PROVINCE,
         string HOME_CITY,
@@ -61,7 +64,9 @@ namespace Blood_SMS
         {
             donor_id = DONOR_ID.Value;
             blood_type = (bloodType)BLOOD_TYPE.Value;
-            name = NAME;
+            last_name = LAST_NAME;
+            first_name = FIRST_NAME;
+            middle_initial = MIDDLE_INITIAL;
             home_province = HOME_PROVINCE;
             home_city = HOME_CITY;
             home_street = HOME_STREET;
@@ -83,10 +88,12 @@ namespace Blood_SMS
             is_viable = IS_VIABLE.Value;
             reason_for_deferral = REASON_FOR_DEFERRAL;
             Refresh();
+
+            name = LAST_NAME +", " + FIRST_NAME +" " + MIDDLE_INITIAL;
         }
 
         //NEW REGISTER
-        public Donor(string NAME,
+        public Donor(string LAST_NAME, string FIRST_NAME, string MIDDLE_INITIAL,
         int BLOOD_TYPE,
         string HOME_PROVINCE,
         string HOME_CITY,
@@ -107,7 +114,9 @@ namespace Blood_SMS
         string REASON_FOR_DEFERRAL
             )
         {
-            name = NAME;
+            last_name = LAST_NAME;
+            first_name = FIRST_NAME;
+            middle_initial = MIDDLE_INITIAL;
             blood_type = (bloodType) BLOOD_TYPE;
             home_province = HOME_PROVINCE;
             home_city = HOME_CITY;
@@ -143,7 +152,9 @@ namespace Blood_SMS
         }
 
         public int Donor_id { get { return donor_id; } set { donor_id = value; } }
-        public string Name { get { return name; } set { name = value; } }
+        public string Last_name { get { return last_name; } set { last_name = value; } }
+        public string First_name { get { return first_name; } set { first_name = value; } }
+        public string Middle_initial { get { return middle_initial; } set { middle_initial = value; } }
         public bloodType Blood_type { get { return blood_type; } set { blood_type = value; } }
         public string Home_province { get { return home_province; } set { home_province = value; } }
         public string Home_city { get { return home_city; } set { home_city = value; } }
@@ -167,5 +178,6 @@ namespace Blood_SMS
         public string Reason_for_deferral { get { return reason_for_deferral; } set { reason_for_deferral = value; } }
 
         public int Age { get { return age; } set { age = value; } }
+        public string Name {get {return name;} set {name = value;}}
     }
 }

@@ -11,7 +11,7 @@ namespace Blood_SMS
         bloodType blood_type;
         int? donor_id;
         string patient_name;
-        int patient_age;
+        int? patient_age;
         DateTime date_added;
         DateTime date_expire;
         DateTime date_removed;
@@ -27,7 +27,7 @@ namespace Blood_SMS
         public bloodType Blood_type { get { return blood_type; } set { blood_type = value; } }
         public int? Donor_id { get { return donor_id; } set { donor_id = value; } }
         public string Patient_name { get { return patient_name; } set { patient_name = value; } }
-        public int Patient_age { get { return patient_age; } set { patient_age = value; } }
+        public int? Patient_age { get { return patient_age; } set { patient_age = value; } }
         public DateTime Date_added { get { return date_added; } set { date_added = value; } }
         public DateTime Date_expire { get { return date_expire; } set { date_expire = value; } }
         public DateTime Date_removed { get { return date_removed; } set { date_removed = value; } }
@@ -43,7 +43,7 @@ namespace Blood_SMS
         //Record Blood Ins
         //Create
 
-        public Blood(string ACCESSION_NUMBER, int BLOOD_TYPE, int? DONOR_ID, DateTime DATE_ADDED, DateTime DATE_EXPIRE)
+        public Blood(string ACCESSION_NUMBER, int BLOOD_TYPE, int? DONOR_ID, string PATIENT_NAME, int? PATIENT_AGE, DateTime DATE_ADDED, DateTime DATE_EXPIRE)
         {
             accession_number = ACCESSION_NUMBER;
             blood_type = (bloodType)BLOOD_TYPE;
@@ -51,8 +51,8 @@ namespace Blood_SMS
             date_added = DATE_ADDED;
             date_expire = DATE_EXPIRE;
 
-            patient_name = "";
-            patient_age = 0;
+            patient_name = PATIENT_NAME;
+            patient_age = PATIENT_AGE;
             date_removed = DateTime.MinValue;
             is_assigned = false;
             is_processed = false;

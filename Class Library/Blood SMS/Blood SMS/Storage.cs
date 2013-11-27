@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 namespace Blood_SMS
 {
     public enum graphCommand { Add, Remove, Release, Quarantine, Use, Summary };
-    public enum bloodType { ABp, ABn, Ap, An, Bp, Bn, Op, On };
+    public enum bloodType { NotTyped, ABp, ABn, Ap, An, Bp, Bn, Op, On };
     public enum contactMethod { none, email, cellphone };
     public enum educationalAttainment { other, gradeschool, highschool, college };
     public enum city { QuezonCity, SanJuan, Manila, Caloocan, Mandaluyong, Malabon, Pateros, Makati, Valenzuela, Navotas, Pasay, Taguig, Paranaque, Muntinlupa, LasPinas, Other };
@@ -59,7 +59,7 @@ las pinas 34.9km
         const int MINIMUMBLOODVALUE = 5;
         const int MINIMUMEXPIRYALERTVALUE = 3;
         readonly string[] BLOOD_FIELDS = { "accession_number", "blood_type", "patient_name", "patient_age", "date_added", "date_expire", "date_removed", "is_assigned", "is_processed", "is_quarantined", "reason_for_removal" };
-        readonly string[] DONOR_FIELDS = { "donor_id", "name", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "email", "cellphone", "educational_attainment", "birth_date", "date_registered", "next_available", "times_donated", "times_contacted", "is_contactable", "is_viable", "reason_for_deferral" };
+        readonly string[] DONOR_FIELDS = { "donor_id", "last_name", "first_name", "middle_initial", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "email", "cellphone", "educational_attainment", "birth_date", "date_registered", "next_available", "times_donated", "times_contacted", "is_contactable", "is_viable", "reason_for_deferral" };
         public Storage(string host, string db, string user, string pass)
         {
             connectionString = string.Format("Server={0};Database={1};Uid={2};Pwd={3}", host, db, user, pass);
@@ -103,30 +103,32 @@ las pinas 34.9km
             while (reader.Read())
             {
                 int? DONOR_ID = reader.GetValue(0) as int?;
-                string NAME = reader.GetValue(1) as string;
-                int? BLOOD_TYPE = reader.GetValue(2) as int?;
-                string HOME_PROVINCE = reader.GetValue(3) as string;
-                string HOME_CITY = reader.GetValue(4) as string;
-                string HOME_STREET = reader.GetValue(5) as string;
-                string OFFICE_PROVINCE = reader.GetValue(6) as string;
-                string OFFICE_CITY = reader.GetValue(7) as string;
-                string OFFICE_STREET = reader.GetValue(8) as string;
-                int? PREFERRED_CONTACT_METHOD = reader.GetValue(9) as int?;
-                string HOME_LANDLINE = reader.GetValue(10) as string;
-                string OFFICE_LANDLINE = reader.GetValue(11) as string;
-                string EMAIL = reader.GetValue(12) as string;
-                string CELLPHONE = reader.GetValue(13) as string;
-                int? EDUCATIONAL_ATTAINMENT = reader.GetValue(14) as int?;
-                DateTime? BIRTH_DATE = reader.GetValue(15) as DateTime?;
-                DateTime? DATE_REGISTERED = reader.GetValue(16) as DateTime?;
-                DateTime? NEXT_AVAILABLE = reader.GetValue(17) as DateTime?;
-                int? TIMES_DONATED = reader.GetValue(18) as int?;
-                int? TIMES_CONTACTED = reader.GetValue(19) as int?;
-                bool? IS_CONTACTABLE = reader.GetValue(20) as bool?;
-                bool? IS_VIABLE = reader.GetValue(21) as bool?;
-                string REASON_FOR_DEFERRAL = reader.GetValue(22) as string;
+                string LAST_NAME = reader.GetValue(1) as string;
+                string FIRST_NAME = reader.GetValue(2) as string;
+                string MIDDLE_INITIAL = reader.GetValue(3) as string;
+                int? BLOOD_TYPE = reader.GetValue(4) as int?;
+                string HOME_PROVINCE = reader.GetValue(5) as string;
+                string HOME_CITY = reader.GetValue(6) as string;
+                string HOME_STREET = reader.GetValue(7) as string;
+                string OFFICE_PROVINCE = reader.GetValue(8) as string;
+                string OFFICE_CITY = reader.GetValue(9) as string;
+                string OFFICE_STREET = reader.GetValue(10) as string;
+                int? PREFERRED_CONTACT_METHOD = reader.GetValue(11) as int?;
+                string HOME_LANDLINE = reader.GetValue(12) as string;
+                string OFFICE_LANDLINE = reader.GetValue(13) as string;
+                string EMAIL = reader.GetValue(14) as string;
+                string CELLPHONE = reader.GetValue(15) as string;
+                int? EDUCATIONAL_ATTAINMENT = reader.GetValue(16) as int?;
+                DateTime? BIRTH_DATE = reader.GetValue(17) as DateTime?;
+                DateTime? DATE_REGISTERED = reader.GetValue(18) as DateTime?;
+                DateTime? NEXT_AVAILABLE = reader.GetValue(19) as DateTime?;
+                int? TIMES_DONATED = reader.GetValue(20) as int?;
+                int? TIMES_CONTACTED = reader.GetValue(21) as int?;
+                bool? IS_CONTACTABLE = reader.GetValue(22) as bool?;
+                bool? IS_VIABLE = reader.GetValue(23) as bool?;
+                string REASON_FOR_DEFERRAL = reader.GetValue(24) as string;
 
-                Donor x = new Donor(DONOR_ID, NAME,
+                Donor x = new Donor(DONOR_ID, LAST_NAME, FIRST_NAME, MIDDLE_INITIAL,
                     BLOOD_TYPE,
                     HOME_PROVINCE,
                     HOME_CITY,
@@ -161,7 +163,7 @@ las pinas 34.9km
         */
         //NEW REGISTRANT
         public bool AddDonor(
-            string NAME,
+            string LAST_NAME, string FIRST_NAME, string MIDDLE_INITIAL,
             int BLOOD_TYPE,
             string HOME_PROVINCE,
             string HOME_CITY,
@@ -182,7 +184,7 @@ las pinas 34.9km
             string REASON_FOR_DEFERRAL
             )
         {
-            Donor x = new Donor(NAME,
+            Donor x = new Donor(LAST_NAME, FIRST_NAME, MIDDLE_INITIAL,
                 BLOOD_TYPE,
                 HOME_PROVINCE,
                 HOME_CITY,
@@ -220,7 +222,7 @@ las pinas 34.9km
          *  Donor object containing properties to be applied
          *</param>
          */
-        bool UpdateDonor(int DONOR_ID, string NAME,
+        bool UpdateDonor(int DONOR_ID, string LAST_NAME, string FIRST_NAME, string MIDDLE_INITIAL,
             int BLOOD_TYPE,
             string HOME_PROVINCE,
             string HOME_CITY,
@@ -245,7 +247,7 @@ las pinas 34.9km
         {
             
             Donor x = new Donor(DONOR_ID,
-                    NAME,
+                    LAST_NAME, FIRST_NAME, MIDDLE_INITIAL,
                     BLOOD_TYPE,
                     HOME_PROVINCE,
                     HOME_CITY,
@@ -286,7 +288,9 @@ las pinas 34.9km
             //long id = comm.LastInsertedId;
             //x.Donor_id = (int)id;
             //comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
-            comm.Parameters.AddWithValue("@name", x.Name);
+            comm.Parameters.AddWithValue("@last_name", x.Last_name);
+            comm.Parameters.AddWithValue("@first_name", x.First_name);
+            comm.Parameters.AddWithValue("@middle_initial", x.Middle_initial);
             comm.Parameters.AddWithValue("@blood_type", x.Blood_type);
             comm.Parameters.AddWithValue("@home_province", x.Home_province);
             comm.Parameters.AddWithValue("@home_city", x.Home_city);
@@ -480,9 +484,9 @@ las pinas 34.9km
         *</summary>
         */
         //new donation
-        public bool AddBlood(string accession_number, int blood_type, int? donor_id, DateTime date_added, DateTime date_expire)
+        public bool AddBlood(string accession_number, int blood_type, int? donor_id, string patient_name, int? patient_age, DateTime date_added, DateTime date_expire)
         {
-            Blood x = new Blood(accession_number, blood_type, donor_id, date_added, date_expire);
+            Blood x = new Blood(accession_number, blood_type, donor_id, patient_name, patient_age, date_added, date_expire);
 
             if (bloodCommands("Insert into Blood " + AddQuery(BLOOD_FIELDS), x) > 0)
             {
@@ -522,7 +526,8 @@ las pinas 34.9km
             comm.Parameters.AddWithValue("@blood_type", x.Blood_type);
             if (x.Donor_id.HasValue)
                 comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
-            comm.Parameters.AddWithValue("@patient_name", x.Patient_name);
+            if(!String.IsNullOrWhiteSpace(x.Patient_name))
+                comm.Parameters.AddWithValue("@patient_name", x.Patient_name);
             comm.Parameters.AddWithValue("@patient_age", x.Patient_age);
             comm.Parameters.AddWithValue("@date_added", x.Date_added);
             comm.Parameters.AddWithValue("@date_expire", x.Date_expire);
