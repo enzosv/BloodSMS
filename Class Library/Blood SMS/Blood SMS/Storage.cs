@@ -536,7 +536,7 @@ las pinas 34.9km
             }
         }
 
-        int bloodCommands(string query, Blood x)
+        bool bloodCommands(string query, Blood x)
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
             MySqlCommand comm = new MySqlCommand(query, conn);
@@ -577,6 +577,34 @@ las pinas 34.9km
             return count;
         }
 
+        
+    //{ 111, new StudentName {FirstName="Sachin", LastName="Karnik", ID=211}},
+    //{ 112, new StudentName {FirstName="Dina", LastName="Salimzianova", ID=317}},
+    //{ 113, new StudentName {FirstName="Andy", LastName="Ruth", ID=198}}
+
+        Dictionary<int, DateTime> getDayCount(DateTime from, DateTime to, graphCommand command)
+        {
+            Dictionary<int, DateTime> days = new Dictionary<int, DateTime>();
+            int i = 0;
+            for (DateTime day = from; day <= to; day = day.AddDays(1))
+            {
+                days.Add(i, day);
+                i++;
+            }
+            int[,] ints = new int[i, BlOODTYPECOUNT];
+            foreach (Blood b in bloodList)
+            {
+                if (b.Is_removed)
+                {
+                    DateTime myValue;
+                    if (days.TryGetValue(b.Date_removed, out myValue)) 
+                    {
+
+                    }
+                }
+            }
+            return days;
+        }
         /*
         public int[] getAllBloodChangedOn(DateTime date)
         {
