@@ -206,7 +206,7 @@ las pinas 34.9km
             );
 
             //http://stackoverflow.com/questions/5228780/how-to-get-last-inserted-id
-            if (donorCommands("Insert into donor output donor_id" + AddQuery(DONOR_FIELDS), x) > 0)
+            if (donorCommands("Insert into donor output donor_id" + AddQuery(DONOR_FIELDS), x))
             {
                 sortDonor(x);
                 return true;
@@ -269,7 +269,7 @@ las pinas 34.9km
                     IS_CONTACTABLE,
                     IS_VIABLE,
                     REASON_FOR_DEFERRAL);
-            if (donorCommands("UPDATE donor SET " + UpdateQuery(DONOR_FIELDS), x) > 0)
+            if (donorCommands("UPDATE donor SET " + UpdateQuery(DONOR_FIELDS), x))
             {
                 unsortDonor(findDonor(DONOR_ID));
                 x.Donor_id = DONOR_ID;
@@ -279,7 +279,18 @@ las pinas 34.9km
             return false;
         }
 
-        int donorCommands(string query, Donor x)
+        bool UpdateDonor(Donor d)
+        {
+            if (donorCommands("UPDATE donor SET " + UpdateQuery(DONOR_FIELDS), d))
+            {
+                unsortDonor(findDonor(d.Donor_id));
+                sortDonor(d);
+                return true;
+            }
+            return false;
+        }
+
+        bool donorCommands(string query, Donor x)
         {
             //FIND A WAY TO SET THE ID
             MySqlConnection conn = new MySqlConnection(connectionString);
@@ -318,7 +329,7 @@ las pinas 34.9km
             x.Donor_id = (int)comm.ExecuteScalar();
             int rowsAffected = comm.ExecuteNonQuery();
             conn.Close();
-            return rowsAffected;
+            return (rowsAffected > 0);
         }
 
         bool DeleteDonorWithId(int id)
@@ -488,7 +499,7 @@ las pinas 34.9km
         {
             Blood x = new Blood(accession_number, blood_type, donor_id, patient_name, patient_age, date_added, date_expire);
 
-            if (bloodCommands("Insert into Blood " + AddQuery(BLOOD_FIELDS), x) > 0)
+            if (bloodCommands("Insert into Blood " + AddQuery(BLOOD_FIELDS), x))
             {
                 SortBlood(x);
                 return true;
@@ -507,13 +518,22 @@ las pinas 34.9km
         bool UpdateBlood(string accession_number, int blood_type, int? donor_id, string patient_name, int patient_age, DateTime date_added, DateTime date_expire, DateTime date_removed, bool is_assigned, bool is_processed, bool is_quarantined, string reason_for_removal)
         {
             Blood x = new Blood(accession_number, blood_type, donor_id, patient_name, patient_age, date_added, date_expire, date_removed, is_assigned, is_processed, is_quarantined, reason_for_removal);
-            if (bloodCommands("UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS), x) > 0)
+            if (bloodCommands("UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS), x))
             {
                 UnsortBlood(findBlood(accession_number));
                 SortBlood(x);
                 return true;
             }
             return false;
+        }
+
+        bool UpdateBlood(Blood b)
+        {
+            if (bloodCommands("UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS), b))
+            {
+                UnsortBlood(findBlood(b.Accession_number));
+                SortBlood(b);
+            }
         }
 
         int bloodCommands(string query, Blood x)
@@ -540,7 +560,7 @@ las pinas 34.9km
             conn.Open();
             int rowsAffected = comm.ExecuteNonQuery();
             conn.Close();
-            return rowsAffected;
+            return (rowsAffected > 0);
         }
 
         #region bloodGraphMethods

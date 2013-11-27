@@ -48,11 +48,11 @@ namespace Blood_SMS
             accession_number = ACCESSION_NUMBER;
             blood_type = (bloodType)BLOOD_TYPE;
             donor_id = DONOR_ID;
+            patient_name = PATIENT_NAME;
+            patient_age = PATIENT_AGE;
             date_added = DATE_ADDED;
             date_expire = DATE_EXPIRE;
 
-            patient_name = PATIENT_NAME;
-            patient_age = PATIENT_AGE;
             date_removed = DateTime.MinValue;
             is_assigned = false;
             is_processed = false;
@@ -89,6 +89,8 @@ namespace Blood_SMS
             Refresh();
         }
 
+        //foreach blood in available blood b.refresh; updateBlood(b);
+        //
         public void Refresh()
         {
             TimeSpan span = DateTime.Today - date_added;
