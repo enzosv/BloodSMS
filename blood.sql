@@ -50,14 +50,8 @@ CREATE TABLE IF NOT EXISTS `BSMS`.`blood` (
   `accession_number` VARCHAR(45) NOT NULL,
   `blood_type` INT NOT NULL,
   `donor_id` INT NULL,
-  `patient_name` VARCHAR(45) NULL,
-  `patient_age` INT NULL,
-  `date_added` DATETIME NOT NULL,
-  `date_expire` DATETIME NOT NULL,
+  `date_donated` DATETIME NOT NULL,
   `date_removed` DATETIME NOT NULL,
-  `is_processed` TINYINT(1) NOT NULL,
-  `is_quarantined` TINYINT(1) NOT NULL,
-  `reason_for_removal` TEXT NOT NULL,
   UNIQUE INDEX `accession_number_UNIQUE` (`accession_number` ASC),
   PRIMARY KEY (`accession_number`),
   INDEX `donor_id_idx` (`donor_id` ASC),
@@ -70,22 +64,25 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `BSMS`.`patient`
+-- Table `BSMS`.`component`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `BSMS`.`patient` ;
+DROP TABLE IF EXISTS `BSMS`.`component` ;
 
-CREATE TABLE IF NOT EXISTS `BSMS`.`patient` (
-  `patient_id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `BSMS`.`component` (
   `accession_number` VARCHAR(45) NOT NULL,
-  `last_name` VARCHAR(45) NOT NULL,
-  `first_name` VARCHAR(45) NOT NULL,
-  `middle_initial` VARCHAR(45) NOT NULL,
-  `age` INT NOT NULL,
+  `component_name` VARCHAR(45) NOT NULL,
+  `date_processed` DATETIME NOT NULL,
+  `date_reprocessed` DATETIME NOT NULL,
+  `date_expired` DATETIME NOT NULL,
+  `date_quarantined` DATETIME NOT NULL,
   `date_assigned` DATETIME NOT NULL,
-  `date_received` DATETIME NOT NULL,
-  PRIMARY KEY (`patient_id`),
-  UNIQUE INDEX `patient_id_UNIQUE` (`patient_id` ASC),
-  INDEX `accession_number_idx` (`accession_number` ASC),
+  `date_released` DATETIME NOT NULL,
+  `patient_last_name` VARCHAR(45) NOT NULL,
+  `patient_first_name` VARCHAR(45) NOT NULL,
+  `patient_middle_initial` VARCHAR(45) NOT NULL,
+  `patient_age` VARCHAR(45) NOT NULL,
+  `reason_for_removal` TEXT NOT NULL,
+  PRIMARY KEY (`accession_number`),
   CONSTRAINT `accession_number`
     FOREIGN KEY (`accession_number`)
     REFERENCES `BSMS`.`blood` (`accession_number`)
