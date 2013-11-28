@@ -469,117 +469,6 @@ las pinas 34.9km
             conn.Close();
             return (rowsAffected > 0);
         }
-
-        #region bloodGraphMethods
-        public int[] getBloodModifiedDuring(DateTime from, DateTime to, graphCommand command)
-        {
-            Hashtable days = new Hashtable();
-            int count = 0;
-
-            for (DateTime day = from; day <= to; day = day.AddDays(1))
-            {
-                days.Add(day, count);
-                count++;
-            }
-            int[] ints = new int[count];
-            switch (command)
-            {
-                case graphCommand.Release:
-                    foreach (Blood b in bloodList)
-                    {
-                        foreach (Component c in b.components)
-                        {
-                            if (c.Date_released != DateTime.MinValue)
-                            {
-                                ints[(int)days[c.Date_released]]++;
-                            }
-                        }
-                        
-                    }
-                    break;
-                case graphCommand.Quarantine:
-                    foreach (Blood b in bloodList)
-                    {
-                        foreach (Component c in b.components)
-                        {
-                            if (c.Date_quarantined != DateTime.MinValue)
-                            {
-                                ints[(int)days[c.Date_quarantined]]++;
-                            }
-                        }
-                    }
-                    break;
-                case graphCommand.Add:
-                    foreach (Blood b in bloodList)
-                    {
-                        ints[(int)days[b.Date_donated]]++;
-                    }
-                    break;
-                case graphCommand.Remove:
-                    foreach (Blood b in bloodList)
-                    {
-                        ints[(int)days[b.Date_removed]]++;
-                    }
-                    break;
-            }
-
-            return ints;
-        }
-        public int[,] getBloodTypeModifiedDuring(DateTime from, DateTime to, graphCommand command)
-        {
-            Hashtable days = new Hashtable();
-            int count = 0;
-
-            for (DateTime day = from; day <= to; day = day.AddDays(1))
-            {
-                days.Add(day, count);
-                count++;
-            }
-            int[,] ints = new int[count, BlOODTYPECOUNT];
-            switch (command)
-            {
-                case graphCommand.Release:
-                    foreach (Blood b in bloodList)
-                    {
-                        foreach (Component c in b.components)
-                        {
-                            if (c.Date_released != DateTime.MinValue)
-                            {
-                                ints[(int)days[c.Date_released], (int)b.Blood_type]++;
-                            }
-                        }
-                    }
-                    break;
-                case graphCommand.Quarantine:
-                    foreach (Blood b in bloodList)
-                    {
-                        foreach (Component c in b.components)
-                        {
-                            if (c.Date_quarantined != DateTime.MinValue)
-                            {
-                                ints[(int)days[c.Date_quarantined], (int)b.Blood_type]++;
-                            }
-                        }
-                    }
-                    break;
-                case graphCommand.Add:
-                    foreach (Blood b in bloodList)
-                    {
-                        ints[(int)days[b.Date_donated], (int)b.Blood_type]++;
-                    }
-                    break;
-                case graphCommand.Remove:
-                    foreach (Blood b in bloodList)
-                    {
-                        ints[(int)days[b.Date_removed], (int)b.Blood_type]++;
-                    }
-                    break;
-            }
-            
-            return ints;
-        }
-        #endregion
-
         
         void UnsortBlood(Blood b)
         {
@@ -876,6 +765,117 @@ las pinas 34.9km
 
         #endregion
 
+        #region Graph Methods
+        public int[] getBloodModifiedDuring(DateTime from, DateTime to, graphCommand command)
+        {
+            Hashtable days = new Hashtable();
+            int count = 0;
+
+            for (DateTime day = from; day <= to; day = day.AddDays(1))
+            {
+                days.Add(day, count);
+                count++;
+            }
+            int[] ints = new int[count];
+            switch (command)
+            {
+                case graphCommand.Release:
+                    foreach (Blood b in bloodList)
+                    {
+                        foreach (Component c in b.components)
+                        {
+                            if (c.Date_released != DateTime.MinValue)
+                            {
+                                ints[(int)days[c.Date_released]]++;
+                            }
+                        }
+
+                    }
+                    break;
+
+                case graphCommand.Quarantine:
+                    foreach (Blood b in bloodList)
+                    {
+                        foreach (Component c in b.components)
+                        {
+                            if (c.Date_quarantined != DateTime.MinValue)
+                            {
+                                ints[(int)days[c.Date_quarantined]]++;
+                            }
+                        }
+                    }
+                    break;
+
+                case graphCommand.Add:
+                    foreach (Blood b in bloodList)
+                    {
+                        ints[(int)days[b.Date_donated]]++;
+                    }
+                    break;
+                case graphCommand.Remove:
+                    foreach (Blood b in bloodList)
+                    {
+                        ints[(int)days[b.Date_removed]]++;
+                    }
+                    break;
+            }
+
+            return ints;
+        }
+        public int[,] getBloodTypeModifiedDuring(DateTime from, DateTime to, graphCommand command)
+        {
+            Hashtable days = new Hashtable();
+            int count = 0;
+
+            for (DateTime day = from; day <= to; day = day.AddDays(1))
+            {
+                days.Add(day, count);
+                count++;
+            }
+            int[,] ints = new int[count, BlOODTYPECOUNT];
+            switch (command)
+            {
+                case graphCommand.Release:
+                    foreach (Blood b in bloodList)
+                    {
+                        foreach (Component c in b.components)
+                        {
+                            if (c.Date_released != DateTime.MinValue)
+                            {
+                                ints[(int)days[c.Date_released], (int)b.Blood_type]++;
+                            }
+                        }
+                    }
+                    break;
+                case graphCommand.Quarantine:
+                    foreach (Blood b in bloodList)
+                    {
+                        foreach (Component c in b.components)
+                        {
+                            if (c.Date_quarantined != DateTime.MinValue)
+                            {
+                                ints[(int)days[c.Date_quarantined], (int)b.Blood_type]++;
+                            }
+                        }
+                    }
+                    break;
+                case graphCommand.Add:
+                    foreach (Blood b in bloodList)
+                    {
+                        ints[(int)days[b.Date_donated], (int)b.Blood_type]++;
+                    }
+                    break;
+                case graphCommand.Remove:
+                    foreach (Blood b in bloodList)
+                    {
+                        ints[(int)days[b.Date_removed], (int)b.Blood_type]++;
+                    }
+                    break;
+            }
+
+            return ints;
+        }
+        #endregion
     }
 }
 
