@@ -370,7 +370,7 @@ las pinas 34.9km
 
         
 
-        List<Donor> getClosestByType(int count, bloodType blood_type)
+        public List<Donor> getClosestByType(int count, bloodType blood_type)
         {
             int cityCount = Enum.GetNames(typeof(city)).Length;
             int bType = (int)blood_type;
@@ -382,6 +382,8 @@ las pinas 34.9km
                     if (d.Home_city == ((city)i).ToString())
                     {
                         closestByType.Add(d);
+                        d.Times_contacted++;
+                        UpdateDonor(d);
                         if (closestByType.Count >= count)
                             return closestByType;
                     }
