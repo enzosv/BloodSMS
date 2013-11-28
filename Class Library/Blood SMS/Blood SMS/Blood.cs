@@ -10,8 +10,6 @@ namespace Blood_SMS
         string accession_number;
         bloodType blood_type;
         int? donor_id;
-        string patient_name;
-        int? patient_age;
         DateTime date_added;
         DateTime date_expire;
         DateTime date_removed;
@@ -19,15 +17,15 @@ namespace Blood_SMS
         bool is_processed;
         bool is_quarantined;
         string reason_for_removal;
-        
+
         int age;
         bool is_removed;
+
+        public List<Patient> patients;
 
         public string Accession_number { get { return accession_number; } set { accession_number = value; } }
         public bloodType Blood_type { get { return blood_type; } set { blood_type = value; } }
         public int? Donor_id { get { return donor_id; } set { donor_id = value; } }
-        public string Patient_name { get { return patient_name; } set { patient_name = value; } }
-        public int? Patient_age { get { return patient_age; } set { patient_age = value; } }
         public DateTime Date_added { get { return date_added; } set { date_added = value; } }
         public DateTime Date_expire { get { return date_expire; } set { date_expire = value; } }
         public DateTime Date_removed { get { return date_removed; } set { date_removed = value; } }
@@ -35,21 +33,18 @@ namespace Blood_SMS
         public bool Is_processed { get { return is_processed; } set { is_processed = value; } }
         public bool Is_quarantined { get { return is_quarantined; } set { is_quarantined = value; } }
         public string Reason_for_removal { get{return reason_for_removal;} set{ reason_for_removal = value;} }
-       
 
-        public int Age { get{return age;} set{ age = value;} }
+        public int Age { get{return age;}}
         public bool Is_removed { get{return is_removed;} set{ is_removed = value;} }
 
         //Record Blood Ins
         //Create
 
-        public Blood(string ACCESSION_NUMBER, int BLOOD_TYPE, int? DONOR_ID, string PATIENT_NAME, int? PATIENT_AGE, DateTime DATE_ADDED, DateTime DATE_EXPIRE)
+        public Blood(string ACCESSION_NUMBER, int BLOOD_TYPE, int? DONOR_ID, DateTime DATE_ADDED, DateTime DATE_EXPIRE)
         {
             accession_number = ACCESSION_NUMBER;
             blood_type = (bloodType)BLOOD_TYPE;
             donor_id = DONOR_ID;
-            patient_name = PATIENT_NAME;
-            patient_age = PATIENT_AGE;
             date_added = DATE_ADDED;
             date_expire = DATE_EXPIRE;
 
@@ -64,7 +59,7 @@ namespace Blood_SMS
         }
 
         //From SQL
-        public Blood(string ACCESSION_NUMBER, int? BLOOD_TYPE, int? DONOR_ID, string PATIENT_NAME, int? PATIENT_AGE, DateTime? DATE_ADDED, DateTime? DATE_EXPIRE, DateTime? DATE_REMOVED, bool? IS_ASSIGNED, bool? IS_PROCESSED, bool? IS_QUARANTINED, string REASON_FOR_REMOVAL)
+        public Blood(string ACCESSION_NUMBER, int? BLOOD_TYPE, int? DONOR_ID, DateTime? DATE_ADDED, DateTime? DATE_EXPIRE, DateTime? DATE_REMOVED, bool? IS_ASSIGNED, bool? IS_PROCESSED, bool? IS_QUARANTINED, string REASON_FOR_REMOVAL)
         {
             accession_number = ACCESSION_NUMBER;
             blood_type = (bloodType)BLOOD_TYPE.Value;
@@ -72,8 +67,6 @@ namespace Blood_SMS
             date_added = DATE_ADDED.Value;
             date_expire = DATE_EXPIRE.Value;
 
-            patient_name = PATIENT_NAME;
-            patient_age = PATIENT_AGE.Value;
             date_removed = DATE_REMOVED.Value;
             is_assigned = IS_ASSIGNED.Value;
             is_processed = IS_PROCESSED.Value;
@@ -86,6 +79,7 @@ namespace Blood_SMS
             }
             else
                 is_removed = false;
+            patients = new List<Patient>();
             Refresh();
         }
 
@@ -115,7 +109,7 @@ namespace Blood_SMS
             is_removed = true;
         }
 
-        public bool Release(DateTime DATE_REMOVED)
+        /*public bool Release(DateTime DATE_REMOVED)
         {
             if (is_assigned)
             {
@@ -125,7 +119,7 @@ namespace Blood_SMS
                 return true;
             }
             return false;
-        }
+        }*/
 
         public void Quarantine(string reason, DateTime DATE_REMOVED)
         {
@@ -134,7 +128,17 @@ namespace Blood_SMS
             reason_for_removal = reason;
             is_removed = true;
         }
-		
+
+        public void AddPatient(Patient patient)
+        {
+            patients.Add(patient);
+        }
+
+        public void RemovePatient(Patient patient)
+        {
+            if(patients.Contains(patient))
+                patients.Remove(patient);
+        }
 
     }
 }

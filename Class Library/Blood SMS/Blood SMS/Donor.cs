@@ -28,11 +28,11 @@ namespace Blood_SMS
         DateTime birth_date;
         DateTime date_registered;
         DateTime next_available;
-        int times_donated;
         int times_contacted;
         bool is_contactable;
         bool is_viable;
         string reason_for_deferral;
+        List<Blood> bloods;
 
         int age;
         string name;
@@ -90,6 +90,7 @@ namespace Blood_SMS
             Refresh();
 
             name = LAST_NAME +", " + FIRST_NAME +" " + MIDDLE_INITIAL;
+            bloods = new List<Blood>();
         }
 
         //NEW REGISTER
@@ -151,6 +152,11 @@ namespace Blood_SMS
             if (birth_date > DateTime.Today.AddYears(-age)) age--;
         }
 
+        public void AddBlood(Blood b)
+        {
+            bloods.Add(b);
+        }
+
         public int Donor_id { get { return donor_id; } set { donor_id = value; } }
         public string Last_name { get { return last_name; } set { last_name = value; } }
         public string First_name { get { return first_name; } set { first_name = value; } }
@@ -179,5 +185,6 @@ namespace Blood_SMS
 
         public int Age { get { return age; } set { age = value; } }
         public string Name {get {return name;} set {name = value;}}
+        public List<Blood> Bloods { get { return bloods; } }
     }
 }

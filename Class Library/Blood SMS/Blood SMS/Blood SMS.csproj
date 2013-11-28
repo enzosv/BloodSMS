@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Blood.cs" />
     <Compile Include="Donor.cs" />
+    <Compile Include="Patient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Storage.cs" />
   </ItemGroup>

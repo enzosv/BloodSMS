@@ -297,17 +297,15 @@ namespace BloodSMSApp
             RefreshGraph();
         }
 
-        private void usedButton_Click(object sender, EventArgs e)
-        {
-            RefreshLegend(); 
-            command = graphCommand.Use;
-            RefreshGraph();
-        }
-
         private void button11_Click(object sender, EventArgs e)
         {
             command = graphCommand.Summary;
             RefreshGraph();
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
     }
