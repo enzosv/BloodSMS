@@ -784,7 +784,7 @@ las pinas 34.9km
                     {
                         foreach (Component c in b.components)
                         {
-                            if (c.Date_released != DateTime.MinValue)
+                            if (c.Is_released)
                             {
                                 ints[(int)days[c.Date_released]]++;
                             }
@@ -798,7 +798,7 @@ las pinas 34.9km
                     {
                         foreach (Component c in b.components)
                         {
-                            if (c.Date_quarantined != DateTime.MinValue)
+                            if (c.Is_quarantined)
                             {
                                 ints[(int)days[c.Date_quarantined]]++;
                             }
@@ -840,7 +840,7 @@ las pinas 34.9km
                     {
                         foreach (Component c in b.components)
                         {
-                            if (c.Date_released != DateTime.MinValue)
+                            if (c.Is_released)
                             {
                                 ints[(int)days[c.Date_released], (int)b.Blood_type]++;
                             }
@@ -852,7 +852,7 @@ las pinas 34.9km
                     {
                         foreach (Component c in b.components)
                         {
-                            if (c.Date_quarantined != DateTime.MinValue)
+                            if (c.Is_quarantined)
                             {
                                 ints[(int)days[c.Date_quarantined], (int)b.Blood_type]++;
                             }

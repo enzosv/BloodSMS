@@ -55,7 +55,7 @@ namespace Blood_SMS
             {
                 foreach (Component c in components)
                 {
-                    if (c.Date_reprocessed == DateTime.MinValue && c.Date_quarantined == DateTime.MinValue && c.Date_released == DateTime.MinValue)
+                    if (c.Date_reprocessed == DateTime.MinValue && !c.Is_quarantined && !c.Is_released)
                     {
                         date_removed = DateTime.Now;
                         is_removed = false;

@@ -22,6 +22,8 @@ namespace Blood_SMS
         string reason_for_removal;
 
         int age;
+        bool is_quarantined;
+        bool is_released;
 
         public string Accession_number { get { return accession_number; } set { accession_number = value; } }
         public string Component_name{ get { return component_name; }}
@@ -38,6 +40,8 @@ namespace Blood_SMS
         public string Reason_for_removal { get { return reason_for_removal; }}
 
         public int Age { get { return age; } }
+        public bool Is_quarantined { get { return is_quarantined; } }
+        public bool Is_released { get { return is_released; } }
 
         //from SQL
         public Component(string ACCESSION_NUMBER, string COMPONENT_NAME, DateTime DATE_PROCESSED, DateTime DATE_EXPIRED, string PATIENT_LAST_NAME, string PATIENT_FIRST_NAME, string PATIENT_MIDDLE_INITIAL, int PATIENT_AGE, DateTime DATE_REPROCESSED, DateTime DATE_QUARANTINED, DateTime DATE_ASSIGNED, DateTime DATE_RELEASED, string REASON_FOR_REMOVAL)
@@ -57,6 +61,14 @@ namespace Blood_SMS
             date_released = DATE_RELEASED;
             reason_for_removal = REASON_FOR_REMOVAL;
 
+            if (date_released != DateTime.MinValue)
+                is_released = true;
+            else
+                is_released = false;
+            if (date_quarantined != DateTime.MinValue)
+                is_quarantined = true;
+            else
+                is_quarantined = false;
             Refresh();
         }
 
@@ -115,24 +127,28 @@ namespace Blood_SMS
         {
             date_released = date;
             reason_for_removal = REASON_FOR_REMOVAL;
+            is_released = true;
         }
 
         public void Unrelease()
         {
             date_released = DateTime.MinValue;
             reason_for_removal = "";
+            is_released = false;
         }
 
         public void Quarantine(DateTime date, string REASON_FOR_REMOVAL)
         {
             date_quarantined = date;
             reason_for_removal = REASON_FOR_REMOVAL;
+            is_quarantined = true;
         }
 
         public void Unquarantine()
         {
             date_quarantined = DateTime.MinValue;
             reason_for_removal = "";
+            is_quarantined = false;
         }
 
         public void Reprocess(DateTime date, string REASON_FOR_REMOVAL)
