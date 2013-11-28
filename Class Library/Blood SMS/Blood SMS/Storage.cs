@@ -35,9 +35,7 @@ las pinas 34.9km
     {
         public List<Blood> bloodList;
         public List<Blood>[] bloodTypes;
-        public List<Blood> availableBlood;
-        public List<Blood> quarantinedBlood;
-        public List<Blood> releasedBlood;
+
         public List<Donor> donorList;
         public List<Donor>[] donorTypes;
         public List<Donor> contactableDonors;
@@ -59,9 +57,9 @@ las pinas 34.9km
         int BlOODTYPECOUNT = Enum.GetNames(typeof(bloodType)).Length;
         const int MINIMUMBLOODVALUE = 5;
         const int MINIMUMEXPIRYALERTVALUE = 3;
-        readonly string[] BLOOD_FIELDS = { "accession_number", "blood_type", "date_added", "date_expire", "date_removed", "is_assigned", "is_processed", "is_quarantined", "reason_for_removal" };
-        readonly string[] DONOR_FIELDS = { "donor_id", "last_name", "first_name", "middle_initial", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "email", "cellphone", "educational_attainment", "birth_date", "date_registered", "next_available", "times_donated", "times_contacted", "is_contactable", "is_viable", "reason_for_deferral" };
-        readonly string[] PATIENT_FIELDS = { "patient_id", "accession_number", "last_name", "first_name", "middle_initial", "age" };
+        readonly string[] BLOOD_FIELDS = { "accession_number", "blood_type", "donor_id", "date_donated"};
+        readonly string[] DONOR_FIELDS = { "donor_id", "last_name", "first_name", "middle_initial", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "email", "cellphone", "educational_attainment", "birth_date", "date_registered", "next_available", "times_contacted", "is_contactable", "is_viable", "reason_for_deferral" };
+        readonly string[] COMPONENT_FIELDS = { "accession_number", "component_name", "date_processed", "date_expire", "date_assigned", "date_released", "patient_last_name", "patient_first_name", "patient_middle_initial", "patient_age", "is_quarantined", "reason_for_removal" };
         
         public Storage(string host, string db, string user, string pass)
         {
@@ -69,8 +67,6 @@ las pinas 34.9km
 
             bloodList = new List<Blood>();
             bloodTypes = new List<Blood>[BlOODTYPECOUNT];
-            availableBlood = new List<Blood>();
-            quarantinedBlood = new List<Blood>();
             
             donorList = new List<Donor>();
             donorTypes = new List<Donor>[BlOODTYPECOUNT];
@@ -82,7 +78,7 @@ las pinas 34.9km
             contactableDonors = new List<Donor>();
             viableDonors = new List<Donor>();
             bannedDonors = new List<Donor>();
-
+            
             getDonorSQL();
             getBloodSQL();
         }
@@ -124,7 +120,6 @@ las pinas 34.9km
                 DateTime? BIRTH_DATE = reader.GetValue(17) as DateTime?;
                 DateTime? DATE_REGISTERED = reader.GetValue(18) as DateTime?;
                 DateTime? NEXT_AVAILABLE = reader.GetValue(19) as DateTime?;
-                int? TIMES_DONATED = reader.GetValue(20) as int?;
                 int? TIMES_CONTACTED = reader.GetValue(21) as int?;
                 bool? IS_CONTACTABLE = reader.GetValue(22) as bool?;
                 bool? IS_VIABLE = reader.GetValue(23) as bool?;
@@ -147,7 +142,6 @@ las pinas 34.9km
                     BIRTH_DATE,
                     DATE_REGISTERED,
                     NEXT_AVAILABLE,
-                    TIMES_DONATED,
                     TIMES_CONTACTED,
                     IS_CONTACTABLE,
                     IS_VIABLE,
@@ -241,7 +235,6 @@ las pinas 34.9km
             DateTime BIRTH_DATE,
             DateTime DATE_REGISTERED,
             DateTime NEXT_AVAILABLE,
-            int TIMES_DONATED,
             int TIMES_CONTACTED,
             bool IS_CONTACTABLE,
             bool IS_VIABLE,
@@ -266,7 +259,6 @@ las pinas 34.9km
                     BIRTH_DATE,
                     DATE_REGISTERED,
                     NEXT_AVAILABLE,
-                    TIMES_DONATED,
                     TIMES_CONTACTED,
                     IS_CONTACTABLE,
                     IS_VIABLE,
@@ -320,7 +312,6 @@ las pinas 34.9km
             comm.Parameters.AddWithValue("@birth_date", x.Birth_date);
             comm.Parameters.AddWithValue("@date_registered", x.Date_registered);
             comm.Parameters.AddWithValue("@next_available", x.Next_available);
-            comm.Parameters.AddWithValue("@times_donated", x.Times_donated);
             comm.Parameters.AddWithValue("@times_contacted", x.Times_contacted);
             comm.Parameters.AddWithValue("@is_contactable", x.Is_contactable);
             comm.Parameters.AddWithValue("@is_viable", x.Is_viable);
@@ -474,17 +465,9 @@ las pinas 34.9km
                 string accession_number = reader.GetValue(0) as string;
                 int? blood_type = reader.GetValue(1) as int?;
                 int? donor_id = reader.GetValue(2) as int?;
-                string patient_name = reader.GetValue(3) as string;
-                int? patient_age = reader.GetValue(4) as int?;
-                DateTime? date_added = reader.GetValue(5) as DateTime?;
-                DateTime? date_expire = reader.GetValue(6) as DateTime?;
-                DateTime? date_removed = reader.GetValue(7) as DateTime?;
-                bool? is_assigned = reader.GetValue(8) as bool?;
-                bool? is_processed = reader.GetValue(9) as bool?;
-                bool? is_quarantined = reader.GetValue(10) as bool?;
-                string reason_for_removal = reader.GetValue(11) as string;
+                DateTime? date_donated = reader.GetValue(5) as DateTime?;
 
-                Blood x = new Blood(accession_number, blood_type, donor_id, patient_name, patient_age, date_added, date_expire, date_removed, is_assigned, is_processed, is_quarantined, reason_for_removal);
+                Blood x = new Blood(accession_number, blood_type.Value, donor_id, date_donated.Value);
                 SortBlood(x);
             }
             reader.Close();
@@ -497,32 +480,12 @@ las pinas 34.9km
         *</summary>
         */
         //new donation
-        public bool AddBlood(string accession_number, int blood_type, int? donor_id, string patient_name, int? patient_age, DateTime date_added, DateTime date_expire)
+        public bool AddBlood(string accession_number, int blood_type, int? donor_id, DateTime date_donated)
         {
-            Blood x = new Blood(accession_number, blood_type, donor_id, patient_name, patient_age, date_added, date_expire);
+            Blood x = new Blood(accession_number, blood_type, donor_id, date_donated);
 
             if (bloodCommands("Insert into Blood " + AddQuery(BLOOD_FIELDS), x))
             {
-                SortBlood(x);
-                return true;
-            }
-            return false;
-        }
-
-        /*
-       *<summary>
-       *  Updates the sql table with the properties found in the supplied object
-       *</summary>
-       *<param name="x">
-       *  Blood object containing properties to be applied
-       *</param>
-       */
-        bool UpdateBlood(string accession_number, int blood_type, int? donor_id, string patient_name, int patient_age, DateTime date_added, DateTime date_expire, DateTime date_removed, bool is_assigned, bool is_processed, bool is_quarantined, string reason_for_removal)
-        {
-            Blood x = new Blood(accession_number, blood_type, donor_id, patient_name, patient_age, date_added, date_expire, date_removed, is_assigned, is_processed, is_quarantined, reason_for_removal);
-            if (bloodCommands("UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS), x))
-            {
-                UnsortBlood(findBlood(accession_number));
                 SortBlood(x);
                 return true;
             }
@@ -550,16 +513,7 @@ las pinas 34.9km
             comm.Parameters.AddWithValue("@blood_type", x.Blood_type);
             if (x.Donor_id.HasValue)
                 comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
-            if(!String.IsNullOrWhiteSpace(x.Patient_name))
-                comm.Parameters.AddWithValue("@patient_name", x.Patient_name);
-            comm.Parameters.AddWithValue("@patient_age", x.Patient_age);
-            comm.Parameters.AddWithValue("@date_added", x.Date_added);
-            comm.Parameters.AddWithValue("@date_expire", x.Date_expire);
-            comm.Parameters.AddWithValue("@date_removed", x.Date_removed);
-            comm.Parameters.AddWithValue("@is_assigned", x.Is_assigned);
-            comm.Parameters.AddWithValue("@is_processed", x.Is_processed);
-            comm.Parameters.AddWithValue("@is_quarantined", x.Is_quarantined);
-            comm.Parameters.AddWithValue("@reason_for_removal", x.Reason_for_removal);
+            comm.Parameters.AddWithValue("@date_added", x.Date_donated);
 
             conn.Open();
             int rowsAffected = comm.ExecuteNonQuery();
@@ -584,25 +538,32 @@ las pinas 34.9km
                 case graphCommand.Release:
                     foreach (Blood b in bloodList)
                     {
-                        if (b.Is_assigned && !b.Is_quarantined && b.Is_removed)
+                        foreach (Component c in b.components)
                         {
-                            ints[(int)days[b.Date_removed]]++;
+                            if (c.Date_released != DateTime.MinValue)
+                            {
+                                ints[(int)days[c.Date_released]]++;
+                            }
                         }
+                        
                     }
                     break;
                 case graphCommand.Quarantine:
                     foreach (Blood b in bloodList)
                     {
-                        if (b.Is_quarantined)
+                        foreach (Component c in b.components)
                         {
-                            ints[(int)days[b.Date_removed]]++;
+                            if (c.Date_quarantined != DateTime.MinValue)
+                            {
+                                ints[(int)days[c.Date_quarantined]]++;
+                            }
                         }
                     }
                     break;
                 case graphCommand.Add:
                     foreach (Blood b in bloodList)
                     {
-                        ints[(int)days[b.Date_added]]++;
+                        ints[(int)days[b.Date_donated]]++;
                     }
                     break;
             }
@@ -622,37 +583,34 @@ las pinas 34.9km
             int[,] ints = new int[count, BlOODTYPECOUNT];
             switch (command)
             {
-                case graphCommand.Remove:
-                    foreach (Blood b in bloodList)
-                    {
-                        if (b.Is_removed)
-                        {
-                            ints[(int)days[b.Date_removed], (int)b.Blood_type]++;
-                        }
-                    }
-                    break;
                 case graphCommand.Release:
                     foreach (Blood b in bloodList)
                     {
-                        if (b.Is_assigned && !b.Is_quarantined && b.Is_removed)
+                        foreach (Component c in b.components)
                         {
-                            ints[(int)days[b.Date_removed], (int)b.Blood_type]++;
+                            if (c.Date_released != DateTime.MinValue)
+                            {
+                                ints[(int)days[c.Date_released], (int)b.Blood_type]++;
+                            }
                         }
                     }
                     break;
                 case graphCommand.Quarantine:
                     foreach (Blood b in bloodList)
                     {
-                        if (b.Is_quarantined && b.Is_removed)
+                        foreach (Component c in b.components)
                         {
-                            ints[(int)days[b.Date_removed], (int)b.Blood_type]++;
+                            if (c.Date_quarantined != DateTime.MinValue)
+                            {
+                                ints[(int)days[c.Date_quarantined], (int)b.Blood_type]++;
+                            }
                         }
                     }
                     break;
                 case graphCommand.Add:
                     foreach (Blood b in bloodList)
                     {
-                        ints[(int)days[b.Date_added], (int)b.Blood_type]++;
+                        ints[(int)days[b.Date_donated], (int)b.Blood_type]++;
                     }
                     break;
             }
@@ -683,6 +641,7 @@ las pinas 34.9km
 
         void SortBlood(Blood b)
         {
+            bloodList.Add(b);
             if (!b.Is_removed)
             {
                 availableBlood.Add(b);
@@ -692,7 +651,7 @@ las pinas 34.9km
             {
                 quarantinedBlood.Add(b);
             }
-            if (b.Is_assigned && b.Is_removed)
+            if (!b.Is_quarantined && b.Is_removed)
             {
                 releasedBlood.Add(b);
             }

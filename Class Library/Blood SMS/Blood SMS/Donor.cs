@@ -55,7 +55,6 @@ namespace Blood_SMS
         DateTime? BIRTH_DATE,
         DateTime? DATE_REGISTERED,
         DateTime? NEXT_AVAILABLE,
-        int? TIMES_DONATED,
         int? TIMES_CONTACTED,
         bool? IS_CONTACTABLE,
         bool? IS_VIABLE,
@@ -82,7 +81,6 @@ namespace Blood_SMS
             birth_date = BIRTH_DATE.Value;
             date_registered = DATE_REGISTERED.Value;
             next_available = NEXT_AVAILABLE.Value;
-            times_donated = TIMES_DONATED.Value;
             times_contacted = TIMES_CONTACTED.Value;
             is_contactable = IS_CONTACTABLE.Value;
             is_viable = IS_VIABLE.Value;
@@ -135,13 +133,15 @@ namespace Blood_SMS
             date_registered = DATE_REGISTERED;
 
             next_available = DateTime.MinValue;
-            times_donated = 0;
             times_contacted = 0;
 
             is_contactable = IS_CONTACTABLE;
             is_viable = IS_VIABLE;
             reason_for_deferral = REASON_FOR_DEFERRAL;
             Refresh();
+
+            name = LAST_NAME + ", " + FIRST_NAME + " " + MIDDLE_INITIAL;
+            bloods = new List<Blood>();
         }
 
 
@@ -155,6 +155,11 @@ namespace Blood_SMS
         public void AddBlood(Blood b)
         {
             bloods.Add(b);
+        }
+
+        public void RemoveBlood(Blood b)
+        {
+            bloods.Remove(b);
         }
 
         public int Donor_id { get { return donor_id; } set { donor_id = value; } }
@@ -177,7 +182,6 @@ namespace Blood_SMS
         public DateTime Birth_date { get { return birth_date; } set { birth_date = value; } }
         public DateTime Date_registered { get { return date_registered; } set { date_registered = value; } }
         public DateTime Next_available { get { return next_available; } set { next_available = value; } }
-        public int Times_donated { get { return times_donated; } set { times_donated = value; } }
         public int Times_contacted { get { return times_contacted; } set { times_contacted = value; } }
         public bool Is_contactable { get { return is_contactable; } set { is_contactable = value; } }
         public bool Is_viable { get { return is_viable; } set { is_viable = value; } }

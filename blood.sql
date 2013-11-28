@@ -32,7 +32,6 @@ CREATE TABLE IF NOT EXISTS `BSMS`.`donor` (
   `birth_date` DATETIME NOT NULL,
   `date_registered` DATETIME NOT NULL,
   `next_available` DATETIME NOT NULL,
-  `times_donated` INT NOT NULL,
   `times_contacted` INT NOT NULL,
   `is_contactable` TINYINT(1) NOT NULL,
   `is_viable` TINYINT(1) NOT NULL,
@@ -51,12 +50,11 @@ CREATE TABLE IF NOT EXISTS `BSMS`.`blood` (
   `accession_number` VARCHAR(45) NOT NULL,
   `blood_type` INT NOT NULL,
   `donor_id` INT NULL,
-  `patient_name` VARCHAR(45) NOT NULL,
-  `patient_age` INT NOT NULL,
+  `patient_name` VARCHAR(45) NULL,
+  `patient_age` INT NULL,
   `date_added` DATETIME NOT NULL,
   `date_expire` DATETIME NOT NULL,
   `date_removed` DATETIME NOT NULL,
-  `is_assigned` TINYINT(1) NOT NULL,
   `is_processed` TINYINT(1) NOT NULL,
   `is_quarantined` TINYINT(1) NOT NULL,
   `reason_for_removal` TEXT NOT NULL,
@@ -66,6 +64,31 @@ CREATE TABLE IF NOT EXISTS `BSMS`.`blood` (
   CONSTRAINT `donor_id`
     FOREIGN KEY (`donor_id`)
     REFERENCES `BSMS`.`donor` (`donor_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `BSMS`.`patient`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `BSMS`.`patient` ;
+
+CREATE TABLE IF NOT EXISTS `BSMS`.`patient` (
+  `patient_id` INT NOT NULL,
+  `accession_number` VARCHAR(45) NOT NULL,
+  `last_name` VARCHAR(45) NOT NULL,
+  `first_name` VARCHAR(45) NOT NULL,
+  `middle_initial` VARCHAR(45) NOT NULL,
+  `age` INT NOT NULL,
+  `date_assigned` DATETIME NOT NULL,
+  `date_received` DATETIME NOT NULL,
+  PRIMARY KEY (`patient_id`),
+  UNIQUE INDEX `patient_id_UNIQUE` (`patient_id` ASC),
+  INDEX `accession_number_idx` (`accession_number` ASC),
+  CONSTRAINT `accession_number`
+    FOREIGN KEY (`accession_number`)
+    REFERENCES `BSMS`.`blood` (`accession_number`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
