@@ -605,8 +605,11 @@ las pinas 34.9km
         {
             if(ComponentCommands("Update component set " + UpdateQuery(COMPONENT_FIELDS), c))
             {
-                findBlood(c.Accession_number).RemoveComponent(findComponentWithAccessionNumberAndName(c.Accession_number, c.Component_name));
-                findBlood(c.Accession_number).AddComponent(c);
+                Blood b = findBlood(c.Accession_number);
+                b.RemoveComponent(findComponentWithAccessionNumberAndName(c.Accession_number, c.Component_name));
+                b.AddComponent(c);
+                if (b.checkRemoved())
+                    UpdateBlood(b);
                 return true;
             }
             return false;

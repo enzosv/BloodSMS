@@ -48,8 +48,9 @@ namespace Blood_SMS
                 is_removed = true;
         }
 
-        public void checkRemoved()
+        public bool checkRemoved()
         {
+            bool old_is_removed = is_removed;
             is_removed = true;
             if (components.Count < 1)
             {
@@ -65,6 +66,8 @@ namespace Blood_SMS
             }
             else
                 is_removed = false;
+            return (old_is_removed != is_removed);
+
         }
 
         public void AddComponent(Component c)
