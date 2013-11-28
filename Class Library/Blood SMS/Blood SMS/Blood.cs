@@ -24,22 +24,25 @@ namespace Blood_SMS
         public bool Is_removed { get { return is_removed; } }
 
         //new donation
-        public Blood(string ACCESSION_NUMBER, int BLOOD_TYPE, int? DONOR_ID, DateTime DATE_ADDED)
+        public Blood(string ACCESSION_NUMBER, int BLOOD_TYPE, int? DONOR_ID, DateTime DATE_DONATED)
         {
             accession_number = ACCESSION_NUMBER;
             blood_type = (bloodType)BLOOD_TYPE;
             donor_id = DONOR_ID;
+            date_donated = DATE_DONATED;
+
             date_removed = DateTime.MinValue;
             is_removed = false;
             components = new List<Component>();
         }
 
         //from SQL
-        public Blood(string ACCESSION_NUMBER, int BLOOD_TYPE, int? DONOR_ID, DateTime DATE_ADDED, DateTime DATE_REMOVED)
+        public Blood(string ACCESSION_NUMBER, int BLOOD_TYPE, int? DONOR_ID, DateTime DATE_DONATED, DateTime DATE_REMOVED)
         {
             accession_number = ACCESSION_NUMBER;
             blood_type = (bloodType)BLOOD_TYPE;
             donor_id = DONOR_ID;
+            date_donated = DATE_DONATED;
             date_removed = DATE_REMOVED;
             components = new List<Component>();
             if (date_removed != DateTime.MinValue)
