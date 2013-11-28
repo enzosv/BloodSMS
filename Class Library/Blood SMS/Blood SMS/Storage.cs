@@ -8,7 +8,7 @@ using MySql.Data.MySqlClient;
 
 namespace Blood_SMS
 {
-    public enum graphCommand { Add, Release, Quarantine, Summary };
+    public enum graphCommand { Add, Release, Quarantine, Remove, Summary };
     public enum bloodType { NotTyped, ABp, ABn, Ap, An, Bp, Bn, Op, On };
     public enum contactMethod { none, email, cellphone };
     public enum educationalAttainment { other, none, gradeschool, highschool, college };
@@ -35,7 +35,8 @@ las pinas 34.9km
     {
         public List<Blood> bloodList;
         public List<Blood>[] bloodTypes;
-
+        public List<Blood> availableBlood;
+        public List<Blood> unavailableBlood;
         public List<Donor> donorList;
         public List<Donor>[] donorTypes;
         public List<Donor> contactableDonors;
@@ -57,9 +58,9 @@ las pinas 34.9km
         int BlOODTYPECOUNT = Enum.GetNames(typeof(bloodType)).Length;
         const int MINIMUMBLOODVALUE = 5;
         const int MINIMUMEXPIRYALERTVALUE = 3;
-        readonly string[] BLOOD_FIELDS = { "accession_number", "blood_type", "donor_id", "date_donated"};
+        readonly string[] BLOOD_FIELDS = { "accession_number", "blood_type", "donor_id", "date_donated", "date_removed"};
         readonly string[] DONOR_FIELDS = { "donor_id", "last_name", "first_name", "middle_initial", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "email", "cellphone", "educational_attainment", "birth_date", "date_registered", "next_available", "times_contacted", "is_contactable", "is_viable", "reason_for_deferral" };
-        readonly string[] COMPONENT_FIELDS = { "accession_number", "component_name", "date_processed", "date_expire", "date_assigned", "date_released", "patient_last_name", "patient_first_name", "patient_middle_initial", "patient_age", "is_quarantined", "reason_for_removal" };
+        readonly string[] COMPONENT_FIELDS = { "accession_number", "component_name", "date_processed", "date_expire", "date_quarantined", "date_assigned", "date_released", "patient_last_name", "patient_first_name", "patient_middle_initial", "patient_age", "reason_for_removal" };
         
         public Storage(string host, string db, string user, string pass)
         {
@@ -67,7 +68,8 @@ las pinas 34.9km
 
             bloodList = new List<Blood>();
             bloodTypes = new List<Blood>[BlOODTYPECOUNT];
-            
+            availableBlood = new List<Blood>();
+            unavailableBlood = new List<Blood>();
             donorList = new List<Donor>();
             donorTypes = new List<Donor>[BlOODTYPECOUNT];
             for (int i = 0; i < BlOODTYPECOUNT; i++)
@@ -465,9 +467,10 @@ las pinas 34.9km
                 string accession_number = reader.GetValue(0) as string;
                 int? blood_type = reader.GetValue(1) as int?;
                 int? donor_id = reader.GetValue(2) as int?;
-                DateTime? date_donated = reader.GetValue(5) as DateTime?;
+                DateTime? date_donated = reader.GetValue(3) as DateTime?;
+                DateTime? date_removed = reader.GetValue(4) as DateTime?;
 
-                Blood x = new Blood(accession_number, blood_type.Value, donor_id, date_donated.Value);
+                Blood x = new Blood(accession_number, blood_type.Value, donor_id, date_donated.Value, date_removed.Value);
                 SortBlood(x);
             }
             reader.Close();
@@ -513,7 +516,8 @@ las pinas 34.9km
             comm.Parameters.AddWithValue("@blood_type", x.Blood_type);
             if (x.Donor_id.HasValue)
                 comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
-            comm.Parameters.AddWithValue("@date_added", x.Date_donated);
+            comm.Parameters.AddWithValue("@date_donated", x.Date_donated);
+            comm.Parameters.AddWithValue("@date_removed", x.Date_removed);
 
             conn.Open();
             int rowsAffected = comm.ExecuteNonQuery();
@@ -566,6 +570,12 @@ las pinas 34.9km
                         ints[(int)days[b.Date_donated]]++;
                     }
                     break;
+                case graphCommand.Remove:
+                    foreach (Blood b in bloodList)
+                    {
+                        ints[(int)days[b.Date_removed]]++;
+                    }
+                    break;
             }
 
             return ints;
@@ -613,12 +623,19 @@ las pinas 34.9km
                         ints[(int)days[b.Date_donated], (int)b.Blood_type]++;
                     }
                     break;
+                case graphCommand.Remove:
+                    foreach (Blood b in bloodList)
+                    {
+                        ints[(int)days[b.Date_removed], (int)b.Blood_type]++;
+                    }
+                    break;
             }
             
             return ints;
         }
         #endregion
 
+        
         void UnsortBlood(Blood b)
         {
             bloodList.Remove(b);
@@ -634,8 +651,8 @@ las pinas 34.9km
                     }
                 }
             }
-            else if (quarantinedBlood.Contains(b))
-                quarantinedBlood.Remove(b);
+            else if (unavailableBlood.Contains(b))
+                unavailableBlood.Remove(b);
 
         }
 
@@ -647,13 +664,9 @@ las pinas 34.9km
                 availableBlood.Add(b);
                 bloodTypes[(int)b.Blood_type].Add(b);
             }
-            else if(b.Is_quarantined)
+            else
             {
-                quarantinedBlood.Add(b);
-            }
-            if (!b.Is_quarantined && b.Is_removed)
-            {
-                releasedBlood.Add(b);
+                unavailableBlood.Add(b);
             }
         }
 
@@ -708,7 +721,97 @@ las pinas 34.9km
         }
         #endregion
 
-        #region Utility Methods 
+        #region Component methods
+
+        void getComponentSQL()
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            conn.Open();
+
+            string query = "Select * from component";
+            MySqlCommand command = new MySqlCommand(query, conn);
+            MySqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                string accession_number = reader.GetValue(0) as string;
+                string component_name = reader.GetValue(1) as string;
+                string patient_last_name = reader.GetValue(2) as string;
+                string patient_first_name = reader.GetValue(3) as string;
+                string patient_middle_initial = reader.GetValue(4) as string;
+                int? patient_age = reader.GetValue(5) as int?;
+                DateTime? date_processed = reader.GetValue(6) as DateTime?;
+                DateTime? date_reprocessed = reader.GetValue(7) as DateTime?;
+                DateTime? date_expired = reader.GetValue(8) as DateTime?;
+                DateTime? date_quarantined = reader.GetValue(9) as DateTime?;
+                DateTime? date_assigned = reader.GetValue(10) as DateTime?;
+                DateTime? date_released = reader.GetValue(11) as DateTime?;
+                string reason_for_removal = reader.GetValue(12) as string;
+
+                findBlood(accession_number).AddComponent(new Component(accession_number, component_name, date_processed.Value, date_expired.Value, patient_last_name, patient_first_name, patient_middle_initial, patient_age.Value, date_reprocessed.Value, date_quarantined.Value, date_assigned.Value, date_released.Value, reason_for_removal));
+            }
+            reader.Close();
+            conn.Close();
+        }
+
+        bool AddComponent(string ACCESSION_NUMBER, string COMPONENT_NAME, DateTime DATE_PROCESSED, DateTime DATE_EXPIRED)
+        {
+            Component c = new Component(ACCESSION_NUMBER, COMPONENT_NAME, DATE_PROCESSED, DATE_EXPIRED);
+            
+            if(ComponentCommands("Insert into component " + AddQuery(COMPONENT_FIELDS), c))
+            {
+                findBlood(ACCESSION_NUMBER).AddComponent(c);
+                return true;
+            }
+            return false;
+        }
+
+        bool UpdateComponent(Component c)
+        {
+            if(ComponentCommands("Update component set " + UpdateQuery(COMPONENT_FIELDS), c))
+            {
+                findBlood(c.Accession_number).RemoveComponent(findComponentWithAccessionNumberAndName(c.Accession_number, c.Component_name));
+                findBlood(c.Accession_number).AddComponent(c);
+                return true;
+            }
+            return false;
+        }
+        bool ComponentCommands(string query, Component x)
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            comm.CommandType = CommandType.Text;
+
+            comm.Parameters.AddWithValue("@accession_number", x.Accession_number);
+            comm.Parameters.AddWithValue("@component_name", x.Component_name);
+            comm.Parameters.AddWithValue("@date_donated", x.Date_processed);
+            comm.Parameters.AddWithValue("@date_reprocessed", x.Date_reprocessed);
+            comm.Parameters.AddWithValue("@date_expired", x.Date_expired);
+            comm.Parameters.AddWithValue("@date_quarantined", x.Date_quarantined);
+            comm.Parameters.AddWithValue("@date_assigned", x.Date_assigned);
+            comm.Parameters.AddWithValue("@date_released", x.Date_released);
+            comm.Parameters.AddWithValue("@patient_last_name", x.Patient_last_name);
+            comm.Parameters.AddWithValue("@patient_first_name", x.Patient_first_name);
+            comm.Parameters.AddWithValue("@patient_middle_initial", x.Patient_middle_initial);
+            comm.Parameters.AddWithValue("@patient_age", x.Patient_age);
+            comm.Parameters.AddWithValue("@reason_for_removal", x.Reason_for_removal);
+            conn.Open();
+            int rowsAffected = comm.ExecuteNonQuery();
+            conn.Close();
+            return (rowsAffected > 0);
+        }
+
+        Component findComponentWithAccessionNumberAndName(string accession_number, string name)
+        {
+            foreach (Component c in findBlood(accession_number).components)
+            {
+                if (c.Component_name == name)
+                    return c;
+            }
+            return null;
+        }
+
+        #endregion
+        #region Utility Methods
         /*
          *<summary>
          *  returns a string which assigns the values to be updated
@@ -760,12 +863,20 @@ las pinas 34.9km
             return false;
         }
 
-        public bool AlertNearExpiration(Blood b)
+        public List<string> AlertNearExpiration()
         {
-            TimeSpan span = DateTime.Now - b.Date_expire;
-            if (span.TotalDays < MINIMUMEXPIRYALERTVALUE)
-                return true;
-            return false;
+            List<string> expiringComponents = new List<string>();
+            foreach (Blood b in bloodList)
+            {
+                foreach (Component c in b.components)
+                {
+                    TimeSpan span = DateTime.Now - c.Date_expired;
+                    if (span.TotalDays < MINIMUMEXPIRYALERTVALUE)
+                        expiringComponents.Add(c.Component_name);
+                }
+            }
+            
+            return expiringComponents;
         }
 
         #endregion

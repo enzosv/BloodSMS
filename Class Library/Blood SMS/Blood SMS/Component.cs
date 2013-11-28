@@ -28,10 +28,12 @@ namespace Blood_SMS
         public string Patient_last_name{ get { return patient_last_name; }}
         public string Patient_first_name{ get { return patient_first_name; }}
         public string Patient_middle_initial{ get { return patient_middle_initial; }}
+        public int Patient_age { get { return patient_age; } }
         public DateTime Date_processed { get { return date_processed; }}
         public DateTime Date_reprocessed { get { return date_reprocessed; } }
         public DateTime Date_expired { get { return date_expired; } }
         public DateTime Date_quarantined { get { return date_quarantined; } }
+        public DateTime Date_assigned { get { return date_assigned; } }
         public DateTime Date_released { get { return date_released; }}
         public string Reason_for_removal { get { return reason_for_removal; }}
 
