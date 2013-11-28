@@ -23,7 +23,7 @@ namespace Blood_SMS
 
         int age;
 
-        public string Accession_number { get { return accession_number; }}
+        public string Accession_number { get { return accession_number; } set { accession_number = value; } }
         public string Component_name{ get { return component_name; }}
         public string Patient_last_name{ get { return patient_last_name; }}
         public string Patient_first_name{ get { return patient_first_name; }}

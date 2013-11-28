@@ -211,70 +211,7 @@ las pinas 34.9km
             }
             return false;
         }
-
-        /*
-         *<summary>
-         *  Updates the sql table with the properties found in the supplied object
-         *</summary>
-         *<param name="x">
-         *  Donor object containing properties to be applied
-         *</param>
-         */
-        bool UpdateDonor(int DONOR_ID, string LAST_NAME, string FIRST_NAME, string MIDDLE_INITIAL,
-            int BLOOD_TYPE,
-            string HOME_PROVINCE,
-            string HOME_CITY,
-            string HOME_STREET,
-            string OFFICE_PROVINCE,
-            string OFFICE_CITY,
-            string OFFICE_STREET,
-            int PREFERRED_CONTACT_METHOD,
-            string HOME_LANDLINE,
-            string OFFICE_LANDLINE,
-            string EMAIL,
-            string CELLPHONE,
-            int EDUCATIONAL_ATTAINMENT,
-            DateTime BIRTH_DATE,
-            DateTime DATE_REGISTERED,
-            DateTime NEXT_AVAILABLE,
-            int TIMES_CONTACTED,
-            bool IS_CONTACTABLE,
-            bool IS_VIABLE,
-            string REASON_FOR_DEFERRAL)
-        {
-            
-            Donor x = new Donor(DONOR_ID,
-                    LAST_NAME, FIRST_NAME, MIDDLE_INITIAL,
-                    BLOOD_TYPE,
-                    HOME_PROVINCE,
-                    HOME_CITY,
-                    HOME_STREET,
-                    OFFICE_PROVINCE,
-                    OFFICE_CITY,
-                    OFFICE_STREET,
-                    PREFERRED_CONTACT_METHOD,
-                    HOME_LANDLINE,
-                    OFFICE_LANDLINE,
-                    EMAIL,
-                    CELLPHONE,
-                    EDUCATIONAL_ATTAINMENT,
-                    BIRTH_DATE,
-                    DATE_REGISTERED,
-                    NEXT_AVAILABLE,
-                    TIMES_CONTACTED,
-                    IS_CONTACTABLE,
-                    IS_VIABLE,
-                    REASON_FOR_DEFERRAL);
-            if (donorCommands("UPDATE donor SET " + UpdateQuery(DONOR_FIELDS), x))
-            {
-                unsortDonor(findDonor(DONOR_ID));
-                x.Donor_id = DONOR_ID;
-                sortDonor(x);
-                return true;
-            }
-            return false;
-        }
-
+        
         bool UpdateDonor(Donor d)
         {
             if (donorCommands("UPDATE donor SET " + UpdateQuery(DONOR_FIELDS), d))
@@ -500,6 +437,14 @@ las pinas 34.9km
             if (bloodCommands("UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS), b))
             {
                 UnsortBlood(findBlood(b.Accession_number));
+                if(findBlood(b.Accession_number).Accession_number != b.Accession_number)
+                {
+                    foreach (Component c in b.components)
+                    {
+                        c.Accession_number = b.Accession_number;
+                        UpdateComponent(c, b);
+                    }
+                }
                 SortBlood(b);
                 return true;
             }
@@ -670,8 +615,6 @@ las pinas 34.9km
             }
         }
 
-        
-
         bool isBloodUnique(string id)
         {
             foreach (Blood b in bloodList)
@@ -694,6 +637,10 @@ las pinas 34.9km
             conn.Close();
             if (rowsAffected > 0)
             {
+                foreach (Component c in findBlood(accession_number).components)
+                {
+                    DeleteAllComponentsWithAccessionNumber(accession_number);
+                }
                 UnsortBlood(findBlood(accession_number));
                 return true;
             }
@@ -775,6 +722,18 @@ las pinas 34.9km
             }
             return false;
         }
+
+        bool UpdateComponent(Component c, Blood b)
+        {
+            if (ComponentCommands("Update component set " + UpdateQuery(COMPONENT_FIELDS), c))
+            {
+                b.RemoveComponent(findComponentWithAccessionNumberAndName(c.Accession_number, c.Component_name));
+                b.AddComponent(c);
+                return true;
+            }
+            return false;
+        }
+
         bool ComponentCommands(string query, Component x)
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
@@ -810,7 +769,43 @@ las pinas 34.9km
             return null;
         }
 
+        bool DeleteComponentWithAccessionNumberAndName(string accession_number, string name)
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            string query = "DELETE FROM component WHERE accession_number = @accession_number AND component_name = @component_name";
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            comm.Parameters.AddWithValue("@accession_number", accession_number);
+            comm.Parameters.AddWithValue("@component_name", name);
+            conn.Open();
+            int rowsAffected = comm.ExecuteNonQuery();
+            conn.Close();
+            if (rowsAffected > 0)
+            {
+                findBlood(accession_number).RemoveComponent(findComponentWithAccessionNumberAndName(accession_number, name));
+                return true;
+            }
+            return false;
+        }
+
+        bool DeleteAllComponentsWithAccessionNumber(string accession_number)
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            string query = "DELETE FROM component WHERE accession_number = @accession_number";
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            comm.Parameters.AddWithValue("@accession_number", accession_number);
+            conn.Open();
+            int rowsAffected = comm.ExecuteNonQuery();
+            conn.Close();
+            if (rowsAffected > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
         #endregion
+
         #region Utility Methods
         /*
          *<summary>
