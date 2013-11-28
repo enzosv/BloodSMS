@@ -36,6 +36,7 @@ namespace Blood_SMS
 
         int age;
         string name;
+        int times_donated;
 
         //FROM SQL
         public Donor(int? DONOR_ID, string LAST_NAME, string FIRST_NAME, string MIDDLE_INITIAL,
@@ -190,5 +191,7 @@ namespace Blood_SMS
         public int Age { get { return age; } set { age = value; } }
         public string Name {get {return name;} set {name = value;}}
         public List<Blood> Bloods { get { return bloods; } }
+        public int Times_donated { get { return times_donated; } set { times_donated = value; } }
+
     }
 }

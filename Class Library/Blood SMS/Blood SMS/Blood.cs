@@ -65,7 +65,10 @@ namespace Blood_SMS
                 }
             }
             else
+            {
+                date_removed = DateTime.MinValue;
                 is_removed = false;
+            }
             return (old_is_removed != is_removed);
 
         }

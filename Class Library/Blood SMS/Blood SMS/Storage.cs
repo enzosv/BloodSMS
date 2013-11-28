@@ -81,8 +81,9 @@ las pinas 34.9km
             viableDonors = new List<Donor>();
             bannedDonors = new List<Donor>();
             
-            getDonorSQL();
             getBloodSQL();
+            getDonorSQL();
+            getComponentSQL();
         }
 
         #region Donor methods
@@ -330,12 +331,20 @@ las pinas 34.9km
                 {
                     contactableDonors.Add(d);
                     donorTypes[(int)d.Blood_type].Add(d);
+                    foreach (Blood b in bloodList)
+                    {
+                        if (b.Donor_id.HasValue && b.Donor_id.Value == d.Donor_id)
+                        {
+                            d.Times_donated++;
+                        }
+                    }
                 }
             }
             else
             {
                 bannedDonors.Add(d);
             }
+            
         }
 
         void unsortDonor(Donor d)
