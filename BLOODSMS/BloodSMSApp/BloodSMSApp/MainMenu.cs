@@ -37,20 +37,7 @@ namespace BloodSMSApp
             storage = new Storage("localhost", "bsms", "root", "root");
             bloodTypeCount = new int[Enum.GetNames(typeof(bloodType)).Length];
             notifications = new List<string>();
-
             command = graphCommand.Summary;
-            chart1.Series[0].LegendText = "Added Blood";
-            chart1.Series[1].LegendText = "Removed Blood";
-            chart1.Series[2].Enabled = false;
-            chart1.Series[3].Enabled = false;
-            chart1.Series[4].Enabled = false;
-            chart1.Series[5].Enabled = false;
-            chart1.Series[6].Enabled = false;
-            chart1.Series[7].Enabled = false;
-            chart1.Series[8].Enabled = false;
-            chart1.Series[9].Enabled = false;
-
-
 
             days = new Dictionary<DateTime, int>();
             days2 = new Dictionary<int, DateTime>();
@@ -113,16 +100,18 @@ namespace BloodSMSApp
 
         void DisplayOverview()
         {
-            availableBloodLabel.Text = "Available Blood: " + bloodCount;
-            ABp.Text = "AB+ : " + bloodTypeCount[0];
-            ABn.Text = "AB- : " + bloodTypeCount[1];
-            Ap.Text = "A+ : " + bloodTypeCount[2];
-            An.Text = "A- : " + bloodTypeCount[3];
-            Bp.Text = "B+ : " + bloodTypeCount[4];
-            Bn.Text = "B- : " + bloodTypeCount[5];
-            Op.Text = "O+ : " + bloodTypeCount[6];
-            On.Text = "O- : " + bloodTypeCount[6];
+            
+            bloodType b;
 
+            chart2.Series[0].Points.AddY(1200 - storage.availableBlood.Count);
+            chart2.Series[0].Points[0].LegendText = "Avialable Blood: " + storage.availableBlood.Count;
+            chart2.Series[0].Points[0].Color = Color.Transparent;
+            for (int i = 1; i < bloodTypeCount.Length - 1; i++)
+            {
+                b = (bloodType)i;
+                chart2.Series[0].Points.AddY(bloodTypeCount[i]);
+                chart2.Series[0].Points[i].LegendText = b.ToString().Replace('p', '+').Replace('n', '-') + ": " + bloodTypeCount[i];
+            }
             //notifications
             for (int i = 0; i < notifications.Count; i++)
             {
@@ -340,5 +329,11 @@ namespace BloodSMSApp
                 seriesHit.BorderDashStyle = ChartDashStyle.Solid;
             }
         }
+
+        #region PieChart
+
+        
+
+        #endregion
     }
 }

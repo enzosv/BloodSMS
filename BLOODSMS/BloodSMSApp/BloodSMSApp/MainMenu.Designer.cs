@@ -30,9 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -42,21 +41,14 @@
             System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.notificationsBox = new System.Windows.Forms.ListBox();
-            this.On = new System.Windows.Forms.Label();
-            this.Op = new System.Windows.Forms.Label();
-            this.Bn = new System.Windows.Forms.Label();
-            this.Bp = new System.Windows.Forms.Label();
-            this.An = new System.Windows.Forms.Label();
-            this.Ap = new System.Windows.Forms.Label();
-            this.ABn = new System.Windows.Forms.Label();
-            this.ABp = new System.Windows.Forms.Label();
-            this.availableBloodLabel = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.Summary = new System.Windows.Forms.Button();
@@ -94,10 +86,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.tabPage3.SuspendLayout();
@@ -105,6 +96,7 @@
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList1
@@ -135,18 +127,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.chart2);
             this.tabPage1.Controls.Add(this.notificationsBox);
-            this.tabPage1.Controls.Add(this.On);
-            this.tabPage1.Controls.Add(this.Op);
-            this.tabPage1.Controls.Add(this.Bn);
-            this.tabPage1.Controls.Add(this.Bp);
-            this.tabPage1.Controls.Add(this.An);
-            this.tabPage1.Controls.Add(this.Ap);
-            this.tabPage1.Controls.Add(this.ABn);
-            this.tabPage1.Controls.Add(this.ABp);
-            this.tabPage1.Controls.Add(this.availableBloodLabel);
-            this.tabPage1.Controls.Add(this.pictureBox2);
-            this.tabPage1.Controls.Add(this.pictureBox1);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.ImageIndex = 0;
             this.tabPage1.Location = new System.Drawing.Point(4, 70);
@@ -163,107 +145,6 @@
             this.notificationsBox.Name = "notificationsBox";
             this.notificationsBox.Size = new System.Drawing.Size(289, 303);
             this.notificationsBox.TabIndex = 13;
-            // 
-            // On
-            // 
-            this.On.AutoSize = true;
-            this.On.Location = new System.Drawing.Point(196, 150);
-            this.On.Name = "On";
-            this.On.Size = new System.Drawing.Size(24, 13);
-            this.On.TabIndex = 11;
-            this.On.Text = "O-: ";
-            // 
-            // Op
-            // 
-            this.Op.AutoSize = true;
-            this.Op.Location = new System.Drawing.Point(196, 137);
-            this.Op.Name = "Op";
-            this.Op.Size = new System.Drawing.Size(27, 13);
-            this.Op.TabIndex = 10;
-            this.Op.Text = "O+: ";
-            // 
-            // Bn
-            // 
-            this.Bn.AutoSize = true;
-            this.Bn.Location = new System.Drawing.Point(196, 124);
-            this.Bn.Name = "Bn";
-            this.Bn.Size = new System.Drawing.Size(23, 13);
-            this.Bn.TabIndex = 9;
-            this.Bn.Text = "B-: ";
-            // 
-            // Bp
-            // 
-            this.Bp.AutoSize = true;
-            this.Bp.Location = new System.Drawing.Point(196, 111);
-            this.Bp.Name = "Bp";
-            this.Bp.Size = new System.Drawing.Size(26, 13);
-            this.Bp.TabIndex = 8;
-            this.Bp.Text = "B+: ";
-            // 
-            // An
-            // 
-            this.An.AutoSize = true;
-            this.An.Location = new System.Drawing.Point(196, 98);
-            this.An.Name = "An";
-            this.An.Size = new System.Drawing.Size(23, 13);
-            this.An.TabIndex = 7;
-            this.An.Text = "A-: ";
-            // 
-            // Ap
-            // 
-            this.Ap.AutoSize = true;
-            this.Ap.Location = new System.Drawing.Point(196, 85);
-            this.Ap.Name = "Ap";
-            this.Ap.Size = new System.Drawing.Size(26, 13);
-            this.Ap.TabIndex = 6;
-            this.Ap.Text = "A+: ";
-            // 
-            // ABn
-            // 
-            this.ABn.AutoSize = true;
-            this.ABn.Location = new System.Drawing.Point(196, 72);
-            this.ABn.Name = "ABn";
-            this.ABn.Size = new System.Drawing.Size(30, 13);
-            this.ABn.TabIndex = 5;
-            this.ABn.Text = "AB-: ";
-            // 
-            // ABp
-            // 
-            this.ABp.AutoSize = true;
-            this.ABp.Location = new System.Drawing.Point(196, 59);
-            this.ABp.Name = "ABp";
-            this.ABp.Size = new System.Drawing.Size(33, 13);
-            this.ABp.TabIndex = 4;
-            this.ABp.Text = "AB+: ";
-            // 
-            // availableBloodLabel
-            // 
-            this.availableBloodLabel.AutoSize = true;
-            this.availableBloodLabel.Location = new System.Drawing.Point(193, 42);
-            this.availableBloodLabel.Name = "availableBloodLabel";
-            this.availableBloodLabel.Size = new System.Drawing.Size(86, 13);
-            this.availableBloodLabel.TabIndex = 3;
-            this.availableBloodLabel.Text = "Available Blood: ";
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::BloodSMSApp.Properties.Resources.blood;
-            this.pictureBox2.Location = new System.Drawing.Point(34, 225);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(132, 10);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 2;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::BloodSMSApp.Properties.Resources.container;
-            this.pictureBox1.Location = new System.Drawing.Point(34, 42);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(132, 193);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
             // 
             // label1
             // 
@@ -356,66 +237,75 @@
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend1.IsDockedInsideChartArea = false;
-            legend1.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend2.IsDockedInsideChartArea = false;
+            legend2.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row;
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(7, 60);
             this.chart1.Name = "chart1";
-            series1.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.Name = "Total";
             series2.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
             series2.ChartArea = "ChartArea1";
             series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series2.Legend = "Legend1";
-            series2.Name = "AB+";
+            series2.LegendText = "Added Blood";
+            series2.Name = "Total";
             series3.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
             series3.ChartArea = "ChartArea1";
             series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series3.Legend = "Legend1";
-            series3.Name = "AB-";
+            series3.LegendText = "Removed Blood";
+            series3.Name = "AB+";
             series4.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
             series4.ChartArea = "ChartArea1";
             series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Enabled = false;
             series4.Legend = "Legend1";
-            series4.Name = "A+";
+            series4.Name = "AB-";
             series5.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
             series5.ChartArea = "ChartArea1";
             series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Enabled = false;
             series5.Legend = "Legend1";
-            series5.Name = "A-";
+            series5.Name = "A+";
             series6.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
             series6.ChartArea = "ChartArea1";
             series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Enabled = false;
             series6.Legend = "Legend1";
-            series6.Name = "B+";
+            series6.Name = "A-";
             series7.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
             series7.ChartArea = "ChartArea1";
             series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series7.Enabled = false;
             series7.Legend = "Legend1";
-            series7.Name = "B-";
+            series7.Name = "B+";
             series8.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
             series8.ChartArea = "ChartArea1";
             series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series8.Enabled = false;
             series8.Legend = "Legend1";
-            series8.Name = "O+";
+            series8.Name = "B-";
             series9.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
             series9.ChartArea = "ChartArea1";
             series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series9.Enabled = false;
             series9.Legend = "Legend1";
-            series9.Name = "O-";
+            series9.Name = "O+";
             series10.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
             series10.ChartArea = "ChartArea1";
             series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series10.Enabled = false;
             series10.Legend = "Legend1";
-            series10.Name = "Not Typed";
-            this.chart1.Series.Add(series1);
+            series10.Name = "O-";
+            series11.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series11.ChartArea = "ChartArea1";
+            series11.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series11.Enabled = false;
+            series11.Legend = "Legend1";
+            series11.Name = "Not Typed";
             this.chart1.Series.Add(series2);
             this.chart1.Series.Add(series3);
             this.chart1.Series.Add(series4);
@@ -425,6 +315,7 @@
             this.chart1.Series.Add(series8);
             this.chart1.Series.Add(series9);
             this.chart1.Series.Add(series10);
+            this.chart1.Series.Add(series11);
             this.chart1.Size = new System.Drawing.Size(660, 434);
             this.chart1.TabIndex = 1;
             this.chart1.Text = "chart1";
@@ -709,6 +600,25 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Blood SMS";
             // 
+            // chart2
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart2.Legends.Add(legend1);
+            this.chart2.Location = new System.Drawing.Point(6, 25);
+            this.chart2.Name = "chart2";
+            series1.BorderColor = System.Drawing.Color.Black;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Legend = "Legend1";
+            series1.LegendText = "AB+";
+            series1.Name = "Series1";
+            this.chart2.Series.Add(series1);
+            this.chart2.Size = new System.Drawing.Size(339, 320);
+            this.chart2.TabIndex = 14;
+            this.chart2.Text = "chart2";
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -731,8 +641,6 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.tabPage3.ResumeLayout(false);
@@ -740,6 +648,7 @@
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -779,17 +688,6 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label availableBloodLabel;
-        private System.Windows.Forms.Label ABp;
-        private System.Windows.Forms.Label ABn;
-        private System.Windows.Forms.Label On;
-        private System.Windows.Forms.Label Op;
-        private System.Windows.Forms.Label Bn;
-        private System.Windows.Forms.Label Bp;
-        private System.Windows.Forms.Label An;
-        private System.Windows.Forms.Label Ap;
         private System.Windows.Forms.ListBox notificationsBox;
         private System.Windows.Forms.DateTimePicker dateTo;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
@@ -799,6 +697,7 @@
         private System.Windows.Forms.Button quarantinedButton;
         private System.Windows.Forms.DateTimePicker dateFrom;
         private System.Windows.Forms.Button Summary;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
 
     }
 }
