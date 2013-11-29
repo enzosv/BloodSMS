@@ -81,8 +81,8 @@ namespace BloodSMSApp
             notifications.Clear();
 
             //check low level
-            bloodType blood_type = bloodType.NotTyped;
-            for (int i = 0; i < bloodTypeCount.Length - 1; i++)
+            bloodType blood_type;
+            for (int i = 0; i < bloodTypeCount.Length; i++)
             {
                 blood_type = (bloodType)i;
                 if (storage.AlertLowLevel(i))
@@ -107,7 +107,7 @@ namespace BloodSMSApp
             chart2.Series[0].Points[0].LegendText = "Available Blood: " + storage.availableBlood.Count;
             chart2.Series[0].Points[0].Color = Color.Transparent;
 
-            for (int i = 1; i < bloodTypeCount.Length - 1; i++)
+            for (int i = 1; i < bloodTypeCount.Length; i++)
             {
                 b = (bloodType)i;
                 chart2.Series[0].Points.AddY(bloodTypeCount[i]);
@@ -198,7 +198,6 @@ namespace BloodSMSApp
                 chart1.Series[6].Enabled = true;
                 chart1.Series[7].Enabled = true;
                 chart1.Series[8].Enabled = true;
-                chart1.Series[9].Enabled = true;
             }
         }
 
@@ -302,7 +301,6 @@ namespace BloodSMSApp
                 chart1.Series[6].Enabled = false;
                 chart1.Series[7].Enabled = false;
                 chart1.Series[8].Enabled = false;
-                chart1.Series[9].Enabled = false;
                 command = graphCommand.Summary;
                 RefreshGraph();
             }

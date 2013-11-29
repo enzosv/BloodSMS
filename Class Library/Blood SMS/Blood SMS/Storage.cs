@@ -8,8 +8,9 @@ using MySql.Data.MySqlClient;
 
 namespace Blood_SMS
 {
+    public enum bloodComponents { Whole, PackedRedCells, Plateles, FreshFrozenPlasma, CryoprecipitatedAHF };
     public enum graphCommand { Add, Release, Quarantine, Remove, Summary };
-    public enum bloodType { ABp, ABn, Ap, An, Bp, Bn, Op, On, NotTyped};
+    public enum bloodType { ABp, ABn, Ap, An, Bp, Bn, Op, On};
     public enum contactMethod { none, email, cellphone };
     public enum educationalAttainment { other, none, gradeschool, highschool, college };
     public enum city { QuezonCity, SanJuan, Manila, Caloocan, Mandaluyong, Malabon, Pateros, Makati, Valenzuela, Navotas, Pasay, Taguig, Paranaque, Muntinlupa, LasPinas, Other };
