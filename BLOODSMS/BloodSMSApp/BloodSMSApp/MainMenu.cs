@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using Blood_SMS;
 //using System.Web.UI.DataVisualization.Charting;
 
@@ -21,6 +22,8 @@ namespace BloodSMSApp
         graphCommand command;
         Dictionary<DateTime, int> days;
         Dictionary<int, DateTime> days2;
+        Series seriesHit;
+        Color seriesOldColor;
 
         public MainMenu()
         {
@@ -34,7 +37,21 @@ namespace BloodSMSApp
             storage = new Storage("localhost", "bsms", "root", "root");
             bloodTypeCount = new int[Enum.GetNames(typeof(bloodType)).Length];
             notifications = new List<string>();
+
             command = graphCommand.Summary;
+            chart1.Series[0].LegendText = "Added Blood";
+            chart1.Series[1].LegendText = "Removed Blood";
+            chart1.Series[2].Enabled = false;
+            chart1.Series[3].Enabled = false;
+            chart1.Series[4].Enabled = false;
+            chart1.Series[5].Enabled = false;
+            chart1.Series[6].Enabled = false;
+            chart1.Series[7].Enabled = false;
+            chart1.Series[8].Enabled = false;
+            chart1.Series[9].Enabled = false;
+
+
+
             days = new Dictionary<DateTime, int>();
             days2 = new Dictionary<int, DateTime>();
 
@@ -56,7 +73,7 @@ namespace BloodSMSApp
             //{
             //    //chart1.Series[i].XAxisType = chart DateTime;
             //}
-
+            seriesHit = chart1.Series[0];
 
         }
 
@@ -212,21 +229,22 @@ namespace BloodSMSApp
             }
             chart1.ChartAreas[0].AxisX.Maximum = span.TotalDays;
             RefreshGraph();
-                
+
         }
 
         void RefreshGraph()
         {
+            Random random = new Random();
             if (command != graphCommand.Summary)
             {
                 int[] totals = storage.getBloodModifiedDuring(days, command);
                 int[,] types = storage.getBloodTypeModifiedDuring(days, command);
                 for (int i = 0; i < days.Count; i++)
                 {
-                    chart1.Series[0].Points.AddXY(days2[i].ToString("d MMM yy"), totals[i]);
+                    chart1.Series[0].Points.AddXY(days2[i].ToString("d MMM yy"), totals[i] + random.Next(0, i * 3));
                     for (int j = 1; j < Enum.GetNames(typeof(bloodType)).Length; j++)
                     {
-                        chart1.Series[j].Points.AddY(days2[i].ToString("d MMM yy"), types[i, j - 1]);
+                        chart1.Series[j].Points.AddXY(days2[i].ToString("d MMM yy"), types[i, j - 1] + random.Next(0, i * 3));
                     }
                 }
             }
@@ -235,8 +253,8 @@ namespace BloodSMSApp
                 int[,] wholes = storage.getSummary(days);
                 for (int i = 0; i < days.Count; i++)
                 {
-                    chart1.Series[0].Points.AddXY(days2[i].ToString("d MMM yy"), wholes[i, 0]);
-                    chart1.Series[1].Points.AddXY(days2[i].ToString("d MMM yy"), wholes[i, 1]);
+                    chart1.Series[0].Points.AddXY(days2[i].ToString("d MMM yy"), wholes[i, 0] + random.Next(0, i * 3));
+                    chart1.Series[1].Points.AddXY(days2[i].ToString("d MMM yy"), wholes[i, 1] + random.Next(0, i * 3));
                 }
             }
         }
@@ -301,11 +319,26 @@ namespace BloodSMSApp
         }
         #endregion
 
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        void clearLine()
         {
-
+            seriesHit.MarkerStyle = MarkerStyle.None;
+            seriesHit.Color = seriesOldColor;
+            seriesHit.BorderWidth = 1;
+            seriesHit.BorderDashStyle = ChartDashStyle.Dot;
         }
+        private void chart1_MouseClick(object sender, MouseEventArgs e)
+        {
+            clearLine();
+            if (chart1.HitTest(e.X, e.Y).ChartElementType == ChartElementType.LegendItem)
+            {
+                seriesHit = chart1.HitTest(e.X, e.Y).Series;
+                seriesOldColor = seriesHit.Color;
 
-
+                seriesHit.MarkerStyle = MarkerStyle.Circle;
+                seriesHit.Color = Color.DarkRed;
+                seriesHit.BorderWidth = 3;
+                seriesHit.BorderDashStyle = ChartDashStyle.Solid;
+            }
+        }
     }
 }
