@@ -25,7 +25,7 @@ namespace BloodSMSApp
         {
             if (d != null)
             {
-                storage.AddBlood(dateAddedField.Value, dateExpireField.Value, taken_from);
+                //storage.AddBlood(dateAddedField.Value, dateExpireField.Value, taken_from);
                 this.Hide();
             }
         }

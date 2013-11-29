@@ -23,10 +23,10 @@ namespace BloodSMSApp
         private void AddDonorButton_Click(object sender, EventArgs e)
         {
             defferalField.Text = storage.AddQuery(new string[]{ "name", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "cellphone", "educational_attainment", "birth_date", "date_registered", "last_donation", "next_available", "times_donated", "is_contactable", "is_viable", "reason_for_deferral" });
-            if (nameField.Text.Length > 1 &&
-                hProvinceField.Text.Length > 1 &&
-                hCityField.Text.Length > 1)
-                storage.AddDonor(nameField.Text, (bloodType)bloodTypeField.SelectedValue, hProvinceField.Text, hCityField.Text, hStreetField.Text, oProvinceField.Text, oCityField.Text, oStreetField.Text, (contactMethod)preferredContactField.SelectedValue, hLandlineField.Text, oLandlineField.Text, emailField.Text, cellphoneField.Text, educationalAttainmentField.SelectedText, birthDateField.Value, dateRegisteredField.Value, contactableYes.Checked, viableYes.Checked, defferalField.Text);
+            //if (nameField.Text.Length > 1 &&
+                //hProvinceField.Text.Length > 1 &&
+                //hCityField.Text.Length > 1)
+                //storage.AddDonor(nameField.Text, (bloodType)bloodTypeField.SelectedValue, hProvinceField.Text, hCityField.Text, hStreetField.Text, oProvinceField.Text, oCityField.Text, oStreetField.Text, (contactMethod)preferredContactField.SelectedValue, hLandlineField.Text, oLandlineField.Text, emailField.Text, cellphoneField.Text, educationalAttainmentField.SelectedText, birthDateField.Value, dateRegisteredField.Value, contactableYes.Checked, viableYes.Checked, defferalField.Text);
         }
 
         private void oLandlineField_TextChanged(object sender, EventArgs e)

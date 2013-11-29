@@ -9,7 +9,7 @@ using MySql.Data.MySqlClient;
 namespace Blood_SMS
 {
     public enum graphCommand { Add, Release, Quarantine, Remove, Summary };
-    public enum bloodType { NotTyped, ABp, ABn, Ap, An, Bp, Bn, Op, On };
+    public enum bloodType { ABp, ABn, Ap, An, Bp, Bn, Op, On, NotTyped};
     public enum contactMethod { none, email, cellphone };
     public enum educationalAttainment { other, none, gradeschool, highschool, college };
     public enum city { QuezonCity, SanJuan, Manila, Caloocan, Mandaluyong, Malabon, Pateros, Makati, Valenzuela, Navotas, Pasay, Taguig, Paranaque, Muntinlupa, LasPinas, Other };
@@ -54,7 +54,6 @@ las pinas 34.9km
         //public List<Donor> BannedDonors { get; set; }
 
         string connectionString;
-
         int BlOODTYPECOUNT = Enum.GetNames(typeof(bloodType)).Length;
         const int MINIMUMBLOODVALUE = 5;
         const int MINIMUMEXPIRYALERTVALUE = 3;
@@ -759,23 +758,23 @@ las pinas 34.9km
             return fieldNames + ") Values(" + valueParameters + ")";
         }
 
-        public bool AlertLowLevel(bloodType blood_type)
+        public bool AlertLowLevel(int blood_type)
         {
-            if (bloodTypes[(int)blood_type].Count < MINIMUMBLOODVALUE)
+            if (bloodTypes[blood_type].Count < MINIMUMBLOODVALUE)
                 return true;
             return false;
         }
 
-        public List<string> AlertNearExpiration()
+        public List<string[]> AlertNearExpiration()
         {
-            List<string> expiringComponents = new List<string>();
+            List<string[]> expiringComponents = new List<string[]>();
             foreach (Blood b in bloodList)
             {
                 foreach (Component c in b.components)
                 {
                     TimeSpan span = DateTime.Now - c.Date_expired;
                     if (span.TotalDays < MINIMUMEXPIRYALERTVALUE)
-                        expiringComponents.Add(c.Component_name);
+                        expiringComponents.Add(new string[2] {c.Component_name, c.Accession_number});
                 }
             }
             
@@ -785,17 +784,10 @@ las pinas 34.9km
         #endregion
 
         #region Graph Methods
-        public int[] getBloodModifiedDuring(DateTime from, DateTime to, graphCommand command)
+        public int[] getBloodModifiedDuring(Dictionary<DateTime, int> days, graphCommand command)
         {
-            Hashtable days = new Hashtable();
-            int count = 0;
-
-            for (DateTime day = from; day <= to; day = day.AddDays(1))
-            {
-                days.Add(day, count);
-                count++;
-            }
-            int[] ints = new int[count];
+            
+            int[] ints = new int[days.Count];
             switch (command)
             {
                 case graphCommand.Release:
@@ -841,17 +833,22 @@ las pinas 34.9km
 
             return ints;
         }
-        public int[,] getBloodTypeModifiedDuring(DateTime from, DateTime to, graphCommand command)
-        {
-            Hashtable days = new Hashtable();
-            int count = 0;
 
-            for (DateTime day = from; day <= to; day = day.AddDays(1))
+        public int[,] getSummary(Dictionary<DateTime, int> days)
+        {
+            int[,] ints = new int[days.Count, 2];
+            foreach (Blood b in bloodList)
             {
-                days.Add(day, count);
-                count++;
+                ints[(int)days[b.Date_donated], 0]++;
+                ints[(int)days[b.Date_removed], 1]++;
             }
-            int[,] ints = new int[count, BlOODTYPECOUNT];
+            return ints;
+        }
+
+        public int[,] getBloodTypeModifiedDuring(Dictionary<DateTime, int> days, graphCommand command)
+        {
+            
+            int[,] ints = new int[days.Count, BlOODTYPECOUNT];
             switch (command)
             {
                 case graphCommand.Release:
@@ -861,6 +858,7 @@ las pinas 34.9km
                         {
                             if (c.Is_released)
                             {
+                                days[c.Date_released] = (int)days[c.Date_released] + 1;
                                 ints[(int)days[c.Date_released], (int)b.Blood_type]++;
                             }
                         }
@@ -900,7 +898,7 @@ las pinas 34.9km
 
         string ValidateText(string text, int minimumLength, char[] requiredCharacters, bool required)
         {
-            if ((required && !String.IsNullOrEmpty(text) || (!required && text.Length > 1) && text.Length >= minimumLength)
+            if ((required && !String.IsNullOrEmpty(text) || (!required && text.Length > 1)) && text.Length >= minimumLength)
             {
                 foreach(char c in requiredCharacters)
                 {

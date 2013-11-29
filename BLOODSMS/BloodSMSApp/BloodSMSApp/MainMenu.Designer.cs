@@ -41,6 +41,7 @@
             System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -61,7 +62,6 @@
             this.Summary = new System.Windows.Forms.Button();
             this.dateFrom = new System.Windows.Forms.DateTimePicker();
             this.addedButton = new System.Windows.Forms.Button();
-            this.usedButton = new System.Windows.Forms.Button();
             this.releasedButton = new System.Windows.Forms.Button();
             this.quarantinedButton = new System.Windows.Forms.Button();
             this.removedButton = new System.Windows.Forms.Button();
@@ -88,7 +88,6 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -280,7 +279,6 @@
             this.tabPage2.Controls.Add(this.Summary);
             this.tabPage2.Controls.Add(this.dateFrom);
             this.tabPage2.Controls.Add(this.addedButton);
-            this.tabPage2.Controls.Add(this.usedButton);
             this.tabPage2.Controls.Add(this.releasedButton);
             this.tabPage2.Controls.Add(this.quarantinedButton);
             this.tabPage2.Controls.Add(this.removedButton);
@@ -325,16 +323,6 @@
             this.addedButton.Text = "Added";
             this.addedButton.UseVisualStyleBackColor = true;
             this.addedButton.Click += new System.EventHandler(this.addedButton_Click);
-            // 
-            // usedButton
-            // 
-            this.usedButton.Location = new System.Drawing.Point(446, 31);
-            this.usedButton.Name = "usedButton";
-            this.usedButton.Size = new System.Drawing.Size(75, 23);
-            this.usedButton.TabIndex = 5;
-            this.usedButton.Text = "Used";
-            this.usedButton.UseVisualStyleBackColor = true;
-            this.usedButton.Click += new System.EventHandler(this.usedButton_Click);
             // 
             // releasedButton
             // 
@@ -410,6 +398,10 @@
             series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series9.Legend = "Legend1";
             series9.Name = "O-";
+            series10.ChartArea = "ChartArea1";
+            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series10.Legend = "Legend1";
+            series10.Name = "Not Typed";
             this.chart1.Series.Add(series1);
             this.chart1.Series.Add(series2);
             this.chart1.Series.Add(series3);
@@ -419,6 +411,7 @@
             this.chart1.Series.Add(series7);
             this.chart1.Series.Add(series8);
             this.chart1.Series.Add(series9);
+            this.chart1.Series.Add(series10);
             this.chart1.Size = new System.Drawing.Size(660, 434);
             this.chart1.TabIndex = 1;
             this.chart1.Text = "chart1";
@@ -643,19 +636,6 @@
             this.dataGridView3.Size = new System.Drawing.Size(850, 436);
             this.dataGridView3.TabIndex = 1;
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.Transparent;
-            this.button1.BackgroundImage = global::BloodSMSApp.Properties.Resources.logout_copy3;
-            this.button1.FlatAppearance.BorderSize = 0;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(854, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(51, 51);
-            this.button1.TabIndex = 3;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -725,7 +705,6 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.tabControl1);
@@ -764,7 +743,6 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
@@ -803,7 +781,6 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Button removedButton;
         private System.Windows.Forms.Button addedButton;
-        private System.Windows.Forms.Button usedButton;
         private System.Windows.Forms.Button releasedButton;
         private System.Windows.Forms.Button quarantinedButton;
         private System.Windows.Forms.DateTimePicker dateFrom;
