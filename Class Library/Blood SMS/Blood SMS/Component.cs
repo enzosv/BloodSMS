@@ -8,7 +8,7 @@ namespace Blood_SMS
     public class Component
     {
         string accession_number;
-        string component_name;
+        bloodComponents component_name;
         string patient_last_name;
         string patient_first_name;
         string patient_middle_initial;
@@ -26,7 +26,7 @@ namespace Blood_SMS
         bool is_released;
 
         public string Accession_number { get { return accession_number; } set { accession_number = value; } }
-        public string Component_name{ get { return component_name; }}
+        public bloodComponents Component_name { get { return component_name; } }
         public string Patient_last_name{ get { return patient_last_name; }}
         public string Patient_first_name{ get { return patient_first_name; }}
         public string Patient_middle_initial{ get { return patient_middle_initial; }}
@@ -44,10 +44,10 @@ namespace Blood_SMS
         public bool Is_released { get { return is_released; } }
 
         //from SQL
-        public Component(string ACCESSION_NUMBER, string COMPONENT_NAME, DateTime DATE_PROCESSED, DateTime DATE_EXPIRED, string PATIENT_LAST_NAME, string PATIENT_FIRST_NAME, string PATIENT_MIDDLE_INITIAL, int PATIENT_AGE, DateTime DATE_REPROCESSED, DateTime DATE_QUARANTINED, DateTime DATE_ASSIGNED, DateTime DATE_RELEASED, string REASON_FOR_REMOVAL)
+        public Component(string ACCESSION_NUMBER, int COMPONENT_NAME, DateTime DATE_PROCESSED, DateTime DATE_EXPIRED, string PATIENT_LAST_NAME, string PATIENT_FIRST_NAME, string PATIENT_MIDDLE_INITIAL, int PATIENT_AGE, DateTime DATE_REPROCESSED, DateTime DATE_QUARANTINED, DateTime DATE_ASSIGNED, DateTime DATE_RELEASED, string REASON_FOR_REMOVAL)
         {
             accession_number = ACCESSION_NUMBER;
-            component_name = COMPONENT_NAME;
+            component_name = (bloodComponents)COMPONENT_NAME;
             date_processed = DATE_PROCESSED;
             date_expired = DATE_EXPIRED;
 
@@ -73,10 +73,10 @@ namespace Blood_SMS
         }
 
         //Create
-        public Component(string ACCESSION_NUMBER, string COMPONENT_NAME, DateTime DATE_PROCESSED, DateTime DATE_EXPIRED)
+        public Component(string ACCESSION_NUMBER, int COMPONENT_NAME, DateTime DATE_PROCESSED, DateTime DATE_EXPIRED)
         {
             accession_number = ACCESSION_NUMBER;
-            component_name = COMPONENT_NAME;
+            component_name = (bloodComponents)COMPONENT_NAME;
             date_processed = DATE_PROCESSED;
             date_expired = DATE_EXPIRED;
 

@@ -70,7 +70,7 @@ DROP TABLE IF EXISTS `BSMS`.`component` ;
 
 CREATE TABLE IF NOT EXISTS `BSMS`.`component` (
   `accession_number` VARCHAR(45) NOT NULL,
-  `component_name` VARCHAR(45) NOT NULL,
+  `component_name` INT NOT NULL,
   `date_processed` DATETIME NOT NULL,
   `date_reprocessed` DATETIME NOT NULL,
   `date_expired` DATETIME NOT NULL,

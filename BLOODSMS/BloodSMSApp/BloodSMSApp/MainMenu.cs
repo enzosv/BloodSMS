@@ -87,7 +87,7 @@ namespace BloodSMSApp
                 blood_type = (bloodType)i;
                 if (storage.AlertLowLevel(i))
                 {
-                    notifications.Add("Supply on " + blood_type.ToString().Replace('p', '+').Replace('n', '-') + " is critically low");
+                    notifications.Add("Supply on " + storage.GetDescription(blood_type) + " is critically low");
                 }
             }
 
@@ -111,7 +111,7 @@ namespace BloodSMSApp
             {
                 b = (bloodType)i;
                 chart2.Series[0].Points.AddY(bloodTypeCount[i]);
-                chart2.Series[0].Points[i].LegendText = b.ToString().Replace('p', '+').Replace('n', '-') + ": " + bloodTypeCount[i];
+                chart2.Series[0].Points[i].LegendText = storage.GetDescription(b) + ": " + bloodTypeCount[i];
             }
             //notifications
             for (int i = 0; i < notifications.Count; i++)
