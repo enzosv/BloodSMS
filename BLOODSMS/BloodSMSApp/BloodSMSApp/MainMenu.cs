@@ -44,7 +44,10 @@ namespace BloodSMSApp
 
             dateFrom.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-1);
             dateTo.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-
+            //for (int i = 0; i < chart1.Series.Count; i++)
+            //{
+            //    chart1.Series[i].IsXValueIndexed = true;
+            //}
 
 
             //chart1.ChartAreas[0].AxisY.Maximum = 1200;
@@ -208,6 +211,7 @@ namespace BloodSMSApp
                 index++;
             }
             chart1.ChartAreas[0].AxisX.Maximum = span.TotalDays;
+            RefreshGraph();
                 
         }
 
@@ -222,7 +226,7 @@ namespace BloodSMSApp
                     chart1.Series[0].Points.AddXY(days2[i].ToString("d MMM yy"), totals[i]);
                     for (int j = 1; j < Enum.GetNames(typeof(bloodType)).Length; j++)
                     {
-                        chart1.Series[j].Points.AddXY(days2[i].ToString("d MMM yy"), types[i, j - 1]);
+                        chart1.Series[j].Points.AddY(days2[i].ToString("d MMM yy"), types[i, j - 1]);
                     }
                 }
             }
