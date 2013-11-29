@@ -898,9 +898,9 @@ las pinas 34.9km
 
         #region Form Validation Methods
 
-        string ValidateText(string text, int minimumLength, char[] requiredCharacters)
+        string ValidateText(string text, int minimumLength, char[] requiredCharacters, bool required)
         {
-            if (!String.IsNullOrEmpty(text) && text.Length >= minimumLength)
+            if ((required && !String.IsNullOrEmpty(text) || (!required && text.Length > 1) && text.Length >= minimumLength)
             {
                 foreach(char c in requiredCharacters)
                 {
