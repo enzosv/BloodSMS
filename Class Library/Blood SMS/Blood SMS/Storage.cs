@@ -80,9 +80,9 @@ las pinas 34.9km
             contactableDonors = new List<Donor>();
             viableDonors = new List<Donor>();
             bannedDonors = new List<Donor>();
-            
-            getBloodSQL();
+
             getDonorSQL();
+            getBloodSQL();
             getComponentSQL();
         }
 
@@ -331,13 +331,7 @@ las pinas 34.9km
                 {
                     contactableDonors.Add(d);
                     donorTypes[(int)d.Blood_type].Add(d);
-                    foreach (Blood b in bloodList)
-                    {
-                        if (b.Donor_id.HasValue && b.Donor_id.Value == d.Donor_id)
-                        {
-                            d.Times_donated++;
-                        }
-                    }
+                    
                 }
             }
             else
@@ -345,6 +339,17 @@ las pinas 34.9km
                 bannedDonors.Add(d);
             }
             
+        }
+
+        void getNumDonations(Donor d)
+        {
+            foreach (Blood b in bloodList)
+                    {
+                        if (b.Donor_id.HasValue && b.Donor_id.Value == d.Donor_id)
+                        {
+                            d.Times_donated++;
+                        }
+                    }
         }
 
         void unsortDonor(Donor d)
@@ -889,6 +894,32 @@ las pinas 34.9km
 
             return ints;
         }
+        #endregion
+
+        #region Form Validation Methods
+
+        string ValidateText(string text, int minimumLength, char[] requiredCharacters)
+        {
+            if (!String.IsNullOrEmpty(text) && text.Length >= minimumLength)
+            {
+                foreach(char c in requiredCharacters)
+                {
+                    if(!text.Contains(c))
+                    {
+                        string charToContain = c + "";
+                        if(c == ' ')
+                            charToContain = "spaces";
+
+                        return "Field must contain " + charToContain;
+                    }
+                }
+                return "";
+            }
+            return "Field must contain at least " + minimumLength + " characters";
+        }
+
+        //http://stackoverflow.com/questions/5028673/c-sharp-numeric-only-textbox-control
+
         #endregion
     }
 }
