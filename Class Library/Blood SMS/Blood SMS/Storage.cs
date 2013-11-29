@@ -435,12 +435,13 @@ las pinas 34.9km
         *</summary>
         */
         //new donation
-        public bool AddBlood(string accession_number, int blood_type, int? donor_id, DateTime date_donated)
+        public bool AddBlood(string accession_number, int blood_type, int? donor_id, DateTime date_donated, DateTime date_expire)
         {
             Blood x = new Blood(accession_number, blood_type, donor_id, date_donated);
 
             if (bloodCommands("Insert into Blood " + AddQuery(BLOOD_FIELDS), x))
             {
+                x.AddComponent(new Component(accession_number, "Whole", date_donated, date_expire));
                 SortBlood(x);
                 return true;
             }

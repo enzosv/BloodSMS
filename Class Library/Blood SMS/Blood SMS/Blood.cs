@@ -34,6 +34,7 @@ namespace Blood_SMS
             date_removed = DateTime.MinValue;
             is_removed = false;
             components = new List<Component>();
+
         }
 
         //from SQL
