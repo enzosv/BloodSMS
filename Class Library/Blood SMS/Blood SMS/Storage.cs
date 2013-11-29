@@ -82,7 +82,7 @@ las pinas 34.9km
         readonly string[] DONOR_FIELDS = { "donor_id", "last_name", "first_name", "middle_initial", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "email", "cellphone", "educational_attainment", "birth_date", "date_registered", "next_available", "times_contacted", "is_contactable", "is_viable", "reason_for_deferral" };
         readonly string[] COMPONENT_FIELDS = { "accession_number", "component_name", "date_processed", "date_expire", "date_quarantined", "date_assigned", "date_released", "patient_last_name", "patient_first_name", "patient_middle_initial", "patient_age", "reason_for_removal" };
 
-        public string GetDescription(System.Enum value)
+        public string GetDescription(Enum value)
         {
             FieldInfo fi = value.GetType().GetField(value.ToString());
             DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
@@ -90,6 +90,30 @@ las pinas 34.9km
                 return attributes[0].Description;
             else
                 return value.ToString();
+        }
+
+        //http://stackoverflow.com/questions/4367723/get-enum-from-description-attribute
+        public T GetValueFromDescription<T>(string description)
+        {
+            var type = typeof(T);
+            if (!type.IsEnum) throw new InvalidOperationException();
+            foreach (var field in type.GetFields())
+            {
+                var attribute = Attribute.GetCustomAttribute(field,
+                    typeof(DescriptionAttribute)) as DescriptionAttribute;
+                if (attribute != null)
+                {
+                    if (attribute.Description == description)
+                        return (T)field.GetValue(null);
+                }
+                else
+                {
+                    if (field.Name == description)
+                        return (T)field.GetValue(null);
+                }
+            }
+            throw new ArgumentException("Not found.", "description");
+            // or return default(T);
         }
 
         public Storage(string host, string db, string user, string pass)
