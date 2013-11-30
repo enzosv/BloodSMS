@@ -151,7 +151,7 @@ namespace Blood_SMS
 
         public bool UpdateDonor(Donor d)
         {
-            if (donorCommands("UPDATE donor SET " + UpdateQuery(DONOR_FIELDS), d))
+            if (donorCommands("UPDATE donor SET " + UpdateQuery(DONOR_FIELDS, new string[] { "donor_id" } ), d))
             {
                 unsortDonor(findDonor(d.Donor_id));
                 sortDonor(d);
@@ -192,12 +192,20 @@ namespace Blood_SMS
             comm.Parameters.AddWithValue("@is_viable", x.Is_viable);
             comm.Parameters.AddWithValue("@reason_for_deferral", x.Reason_for_deferral);
 
+            if (query.Contains("UPDATE") || query.Contains("DELETE"))
+            {
+                comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
+            }
             conn.Open();
             int rowsAffected = comm.ExecuteNonQuery();
-            long id = comm.LastInsertedId;
+            long id;
             
             conn.Close();
-            x.Donor_id = (int)id;
+            if (query.Contains("Insert"))
+            {
+                id = comm.LastInsertedId;
+                x.Donor_id = (int)id;
+            }
             return (rowsAffected > 0);
         }
 
@@ -396,7 +404,7 @@ namespace Blood_SMS
 
         bool UpdateBlood(Blood b)
         {
-            if (bloodCommands("UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS), b))
+            if (bloodCommands("UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS, new string[] { "accession_number" }), b))
             {
                 UnsortBlood(findBlood(b.Accession_number));
                 if (findBlood(b.Accession_number).Accession_number != b.Accession_number)
@@ -565,7 +573,7 @@ namespace Blood_SMS
 
         bool UpdateComponent(Component c)
         {
-            if (ComponentCommands("Update component set " + UpdateQuery(COMPONENT_FIELDS), c))
+            if (ComponentCommands("Update component set " + UpdateQuery(COMPONENT_FIELDS, new string[] { "accession_number", "component_name" }), c))
             {
                 Blood b = findBlood(c.Accession_number);
                 b.RemoveComponent(findComponentWithAccessionNumberAndName(c.Accession_number, c.Component_name));
@@ -579,7 +587,7 @@ namespace Blood_SMS
 
         bool UpdateComponent(Component c, Blood b)
         {
-            if (ComponentCommands("Update component set " + UpdateQuery(COMPONENT_FIELDS), c))
+            if (ComponentCommands("Update component set " + UpdateQuery(COMPONENT_FIELDS, new string[] { "accession_number", "component_name" }), c))
             {
                 b.RemoveComponent(findComponentWithAccessionNumberAndName(c.Accession_number, c.Component_name));
                 b.AddComponent(c);
@@ -669,14 +677,19 @@ namespace Blood_SMS
          *  string array containing all fields for an SQL table
          *</param>
          */
-        string UpdateQuery(string[] fields)
+        string UpdateQuery(string[] fields, string[] comparator)
         {
-            string valueParameters = "";
-            for (int i = 1; i < fields.Length; i++)
+            string valueParameters = fields[1] + "=@" + fields[1];
+            for (int i = 2; i < fields.Length; i++)
             {
-                valueParameters += fields[i] + "=@" + fields[i] + ", ";
+                valueParameters += ", " + fields[i] + "=@" + fields[i];
             }
-            valueParameters += "Where " + fields[0] + "=@" + fields[0];
+            valueParameters += " Where " + comparator[0] + "=@" + comparator[0];
+            for (int i = 1; i < comparator.Length; i++)
+            {
+                valueParameters += " AND Where " + comparator[i] + "=@" + comparator[i];
+            }
+            
             return valueParameters;
         }
 
