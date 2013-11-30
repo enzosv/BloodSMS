@@ -96,7 +96,6 @@
             this.takenFromField.Name = "takenFromField";
             this.takenFromField.Size = new System.Drawing.Size(200, 20);
             this.takenFromField.TabIndex = 35;
-            this.takenFromField.TextChanged += new System.EventHandler(this.takenFromField_TextChanged);
             // 
             // label1
             // 

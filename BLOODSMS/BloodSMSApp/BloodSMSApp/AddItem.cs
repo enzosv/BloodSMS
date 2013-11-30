@@ -40,20 +40,5 @@ namespace BloodSMSApp
             dateAddedField.MaxDate = dateExpireField.Value;
         }
 
-        private void takenFromField_TextChanged(object sender, EventArgs e)
-        {
-            if (int.TryParse(takenFromField.Text, out taken_from))
-            {
-               
-                if (storage.findDonor(taken_from) != null)
-                {
-                    d = storage.findDonor(taken_from);
-                    listBox1.Items.Add("Name: " + d.Name);
-                    listBox1.Enabled = true;
-                }
-                
-            }
-        }
-
     }
 }

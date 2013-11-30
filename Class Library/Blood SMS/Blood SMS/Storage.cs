@@ -162,13 +162,10 @@ namespace Blood_SMS
 
         bool donorCommands(string query, Donor x)
         {
-            //FIND A WAY TO SET THE ID
             MySqlConnection conn = new MySqlConnection(connectionString);
             MySqlCommand comm = new MySqlCommand(query, conn);
             comm.CommandType = CommandType.Text;
-            //
-            //
-            //comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
+
             comm.Parameters.AddWithValue("@last_name", x.Last_name);
             comm.Parameters.AddWithValue("@first_name", x.First_name);
             comm.Parameters.AddWithValue("@middle_initial", x.Middle_initial);
@@ -239,9 +236,7 @@ namespace Blood_SMS
             foreach (Donor d in donorList)
             {
                 if (d.Donor_id == id)
-                {
                     return d;
-                }
             }
             return null;
         }
@@ -288,10 +283,7 @@ namespace Blood_SMS
                 }
             }
             else
-            {
                 bannedDonors.Add(d);
-            }
-
         }
 
         void getNumDonations(Donor d)
@@ -299,9 +291,7 @@ namespace Blood_SMS
             foreach (Blood b in bloodList)
             {
                 if (b.Donor_id.HasValue && b.Donor_id.Value == d.Donor_id)
-                {
                     d.Times_donated++;
-                }
             }
         }
 
@@ -325,8 +315,6 @@ namespace Blood_SMS
             else if (bannedDonors.Contains(d))
                 bannedDonors.Remove(d);
         }
-
-
 
         public List<Donor> getClosestByType(int count, bloodType blood_type)
         {
@@ -469,9 +457,7 @@ namespace Blood_SMS
                 bloodTypes[(int)b.Blood_type].Add(b);
             }
             else
-            {
                 unavailableBlood.Add(b);
-            }
         }
 
         bool isBloodUnique(string id)
@@ -519,9 +505,7 @@ namespace Blood_SMS
             foreach (Blood b in bloodList)
             {
                 if (b.Accession_number == accession_number)
-                {
                     return b;
-                }
             }
             return null;
         }
@@ -659,9 +643,7 @@ namespace Blood_SMS
             int rowsAffected = comm.ExecuteNonQuery();
             conn.Close();
             if (rowsAffected > 0)
-            {
                 return true;
-            }
             return false;
         }
 
@@ -756,9 +738,7 @@ namespace Blood_SMS
                         foreach (Component c in b.components)
                         {
                             if (c.Is_released)
-                            {
                                 ints[(int)days[c.Date_released]]++;
-                            }
                         }
 
                     }
@@ -770,9 +750,7 @@ namespace Blood_SMS
                         foreach (Component c in b.components)
                         {
                             if (c.Is_quarantined)
-                            {
                                 ints[(int)days[c.Date_quarantined]]++;
-                            }
                         }
                     }
                     break;
@@ -817,10 +795,7 @@ namespace Blood_SMS
                         foreach (Component c in b.components)
                         {
                             if (c.Is_released)
-                            {
-                                days[c.Date_released] = (int)days[c.Date_released] + 1;
                                 ints[(int)days[c.Date_released], (int)b.Blood_type]++;
-                            }
                         }
                     }
                     break;
@@ -830,9 +805,7 @@ namespace Blood_SMS
                         foreach (Component c in b.components)
                         {
                             if (c.Is_quarantined)
-                            {
                                 ints[(int)days[c.Date_quarantined], (int)b.Blood_type]++;
-                            }
                         }
                     }
                     break;
@@ -852,35 +825,6 @@ namespace Blood_SMS
 
             return ints;
         }
-        #endregion
-
-        #region Form Validation Methods
-
-        public string ValidateText(string text, int minimumLength, char[] requiredCharacters, char[] bannedCharacters, bool required)
-        {
-            if ((required && !String.IsNullOrEmpty(text) || (!required && text.Length > 1)) && text.Length >= minimumLength)
-            {
-                foreach (char c in requiredCharacters)
-                {
-                    if (!text.Contains(c))
-                    {
-                        return "Field must contain " + c;
-                    }
-                }
-                foreach (char c in bannedCharacters)
-                {
-                    if (text.Contains(c))
-                    {
-                        return "Field must not contain " + c;
-                    }
-                }
-                return null;
-            }
-            return "Field must contain at least " + minimumLength + " characters";
-        }
-
-        //http://stackoverflow.com/questions/5028673/c-sharp-numeric-only-textbox-control
-
         #endregion
     }
 }

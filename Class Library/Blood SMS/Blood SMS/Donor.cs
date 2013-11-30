@@ -34,7 +34,6 @@ namespace Blood_SMS
         List<Blood> bloods;
 
         int age;
-        string name;
         int times_donated;
 
         //FROM SQL
@@ -85,7 +84,6 @@ namespace Blood_SMS
             reason_for_deferral = REASON_FOR_DEFERRAL;
             Refresh();
 
-            name = LAST_NAME +", " + FIRST_NAME +" " + MIDDLE_INITIAL;
             bloods = new List<Blood>();
         }
 
@@ -136,7 +134,6 @@ namespace Blood_SMS
         public string Reason_for_deferral { get { return reason_for_deferral; } set { reason_for_deferral = value; } }
 
         public int Age { get { return age; } set { age = value; } }
-        public string Name {get {return name;} set {name = value;}}
         public List<Blood> Bloods { get { return bloods; } }
         public int Times_donated { get { return times_donated; } set { times_donated = value; } }
 
