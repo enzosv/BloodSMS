@@ -15,6 +15,8 @@ namespace BloodSMSApp
         Storage storage;
         string oldDefferalText;
         string lastName, firstName, middleInitial;
+        bool duplicate;
+        int id;
         public AddDonor(Storage stor, string lName, string fName, string mInitial)
         {
             InitializeComponent();
@@ -22,7 +24,7 @@ namespace BloodSMSApp
             lastName = lName;
             firstName = fName;
             middleInitial = mInitial;
-            nameLabel.Text = lastName + ", " + firstName + " " + middleInitial; 
+            nameLabel.Text = lastName + ", " + firstName + " " + middleInitial;
             foreach (bloodType x in (bloodType[])Enum.GetValues(typeof(bloodType)))
             {
                 bloodTypeField.Items.Add(MyEnums.GetDescription(x));
@@ -41,12 +43,46 @@ namespace BloodSMSApp
                 hCity.Items.Add(MyEnums.GetDescription(x));
                 oCity.Items.Add(MyEnums.GetDescription(x));
             }
-            bloodTypeField.SelectedIndex = 0;
-            educationalAttainmentField.SelectedIndex = 0;
-            hProvince.SelectedIndex = Enum.GetNames(typeof(province)).Length-1;
-            hCity.SelectedIndex = Enum.GetNames(typeof(city)).Length - 1;
-            oProvince.SelectedIndex = Enum.GetNames(typeof(province)).Length - 1;
-            oCity.SelectedIndex = Enum.GetNames(typeof(city)).Length - 1;
+            populateData();
+        }
+
+        void populateData()
+        {
+            Donor x = storage.findDonorWithName(lastName, firstName, middleInitial);
+            if (x == null)
+            {
+                bloodTypeField.SelectedIndex = 0;
+                educationalAttainmentField.SelectedIndex = 0;
+                hProvince.SelectedIndex = Enum.GetNames(typeof(province)).Length - 1;
+                hCity.SelectedIndex = Enum.GetNames(typeof(city)).Length - 1;
+                oProvince.SelectedIndex = Enum.GetNames(typeof(province)).Length - 1;
+                oCity.SelectedIndex = Enum.GetNames(typeof(city)).Length - 1;
+                duplicate = false;
+            }
+            else
+            {
+                //this code should be the same as show donor
+                id = x.Donor_id;
+                bloodTypeField.SelectedIndex = (int)x.Blood_type;
+                educationalAttainmentField.SelectedIndex = (int)x.Educational_attainment;
+                hProvince.SelectedIndex = (int)x.Home_province;
+                hCity.SelectedIndex = (int)x.Home_city;
+                oProvince.SelectedIndex = (int)x.Office_province;
+                oCity.SelectedIndex = (int)x.Office_city;
+                dateRegisteredField.Value = x.Date_registered;
+                birthDateField.Value = x.Birth_date;
+                nextAvailableField.Value = x.Next_available;
+                hStreetField.Text = x.Home_street;
+                oStreetField.Text = x.Office_street;
+                hLandlineField.Text = x.Home_landline;
+                oLandlineField.Text = x.Office_landline;
+                emailField.Text = x.Email;
+                cellphoneField.Text = x.Cellphone;
+                viableYes.Checked = x.Is_viable;
+                contactableYes.Checked = x.Is_contactable;
+                defferalField.Text = x.Reason_for_deferral;
+                duplicate = true;
+            }
         }
 
         bool isEmailValid(string emailaddress)
@@ -80,19 +116,32 @@ namespace BloodSMSApp
             int h_city = (int)MyEnums.GetValueFromDescription<city>(hCity.Text);
             int o_province = (int)MyEnums.GetValueFromDescription<province>(oProvince.Text);
             int o_city = (int)MyEnums.GetValueFromDescription<city>(oCity.Text);
-            //defferalField.Text = storage.AddQuery(new string[]{ "name", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "cellphone", "educational_attainment", "birth_date", "date_registered", "last_donation", "next_available", "times_donated", "is_contactable", "is_viable", "reason_for_deferral" });
 
             if ((!viableYes.Checked && isStringValid(defferalField.Text) && isStringValid(defferalField.Text)) || (viableYes.Checked))
             {
                 if ((isStringValid(emailField.Text) && isEmailValid(emailField.Text)) || String.IsNullOrEmpty(emailField.Text))
                 {
-                    if (storage.AddDonor(lastName, firstName, middleInitial, blood_type, h_province, h_city, hStreetField.Text, o_province, o_city, oStreetField.Text, hLandlineField.Text, oLandlineField.Text, emailField.Text, cellphoneField.Text, educational_attainment, birthDateField.Value, dateRegisteredField.Value, contactableYes.Checked, viableYes.Checked, defferalField.Text))
+                    Donor x = new Donor(id, lastName, firstName, middleInitial, blood_type, h_province, h_city, hStreetField.Text, o_province, o_city, oStreetField.Text, hLandlineField.Text, oLandlineField.Text, emailField.Text, cellphoneField.Text, educational_attainment, birthDateField.Value, dateRegisteredField.Value, nextAvailableField.Value, 0, contactableYes.Checked, viableYes.Checked, defferalField.Text);
+                    if (!duplicate)
                     {
-                        MessageBox.Show("DONOR ADDED");
-                        Close();
+                        if (storage.AddDonor(x))
+                        {
+                            MessageBox.Show("Donor added");
+                            Close();
+                        }
+                        else
+                            MessageBox.Show("Failed to add new donor");
                     }
                     else
-                        MessageBox.Show("FAIL");
+                    {
+                        if (storage.UpdateDonor(x))
+                        {
+                            MessageBox.Show("Updated Donor");
+                            Close();
+                        }
+                        else
+                            MessageBox.Show("Failed to update donor");
+                    }
                 }
                 else
                     MessageBox.Show("Invalid Email");

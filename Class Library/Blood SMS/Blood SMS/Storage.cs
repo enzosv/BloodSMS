@@ -108,18 +108,18 @@ namespace Blood_SMS
                 string REASON_FOR_DEFERRAL = reader.GetValue(22) as string;
 
                 Donor x = new Donor(DONOR_ID.Value, LAST_NAME, FIRST_NAME, MIDDLE_INITIAL,
-                    (bloodType)BLOOD_TYPE.Value,
-                    (province)HOME_PROVINCE.Value,
-                    (city)HOME_CITY.Value,
+                    BLOOD_TYPE.Value,
+                    HOME_PROVINCE.Value,
+                    HOME_CITY.Value,
                     HOME_STREET,
-                    (province)OFFICE_PROVINCE.Value,
-                    (city)OFFICE_CITY.Value,
+                    OFFICE_PROVINCE.Value,
+                    OFFICE_CITY.Value,
                     OFFICE_STREET,
                     HOME_LANDLINE,
                     OFFICE_LANDLINE,
                     EMAIL,
                     CELLPHONE,
-                    (educationalAttainment)EDUCATIONAL_ATTAINMENT.Value,
+                    EDUCATIONAL_ATTAINMENT.Value,
                     BIRTH_DATE.Value,
                     DATE_REGISTERED.Value,
                     NEXT_AVAILABLE.Value,
@@ -139,63 +139,17 @@ namespace Blood_SMS
         *</summary>
         */
         //NEW REGISTRANT
-        public bool AddDonor(
-            string LAST_NAME, string FIRST_NAME, string MIDDLE_INITIAL,
-            int BLOOD_TYPE,
-            int HOME_PROVINCE,
-            int HOME_CITY,
-            string HOME_STREET,
-            int OFFICE_PROVINCE,
-            int OFFICE_CITY,
-            string OFFICE_STREET,
-            string HOME_LANDLINE,
-            string OFFICE_LANDLINE,
-            string EMAIL,
-            string CELLPHONE,
-            int EDUCATIONAL_ATTAINMENT,
-            DateTime BIRTH_DATE,
-            DateTime DATE_REGISTERED,
-            bool IS_CONTACTABLE,
-            bool IS_VIABLE,
-            string REASON_FOR_DEFERRAL
-            )
+        public bool AddDonor(Donor x)
         {
-            Donor x = new Donor(LAST_NAME, FIRST_NAME, MIDDLE_INITIAL,
-                (bloodType) BLOOD_TYPE,
-                (province)HOME_PROVINCE,
-                (city)HOME_CITY,
-                HOME_STREET,
-                (province)OFFICE_PROVINCE,
-                (city)OFFICE_CITY,
-                OFFICE_STREET,
-                HOME_LANDLINE,
-                OFFICE_LANDLINE,
-                EMAIL,
-                CELLPHONE,
-                (educationalAttainment)EDUCATIONAL_ATTAINMENT,
-                BIRTH_DATE,
-                DATE_REGISTERED,
-                IS_CONTACTABLE,
-                IS_VIABLE,
-                REASON_FOR_DEFERRAL
-            );
-
-            //http://stackoverflow.com/questions/5228780/how-to-get-last-inserted-id
             if (donorCommands("Insert into donor " + AddQuery(DONOR_FIELDS), x))
             {
-                //MySqlConnection conn = new MySqlConnection(connectionString);
-                //MySqlCommand comm = new MySqlCommand("SELECT LAST_INSERT_ID()", conn);
-                //comm.CommandType = CommandType.Text;
-                //conn.Open();
-                //x.Donor_id = (int)comm.ExecuteScalar();
-                //conn.Close();
                 sortDonor(x);
                 return true;
             }
             return false;
         }
 
-        bool UpdateDonor(Donor d)
+        public bool UpdateDonor(Donor d)
         {
             if (donorCommands("UPDATE donor SET " + UpdateQuery(DONOR_FIELDS), d))
             {
@@ -247,7 +201,7 @@ namespace Blood_SMS
             return (rowsAffected > 0);
         }
 
-        bool DeleteDonorWithId(int id)
+        public bool DeleteDonorWithId(int id)
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
             string query = "DELETE FROM Donor WHERE donor_id =@donor_id";
@@ -280,6 +234,16 @@ namespace Blood_SMS
                 {
                     return d;
                 }
+            }
+            return null;
+        }
+
+        public Donor findDonorWithName(string lName, string fName, string mInitial)
+        {
+            foreach (Donor d in donorList)
+            {
+                if (d.Last_name == lName && d.First_name == fName && d.Middle_initial == mInitial)
+                    return d;
             }
             return null;
         }

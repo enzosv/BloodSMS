@@ -39,18 +39,18 @@ namespace Blood_SMS
 
         //FROM SQL
         public Donor(int DONOR_ID, string LAST_NAME, string FIRST_NAME, string MIDDLE_INITIAL,
-        bloodType BLOOD_TYPE,
-        province HOME_PROVINCE,
-        city HOME_CITY,
+        int BLOOD_TYPE,
+        int HOME_PROVINCE,
+        int HOME_CITY,
         string HOME_STREET,
-        province OFFICE_PROVINCE,
-        city OFFICE_CITY,
+        int OFFICE_PROVINCE,
+        int OFFICE_CITY,
         string OFFICE_STREET,
         string HOME_LANDLINE,
         string OFFICE_LANDLINE,
         string EMAIL,
         string CELLPHONE,
-        educationalAttainment EDUCATIONAL_ATTAINMENT,
+        int EDUCATIONAL_ATTAINMENT,
         DateTime BIRTH_DATE,
         DateTime DATE_REGISTERED,
         DateTime NEXT_AVAILABLE,
@@ -61,21 +61,21 @@ namespace Blood_SMS
             )
         {
             donor_id = DONOR_ID;
-            blood_type = BLOOD_TYPE;
+            blood_type = (bloodType)BLOOD_TYPE;
             last_name = LAST_NAME;
             first_name = FIRST_NAME;
             middle_initial = MIDDLE_INITIAL;
-            home_province = HOME_PROVINCE;
-            home_city = HOME_CITY;
+            home_province = (province)HOME_PROVINCE;
+            home_city = (city)HOME_CITY;
             home_street = HOME_STREET;
-            office_province = OFFICE_PROVINCE;
-            office_city = OFFICE_CITY;
+            office_province = (province)OFFICE_PROVINCE;
+            office_city = (city)OFFICE_CITY;
             office_street = OFFICE_STREET;
             home_landline = HOME_LANDLINE;
             office_landline = OFFICE_LANDLINE;
             email = EMAIL;
             cellphone = CELLPHONE;
-            educational_attainment = EDUCATIONAL_ATTAINMENT;
+            educational_attainment = (educationalAttainment)EDUCATIONAL_ATTAINMENT;
             birth_date = BIRTH_DATE;
             date_registered = DATE_REGISTERED;
             next_available = NEXT_AVAILABLE;
@@ -88,58 +88,6 @@ namespace Blood_SMS
             name = LAST_NAME +", " + FIRST_NAME +" " + MIDDLE_INITIAL;
             bloods = new List<Blood>();
         }
-
-        //NEW REGISTER
-        public Donor(string LAST_NAME, string FIRST_NAME, string MIDDLE_INITIAL,
-        bloodType BLOOD_TYPE,
-        province HOME_PROVINCE,
-        city HOME_CITY,
-        string HOME_STREET,
-        province OFFICE_PROVINCE,
-        city OFFICE_CITY,
-        string OFFICE_STREET,
-        string HOME_LANDLINE,
-        string OFFICE_LANDLINE,
-        string EMAIL,
-        string CELLPHONE,
-        educationalAttainment EDUCATIONAL_ATTAINMENT,
-        DateTime BIRTH_DATE,
-        DateTime DATE_REGISTERED,
-        bool IS_CONTACTABLE,
-        bool IS_VIABLE,
-        string REASON_FOR_DEFERRAL
-            )
-        {
-            last_name = LAST_NAME;
-            first_name = FIRST_NAME;
-            middle_initial = MIDDLE_INITIAL;
-            blood_type = BLOOD_TYPE;
-            home_province = HOME_PROVINCE;
-            home_city = HOME_CITY;
-            home_street = HOME_STREET;
-            office_province = OFFICE_PROVINCE;
-            office_city = OFFICE_CITY;
-            office_street = OFFICE_STREET;
-            home_landline = HOME_LANDLINE;
-            office_landline = OFFICE_LANDLINE;
-            email = EMAIL;
-            cellphone = CELLPHONE;
-            educational_attainment = (educationalAttainment) EDUCATIONAL_ATTAINMENT;
-            birth_date = BIRTH_DATE;
-            date_registered = DATE_REGISTERED;
-
-            next_available = DateTime.MinValue;
-            times_contacted = 0;
-
-            is_contactable = IS_CONTACTABLE;
-            is_viable = IS_VIABLE;
-            reason_for_deferral = REASON_FOR_DEFERRAL;
-            Refresh();
-
-            name = LAST_NAME + ", " + FIRST_NAME + " " + MIDDLE_INITIAL;
-            bloods = new List<Blood>();
-        }
-
 
         public void Refresh()
         {
