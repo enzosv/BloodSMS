@@ -37,7 +37,7 @@ namespace Blood_SMS
         const int MINIMUMBLOODVALUE = 5;
         const int MINIMUMEXPIRYALERTVALUE = 3;
         readonly string[] BLOOD_FIELDS = { "accession_number", "blood_type", "donor_id", "date_donated", "date_removed" };
-        readonly string[] DONOR_FIELDS = { "donor_id", "last_name", "first_name", "middle_initial", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "email", "cellphone", "educational_attainment", "birth_date", "date_registered", "next_available", "times_contacted", "is_contactable", "is_viable", "reason_for_deferral" };
+        readonly string[] DONOR_FIELDS = { "last_name", "first_name", "middle_initial", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "email", "cellphone", "educational_attainment", "birth_date", "date_registered", "next_available", "times_contacted", "is_contactable", "is_viable", "reason_for_deferral" };
         readonly string[] COMPONENT_FIELDS = { "accession_number", "component_name", "date_processed", "date_expire", "date_quarantined", "date_assigned", "date_released", "patient_last_name", "patient_first_name", "patient_middle_initial", "patient_age", "reason_for_removal" };
         int BlOODTYPECOUNT = Enum.GetNames(typeof(bloodType)).Length;
         
@@ -103,10 +103,10 @@ namespace Blood_SMS
                 DateTime? BIRTH_DATE = reader.GetValue(17) as DateTime?;
                 DateTime? DATE_REGISTERED = reader.GetValue(18) as DateTime?;
                 DateTime? NEXT_AVAILABLE = reader.GetValue(19) as DateTime?;
-                int? TIMES_CONTACTED = reader.GetValue(21) as int?;
-                bool? IS_CONTACTABLE = reader.GetValue(22) as bool?;
-                bool? IS_VIABLE = reader.GetValue(23) as bool?;
-                string REASON_FOR_DEFERRAL = reader.GetValue(24) as string;
+                int? TIMES_CONTACTED = reader.GetValue(20) as int?;
+                bool? IS_CONTACTABLE = reader.GetValue(21) as bool?;
+                bool? IS_VIABLE = reader.GetValue(22) as bool?;
+                string REASON_FOR_DEFERRAL = reader.GetValue(23) as string;
 
                 Donor x = new Donor(DONOR_ID, LAST_NAME, FIRST_NAME, MIDDLE_INITIAL,
                     BLOOD_TYPE,
@@ -185,8 +185,14 @@ namespace Blood_SMS
             );
 
             //http://stackoverflow.com/questions/5228780/how-to-get-last-inserted-id
-            if (donorCommands("Insert into donor output donor_id" + AddQuery(DONOR_FIELDS), x))
+            if (donorCommands("Insert into donor " + AddQuery(DONOR_FIELDS), x))
             {
+                //MySqlConnection conn = new MySqlConnection(connectionString);
+                //MySqlCommand comm = new MySqlCommand("SELECT LAST_INSERT_ID()", conn);
+                //comm.CommandType = CommandType.Text;
+                //conn.Open();
+                //x.Donor_id = (int)comm.ExecuteScalar();
+                //conn.Close();
                 sortDonor(x);
                 return true;
             }
@@ -210,8 +216,8 @@ namespace Blood_SMS
             MySqlConnection conn = new MySqlConnection(connectionString);
             MySqlCommand comm = new MySqlCommand(query, conn);
             comm.CommandType = CommandType.Text;
-            //long id = comm.LastInsertedId;
-            //x.Donor_id = (int)id;
+            //
+            //
             //comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
             comm.Parameters.AddWithValue("@last_name", x.Last_name);
             comm.Parameters.AddWithValue("@first_name", x.First_name);
@@ -237,11 +243,12 @@ namespace Blood_SMS
             comm.Parameters.AddWithValue("@is_viable", x.Is_viable);
             comm.Parameters.AddWithValue("@reason_for_deferral", x.Reason_for_deferral);
 
-
             conn.Open();
-            x.Donor_id = (int)comm.ExecuteScalar();
             int rowsAffected = comm.ExecuteNonQuery();
+            long id = comm.LastInsertedId;
+            
             conn.Close();
+            x.Donor_id = (int)id;
             return (rowsAffected > 0);
         }
 
@@ -311,7 +318,6 @@ namespace Blood_SMS
                 {
                     contactableDonors.Add(d);
                     donorTypes[(int)d.Blood_type].Add(d);
-
                 }
             }
             else

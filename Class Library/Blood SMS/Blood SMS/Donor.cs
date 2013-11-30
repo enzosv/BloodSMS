@@ -163,6 +163,12 @@ namespace Blood_SMS
             bloods.Remove(b);
         }
 
+        public void SendEmail(string subject, string body)
+        {
+            times_contacted++;
+            Email mail = new Email(email, subject, body);
+        }
+
         public int Donor_id { get { return donor_id; } set { donor_id = value; } }
         public string Last_name { get { return last_name; } set { last_name = value; } }
         public string First_name { get { return first_name; } set { first_name = value; } }

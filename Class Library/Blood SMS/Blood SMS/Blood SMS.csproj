@@ -47,6 +47,7 @@
     <Compile Include="Blood.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="Donor.cs" />
+    <Compile Include="Email.cs" />
     <Compile Include="MyEnums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Storage.cs" />

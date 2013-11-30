@@ -11,35 +11,34 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter email:");
-            string email = Console.ReadLine();
-            Console.WriteLine("Enter password");
-            string password = Console.ReadLine();
-            NetworkCredential cred = new NetworkCredential(email, password);
-
-            MailMessage msg = new MailMessage();
-            Console.WriteLine("Enter Recipient: ");
+            Console.WriteLine("Enter recipient email");
             string recipient = Console.ReadLine();
-            msg.To.Add(recipient);
-            msg.From = new MailAddress(email);
-            msg.Subject = "A subject.";
-            msg.Body = "Hello, this is my message.";
 
-            //NetworkCredential cred = new NetworkCredential("prankster@gmail.com", "EmailAccountPass");
-            //msg.From = new MailAddress("CrazyGuy@insane.com");
+            Console.WriteLine("Enter Subject :");
+            string subject = Console.ReadLine();
+            Console.WriteLine("Enter message :");
+            string body = Console.ReadLine();
 
-            SmtpClient client = new SmtpClient("smtp.gmail.com", 25);
+            var fromAddress = new MailAddress("eamc.bloodbank@gmail.com");
+            var toAddress = new MailAddress(recipient);
 
-            client.Credentials = cred; // Send our account login details to the client.
-            client.EnableSsl = true;   // Read below.
-            client.Send(msg);          // Send our email.
-
-            // Host List:
-            // smtp.gmail.com // Gmail
-            // smtp.live.com // Windows live / Hotmail
-            // smtp.mail.yahoo.com // Yahoo
-            // smtp.aim.com // AIM
-            // my.inbox.com // Inbox
+            var smtp = new SmtpClient
+                       {
+                           Host = "smtp.gmail.com",
+                           Port = 587,
+                           EnableSsl = true,
+                           DeliveryMethod = SmtpDeliveryMethod.Network,
+                           UseDefaultCredentials = false,
+                           Credentials = new NetworkCredential(fromAddress.Address, "bloodbus")
+                       };
+            using (var message = new MailMessage(fromAddress, toAddress)
+                                 {
+                                     Subject = subject,
+                                     Body = body
+                                 })
+            {
+                smtp.Send(message);
+            }
             Console.Read();
         }
     }

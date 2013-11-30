@@ -46,7 +46,7 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
-            this.nameField = new System.Windows.Forms.TextBox();
+            this.lastnameField = new System.Windows.Forms.TextBox();
             this.dateRegisteredField = new System.Windows.Forms.DateTimePicker();
             this.bloodTypeField = new System.Windows.Forms.ComboBox();
             this.preferredContactField = new System.Windows.Forms.ComboBox();
@@ -75,6 +75,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.defferalField = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
+            this.firstNameField = new System.Windows.Forms.TextBox();
+            this.middleInitialField = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -259,12 +261,12 @@
             this.label25.TabIndex = 24;
             this.label25.Text = "NEXT AVAILABLE:";
             // 
-            // nameField
+            // lastnameField
             // 
-            this.nameField.Location = new System.Drawing.Point(47, 83);
-            this.nameField.Name = "nameField";
-            this.nameField.Size = new System.Drawing.Size(200, 20);
-            this.nameField.TabIndex = 27;
+            this.lastnameField.Location = new System.Drawing.Point(47, 83);
+            this.lastnameField.Name = "lastnameField";
+            this.lastnameField.Size = new System.Drawing.Size(79, 20);
+            this.lastnameField.TabIndex = 27;
             // 
             // dateRegisteredField
             // 
@@ -275,6 +277,7 @@
             // 
             // bloodTypeField
             // 
+            this.bloodTypeField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.bloodTypeField.FormattingEnabled = true;
             this.bloodTypeField.Location = new System.Drawing.Point(301, 134);
             this.bloodTypeField.Name = "bloodTypeField";
@@ -283,6 +286,7 @@
             // 
             // preferredContactField
             // 
+            this.preferredContactField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.preferredContactField.FormattingEnabled = true;
             this.preferredContactField.Location = new System.Drawing.Point(49, 481);
             this.preferredContactField.Name = "preferredContactField";
@@ -396,6 +400,7 @@
             // 
             // educationalAttainmentField
             // 
+            this.educationalAttainmentField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.educationalAttainmentField.FormattingEnabled = true;
             this.educationalAttainmentField.Location = new System.Drawing.Point(47, 186);
             this.educationalAttainmentField.Name = "educationalAttainmentField";
@@ -518,12 +523,28 @@
             this.label16.TabIndex = 62;
             this.label16.Text = "REASON FOR DEFFERAL";
             // 
+            // firstNameField
+            // 
+            this.firstNameField.Location = new System.Drawing.Point(132, 82);
+            this.firstNameField.Name = "firstNameField";
+            this.firstNameField.Size = new System.Drawing.Size(79, 20);
+            this.firstNameField.TabIndex = 63;
+            // 
+            // middleInitialField
+            // 
+            this.middleInitialField.Location = new System.Drawing.Point(217, 82);
+            this.middleInitialField.Name = "middleInitialField";
+            this.middleInitialField.Size = new System.Drawing.Size(32, 20);
+            this.middleInitialField.TabIndex = 64;
+            // 
             // AddDonor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BloodSMSApp.Properties.Resources.addDonor_copy;
             this.ClientSize = new System.Drawing.Size(535, 703);
+            this.Controls.Add(this.middleInitialField);
+            this.Controls.Add(this.firstNameField);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.defferalField);
             this.Controls.Add(this.panel2);
@@ -548,7 +569,7 @@
             this.Controls.Add(this.bloodTypeField);
             this.Controls.Add(this.birthDateField);
             this.Controls.Add(this.dateRegisteredField);
-            this.Controls.Add(this.nameField);
+            this.Controls.Add(this.lastnameField);
             this.Controls.Add(this.label25);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.label20);
@@ -598,7 +619,7 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.TextBox nameField;
+        private System.Windows.Forms.TextBox lastnameField;
         private System.Windows.Forms.DateTimePicker dateRegisteredField;
         private System.Windows.Forms.ComboBox bloodTypeField;
         private System.Windows.Forms.ComboBox preferredContactField;
@@ -627,5 +648,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox defferalField;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox firstNameField;
+        private System.Windows.Forms.TextBox middleInitialField;
     }
 }
