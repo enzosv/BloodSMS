@@ -37,7 +37,7 @@ namespace Blood_SMS
         const int MINIMUMBLOODVALUE = 5;
         const int MINIMUMEXPIRYALERTVALUE = 3;
         readonly string[] BLOOD_FIELDS = { "accession_number", "blood_type", "donor_id", "date_donated", "date_removed" };
-        readonly string[] DONOR_FIELDS = { "last_name", "first_name", "middle_initial", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "preferred_contact_method", "home_landline", "office_landline", "email", "cellphone", "educational_attainment", "birth_date", "date_registered", "next_available", "times_contacted", "is_contactable", "is_viable", "reason_for_deferral" };
+        readonly string[] DONOR_FIELDS = { "last_name", "first_name", "middle_initial", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "home_landline", "office_landline", "email", "cellphone", "educational_attainment", "birth_date", "date_registered", "next_available", "times_contacted", "is_contactable", "is_viable", "reason_for_deferral" };
         readonly string[] COMPONENT_FIELDS = { "accession_number", "component_name", "date_processed", "date_expire", "date_quarantined", "date_assigned", "date_released", "patient_last_name", "patient_first_name", "patient_middle_initial", "patient_age", "reason_for_removal" };
         int BlOODTYPECOUNT = Enum.GetNames(typeof(bloodType)).Length;
         
@@ -88,46 +88,44 @@ namespace Blood_SMS
                 string FIRST_NAME = reader.GetValue(2) as string;
                 string MIDDLE_INITIAL = reader.GetValue(3) as string;
                 int? BLOOD_TYPE = reader.GetValue(4) as int?;
-                string HOME_PROVINCE = reader.GetValue(5) as string;
-                string HOME_CITY = reader.GetValue(6) as string;
+                int? HOME_PROVINCE = reader.GetValue(5) as int?;
+                int? HOME_CITY = reader.GetValue(6) as int?;
                 string HOME_STREET = reader.GetValue(7) as string;
-                string OFFICE_PROVINCE = reader.GetValue(8) as string;
-                string OFFICE_CITY = reader.GetValue(9) as string;
+                int? OFFICE_PROVINCE = reader.GetValue(8) as int?;
+                int? OFFICE_CITY = reader.GetValue(9) as int?;
                 string OFFICE_STREET = reader.GetValue(10) as string;
-                int? PREFERRED_CONTACT_METHOD = reader.GetValue(11) as int?;
-                string HOME_LANDLINE = reader.GetValue(12) as string;
-                string OFFICE_LANDLINE = reader.GetValue(13) as string;
-                string EMAIL = reader.GetValue(14) as string;
-                string CELLPHONE = reader.GetValue(15) as string;
-                int? EDUCATIONAL_ATTAINMENT = reader.GetValue(16) as int?;
-                DateTime? BIRTH_DATE = reader.GetValue(17) as DateTime?;
-                DateTime? DATE_REGISTERED = reader.GetValue(18) as DateTime?;
-                DateTime? NEXT_AVAILABLE = reader.GetValue(19) as DateTime?;
-                int? TIMES_CONTACTED = reader.GetValue(20) as int?;
-                bool? IS_CONTACTABLE = reader.GetValue(21) as bool?;
-                bool? IS_VIABLE = reader.GetValue(22) as bool?;
-                string REASON_FOR_DEFERRAL = reader.GetValue(23) as string;
+                string HOME_LANDLINE = reader.GetValue(11) as string;
+                string OFFICE_LANDLINE = reader.GetValue(12) as string;
+                string EMAIL = reader.GetValue(13) as string;
+                string CELLPHONE = reader.GetValue(14) as string;
+                int? EDUCATIONAL_ATTAINMENT = reader.GetValue(15) as int?;
+                DateTime? BIRTH_DATE = reader.GetValue(16) as DateTime?;
+                DateTime? DATE_REGISTERED = reader.GetValue(17) as DateTime?;
+                DateTime? NEXT_AVAILABLE = reader.GetValue(18) as DateTime?;
+                int? TIMES_CONTACTED = reader.GetValue(19) as int?;
+                bool? IS_CONTACTABLE = reader.GetValue(20) as bool?;
+                bool? IS_VIABLE = reader.GetValue(21) as bool?;
+                string REASON_FOR_DEFERRAL = reader.GetValue(22) as string;
 
-                Donor x = new Donor(DONOR_ID, LAST_NAME, FIRST_NAME, MIDDLE_INITIAL,
-                    BLOOD_TYPE,
-                    HOME_PROVINCE,
-                    HOME_CITY,
+                Donor x = new Donor(DONOR_ID.Value, LAST_NAME, FIRST_NAME, MIDDLE_INITIAL,
+                    (bloodType)BLOOD_TYPE.Value,
+                    (province)HOME_PROVINCE.Value,
+                    (city)HOME_CITY.Value,
                     HOME_STREET,
-                    OFFICE_PROVINCE,
-                    OFFICE_CITY,
+                    (province)OFFICE_PROVINCE.Value,
+                    (city)OFFICE_CITY.Value,
                     OFFICE_STREET,
-                    PREFERRED_CONTACT_METHOD,
                     HOME_LANDLINE,
                     OFFICE_LANDLINE,
                     EMAIL,
                     CELLPHONE,
-                    EDUCATIONAL_ATTAINMENT,
-                    BIRTH_DATE,
-                    DATE_REGISTERED,
-                    NEXT_AVAILABLE,
-                    TIMES_CONTACTED,
-                    IS_CONTACTABLE,
-                    IS_VIABLE,
+                    (educationalAttainment)EDUCATIONAL_ATTAINMENT.Value,
+                    BIRTH_DATE.Value,
+                    DATE_REGISTERED.Value,
+                    NEXT_AVAILABLE.Value,
+                    TIMES_CONTACTED.Value,
+                    IS_CONTACTABLE.Value,
+                    IS_VIABLE.Value,
                     REASON_FOR_DEFERRAL);
                 sortDonor(x);
             }
@@ -144,13 +142,12 @@ namespace Blood_SMS
         public bool AddDonor(
             string LAST_NAME, string FIRST_NAME, string MIDDLE_INITIAL,
             int BLOOD_TYPE,
-            string HOME_PROVINCE,
-            string HOME_CITY,
+            int HOME_PROVINCE,
+            int HOME_CITY,
             string HOME_STREET,
-            string OFFICE_PROVINCE,
-            string OFFICE_CITY,
+            int OFFICE_PROVINCE,
+            int OFFICE_CITY,
             string OFFICE_STREET,
-            int PREFERRED_CONTACT_METHOD,
             string HOME_LANDLINE,
             string OFFICE_LANDLINE,
             string EMAIL,
@@ -164,19 +161,18 @@ namespace Blood_SMS
             )
         {
             Donor x = new Donor(LAST_NAME, FIRST_NAME, MIDDLE_INITIAL,
-                BLOOD_TYPE,
-                HOME_PROVINCE,
-                HOME_CITY,
+                (bloodType) BLOOD_TYPE,
+                (province)HOME_PROVINCE,
+                (city)HOME_CITY,
                 HOME_STREET,
-                OFFICE_PROVINCE,
-                OFFICE_CITY,
+                (province)OFFICE_PROVINCE,
+                (city)OFFICE_CITY,
                 OFFICE_STREET,
-                PREFERRED_CONTACT_METHOD,
                 HOME_LANDLINE,
                 OFFICE_LANDLINE,
                 EMAIL,
                 CELLPHONE,
-                EDUCATIONAL_ATTAINMENT,
+                (educationalAttainment)EDUCATIONAL_ATTAINMENT,
                 BIRTH_DATE,
                 DATE_REGISTERED,
                 IS_CONTACTABLE,
@@ -229,7 +225,6 @@ namespace Blood_SMS
             comm.Parameters.AddWithValue("@office_province", x.Office_province);
             comm.Parameters.AddWithValue("@office_city", x.Office_city);
             comm.Parameters.AddWithValue("@office_street", x.Office_street);
-            comm.Parameters.AddWithValue("@preferred_contact_method", x.Preferred_contact_method);
             comm.Parameters.AddWithValue("@home_landline", x.Home_landline);
             comm.Parameters.AddWithValue("@office_landline", x.Office_landline);
             comm.Parameters.AddWithValue("@email", x.Email);
@@ -370,7 +365,7 @@ namespace Blood_SMS
             {
                 foreach (Donor d in donorTypes[bType])
                 {
-                    if (d.Home_city == ((city)i).ToString())
+                    if (d.Home_city == ((city)i))
                     {
                         closestByType.Add(d);
                         d.Times_contacted++;
@@ -884,7 +879,7 @@ namespace Blood_SMS
 
         #region Form Validation Methods
 
-        string ValidateText(string text, int minimumLength, char[] requiredCharacters, bool required)
+        public string ValidateText(string text, int minimumLength, char[] requiredCharacters, char[] bannedCharacters, bool required)
         {
             if ((required && !String.IsNullOrEmpty(text) || (!required && text.Length > 1)) && text.Length >= minimumLength)
             {
@@ -892,14 +887,17 @@ namespace Blood_SMS
                 {
                     if (!text.Contains(c))
                     {
-                        string charToContain = c + "";
-                        if (c == ' ')
-                            charToContain = "spaces";
-
-                        return "Field must contain " + charToContain;
+                        return "Field must contain " + c;
                     }
                 }
-                return "";
+                foreach (char c in bannedCharacters)
+                {
+                    if (text.Contains(c))
+                    {
+                        return "Field must not contain " + c;
+                    }
+                }
+                return null;
             }
             return "Field must contain at least " + minimumLength + " characters";
         }

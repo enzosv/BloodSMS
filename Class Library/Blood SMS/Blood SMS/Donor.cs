@@ -13,13 +13,12 @@ namespace Blood_SMS
         string first_name;
         string middle_initial;
         bloodType blood_type;
-        string home_province;
-        string home_city;
+        province home_province;
+        city home_city;
         string home_street;
-        string office_province;
-        string office_city;
+        province office_province;
+        city office_city;
         string office_street;
-        contactMethod preferred_contact_method;
         string home_landline;
         string office_landline;
         string email;
@@ -39,31 +38,30 @@ namespace Blood_SMS
         int times_donated;
 
         //FROM SQL
-        public Donor(int? DONOR_ID, string LAST_NAME, string FIRST_NAME, string MIDDLE_INITIAL,
-        int? BLOOD_TYPE,
-        string HOME_PROVINCE,
-        string HOME_CITY,
+        public Donor(int DONOR_ID, string LAST_NAME, string FIRST_NAME, string MIDDLE_INITIAL,
+        bloodType BLOOD_TYPE,
+        province HOME_PROVINCE,
+        city HOME_CITY,
         string HOME_STREET,
-        string OFFICE_PROVINCE,
-        string OFFICE_CITY,
+        province OFFICE_PROVINCE,
+        city OFFICE_CITY,
         string OFFICE_STREET,
-        int? PREFERRED_CONTACT_METHOD,
         string HOME_LANDLINE,
         string OFFICE_LANDLINE,
         string EMAIL,
         string CELLPHONE,
-        int? EDUCATIONAL_ATTAINMENT,
-        DateTime? BIRTH_DATE,
-        DateTime? DATE_REGISTERED,
-        DateTime? NEXT_AVAILABLE,
-        int? TIMES_CONTACTED,
-        bool? IS_CONTACTABLE,
-        bool? IS_VIABLE,
+        educationalAttainment EDUCATIONAL_ATTAINMENT,
+        DateTime BIRTH_DATE,
+        DateTime DATE_REGISTERED,
+        DateTime NEXT_AVAILABLE,
+        int TIMES_CONTACTED,
+        bool IS_CONTACTABLE,
+        bool IS_VIABLE,
         string REASON_FOR_DEFERRAL
             )
         {
-            donor_id = DONOR_ID.Value;
-            blood_type = (bloodType)BLOOD_TYPE.Value;
+            donor_id = DONOR_ID;
+            blood_type = BLOOD_TYPE;
             last_name = LAST_NAME;
             first_name = FIRST_NAME;
             middle_initial = MIDDLE_INITIAL;
@@ -73,18 +71,17 @@ namespace Blood_SMS
             office_province = OFFICE_PROVINCE;
             office_city = OFFICE_CITY;
             office_street = OFFICE_STREET;
-            preferred_contact_method = (contactMethod)PREFERRED_CONTACT_METHOD.Value;
             home_landline = HOME_LANDLINE;
             office_landline = OFFICE_LANDLINE;
             email = EMAIL;
             cellphone = CELLPHONE;
-            educational_attainment = (educationalAttainment)EDUCATIONAL_ATTAINMENT.Value;
-            birth_date = BIRTH_DATE.Value;
-            date_registered = DATE_REGISTERED.Value;
-            next_available = NEXT_AVAILABLE.Value;
-            times_contacted = TIMES_CONTACTED.Value;
-            is_contactable = IS_CONTACTABLE.Value;
-            is_viable = IS_VIABLE.Value;
+            educational_attainment = EDUCATIONAL_ATTAINMENT;
+            birth_date = BIRTH_DATE;
+            date_registered = DATE_REGISTERED;
+            next_available = NEXT_AVAILABLE;
+            times_contacted = TIMES_CONTACTED;
+            is_contactable = IS_CONTACTABLE;
+            is_viable = IS_VIABLE;
             reason_for_deferral = REASON_FOR_DEFERRAL;
             Refresh();
 
@@ -94,19 +91,18 @@ namespace Blood_SMS
 
         //NEW REGISTER
         public Donor(string LAST_NAME, string FIRST_NAME, string MIDDLE_INITIAL,
-        int BLOOD_TYPE,
-        string HOME_PROVINCE,
-        string HOME_CITY,
+        bloodType BLOOD_TYPE,
+        province HOME_PROVINCE,
+        city HOME_CITY,
         string HOME_STREET,
-        string OFFICE_PROVINCE,
-        string OFFICE_CITY,
+        province OFFICE_PROVINCE,
+        city OFFICE_CITY,
         string OFFICE_STREET,
-        int PREFERRED_CONTACT_METHOD,
         string HOME_LANDLINE,
         string OFFICE_LANDLINE,
         string EMAIL,
         string CELLPHONE,
-        int EDUCATIONAL_ATTAINMENT,
+        educationalAttainment EDUCATIONAL_ATTAINMENT,
         DateTime BIRTH_DATE,
         DateTime DATE_REGISTERED,
         bool IS_CONTACTABLE,
@@ -117,14 +113,13 @@ namespace Blood_SMS
             last_name = LAST_NAME;
             first_name = FIRST_NAME;
             middle_initial = MIDDLE_INITIAL;
-            blood_type = (bloodType) BLOOD_TYPE;
+            blood_type = BLOOD_TYPE;
             home_province = HOME_PROVINCE;
             home_city = HOME_CITY;
             home_street = HOME_STREET;
             office_province = OFFICE_PROVINCE;
             office_city = OFFICE_CITY;
             office_street = OFFICE_STREET;
-            preferred_contact_method = (contactMethod) PREFERRED_CONTACT_METHOD;
             home_landline = HOME_LANDLINE;
             office_landline = OFFICE_LANDLINE;
             email = EMAIL;
@@ -165,7 +160,6 @@ namespace Blood_SMS
 
         public void SendEmail(string subject, string body)
         {
-            times_contacted++;
             Email mail = new Email(email, subject, body);
         }
 
@@ -174,13 +168,12 @@ namespace Blood_SMS
         public string First_name { get { return first_name; } set { first_name = value; } }
         public string Middle_initial { get { return middle_initial; } set { middle_initial = value; } }
         public bloodType Blood_type { get { return blood_type; } set { blood_type = value; } }
-        public string Home_province { get { return home_province; } set { home_province = value; } }
-        public string Home_city { get { return home_city; } set { home_city = value; } }
+        public province Home_province { get { return home_province; } set { home_province = value; } }
+        public city Home_city { get { return home_city; } set { home_city = value; } }
         public string Home_street { get { return home_street; } set { home_street = value; } }
-        public string Office_province { get { return office_province; } set { office_province = value; } }
-        public string Office_city { get { return office_city; } set { office_city = value; } }
+        public province Office_province { get { return office_province; } set { office_province = value; } }
+        public city Office_city { get { return office_city; } set { office_city = value; } }
         public string Office_street { get { return office_street; } set { office_street = value; } }
-        public contactMethod Preferred_contact_method { get { return preferred_contact_method; } set { preferred_contact_method = value; } }
         public string Home_landline { get { return home_landline; } set { home_landline = value; } }
         public string Office_landline { get { return office_landline; } set { office_landline = value; } }
         public string Email { get { return email; } set { email = value; } }

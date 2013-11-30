@@ -28,31 +28,86 @@ namespace Blood_SMS
     };
     public enum graphCommand { Add, Release, Quarantine, Remove, Summary };
     public enum bloodType { [Description("AB+")]ABp, [Description("AB-")] ABn, [Description("A+")] Ap, [Description("A-")] An, [Description("B+")] Bp, [Description("B-")] Bn, [Description("O+")] Op, [Description("O-")] On };
-    public enum contactMethod { [Description("None")]none,[Description("Email")] email, [Description("Cellphone")] cellphone };
     public enum educationalAttainment { [Description("Other")]other, [Description("None")] none, [Description("Grade School")] gradeschool, [Description("High School")] highschool, [Description("College")] college };
-    public enum city { QuezonCity, SanJuan, Manila, Caloocan, Mandaluyong, Malabon, Pateros, Makati, Valenzuela, Navotas, Pasay, Taguig, Paranaque, Muntinlupa, LasPinas, Other };
+    public enum city
+    {
+        [Description("Quezon City")]
+        QuezonCity,
 
+        [Description("San Juan")]
+        SanJuan,
+
+        [Description("Manila")]
+        Manila,
+
+        [Description("Caloocan")]
+        Caloocan,
+
+        [Description("Mandaluyong")]
+        Mandaluyong,
+
+        [Description("Malabon")]
+        Malabon,
+
+        [Description("Pateros")]
+        Pateros,
+
+        [Description("Makati")]
+        Makati,
+
+        [Description("Valenzuela")]
+        Valenzuela,
+
+        [Description("Navotas")]
+        Navotas,
+
+        [Description("Pasay")]
+        Pasay,
+
+        [Description("Taguig")]
+        Taguig,
+
+        [Description("Paranaque")]
+        Paranaque,
+
+        [Description("Muntinlupa")]
+        Muntinlupa,
+
+        [Description("Las Pinas")]
+        LasPinas,
+
+        [Description("Other")]
+        Other
+    };
+    public enum province
+    {
+        [Description("Metro Manila")]
+        MetroManila,
+        [Description("Other")]
+        Other,
+
+    }
     public static class MyEnums
     {
-                /*
-         * Quezon City 4.5km
-    Marikina 9.6
-    San Juan 10.1
-    Manila 10.1
-    Caloocan 11.3km
-    Mandaluyong 11.6
-    Malabon 12.3
-    Pateros 12.9
-    Makati 13.7km
-    Valenzuela 14.5
-    Navotas 15.4
-    Pasay 16.4
-    Taguig 21.3
-    Paranaque 25.2
-    Muntinlupa 30.4km
-    las pinas 34.9km
-    */
-        
+        /*
+ * Quezon City 4.5km
+Marikina 9.6
+San Juan 10.1
+Manila 10.1
+Caloocan 11.3km
+Mandaluyong 11.6
+Malabon 12.3
+Pateros 12.9
+Makati 13.7km
+Valenzuela 14.5
+Navotas 15.4
+Pasay 16.4
+Taguig 21.3
+Paranaque 25.2
+Muntinlupa 30.4km
+las pinas 34.9km
+*/
+
 
         public static string GetDescription(Enum value)
         {

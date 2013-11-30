@@ -130,7 +130,7 @@ namespace BloodSMSApp
 
         private void button9_Click_1(object sender, EventArgs e)
         {
-            AddDonor a = new AddDonor(storage);
+            PreAddDonor a = new PreAddDonor(storage);
             a.Show();
         }
 
@@ -160,7 +160,7 @@ namespace BloodSMSApp
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            AddDonor a = new AddDonor(storage);
+            PreAddDonor a = new PreAddDonor(storage);
             a.Show();
         }
         #endregion
