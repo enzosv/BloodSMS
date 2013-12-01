@@ -176,7 +176,7 @@
             // 
             this.dateFrom.CustomFormat = "MMMM yyyy";
             this.dateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateFrom.Location = new System.Drawing.Point(548, 106);
+            this.dateFrom.Location = new System.Drawing.Point(446, 317);
             this.dateFrom.Name = "dateFrom";
             this.dateFrom.ShowUpDown = true;
             this.dateFrom.Size = new System.Drawing.Size(100, 20);
@@ -187,7 +187,7 @@
             // 
             this.dateTo.CustomFormat = "MMMM yyyy";
             this.dateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTo.Location = new System.Drawing.Point(548, 132);
+            this.dateTo.Location = new System.Drawing.Point(552, 317);
             this.dateTo.Name = "dateTo";
             this.dateTo.ShowUpDown = true;
             this.dateTo.Size = new System.Drawing.Size(100, 20);
@@ -196,7 +196,7 @@
             // 
             // Summary
             // 
-            this.Summary.Location = new System.Drawing.Point(573, 225);
+            this.Summary.Location = new System.Drawing.Point(514, 347);
             this.Summary.Name = "Summary";
             this.Summary.Size = new System.Drawing.Size(75, 23);
             this.Summary.TabIndex = 20;
@@ -206,7 +206,7 @@
             // 
             // addedButton
             // 
-            this.addedButton.Location = new System.Drawing.Point(573, 271);
+            this.addedButton.Location = new System.Drawing.Point(461, 376);
             this.addedButton.Name = "addedButton";
             this.addedButton.Size = new System.Drawing.Size(75, 23);
             this.addedButton.TabIndex = 19;
@@ -216,7 +216,7 @@
             // 
             // releasedButton
             // 
-            this.releasedButton.Location = new System.Drawing.Point(573, 359);
+            this.releasedButton.Location = new System.Drawing.Point(461, 405);
             this.releasedButton.Name = "releasedButton";
             this.releasedButton.Size = new System.Drawing.Size(75, 23);
             this.releasedButton.TabIndex = 18;
@@ -226,7 +226,7 @@
             // 
             // quarantinedButton
             // 
-            this.quarantinedButton.Location = new System.Drawing.Point(573, 403);
+            this.quarantinedButton.Location = new System.Drawing.Point(568, 405);
             this.quarantinedButton.Name = "quarantinedButton";
             this.quarantinedButton.Size = new System.Drawing.Size(75, 23);
             this.quarantinedButton.TabIndex = 17;
@@ -235,7 +235,7 @@
             // 
             // removedButton
             // 
-            this.removedButton.Location = new System.Drawing.Point(573, 315);
+            this.removedButton.Location = new System.Drawing.Point(568, 376);
             this.removedButton.Name = "removedButton";
             this.removedButton.Size = new System.Drawing.Size(75, 23);
             this.removedButton.TabIndex = 16;
@@ -252,7 +252,7 @@
             legend1.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row;
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(5, 158);
+            this.chart1.Location = new System.Drawing.Point(5, 10);
             this.chart1.Name = "chart1";
             series1.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
             series1.ChartArea = "ChartArea1";
@@ -317,7 +317,7 @@
             this.chart1.Series.Add(series7);
             this.chart1.Series.Add(series8);
             this.chart1.Series.Add(series9);
-            this.chart1.Size = new System.Drawing.Size(562, 254);
+            this.chart1.Size = new System.Drawing.Size(436, 402);
             this.chart1.TabIndex = 15;
             this.chart1.Text = "chart1";
             this.chart1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chart1_MouseClick);
@@ -326,9 +326,10 @@
             // 
             chartArea2.Name = "ChartArea1";
             this.chart2.ChartAreas.Add(chartArea2);
+            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             legend2.Name = "Legend1";
             this.chart2.Legends.Add(legend2);
-            this.chart2.Location = new System.Drawing.Point(51, 5);
+            this.chart2.Location = new System.Drawing.Point(431, 10);
             this.chart2.Name = "chart2";
             series10.BorderColor = System.Drawing.Color.Black;
             series10.ChartArea = "ChartArea1";
@@ -337,7 +338,7 @@
             series10.LegendText = "AB+";
             series10.Name = "Series1";
             this.chart2.Series.Add(series10);
-            this.chart2.Size = new System.Drawing.Size(239, 188);
+            this.chart2.Size = new System.Drawing.Size(239, 296);
             this.chart2.TabIndex = 14;
             this.chart2.Text = "chart2";
             // 
