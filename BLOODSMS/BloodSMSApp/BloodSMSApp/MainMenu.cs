@@ -118,17 +118,19 @@ namespace BloodSMSApp
             {
                 notificationsBox.Items.Add(notifications[i]);
             }
+            RefreshGraph();
         }
         #endregion
 
         #region buttons
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void b_addDonor_Click(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedIndex == 1)
-                RefreshGraph();
+            PreAddDonor a = new PreAddDonor(storage);
+            a.Show();
         }
 
-        private void button9_Click_1(object sender, EventArgs e)
+        private void b_donorAdd_Click(object sender, EventArgs e)
         {
             PreAddDonor a = new PreAddDonor(storage);
             a.Show();
@@ -158,10 +160,22 @@ namespace BloodSMSApp
             d.Show();
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void Summary_Click(object sender, EventArgs e)
         {
-            PreAddDonor a = new PreAddDonor(storage);
-            a.Show();
+            if (command != graphCommand.Summary)
+            {
+                chart1.Series[0].LegendText = "Added Blood";
+                chart1.Series[1].LegendText = "Removed Blood";
+                chart1.Series[2].Enabled = false;
+                chart1.Series[3].Enabled = false;
+                chart1.Series[4].Enabled = false;
+                chart1.Series[5].Enabled = false;
+                chart1.Series[6].Enabled = false;
+                chart1.Series[7].Enabled = false;
+                chart1.Series[8].Enabled = false;
+                command = graphCommand.Summary;
+                RefreshGraph();
+            }
         }
         #endregion
 
@@ -288,25 +302,6 @@ namespace BloodSMSApp
             }
         }
 
-        private void button11_Click(object sender, EventArgs e)
-        {
-            if (command != graphCommand.Summary)
-            {
-                chart1.Series[0].LegendText = "Added Blood";
-                chart1.Series[1].LegendText = "Removed Blood";
-                chart1.Series[2].Enabled = false;
-                chart1.Series[3].Enabled = false;
-                chart1.Series[4].Enabled = false;
-                chart1.Series[5].Enabled = false;
-                chart1.Series[6].Enabled = false;
-                chart1.Series[7].Enabled = false;
-                chart1.Series[8].Enabled = false;
-                command = graphCommand.Summary;
-                RefreshGraph();
-            }
-        }
-        #endregion
-
         void clearLine()
         {
             seriesHit.MarkerStyle = MarkerStyle.None;
@@ -328,6 +323,16 @@ namespace BloodSMSApp
                 seriesHit.BorderDashStyle = ChartDashStyle.Solid;
             }
         }
+
+        #endregion
+
+        
+
+        
+
+        
+
+        
 
         #region PieChart
 

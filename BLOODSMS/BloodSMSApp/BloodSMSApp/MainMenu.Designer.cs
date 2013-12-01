@@ -30,15 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -50,12 +41,35 @@
             System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dateFrom = new System.Windows.Forms.DateTimePicker();
+            this.dateTo = new System.Windows.Forms.DateTimePicker();
+            this.Summary = new System.Windows.Forms.Button();
+            this.addedButton = new System.Windows.Forms.Button();
+            this.releasedButton = new System.Windows.Forms.Button();
+            this.quarantinedButton = new System.Windows.Forms.Button();
+            this.removedButton = new System.Windows.Forms.Button();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.notificationsBox = new System.Windows.Forms.ListBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.b_inventoryUsed = new System.Windows.Forms.Button();
+            this.b_inventoryQuarantined = new System.Windows.Forms.Button();
+            this.b_inventoryInventory = new System.Windows.Forms.Button();
+            this.b_inventoryALL = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.t_inventorySearch = new System.Windows.Forms.TextBox();
+            this.b_inventoryView = new System.Windows.Forms.Button();
             this.b_inventoryEdit = new System.Windows.Forms.Button();
             this.b_inventoryRemove = new System.Windows.Forms.Button();
             this.b_inventoryAdd = new System.Windows.Forms.Button();
@@ -71,18 +85,21 @@
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.b_donorViable = new System.Windows.Forms.Button();
+            this.b_donorBanned = new System.Windows.Forms.Button();
+            this.b_donorContactable = new System.Windows.Forms.Button();
+            this.b_donorAll = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.t_donorSearch = new System.Windows.Forms.TextBox();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
+            this.notificationsBox = new System.Windows.Forms.ListBox();
             this.b_donorView = new System.Windows.Forms.Button();
             this.b_donorEdit = new System.Windows.Forms.Button();
             this.b_donorDefer = new System.Windows.Forms.Button();
             this.b_donorAdd = new System.Windows.Forms.Button();
-            this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.Summary = new System.Windows.Forms.Button();
-            this.addedButton = new System.Windows.Forms.Button();
-            this.releasedButton = new System.Windows.Forms.Button();
-            this.quarantinedButton = new System.Windows.Forms.Button();
-            this.removedButton = new System.Windows.Forms.Button();
             this.b_addDonor = new System.Windows.Forms.Button();
             this.b_addBlood = new System.Windows.Forms.Button();
             this.t_AB1 = new System.Windows.Forms.TextBox();
@@ -102,29 +119,14 @@
             this.b_contactC1 = new System.Windows.Forms.Button();
             this.t_O1 = new System.Windows.Forms.TextBox();
             this.b_refresh = new System.Windows.Forms.Button();
-            this.b_inventoryView = new System.Windows.Forms.Button();
-            this.t_inventorySearch = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.b_inventoryALL = new System.Windows.Forms.Button();
-            this.b_inventoryInventory = new System.Windows.Forms.Button();
-            this.b_inventoryQuarantined = new System.Windows.Forms.Button();
-            this.b_inventoryUsed = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.t_donorSearch = new System.Windows.Forms.TextBox();
-            this.b_donorAll = new System.Windows.Forms.Button();
-            this.b_donorContactable = new System.Windows.Forms.Button();
-            this.b_donorBanned = new System.Windows.Forms.Button();
-            this.b_donorViable = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // imageList1
@@ -150,10 +152,11 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(681, 505);
             this.tabControl1.TabIndex = 0;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.dateFrom);
+            this.tabPage1.Controls.Add(this.dateTo);
             this.tabPage1.Controls.Add(this.Summary);
             this.tabPage1.Controls.Add(this.addedButton);
             this.tabPage1.Controls.Add(this.releasedButton);
@@ -165,9 +168,159 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 70);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(673, 500);
+            this.tabPage1.Size = new System.Drawing.Size(673, 431);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dateFrom
+            // 
+            this.dateFrom.CustomFormat = "MMMM yyyy";
+            this.dateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateFrom.Location = new System.Drawing.Point(548, 106);
+            this.dateFrom.Name = "dateFrom";
+            this.dateFrom.ShowUpDown = true;
+            this.dateFrom.Size = new System.Drawing.Size(100, 20);
+            this.dateFrom.TabIndex = 22;
+            this.dateFrom.ValueChanged += new System.EventHandler(this.dateFrom_ValueChanged);
+            // 
+            // dateTo
+            // 
+            this.dateTo.CustomFormat = "MMMM yyyy";
+            this.dateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTo.Location = new System.Drawing.Point(548, 132);
+            this.dateTo.Name = "dateTo";
+            this.dateTo.ShowUpDown = true;
+            this.dateTo.Size = new System.Drawing.Size(100, 20);
+            this.dateTo.TabIndex = 21;
+            this.dateTo.ValueChanged += new System.EventHandler(this.dateTo_ValueChanged);
+            // 
+            // Summary
+            // 
+            this.Summary.Location = new System.Drawing.Point(573, 225);
+            this.Summary.Name = "Summary";
+            this.Summary.Size = new System.Drawing.Size(75, 23);
+            this.Summary.TabIndex = 20;
+            this.Summary.Text = "Summary";
+            this.Summary.UseVisualStyleBackColor = true;
+            this.Summary.Click += new System.EventHandler(this.Summary_Click);
+            // 
+            // addedButton
+            // 
+            this.addedButton.Location = new System.Drawing.Point(573, 271);
+            this.addedButton.Name = "addedButton";
+            this.addedButton.Size = new System.Drawing.Size(75, 23);
+            this.addedButton.TabIndex = 19;
+            this.addedButton.Text = "Added";
+            this.addedButton.UseVisualStyleBackColor = true;
+            this.addedButton.Click += new System.EventHandler(this.addedButton_Click);
+            // 
+            // releasedButton
+            // 
+            this.releasedButton.Location = new System.Drawing.Point(573, 359);
+            this.releasedButton.Name = "releasedButton";
+            this.releasedButton.Size = new System.Drawing.Size(75, 23);
+            this.releasedButton.TabIndex = 18;
+            this.releasedButton.Text = "Released";
+            this.releasedButton.UseVisualStyleBackColor = true;
+            this.releasedButton.Click += new System.EventHandler(this.releasedButton_Click);
+            // 
+            // quarantinedButton
+            // 
+            this.quarantinedButton.Location = new System.Drawing.Point(573, 403);
+            this.quarantinedButton.Name = "quarantinedButton";
+            this.quarantinedButton.Size = new System.Drawing.Size(75, 23);
+            this.quarantinedButton.TabIndex = 17;
+            this.quarantinedButton.Text = "Quarantined";
+            this.quarantinedButton.UseVisualStyleBackColor = true;
+            // 
+            // removedButton
+            // 
+            this.removedButton.Location = new System.Drawing.Point(573, 315);
+            this.removedButton.Name = "removedButton";
+            this.removedButton.Size = new System.Drawing.Size(75, 23);
+            this.removedButton.TabIndex = 16;
+            this.removedButton.Text = "Removed";
+            this.removedButton.UseVisualStyleBackColor = true;
+            this.removedButton.Click += new System.EventHandler(this.removedButton_Click);
+            // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend1.IsDockedInsideChartArea = false;
+            legend1.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row;
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(5, 158);
+            this.chart1.Name = "chart1";
+            series1.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.LegendText = "Added Blood";
+            series1.Name = "Total";
+            series2.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.LegendText = "Removed Blood";
+            series2.Name = "AB+";
+            series3.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Enabled = false;
+            series3.Legend = "Legend1";
+            series3.Name = "AB-";
+            series4.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Enabled = false;
+            series4.Legend = "Legend1";
+            series4.Name = "A+";
+            series5.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Enabled = false;
+            series5.Legend = "Legend1";
+            series5.Name = "A-";
+            series6.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Enabled = false;
+            series6.Legend = "Legend1";
+            series6.Name = "B+";
+            series7.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series7.Enabled = false;
+            series7.Legend = "Legend1";
+            series7.Name = "B-";
+            series8.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series8.Enabled = false;
+            series8.Legend = "Legend1";
+            series8.Name = "O+";
+            series9.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series9.ChartArea = "ChartArea1";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series9.Enabled = false;
+            series9.Legend = "Legend1";
+            series9.Name = "O-";
+            this.chart1.Series.Add(series1);
+            this.chart1.Series.Add(series2);
+            this.chart1.Series.Add(series3);
+            this.chart1.Series.Add(series4);
+            this.chart1.Series.Add(series5);
+            this.chart1.Series.Add(series6);
+            this.chart1.Series.Add(series7);
+            this.chart1.Series.Add(series8);
+            this.chart1.Series.Add(series9);
+            this.chart1.Size = new System.Drawing.Size(562, 254);
+            this.chart1.TabIndex = 15;
+            this.chart1.Text = "chart1";
+            this.chart1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chart1_MouseClick);
             // 
             // chart2
             // 
@@ -188,14 +341,6 @@
             this.chart2.TabIndex = 14;
             this.chart2.Text = "chart2";
             // 
-            // notificationsBox
-            // 
-            this.notificationsBox.FormattingEnabled = true;
-            this.notificationsBox.Location = new System.Drawing.Point(914, 134);
-            this.notificationsBox.Name = "notificationsBox";
-            this.notificationsBox.Size = new System.Drawing.Size(158, 498);
-            this.notificationsBox.TabIndex = 13;
-            // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.b_inventoryUsed);
@@ -212,9 +357,95 @@
             this.tabPage3.ImageIndex = 2;
             this.tabPage3.Location = new System.Drawing.Point(4, 70);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(673, 500);
+            this.tabPage3.Size = new System.Drawing.Size(673, 431);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // b_inventoryUsed
+            // 
+            this.b_inventoryUsed.BackColor = System.Drawing.Color.DimGray;
+            this.b_inventoryUsed.FlatAppearance.BorderSize = 0;
+            this.b_inventoryUsed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_inventoryUsed.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_inventoryUsed.ForeColor = System.Drawing.Color.White;
+            this.b_inventoryUsed.Location = new System.Drawing.Point(505, 18);
+            this.b_inventoryUsed.Name = "b_inventoryUsed";
+            this.b_inventoryUsed.Size = new System.Drawing.Size(59, 26);
+            this.b_inventoryUsed.TabIndex = 30;
+            this.b_inventoryUsed.Text = "USED";
+            this.b_inventoryUsed.UseVisualStyleBackColor = false;
+            // 
+            // b_inventoryQuarantined
+            // 
+            this.b_inventoryQuarantined.BackColor = System.Drawing.Color.DimGray;
+            this.b_inventoryQuarantined.FlatAppearance.BorderSize = 0;
+            this.b_inventoryQuarantined.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_inventoryQuarantined.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_inventoryQuarantined.ForeColor = System.Drawing.Color.White;
+            this.b_inventoryQuarantined.Location = new System.Drawing.Point(381, 18);
+            this.b_inventoryQuarantined.Name = "b_inventoryQuarantined";
+            this.b_inventoryQuarantined.Size = new System.Drawing.Size(118, 26);
+            this.b_inventoryQuarantined.TabIndex = 29;
+            this.b_inventoryQuarantined.Text = "QUARANTINED";
+            this.b_inventoryQuarantined.UseVisualStyleBackColor = false;
+            // 
+            // b_inventoryInventory
+            // 
+            this.b_inventoryInventory.BackColor = System.Drawing.Color.DimGray;
+            this.b_inventoryInventory.FlatAppearance.BorderSize = 0;
+            this.b_inventoryInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_inventoryInventory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_inventoryInventory.ForeColor = System.Drawing.Color.White;
+            this.b_inventoryInventory.Location = new System.Drawing.Point(275, 18);
+            this.b_inventoryInventory.Name = "b_inventoryInventory";
+            this.b_inventoryInventory.Size = new System.Drawing.Size(100, 26);
+            this.b_inventoryInventory.TabIndex = 28;
+            this.b_inventoryInventory.Text = "INVENTORY";
+            this.b_inventoryInventory.UseVisualStyleBackColor = false;
+            // 
+            // b_inventoryALL
+            // 
+            this.b_inventoryALL.BackColor = System.Drawing.Color.DimGray;
+            this.b_inventoryALL.FlatAppearance.BorderSize = 0;
+            this.b_inventoryALL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_inventoryALL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_inventoryALL.ForeColor = System.Drawing.Color.White;
+            this.b_inventoryALL.Location = new System.Drawing.Point(218, 18);
+            this.b_inventoryALL.Name = "b_inventoryALL";
+            this.b_inventoryALL.Size = new System.Drawing.Size(51, 26);
+            this.b_inventoryALL.TabIndex = 27;
+            this.b_inventoryALL.Text = "ALL";
+            this.b_inventoryALL.UseVisualStyleBackColor = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 13);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "SEARCH:";
+            // 
+            // t_inventorySearch
+            // 
+            this.t_inventorySearch.Location = new System.Drawing.Point(69, 22);
+            this.t_inventorySearch.Name = "t_inventorySearch";
+            this.t_inventorySearch.Size = new System.Drawing.Size(131, 20);
+            this.t_inventorySearch.TabIndex = 25;
+            // 
+            // b_inventoryView
+            // 
+            this.b_inventoryView.BackColor = System.Drawing.Color.DimGray;
+            this.b_inventoryView.FlatAppearance.BorderSize = 0;
+            this.b_inventoryView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_inventoryView.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_inventoryView.ForeColor = System.Drawing.Color.White;
+            this.b_inventoryView.Location = new System.Drawing.Point(290, 449);
+            this.b_inventoryView.Name = "b_inventoryView";
+            this.b_inventoryView.Size = new System.Drawing.Size(75, 37);
+            this.b_inventoryView.TabIndex = 4;
+            this.b_inventoryView.Text = "VIEW";
+            this.b_inventoryView.UseVisualStyleBackColor = false;
             // 
             // b_inventoryEdit
             // 
@@ -371,6 +602,144 @@
             this.tabPage4.TabIndex = 3;
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Items.AddRange(new object[] {
+            "AB+",
+            "AB-",
+            "A+",
+            "A-",
+            "B+",
+            "B-",
+            "O+",
+            "O-"});
+            this.comboBox1.Location = new System.Drawing.Point(412, 57);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 38;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(275, 60);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(128, 13);
+            this.label4.TabIndex = 37;
+            this.label4.Text = "SORT BY BLOOD TYPE:";
+            // 
+            // b_donorViable
+            // 
+            this.b_donorViable.BackColor = System.Drawing.Color.DimGray;
+            this.b_donorViable.FlatAppearance.BorderSize = 0;
+            this.b_donorViable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_donorViable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_donorViable.ForeColor = System.Drawing.Color.White;
+            this.b_donorViable.Location = new System.Drawing.Point(539, 13);
+            this.b_donorViable.Name = "b_donorViable";
+            this.b_donorViable.Size = new System.Drawing.Size(74, 26);
+            this.b_donorViable.TabIndex = 36;
+            this.b_donorViable.Text = "VIABLE";
+            this.b_donorViable.UseVisualStyleBackColor = false;
+            // 
+            // b_donorBanned
+            // 
+            this.b_donorBanned.BackColor = System.Drawing.Color.DimGray;
+            this.b_donorBanned.FlatAppearance.BorderSize = 0;
+            this.b_donorBanned.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_donorBanned.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_donorBanned.ForeColor = System.Drawing.Color.White;
+            this.b_donorBanned.Location = new System.Drawing.Point(459, 13);
+            this.b_donorBanned.Name = "b_donorBanned";
+            this.b_donorBanned.Size = new System.Drawing.Size(74, 26);
+            this.b_donorBanned.TabIndex = 35;
+            this.b_donorBanned.Text = "BANNED";
+            this.b_donorBanned.UseVisualStyleBackColor = false;
+            // 
+            // b_donorContactable
+            // 
+            this.b_donorContactable.BackColor = System.Drawing.Color.DimGray;
+            this.b_donorContactable.FlatAppearance.BorderSize = 0;
+            this.b_donorContactable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_donorContactable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_donorContactable.ForeColor = System.Drawing.Color.White;
+            this.b_donorContactable.Location = new System.Drawing.Point(335, 13);
+            this.b_donorContactable.Name = "b_donorContactable";
+            this.b_donorContactable.Size = new System.Drawing.Size(118, 26);
+            this.b_donorContactable.TabIndex = 34;
+            this.b_donorContactable.Text = "CONTACTABLE";
+            this.b_donorContactable.UseVisualStyleBackColor = false;
+            // 
+            // b_donorAll
+            // 
+            this.b_donorAll.BackColor = System.Drawing.Color.DimGray;
+            this.b_donorAll.FlatAppearance.BorderSize = 0;
+            this.b_donorAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_donorAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_donorAll.ForeColor = System.Drawing.Color.White;
+            this.b_donorAll.Location = new System.Drawing.Point(278, 13);
+            this.b_donorAll.Name = "b_donorAll";
+            this.b_donorAll.Size = new System.Drawing.Size(51, 26);
+            this.b_donorAll.TabIndex = 33;
+            this.b_donorAll.Text = "ALL";
+            this.b_donorAll.UseVisualStyleBackColor = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(32, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(54, 13);
+            this.label3.TabIndex = 32;
+            this.label3.Text = "SEARCH:";
+            // 
+            // t_donorSearch
+            // 
+            this.t_donorSearch.Location = new System.Drawing.Point(89, 13);
+            this.t_donorSearch.Name = "t_donorSearch";
+            this.t_donorSearch.Size = new System.Drawing.Size(131, 20);
+            this.t_donorSearch.TabIndex = 31;
+            // 
+            // dataGridView3
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle5;
+            this.dataGridView3.Location = new System.Drawing.Point(3, 95);
+            this.dataGridView3.Name = "dataGridView3";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView3.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dataGridView3.Size = new System.Drawing.Size(850, 436);
+            this.dataGridView3.TabIndex = 1;
+            // 
+            // notificationsBox
+            // 
+            this.notificationsBox.FormattingEnabled = true;
+            this.notificationsBox.Location = new System.Drawing.Point(914, 134);
+            this.notificationsBox.Name = "notificationsBox";
+            this.notificationsBox.Size = new System.Drawing.Size(158, 498);
+            this.notificationsBox.TabIndex = 13;
+            // 
             // b_donorView
             // 
             this.b_donorView.BackColor = System.Drawing.Color.DimGray;
@@ -428,39 +797,7 @@
             this.b_donorAdd.TabIndex = 4;
             this.b_donorAdd.Text = "ADD";
             this.b_donorAdd.UseVisualStyleBackColor = false;
-            this.b_donorAdd.Click += new System.EventHandler(this.button9_Click_1);
-            // 
-            // dataGridView3
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridView3.Location = new System.Drawing.Point(3, 95);
-            this.dataGridView3.Name = "dataGridView3";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView3.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.dataGridView3.Size = new System.Drawing.Size(850, 436);
-            this.dataGridView3.TabIndex = 1;
+            this.b_donorAdd.Click += new System.EventHandler(this.b_donorAdd_Click);
             // 
             // label2
             // 
@@ -473,129 +810,6 @@
             this.label2.Size = new System.Drawing.Size(264, 55);
             this.label2.TabIndex = 5;
             this.label2.Text = "Blood SMS";
-            // 
-            // chart1
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend1.IsDockedInsideChartArea = false;
-            legend1.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(5, 173);
-            this.chart1.Name = "chart1";
-            series1.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.LegendText = "Added Blood";
-            series1.Name = "Total";
-            series2.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.LegendText = "Removed Blood";
-            series2.Name = "AB+";
-            series3.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Enabled = false;
-            series3.Legend = "Legend1";
-            series3.Name = "AB-";
-            series4.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.Enabled = false;
-            series4.Legend = "Legend1";
-            series4.Name = "A+";
-            series5.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Enabled = false;
-            series5.Legend = "Legend1";
-            series5.Name = "A-";
-            series6.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series6.Enabled = false;
-            series6.Legend = "Legend1";
-            series6.Name = "B+";
-            series7.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series7.Enabled = false;
-            series7.Legend = "Legend1";
-            series7.Name = "B-";
-            series8.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series8.Enabled = false;
-            series8.Legend = "Legend1";
-            series8.Name = "O+";
-            series9.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series9.ChartArea = "ChartArea1";
-            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series9.Enabled = false;
-            series9.Legend = "Legend1";
-            series9.Name = "O-";
-            this.chart1.Series.Add(series1);
-            this.chart1.Series.Add(series2);
-            this.chart1.Series.Add(series3);
-            this.chart1.Series.Add(series4);
-            this.chart1.Series.Add(series5);
-            this.chart1.Series.Add(series6);
-            this.chart1.Series.Add(series7);
-            this.chart1.Series.Add(series8);
-            this.chart1.Series.Add(series9);
-            this.chart1.Size = new System.Drawing.Size(562, 324);
-            this.chart1.TabIndex = 15;
-            this.chart1.Text = "chart1";
-            // 
-            // Summary
-            // 
-            this.Summary.Location = new System.Drawing.Point(573, 225);
-            this.Summary.Name = "Summary";
-            this.Summary.Size = new System.Drawing.Size(75, 23);
-            this.Summary.TabIndex = 20;
-            this.Summary.Text = "Summary";
-            this.Summary.UseVisualStyleBackColor = true;
-            // 
-            // addedButton
-            // 
-            this.addedButton.Location = new System.Drawing.Point(573, 271);
-            this.addedButton.Name = "addedButton";
-            this.addedButton.Size = new System.Drawing.Size(75, 23);
-            this.addedButton.TabIndex = 19;
-            this.addedButton.Text = "Added";
-            this.addedButton.UseVisualStyleBackColor = true;
-            // 
-            // releasedButton
-            // 
-            this.releasedButton.Location = new System.Drawing.Point(573, 359);
-            this.releasedButton.Name = "releasedButton";
-            this.releasedButton.Size = new System.Drawing.Size(75, 23);
-            this.releasedButton.TabIndex = 18;
-            this.releasedButton.Text = "Released";
-            this.releasedButton.UseVisualStyleBackColor = true;
-            // 
-            // quarantinedButton
-            // 
-            this.quarantinedButton.Location = new System.Drawing.Point(573, 403);
-            this.quarantinedButton.Name = "quarantinedButton";
-            this.quarantinedButton.Size = new System.Drawing.Size(75, 23);
-            this.quarantinedButton.TabIndex = 17;
-            this.quarantinedButton.Text = "Quarantined";
-            this.quarantinedButton.UseVisualStyleBackColor = true;
-            // 
-            // removedButton
-            // 
-            this.removedButton.Location = new System.Drawing.Point(573, 315);
-            this.removedButton.Name = "removedButton";
-            this.removedButton.Size = new System.Drawing.Size(75, 23);
-            this.removedButton.TabIndex = 16;
-            this.removedButton.Text = "Removed";
-            this.removedButton.UseVisualStyleBackColor = true;
             // 
             // b_addDonor
             // 
@@ -610,6 +824,7 @@
             this.b_addDonor.TabIndex = 6;
             this.b_addDonor.Text = "ADD DONOR";
             this.b_addDonor.UseVisualStyleBackColor = false;
+            this.b_addDonor.Click += new System.EventHandler(this.b_addDonor_Click);
             // 
             // b_addBlood
             // 
@@ -807,190 +1022,6 @@
             this.b_refresh.Text = "REFRESH";
             this.b_refresh.UseVisualStyleBackColor = false;
             // 
-            // b_inventoryView
-            // 
-            this.b_inventoryView.BackColor = System.Drawing.Color.DimGray;
-            this.b_inventoryView.FlatAppearance.BorderSize = 0;
-            this.b_inventoryView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_inventoryView.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_inventoryView.ForeColor = System.Drawing.Color.White;
-            this.b_inventoryView.Location = new System.Drawing.Point(290, 449);
-            this.b_inventoryView.Name = "b_inventoryView";
-            this.b_inventoryView.Size = new System.Drawing.Size(75, 37);
-            this.b_inventoryView.TabIndex = 4;
-            this.b_inventoryView.Text = "VIEW";
-            this.b_inventoryView.UseVisualStyleBackColor = false;
-            // 
-            // t_inventorySearch
-            // 
-            this.t_inventorySearch.Location = new System.Drawing.Point(69, 22);
-            this.t_inventorySearch.Name = "t_inventorySearch";
-            this.t_inventorySearch.Size = new System.Drawing.Size(131, 20);
-            this.t_inventorySearch.TabIndex = 25;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 13);
-            this.label1.TabIndex = 26;
-            this.label1.Text = "SEARCH:";
-            // 
-            // b_inventoryALL
-            // 
-            this.b_inventoryALL.BackColor = System.Drawing.Color.DimGray;
-            this.b_inventoryALL.FlatAppearance.BorderSize = 0;
-            this.b_inventoryALL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_inventoryALL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_inventoryALL.ForeColor = System.Drawing.Color.White;
-            this.b_inventoryALL.Location = new System.Drawing.Point(218, 18);
-            this.b_inventoryALL.Name = "b_inventoryALL";
-            this.b_inventoryALL.Size = new System.Drawing.Size(51, 26);
-            this.b_inventoryALL.TabIndex = 27;
-            this.b_inventoryALL.Text = "ALL";
-            this.b_inventoryALL.UseVisualStyleBackColor = false;
-            // 
-            // b_inventoryInventory
-            // 
-            this.b_inventoryInventory.BackColor = System.Drawing.Color.DimGray;
-            this.b_inventoryInventory.FlatAppearance.BorderSize = 0;
-            this.b_inventoryInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_inventoryInventory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_inventoryInventory.ForeColor = System.Drawing.Color.White;
-            this.b_inventoryInventory.Location = new System.Drawing.Point(275, 18);
-            this.b_inventoryInventory.Name = "b_inventoryInventory";
-            this.b_inventoryInventory.Size = new System.Drawing.Size(100, 26);
-            this.b_inventoryInventory.TabIndex = 28;
-            this.b_inventoryInventory.Text = "INVENTORY";
-            this.b_inventoryInventory.UseVisualStyleBackColor = false;
-            // 
-            // b_inventoryQuarantined
-            // 
-            this.b_inventoryQuarantined.BackColor = System.Drawing.Color.DimGray;
-            this.b_inventoryQuarantined.FlatAppearance.BorderSize = 0;
-            this.b_inventoryQuarantined.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_inventoryQuarantined.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_inventoryQuarantined.ForeColor = System.Drawing.Color.White;
-            this.b_inventoryQuarantined.Location = new System.Drawing.Point(381, 18);
-            this.b_inventoryQuarantined.Name = "b_inventoryQuarantined";
-            this.b_inventoryQuarantined.Size = new System.Drawing.Size(118, 26);
-            this.b_inventoryQuarantined.TabIndex = 29;
-            this.b_inventoryQuarantined.Text = "QUARANTINED";
-            this.b_inventoryQuarantined.UseVisualStyleBackColor = false;
-            // 
-            // b_inventoryUsed
-            // 
-            this.b_inventoryUsed.BackColor = System.Drawing.Color.DimGray;
-            this.b_inventoryUsed.FlatAppearance.BorderSize = 0;
-            this.b_inventoryUsed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_inventoryUsed.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_inventoryUsed.ForeColor = System.Drawing.Color.White;
-            this.b_inventoryUsed.Location = new System.Drawing.Point(505, 18);
-            this.b_inventoryUsed.Name = "b_inventoryUsed";
-            this.b_inventoryUsed.Size = new System.Drawing.Size(59, 26);
-            this.b_inventoryUsed.TabIndex = 30;
-            this.b_inventoryUsed.Text = "USED";
-            this.b_inventoryUsed.UseVisualStyleBackColor = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(32, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 13);
-            this.label3.TabIndex = 32;
-            this.label3.Text = "SEARCH:";
-            // 
-            // t_donorSearch
-            // 
-            this.t_donorSearch.Location = new System.Drawing.Point(89, 13);
-            this.t_donorSearch.Name = "t_donorSearch";
-            this.t_donorSearch.Size = new System.Drawing.Size(131, 20);
-            this.t_donorSearch.TabIndex = 31;
-            // 
-            // b_donorAll
-            // 
-            this.b_donorAll.BackColor = System.Drawing.Color.DimGray;
-            this.b_donorAll.FlatAppearance.BorderSize = 0;
-            this.b_donorAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_donorAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_donorAll.ForeColor = System.Drawing.Color.White;
-            this.b_donorAll.Location = new System.Drawing.Point(278, 13);
-            this.b_donorAll.Name = "b_donorAll";
-            this.b_donorAll.Size = new System.Drawing.Size(51, 26);
-            this.b_donorAll.TabIndex = 33;
-            this.b_donorAll.Text = "ALL";
-            this.b_donorAll.UseVisualStyleBackColor = false;
-            // 
-            // b_donorContactable
-            // 
-            this.b_donorContactable.BackColor = System.Drawing.Color.DimGray;
-            this.b_donorContactable.FlatAppearance.BorderSize = 0;
-            this.b_donorContactable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_donorContactable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_donorContactable.ForeColor = System.Drawing.Color.White;
-            this.b_donorContactable.Location = new System.Drawing.Point(335, 13);
-            this.b_donorContactable.Name = "b_donorContactable";
-            this.b_donorContactable.Size = new System.Drawing.Size(118, 26);
-            this.b_donorContactable.TabIndex = 34;
-            this.b_donorContactable.Text = "CONTACTABLE";
-            this.b_donorContactable.UseVisualStyleBackColor = false;
-            // 
-            // b_donorBanned
-            // 
-            this.b_donorBanned.BackColor = System.Drawing.Color.DimGray;
-            this.b_donorBanned.FlatAppearance.BorderSize = 0;
-            this.b_donorBanned.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_donorBanned.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_donorBanned.ForeColor = System.Drawing.Color.White;
-            this.b_donorBanned.Location = new System.Drawing.Point(459, 13);
-            this.b_donorBanned.Name = "b_donorBanned";
-            this.b_donorBanned.Size = new System.Drawing.Size(74, 26);
-            this.b_donorBanned.TabIndex = 35;
-            this.b_donorBanned.Text = "BANNED";
-            this.b_donorBanned.UseVisualStyleBackColor = false;
-            // 
-            // b_donorViable
-            // 
-            this.b_donorViable.BackColor = System.Drawing.Color.DimGray;
-            this.b_donorViable.FlatAppearance.BorderSize = 0;
-            this.b_donorViable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_donorViable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_donorViable.ForeColor = System.Drawing.Color.White;
-            this.b_donorViable.Location = new System.Drawing.Point(539, 13);
-            this.b_donorViable.Name = "b_donorViable";
-            this.b_donorViable.Size = new System.Drawing.Size(74, 26);
-            this.b_donorViable.TabIndex = 36;
-            this.b_donorViable.Text = "VIABLE";
-            this.b_donorViable.UseVisualStyleBackColor = false;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(275, 60);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(128, 13);
-            this.label4.TabIndex = 37;
-            this.label4.Text = "SORT BY BLOOD TYPE:";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "AB+",
-            "AB-",
-            "A+",
-            "A-",
-            "B+",
-            "B-",
-            "O+",
-            "O-"});
-            this.comboBox1.Location = new System.Drawing.Point(412, 57);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 38;
-            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1033,6 +1064,7 @@
             this.Load += new System.EventHandler(this.MainMenu_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
@@ -1040,7 +1072,6 @@
             this.tabPage4.ResumeLayout(false);
             this.tabPage4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1115,6 +1146,8 @@
         private System.Windows.Forms.Button b_donorAll;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox t_donorSearch;
+        private System.Windows.Forms.DateTimePicker dateTo;
+        private System.Windows.Forms.DateTimePicker dateFrom;
 
     }
 }
