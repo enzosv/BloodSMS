@@ -100,11 +100,10 @@ namespace BloodSMSApp
 
         void DisplayOverview()
         {
-            
             bloodType b;
-            int freeSpace = 1200 - storage.availableBlood.Count;
-            chart2.Series[0].Points.AddY(freeSpace);
-            chart2.Series[0].Points[0].LegendText = "Available Blood: " + storage.availableBlood.Count;
+            int availableBlood = storage.availableBlood.Count;
+            chart2.Series[0].Points.AddY(1200 - availableBlood);
+            chart2.Series[0].Points[0].LegendText = "Available Blood: " + availableBlood;
             chart2.Series[0].Points[0].Color = Color.Transparent;
 
             for (int i = 1; i < bloodTypeCount.Length; i++)

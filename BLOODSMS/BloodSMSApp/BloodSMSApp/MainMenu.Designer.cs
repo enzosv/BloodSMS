@@ -69,10 +69,6 @@
             this.b_inventoryALL = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.t_inventorySearch = new System.Windows.Forms.TextBox();
-            this.b_inventoryView = new System.Windows.Forms.Button();
-            this.b_inventoryEdit = new System.Windows.Forms.Button();
-            this.b_inventoryRemove = new System.Windows.Forms.Button();
-            this.b_inventoryAdd = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -95,10 +91,6 @@
             this.t_donorSearch = new System.Windows.Forms.TextBox();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.notificationsBox = new System.Windows.Forms.ListBox();
-            this.b_donorView = new System.Windows.Forms.Button();
-            this.b_donorEdit = new System.Windows.Forms.Button();
-            this.b_donorDefer = new System.Windows.Forms.Button();
-            this.b_donorAdd = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.b_addDonor = new System.Windows.Forms.Button();
             this.b_addBlood = new System.Windows.Forms.Button();
@@ -150,7 +142,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(0, 0);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(681, 505);
+            this.tabControl1.Size = new System.Drawing.Size(681, 568);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -168,7 +160,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 70);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(673, 431);
+            this.tabPage1.Size = new System.Drawing.Size(673, 494);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
@@ -176,7 +168,7 @@
             // 
             this.dateFrom.CustomFormat = "MMMM yyyy";
             this.dateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateFrom.Location = new System.Drawing.Point(446, 317);
+            this.dateFrom.Location = new System.Drawing.Point(569, 226);
             this.dateFrom.Name = "dateFrom";
             this.dateFrom.ShowUpDown = true;
             this.dateFrom.Size = new System.Drawing.Size(100, 20);
@@ -187,7 +179,7 @@
             // 
             this.dateTo.CustomFormat = "MMMM yyyy";
             this.dateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTo.Location = new System.Drawing.Point(552, 317);
+            this.dateTo.Location = new System.Drawing.Point(569, 252);
             this.dateTo.Name = "dateTo";
             this.dateTo.ShowUpDown = true;
             this.dateTo.Size = new System.Drawing.Size(100, 20);
@@ -196,9 +188,9 @@
             // 
             // Summary
             // 
-            this.Summary.Location = new System.Drawing.Point(514, 347);
+            this.Summary.Location = new System.Drawing.Point(569, 278);
             this.Summary.Name = "Summary";
-            this.Summary.Size = new System.Drawing.Size(75, 23);
+            this.Summary.Size = new System.Drawing.Size(100, 23);
             this.Summary.TabIndex = 20;
             this.Summary.Text = "Summary";
             this.Summary.UseVisualStyleBackColor = true;
@@ -206,9 +198,9 @@
             // 
             // addedButton
             // 
-            this.addedButton.Location = new System.Drawing.Point(461, 376);
+            this.addedButton.Location = new System.Drawing.Point(569, 307);
             this.addedButton.Name = "addedButton";
-            this.addedButton.Size = new System.Drawing.Size(75, 23);
+            this.addedButton.Size = new System.Drawing.Size(100, 23);
             this.addedButton.TabIndex = 19;
             this.addedButton.Text = "Added";
             this.addedButton.UseVisualStyleBackColor = true;
@@ -216,9 +208,9 @@
             // 
             // releasedButton
             // 
-            this.releasedButton.Location = new System.Drawing.Point(461, 405);
+            this.releasedButton.Location = new System.Drawing.Point(569, 365);
             this.releasedButton.Name = "releasedButton";
-            this.releasedButton.Size = new System.Drawing.Size(75, 23);
+            this.releasedButton.Size = new System.Drawing.Size(100, 23);
             this.releasedButton.TabIndex = 18;
             this.releasedButton.Text = "Released";
             this.releasedButton.UseVisualStyleBackColor = true;
@@ -226,18 +218,18 @@
             // 
             // quarantinedButton
             // 
-            this.quarantinedButton.Location = new System.Drawing.Point(568, 405);
+            this.quarantinedButton.Location = new System.Drawing.Point(569, 394);
             this.quarantinedButton.Name = "quarantinedButton";
-            this.quarantinedButton.Size = new System.Drawing.Size(75, 23);
+            this.quarantinedButton.Size = new System.Drawing.Size(100, 23);
             this.quarantinedButton.TabIndex = 17;
             this.quarantinedButton.Text = "Quarantined";
             this.quarantinedButton.UseVisualStyleBackColor = true;
             // 
             // removedButton
             // 
-            this.removedButton.Location = new System.Drawing.Point(568, 376);
+            this.removedButton.Location = new System.Drawing.Point(569, 336);
             this.removedButton.Name = "removedButton";
-            this.removedButton.Size = new System.Drawing.Size(75, 23);
+            this.removedButton.Size = new System.Drawing.Size(100, 23);
             this.removedButton.TabIndex = 16;
             this.removedButton.Text = "Removed";
             this.removedButton.UseVisualStyleBackColor = true;
@@ -252,7 +244,7 @@
             legend1.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row;
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(5, 10);
+            this.chart1.Location = new System.Drawing.Point(5, 209);
             this.chart1.Name = "chart1";
             series1.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
             series1.ChartArea = "ChartArea1";
@@ -317,7 +309,7 @@
             this.chart1.Series.Add(series7);
             this.chart1.Series.Add(series8);
             this.chart1.Series.Add(series9);
-            this.chart1.Size = new System.Drawing.Size(436, 402);
+            this.chart1.Size = new System.Drawing.Size(566, 282);
             this.chart1.TabIndex = 15;
             this.chart1.Text = "chart1";
             this.chart1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chart1_MouseClick);
@@ -326,10 +318,9 @@
             // 
             chartArea2.Name = "ChartArea1";
             this.chart2.ChartAreas.Add(chartArea2);
-            legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             legend2.Name = "Legend1";
             this.chart2.Legends.Add(legend2);
-            this.chart2.Location = new System.Drawing.Point(431, 10);
+            this.chart2.Location = new System.Drawing.Point(5, 3);
             this.chart2.Name = "chart2";
             series10.BorderColor = System.Drawing.Color.Black;
             series10.ChartArea = "ChartArea1";
@@ -338,7 +329,7 @@
             series10.LegendText = "AB+";
             series10.Name = "Series1";
             this.chart2.Series.Add(series10);
-            this.chart2.Size = new System.Drawing.Size(239, 296);
+            this.chart2.Size = new System.Drawing.Size(664, 205);
             this.chart2.TabIndex = 14;
             this.chart2.Text = "chart2";
             // 
@@ -350,15 +341,11 @@
             this.tabPage3.Controls.Add(this.b_inventoryALL);
             this.tabPage3.Controls.Add(this.label1);
             this.tabPage3.Controls.Add(this.t_inventorySearch);
-            this.tabPage3.Controls.Add(this.b_inventoryView);
-            this.tabPage3.Controls.Add(this.b_inventoryEdit);
-            this.tabPage3.Controls.Add(this.b_inventoryRemove);
-            this.tabPage3.Controls.Add(this.b_inventoryAdd);
             this.tabPage3.Controls.Add(this.dataGridView2);
             this.tabPage3.ImageIndex = 2;
             this.tabPage3.Location = new System.Drawing.Point(4, 70);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(673, 431);
+            this.tabPage3.Size = new System.Drawing.Size(673, 494);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
@@ -434,64 +421,6 @@
             this.t_inventorySearch.Size = new System.Drawing.Size(131, 20);
             this.t_inventorySearch.TabIndex = 25;
             // 
-            // b_inventoryView
-            // 
-            this.b_inventoryView.BackColor = System.Drawing.Color.DimGray;
-            this.b_inventoryView.FlatAppearance.BorderSize = 0;
-            this.b_inventoryView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_inventoryView.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_inventoryView.ForeColor = System.Drawing.Color.White;
-            this.b_inventoryView.Location = new System.Drawing.Point(290, 449);
-            this.b_inventoryView.Name = "b_inventoryView";
-            this.b_inventoryView.Size = new System.Drawing.Size(75, 37);
-            this.b_inventoryView.TabIndex = 4;
-            this.b_inventoryView.Text = "VIEW";
-            this.b_inventoryView.UseVisualStyleBackColor = false;
-            // 
-            // b_inventoryEdit
-            // 
-            this.b_inventoryEdit.BackColor = System.Drawing.Color.DimGray;
-            this.b_inventoryEdit.FlatAppearance.BorderSize = 0;
-            this.b_inventoryEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_inventoryEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_inventoryEdit.ForeColor = System.Drawing.Color.White;
-            this.b_inventoryEdit.Location = new System.Drawing.Point(94, 449);
-            this.b_inventoryEdit.Name = "b_inventoryEdit";
-            this.b_inventoryEdit.Size = new System.Drawing.Size(75, 37);
-            this.b_inventoryEdit.TabIndex = 3;
-            this.b_inventoryEdit.Text = "EDIT";
-            this.b_inventoryEdit.UseVisualStyleBackColor = false;
-            // 
-            // b_inventoryRemove
-            // 
-            this.b_inventoryRemove.BackColor = System.Drawing.Color.DimGray;
-            this.b_inventoryRemove.FlatAppearance.BorderSize = 0;
-            this.b_inventoryRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_inventoryRemove.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_inventoryRemove.ForeColor = System.Drawing.Color.White;
-            this.b_inventoryRemove.Location = new System.Drawing.Point(175, 449);
-            this.b_inventoryRemove.Name = "b_inventoryRemove";
-            this.b_inventoryRemove.Size = new System.Drawing.Size(109, 37);
-            this.b_inventoryRemove.TabIndex = 2;
-            this.b_inventoryRemove.Text = "REMOVE";
-            this.b_inventoryRemove.UseVisualStyleBackColor = false;
-            this.b_inventoryRemove.Click += new System.EventHandler(this.button5_Click_1);
-            // 
-            // b_inventoryAdd
-            // 
-            this.b_inventoryAdd.BackColor = System.Drawing.Color.DimGray;
-            this.b_inventoryAdd.FlatAppearance.BorderSize = 0;
-            this.b_inventoryAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_inventoryAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_inventoryAdd.ForeColor = System.Drawing.Color.White;
-            this.b_inventoryAdd.Location = new System.Drawing.Point(13, 449);
-            this.b_inventoryAdd.Name = "b_inventoryAdd";
-            this.b_inventoryAdd.Size = new System.Drawing.Size(75, 37);
-            this.b_inventoryAdd.TabIndex = 1;
-            this.b_inventoryAdd.Text = "ADD";
-            this.b_inventoryAdd.UseVisualStyleBackColor = false;
-            this.b_inventoryAdd.Click += new System.EventHandler(this.button4_Click_1);
-            // 
             // dataGridView2
             // 
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -522,7 +451,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridView2.Location = new System.Drawing.Point(-3, 68);
+            this.dataGridView2.Location = new System.Drawing.Point(0, 60);
             this.dataGridView2.Name = "dataGridView2";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -532,7 +461,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridView2.Size = new System.Drawing.Size(673, 367);
+            this.dataGridView2.Size = new System.Drawing.Size(673, 434);
             this.dataGridView2.TabIndex = 0;
             // 
             // Column2
@@ -740,65 +669,6 @@
             this.notificationsBox.Name = "notificationsBox";
             this.notificationsBox.Size = new System.Drawing.Size(158, 498);
             this.notificationsBox.TabIndex = 13;
-            // 
-            // b_donorView
-            // 
-            this.b_donorView.BackColor = System.Drawing.Color.DimGray;
-            this.b_donorView.FlatAppearance.BorderSize = 0;
-            this.b_donorView.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_donorView.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_donorView.ForeColor = System.Drawing.Color.White;
-            this.b_donorView.Location = new System.Drawing.Point(239, 604);
-            this.b_donorView.Name = "b_donorView";
-            this.b_donorView.Size = new System.Drawing.Size(75, 37);
-            this.b_donorView.TabIndex = 7;
-            this.b_donorView.Text = "VIEW";
-            this.b_donorView.UseVisualStyleBackColor = false;
-            this.b_donorView.Click += new System.EventHandler(this.button10_Click);
-            // 
-            // b_donorEdit
-            // 
-            this.b_donorEdit.BackColor = System.Drawing.Color.DimGray;
-            this.b_donorEdit.FlatAppearance.BorderSize = 0;
-            this.b_donorEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_donorEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_donorEdit.ForeColor = System.Drawing.Color.White;
-            this.b_donorEdit.Location = new System.Drawing.Point(401, 604);
-            this.b_donorEdit.Name = "b_donorEdit";
-            this.b_donorEdit.Size = new System.Drawing.Size(75, 37);
-            this.b_donorEdit.TabIndex = 6;
-            this.b_donorEdit.Text = "EDIT";
-            this.b_donorEdit.UseVisualStyleBackColor = false;
-            // 
-            // b_donorDefer
-            // 
-            this.b_donorDefer.BackColor = System.Drawing.Color.DimGray;
-            this.b_donorDefer.FlatAppearance.BorderSize = 0;
-            this.b_donorDefer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_donorDefer.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_donorDefer.ForeColor = System.Drawing.Color.White;
-            this.b_donorDefer.Location = new System.Drawing.Point(482, 604);
-            this.b_donorDefer.Name = "b_donorDefer";
-            this.b_donorDefer.Size = new System.Drawing.Size(95, 37);
-            this.b_donorDefer.TabIndex = 5;
-            this.b_donorDefer.Text = "DEFER";
-            this.b_donorDefer.UseVisualStyleBackColor = false;
-            this.b_donorDefer.Click += new System.EventHandler(this.button8_Click_1);
-            // 
-            // b_donorAdd
-            // 
-            this.b_donorAdd.BackColor = System.Drawing.Color.DimGray;
-            this.b_donorAdd.FlatAppearance.BorderSize = 0;
-            this.b_donorAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_donorAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_donorAdd.ForeColor = System.Drawing.Color.White;
-            this.b_donorAdd.Location = new System.Drawing.Point(320, 604);
-            this.b_donorAdd.Name = "b_donorAdd";
-            this.b_donorAdd.Size = new System.Drawing.Size(75, 37);
-            this.b_donorAdd.TabIndex = 4;
-            this.b_donorAdd.Text = "ADD";
-            this.b_donorAdd.UseVisualStyleBackColor = false;
-            this.b_donorAdd.Click += new System.EventHandler(this.b_donorAdd_Click);
             // 
             // label2
             // 
@@ -1029,12 +899,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BloodSMSApp.Properties.Resources._2MAINMENU_copy8;
             this.ClientSize = new System.Drawing.Size(1079, 671);
-            this.Controls.Add(this.b_donorView);
-            this.Controls.Add(this.b_donorEdit);
             this.Controls.Add(this.b_refresh);
-            this.Controls.Add(this.b_donorDefer);
             this.Controls.Add(this.b_contactC2);
-            this.Controls.Add(this.b_donorAdd);
             this.Controls.Add(this.t_O2);
             this.Controls.Add(this.b_contactC1);
             this.Controls.Add(this.t_O1);
@@ -1097,13 +963,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.Button b_inventoryEdit;
-        private System.Windows.Forms.Button b_inventoryRemove;
-        private System.Windows.Forms.Button b_inventoryAdd;
-        private System.Windows.Forms.Button b_donorEdit;
-        private System.Windows.Forms.Button b_donorDefer;
-        private System.Windows.Forms.Button b_donorAdd;
-        private System.Windows.Forms.Button b_donorView;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ListBox notificationsBox;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
@@ -1119,7 +978,6 @@
         private System.Windows.Forms.Button b_inventoryALL;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox t_inventorySearch;
-        private System.Windows.Forms.Button b_inventoryView;
         private System.Windows.Forms.Button b_addDonor;
         private System.Windows.Forms.Button b_addBlood;
         private System.Windows.Forms.TextBox t_AB1;
