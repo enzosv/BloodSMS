@@ -286,13 +286,15 @@ namespace Blood_SMS
                 bannedDonors.Add(d);
         }
 
-        void getNumDonations(Donor d)
+        public int getNumDonations(Donor d)
         {
+            int count =0;
             foreach (Blood b in bloodList)
             {
                 if (b.Donor_id.HasValue && b.Donor_id.Value == d.Donor_id)
-                    d.Times_donated++;
+                    count++;
             }
+            return count;
         }
 
         void unsortDonor(Donor d)
@@ -500,7 +502,7 @@ namespace Blood_SMS
          * 
          *</param>
          */
-        Blood findBlood(string accession_number)
+        public Blood findBlood(string accession_number)
         {
             foreach (Blood b in bloodList)
             {
@@ -605,7 +607,7 @@ namespace Blood_SMS
             return (rowsAffected > 0);
         }
 
-        Component findComponentWithAccessionNumberAndName(string accession_number, bloodComponents name)
+        public Component findComponentWithAccessionNumberAndName(string accession_number, bloodComponents name)
         {
             foreach (Component c in findBlood(accession_number).components)
             {
@@ -615,7 +617,7 @@ namespace Blood_SMS
             return null;
         }
 
-        bool DeleteComponentWithAccessionNumberAndName(string accession_number, bloodComponents name)
+        public bool DeleteComponentWithAccessionNumberAndName(string accession_number, bloodComponents name)
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
             string query = "DELETE FROM component WHERE accession_number = @accession_number AND component_name = @component_name";

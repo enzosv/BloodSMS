@@ -91,6 +91,12 @@
     <Compile Include="RemoveItem.Designer.cs">
       <DependentUpon>RemoveItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="ShowBlood.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowBlood.Designer.cs">
+      <DependentUpon>ShowBlood.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewDonor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +130,9 @@
     </Compile>
     <EmbeddedResource Include="RemoveItem.resx">
       <DependentUpon>RemoveItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowBlood.resx">
+      <DependentUpon>ShowBlood.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewDonor.resx">
       <DependentUpon>ViewDonor.cs</DependentUpon>

@@ -21,25 +21,23 @@ namespace Blood_SMS
         DateTime date_released;
         string reason_for_removal;
 
-        int age;
         bool is_quarantined;
         bool is_released;
 
         public string Accession_number { get { return accession_number; } set { accession_number = value; } }
         public bloodComponents Component_name { get { return component_name; } }
-        public string Patient_last_name{ get { return patient_last_name; }}
-        public string Patient_first_name{ get { return patient_first_name; }}
-        public string Patient_middle_initial{ get { return patient_middle_initial; }}
+        public string Patient_last_name { get { return patient_last_name; } }
+        public string Patient_first_name { get { return patient_first_name; } }
+        public string Patient_middle_initial { get { return patient_middle_initial; } }
         public int Patient_age { get { return patient_age; } }
-        public DateTime Date_processed { get { return date_processed; }}
+        public DateTime Date_processed { get { return date_processed; } }
         public DateTime Date_reprocessed { get { return date_reprocessed; } }
         public DateTime Date_expired { get { return date_expired; } }
         public DateTime Date_quarantined { get { return date_quarantined; } }
         public DateTime Date_assigned { get { return date_assigned; } }
-        public DateTime Date_released { get { return date_released; }}
-        public string Reason_for_removal { get { return reason_for_removal; }}
+        public DateTime Date_released { get { return date_released; } }
+        public string Reason_for_removal { get { return reason_for_removal; } }
 
-        public int Age { get { return age; } }
         public bool Is_quarantined { get { return is_quarantined; } }
         public bool Is_released { get { return is_released; } }
 
@@ -94,14 +92,9 @@ namespace Blood_SMS
         }
 
         public void Refresh()
-        {        
-           if (date_quarantined != DateTime.MinValue && date_expired < DateTime.Today)
-           {
-               TimeSpan span = DateTime.Today - date_processed;
-               age = span.Days;
-               Quarantine(date_expired, "Expired on " + date_expired.ToShortDateString());
-           }
-
+        {
+            if (!is_released && !is_quarantined && date_reprocessed != DateTime.MinValue && date_expired <= DateTime.Today)
+                Quarantine(date_expired, "Expired on " + date_expired.ToShortDateString());
         }
 
         public void Assign(string PATIENT_LAST_NAME, string PATIENT_FIRST_NAME, string PATIENT_MIDDLE_INITIAL, int PATIENT_AGE, DateTime DATE_ASSIGNED)

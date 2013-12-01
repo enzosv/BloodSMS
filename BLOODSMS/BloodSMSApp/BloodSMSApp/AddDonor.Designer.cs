@@ -52,10 +52,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.hLandlineField = new System.Windows.Forms.TextBox();
-            this.oLandlineField = new System.Windows.Forms.TextBox();
             this.emailField = new System.Windows.Forms.TextBox();
-            this.cellphoneField = new System.Windows.Forms.TextBox();
             this.educationalAttainmentField = new System.Windows.Forms.ComboBox();
             this.birthDateField = new System.Windows.Forms.DateTimePicker();
             this.nextAvailableField = new System.Windows.Forms.DateTimePicker();
@@ -76,6 +73,13 @@
             this.label18 = new System.Windows.Forms.Label();
             this.cancelButton = new System.Windows.Forms.Button();
             this.nameLabel = new System.Windows.Forms.Label();
+            this.hLandlineField = new System.Windows.Forms.TextBox();
+            this.oLandlineField = new System.Windows.Forms.TextBox();
+            this.cellphoneField = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.ageText = new System.Windows.Forms.Label();
+            this.timesContactedText = new System.Windows.Forms.Label();
+            this.timesDonated = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.contactPanel.SuspendLayout();
             this.defferalPanel.SuspendLayout();
@@ -313,24 +317,6 @@
             this.label10.TabIndex = 35;
             this.label10.Text = "PROVINCE:";
             // 
-            // hLandlineField
-            // 
-            this.hLandlineField.Location = new System.Drawing.Point(49, 382);
-            this.hLandlineField.MaxLength = 45;
-            this.hLandlineField.Name = "hLandlineField";
-            this.hLandlineField.Size = new System.Drawing.Size(200, 20);
-            this.hLandlineField.TabIndex = 41;
-            this.hLandlineField.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.hLandlineField_KeyPress);
-            // 
-            // oLandlineField
-            // 
-            this.oLandlineField.Location = new System.Drawing.Point(301, 382);
-            this.oLandlineField.MaxLength = 45;
-            this.oLandlineField.Name = "oLandlineField";
-            this.oLandlineField.Size = new System.Drawing.Size(200, 20);
-            this.oLandlineField.TabIndex = 42;
-            this.oLandlineField.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.oLandlineField_KeyPress);
-            // 
             // emailField
             // 
             this.emailField.Location = new System.Drawing.Point(49, 428);
@@ -338,15 +324,6 @@
             this.emailField.Name = "emailField";
             this.emailField.Size = new System.Drawing.Size(200, 20);
             this.emailField.TabIndex = 43;
-            // 
-            // cellphoneField
-            // 
-            this.cellphoneField.Location = new System.Drawing.Point(324, 428);
-            this.cellphoneField.MaxLength = 10;
-            this.cellphoneField.Name = "cellphoneField";
-            this.cellphoneField.Size = new System.Drawing.Size(177, 20);
-            this.cellphoneField.TabIndex = 44;
-            this.cellphoneField.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cellphoneField_KeyPress);
             // 
             // educationalAttainmentField
             // 
@@ -550,11 +527,75 @@
             // 
             this.nameLabel.AutoSize = true;
             this.nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameLabel.Location = new System.Drawing.Point(46, 86);
+            this.nameLabel.Location = new System.Drawing.Point(43, 86);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(50, 16);
             this.nameLabel.TabIndex = 72;
             this.nameLabel.Text = "NAME:";
+            // 
+            // hLandlineField
+            // 
+            this.hLandlineField.Location = new System.Drawing.Point(49, 386);
+            this.hLandlineField.MaxLength = 21;
+            this.hLandlineField.Name = "hLandlineField";
+            this.hLandlineField.Size = new System.Drawing.Size(200, 20);
+            this.hLandlineField.TabIndex = 73;
+            // 
+            // oLandlineField
+            // 
+            this.oLandlineField.Location = new System.Drawing.Point(301, 386);
+            this.oLandlineField.MaxLength = 21;
+            this.oLandlineField.Name = "oLandlineField";
+            this.oLandlineField.Size = new System.Drawing.Size(200, 20);
+            this.oLandlineField.TabIndex = 74;
+            // 
+            // cellphoneField
+            // 
+            this.cellphoneField.Location = new System.Drawing.Point(323, 428);
+            this.cellphoneField.MaxLength = 10;
+            this.cellphoneField.Name = "cellphoneField";
+            this.cellphoneField.Size = new System.Drawing.Size(176, 20);
+            this.cellphoneField.TabIndex = 75;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(100, 61);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 76;
+            this.button1.Text = "Change Name";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // ageText
+            // 
+            this.ageText.AutoSize = true;
+            this.ageText.Location = new System.Drawing.Point(142, 117);
+            this.ageText.Name = "ageText";
+            this.ageText.Size = new System.Drawing.Size(41, 13);
+            this.ageText.TabIndex = 77;
+            this.ageText.Text = "label11";
+            this.ageText.Visible = false;
+            // 
+            // timesContactedText
+            // 
+            this.timesContactedText.AutoSize = true;
+            this.timesContactedText.Location = new System.Drawing.Point(443, 66);
+            this.timesContactedText.Name = "timesContactedText";
+            this.timesContactedText.Size = new System.Drawing.Size(41, 13);
+            this.timesContactedText.TabIndex = 78;
+            this.timesContactedText.Text = "label11";
+            this.timesContactedText.Visible = false;
+            // 
+            // timesDonated
+            // 
+            this.timesDonated.AutoSize = true;
+            this.timesDonated.Location = new System.Drawing.Point(490, 66);
+            this.timesDonated.Name = "timesDonated";
+            this.timesDonated.Size = new System.Drawing.Size(41, 13);
+            this.timesDonated.TabIndex = 79;
+            this.timesDonated.Text = "label11";
+            this.timesDonated.Visible = false;
             // 
             // AddDonor
             // 
@@ -562,6 +603,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BloodSMSApp.Properties.Resources.addDonor_copy;
             this.ClientSize = new System.Drawing.Size(535, 703);
+            this.Controls.Add(this.timesDonated);
+            this.Controls.Add(this.timesContactedText);
+            this.Controls.Add(this.ageText);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.cellphoneField);
+            this.Controls.Add(this.oLandlineField);
+            this.Controls.Add(this.hLandlineField);
             this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.label18);
@@ -575,10 +623,7 @@
             this.Controls.Add(this.AddDonorButton);
             this.Controls.Add(this.nextAvailableField);
             this.Controls.Add(this.educationalAttainmentField);
-            this.Controls.Add(this.cellphoneField);
             this.Controls.Add(this.emailField);
-            this.Controls.Add(this.oLandlineField);
-            this.Controls.Add(this.hLandlineField);
             this.Controls.Add(this.oStreetField);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label9);
@@ -643,10 +688,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox hLandlineField;
-        private System.Windows.Forms.TextBox oLandlineField;
         private System.Windows.Forms.TextBox emailField;
-        private System.Windows.Forms.TextBox cellphoneField;
         private System.Windows.Forms.ComboBox educationalAttainmentField;
         private System.Windows.Forms.DateTimePicker birthDateField;
         private System.Windows.Forms.DateTimePicker nextAvailableField;
@@ -667,5 +709,12 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Label nameLabel;
+        private System.Windows.Forms.TextBox hLandlineField;
+        private System.Windows.Forms.TextBox oLandlineField;
+        private System.Windows.Forms.TextBox cellphoneField;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label ageText;
+        private System.Windows.Forms.Label timesContactedText;
+        private System.Windows.Forms.Label timesDonated;
     }
 }

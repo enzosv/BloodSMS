@@ -51,6 +51,7 @@ namespace BloodSMSApp
             Donor x = storage.findDonorWithName(lastName, firstName, middleInitial);
             if (x == null)
             {
+                birthDateField.Value = DateTime.Now.AddYears(-16);
                 bloodTypeField.SelectedIndex = 0;
                 educationalAttainmentField.SelectedIndex = 0;
                 hProvince.SelectedIndex = Enum.GetNames(typeof(province)).Length - 1;
@@ -81,6 +82,17 @@ namespace BloodSMSApp
                 viableYes.Checked = x.Is_viable;
                 contactableYes.Checked = x.Is_contactable;
                 defferalField.Text = x.Reason_for_deferral;
+
+                timesContactedText.Visible = true;
+                timesContactedText.Text = "Times Contacted: " + x.Times_contacted.ToString();
+                ageText.Visible = true;
+                ageText.Text = "Age: " + x.Age;
+                int numDonations = storage.getNumDonations(x);
+                if (numDonations > 0)
+                {
+                    timesDonated.Visible = true;
+                    timesDonated.Text = "Times Donated: " + numDonations.ToString();
+                }
                 duplicate = true;
             }
         }
@@ -98,9 +110,9 @@ namespace BloodSMSApp
             }
         }
 
-        bool isStringValid(string s)
+        bool isStringValid(string s, int minLength)
         {
-            return (!String.IsNullOrWhiteSpace(s));
+            return (!String.IsNullOrWhiteSpace(s) && s.Length>=minLength);
         }
 
         void isNumber(KeyPressEventArgs e)
@@ -117,31 +129,47 @@ namespace BloodSMSApp
             int o_province = (int)MyEnums.GetValueFromDescription<province>(oProvince.Text);
             int o_city = (int)MyEnums.GetValueFromDescription<city>(oCity.Text);
 
-            if ((!viableYes.Checked && isStringValid(defferalField.Text) && isStringValid(defferalField.Text)) || (viableYes.Checked))
+            if ((!viableYes.Checked && isStringValid(defferalField.Text,2)) || (viableYes.Checked))
             {
-                if ((isStringValid(emailField.Text) && isEmailValid(emailField.Text)) || String.IsNullOrEmpty(emailField.Text))
+                if ((isStringValid(emailField.Text, 6) && isEmailValid(emailField.Text)) || String.IsNullOrEmpty(emailField.Text))
                 {
-                    Donor x = new Donor(id, lastName, firstName, middleInitial, blood_type, h_province, h_city, hStreetField.Text, o_province, o_city, oStreetField.Text, hLandlineField.Text, oLandlineField.Text, emailField.Text, cellphoneField.Text, educational_attainment, birthDateField.Value, dateRegisteredField.Value, nextAvailableField.Value, 0, contactableYes.Checked, viableYes.Checked, defferalField.Text);
-                    if (!duplicate)
+                    if (isStringValid(cellphoneField.Text, 10) || String.IsNullOrEmpty(cellphoneField.Text))
                     {
-                        if (storage.AddDonor(x))
+                        if (isStringValid(hLandlineField.Text, 7) || String.IsNullOrEmpty(hLandlineField.Text))
                         {
-                            MessageBox.Show("Donor added");
-                            Close();
+                            if (isStringValid(oLandlineField.Text, 7) || String.IsNullOrEmpty(oLandlineField.Text))
+                            {
+                                Donor x = new Donor(id, lastName, firstName, middleInitial, blood_type, h_province, h_city, hStreetField.Text, o_province, o_city, oStreetField.Text, hLandlineField.Text, oLandlineField.Text, emailField.Text, cellphoneField.Text, educational_attainment, birthDateField.Value, dateRegisteredField.Value, nextAvailableField.Value, 0, contactableYes.Checked, viableYes.Checked, defferalField.Text);
+                                if (!duplicate)
+                                {
+                                    if (storage.AddDonor(x))
+                                    {
+                                        MessageBox.Show("Donor added");
+                                        Close();
+                                    }
+                                    else
+                                        MessageBox.Show("Failed to add new donor");
+                                }
+                                else
+                                {
+                                    if (storage.UpdateDonor(x))
+                                    {
+                                        MessageBox.Show("Updated Donor");
+                                        Close();
+                                    }
+                                    else
+                                        MessageBox.Show("Failed to update donor");
+                                }
+                            }
+                            else
+                                MessageBox.Show("Invalid office landline number");
                         }
                         else
-                            MessageBox.Show("Failed to add new donor");
+                            MessageBox.Show("Invalid home landline number");
                     }
                     else
-                    {
-                        if (storage.UpdateDonor(x))
-                        {
-                            MessageBox.Show("Updated Donor");
-                            Close();
-                        }
-                        else
-                            MessageBox.Show("Failed to update donor");
-                    }
+                        MessageBox.Show("Invalid cellphone number");
+                    
                 }
                 else
                     MessageBox.Show("Invalid Email");
@@ -186,6 +214,13 @@ namespace BloodSMSApp
         private void cancelButton_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Close();
+            PreAddDonor a = new PreAddDonor(storage);
+            a.Show();
         }
 
     }
