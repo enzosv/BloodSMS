@@ -28,13 +28,26 @@ namespace BloodSMSApp
         public MainMenu()
         {
             InitializeComponent();
+            
             InitializeValues();
         }
 
         private void b_refresh_Click(object sender, EventArgs e)
         {
-            InitializeComponent();
-            InitializeValues();
+            //InitializeComponent();
+            //InitializeValues();
+            storage = new Storage("localhost", "bsms", "root", "root");
+            bloodTypeCount = new int[Enum.GetNames(typeof(bloodType)).Length];
+            notifications.Clear();
+            //command = graphCommand.Summary;
+
+            dateFrom.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddMonths(-1);
+            dateTo.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+            
+            //seriesHit = chart1.Series[0];
+            dataGridView3.DataSource = storage.donorList;
+            dataGridView2.DataSource = storage.bloodList;
+            RefreshOverview();
         }
 
         void InitializeValues()
@@ -53,6 +66,7 @@ namespace BloodSMSApp
 
             dateFrom.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddMonths(-1);
             dateTo.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+
             seriesHit = chart1.Series[0];
 
             dataGridView3.DataSource = storage.donorList;
@@ -62,13 +76,11 @@ namespace BloodSMSApp
 
         #region overview
 
-        void RefreshStorageCount()
+        void RefreshOverview()
         {
-            bloodCount = storage.availableBlood.Count;
-            for (int i = 0; i < bloodTypeCount.Length; i++)
-            {
-                bloodTypeCount[i] = storage.bloodTypes[i].Count;
-            }
+            RefreshNotifications();
+            RefreshPieChart();
+            RefreshGraph();
         }
 
         void RefreshNotifications()
@@ -90,6 +102,7 @@ namespace BloodSMSApp
             {
                 notifications.Add("Component " + s[0] + " with Accession Number " + s[1] + " is near expiration");
             }
+            notificationsBox.Items.Clear();
             for (int i = 0; i < notifications.Count; i++)
             {
                 notificationsBox.Items.Add(notifications[i]);
@@ -99,6 +112,11 @@ namespace BloodSMSApp
         void RefreshPieChart()
         {
             chart2.Series[0].Points.Clear();
+            bloodCount = storage.availableBlood.Count;
+            for (int i = 0; i < bloodTypeCount.Length; i++)
+            {
+                bloodTypeCount[i] = storage.bloodTypes[i].Count;
+            }
             bloodType b;
             chart2.Series[0].Points.AddY(1200 - bloodCount);
             chart2.Series[0].Points[0].LegendText = "Free Space: " + (1200 - bloodCount);
@@ -110,14 +128,6 @@ namespace BloodSMSApp
                 chart2.Series[0].Points.AddY(bloodTypeCount[i]);
                 chart2.Series[0].Points[i].LegendText = MyEnums.GetDescription(b) + ": " + bloodTypeCount[i];
             }
-        }
-
-        void RefreshOverview()
-        {
-            RefreshStorageCount();
-            RefreshNotifications();
-            RefreshPieChart();
-            RefreshGraph();
         }
 
         #endregion

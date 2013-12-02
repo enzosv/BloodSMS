@@ -25,11 +25,14 @@ namespace BloodSMSApp
             {
                 bTypeField.Items.Add(MyEnums.GetDescription(x));
             }
+            dateExpireField.Value = dateAddedField.Value.AddDays(35);
+
             bTypeField.SelectedIndex = 0;
             hasDonor = false;
             d_last.Enabled = false;
             dFirst.Enabled = false;
             dMid.Enabled = false;
+            
         }
 
         public AddItem(Storage stor, Donor d, string accNumber)
@@ -43,6 +46,8 @@ namespace BloodSMSApp
             {
                 bTypeField.Items.Add(MyEnums.GetDescription(x));
             }
+            dateExpireField.Value = dateAddedField.Value.AddDays(35);
+
             bTypeField.SelectedIndex = (int)d.Blood_type;
             d_last.Text = d.Last_name;
             dFirst.Text = d.First_name;
