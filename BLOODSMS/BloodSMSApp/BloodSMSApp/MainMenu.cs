@@ -47,19 +47,7 @@ namespace BloodSMSApp
             dateFrom.MinDate = new DateTime(2010, 9, 1);
 
             dateFrom.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddMonths(-1);
-            dateTo.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
-            //for (int i = 0; i < chart1.Series.Count; i++)
-            //{
-            //    chart1.Series[i].IsXValueIndexed = true;
-            //}
-
-
-            //chart1.ChartAreas[0].AxisY.Maximum = 1200;
-
-            //for (int i = 0; i < chart1.Series.Count; i++)
-            //{
-            //    //chart1.Series[i].XAxisType = chart DateTime;
-            //}
+            dateTo.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
             seriesHit = chart1.Series[0];
 
             dataGridView3.DataSource = storage.donorList;
@@ -109,7 +97,7 @@ namespace BloodSMSApp
             chart2.Series[0].Points[0].LegendText = "Available Blood: " + availableBlood;
             chart2.Series[0].Points[0].Color = Color.Transparent;
 
-            for (int i = 1; i < bloodTypeCount.Length; i++)
+            for (int i = 0; i < bloodTypeCount.Length; i++)
             {
                 b = (bloodType)i;
                 chart2.Series[0].Points.AddY(bloodTypeCount[i]);
@@ -125,7 +113,35 @@ namespace BloodSMSApp
         #endregion
 
         #region buttons
+        private void b_addBlood_Click(object sender, EventArgs e)
+        {
+            PreAddItem a = new PreAddItem(storage);
+            a.Show();
+        }
+        private void quarantinedButton_Click(object sender, EventArgs e)
+        {
+            if (command != graphCommand.Quarantine)
+            {
+                RefreshLegend();
+                command = graphCommand.Quarantine;
+                RefreshGraph();
+            }
+        }
+        private void reprocessedButton_Click(object sender, EventArgs e)
+        {
+            if (command != graphCommand.Reprocess)
+            {
+                RefreshLegend();
+                command = graphCommand.Reprocess;
+                RefreshGraph();
+            }
+        }
 
+        private void b_refresh_Click(object sender, EventArgs e)
+        {
+            InitializeValues();
+            RefreshOverview();
+        }
         private void b_addDonor_Click(object sender, EventArgs e)
         {
             PreAddDonor a = new PreAddDonor(storage);
@@ -251,13 +267,10 @@ namespace BloodSMSApp
                 int[,] types = storage.getBloodTypeModifiedDuring(days, command);
                 for (int i = 0; i < days.Count; i++)
                 {
-                    chart1.Series[0].Points.Clear();
-                    chart1.Series[0].Points.AddXY(days2[i].ToString("d MMM yy"), totals[i] + random.Next(0, i * 3));
-                    
+                    chart1.Series[0].Points.AddXY(days2[i].ToString("d MMM yy"), totals[i]);
                     for (int j = 1; j < Enum.GetNames(typeof(bloodType)).Length; j++)
                     {
-                        chart1.Series[j].Points.Clear();
-                        chart1.Series[j].Points.AddXY(days2[i].ToString("d MMM yy"), types[i, j - 1] + random.Next(0, i * 3));
+                        chart1.Series[j].Points.AddXY(days2[i].ToString("d MMM yy"), types[i, j - 1]);
                     }
                 }
             }
@@ -266,8 +279,8 @@ namespace BloodSMSApp
                 int[,] wholes = storage.getSummary(days);
                 for (int i = 0; i < days.Count; i++)
                 {
-                    chart1.Series[0].Points.AddXY(days2[i].ToString("d MMM yy"), wholes[i, 0] + random.Next(0, i * 3));
-                    chart1.Series[1].Points.AddXY(days2[i].ToString("d MMM yy"), wholes[i, 1] + random.Next(0, i * 3));
+                    chart1.Series[0].Points.AddXY(days2[i].ToString("d MMM yy"), wholes[i, 0]);
+                    chart1.Series[1].Points.AddXY(days2[i].ToString("d MMM yy"), wholes[i, 1]);
                 }
             }
         }
@@ -339,30 +352,7 @@ namespace BloodSMSApp
             }
         }
 
-        private void quarantinedButton_Click(object sender, EventArgs e)
-        {
-            if (command != graphCommand.Quarantine)
-            {
-                RefreshLegend();
-                command = graphCommand.Quarantine;
-                RefreshGraph();
-            }
-        }
-        private void reprocessedButton_Click(object sender, EventArgs e)
-        {
-            if (command != graphCommand.Reprocess)
-            {
-                RefreshLegend();
-                command = graphCommand.Reprocess;
-                RefreshGraph();
-            }
-        }
-
-        private void b_refresh_Click(object sender, EventArgs e)
-        {
-            InitializeValues();
-            RefreshOverview();
-        }
+        
 
         //private void t_inventorySearch_TextChanged(object sender, EventArgs e)
         //{
@@ -403,17 +393,6 @@ namespace BloodSMSApp
             label6.Text = DateTime.Now.ToShortTimeString();
         }
 
-        private void b_addBlood_Click(object sender, EventArgs e)
-        {
-            PreAddItem a = new PreAddItem(storage);
-            a.Show();
-        }
-
-
-        #region PieChart
-
         
-
-        #endregion
     }
 }
