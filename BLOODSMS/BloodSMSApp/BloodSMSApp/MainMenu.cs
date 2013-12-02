@@ -31,6 +31,12 @@ namespace BloodSMSApp
             InitializeValues();
         }
 
+        private void b_refresh_Click(object sender, EventArgs e)
+        {
+            InitializeComponent();
+            InitializeValues();
+        }
+
         void InitializeValues()
         {
             storage = new Storage("localhost", "bsms", "root", "root");
@@ -55,16 +61,19 @@ namespace BloodSMSApp
         }
 
         #region overview
-        void RefreshOverview()
+
+        void RefreshStorageCount()
         {
             bloodCount = storage.availableBlood.Count;
             for (int i = 0; i < bloodTypeCount.Length; i++)
             {
                 bloodTypeCount[i] = storage.bloodTypes[i].Count;
             }
+        }
 
+        void RefreshNotifications()
+        {
             notifications.Clear();
-
             //check low level
             bloodType blood_type;
             for (int i = 0; i < bloodTypeCount.Length; i++)
@@ -81,15 +90,18 @@ namespace BloodSMSApp
             {
                 notifications.Add("Component " + s[0] + " with Accession Number " + s[1] + " is near expiration");
             }
-            DisplayOverview();
+            for (int i = 0; i < notifications.Count; i++)
+            {
+                notificationsBox.Items.Add(notifications[i]);
+            }
         }
 
-        void DisplayOverview()
+        void RefreshPieChart()
         {
+            chart2.Series[0].Points.Clear();
             bloodType b;
-            int availableBlood = storage.availableBlood.Count;
-            chart2.Series[0].Points.AddY(1200 - availableBlood);
-            chart2.Series[0].Points[0].LegendText = "Available Blood: " + availableBlood;
+            chart2.Series[0].Points.AddY(1200 - bloodCount);
+            chart2.Series[0].Points[0].LegendText = "Free Space: " + (1200 - bloodCount);
             chart2.Series[0].Points[0].Color = Color.Transparent;
 
             for (int i = 0; i < bloodTypeCount.Length; i++)
@@ -98,13 +110,16 @@ namespace BloodSMSApp
                 chart2.Series[0].Points.AddY(bloodTypeCount[i]);
                 chart2.Series[0].Points[i].LegendText = MyEnums.GetDescription(b) + ": " + bloodTypeCount[i];
             }
-            //notifications
-            for (int i = 0; i < notifications.Count; i++)
-            {
-                notificationsBox.Items.Add(notifications[i]);
-            }
+        }
+
+        void RefreshOverview()
+        {
+            RefreshStorageCount();
+            RefreshNotifications();
+            RefreshPieChart();
             RefreshGraph();
         }
+
         #endregion
 
         #region graph
@@ -309,11 +324,6 @@ namespace BloodSMSApp
             }
         }
 
-        private void b_refresh_Click(object sender, EventArgs e)
-        {
-            InitializeComponent();
-            InitializeValues();
-        }
         private void b_addDonor_Click(object sender, EventArgs e)
         {
             PreAddDonor a = new PreAddDonor(storage);
