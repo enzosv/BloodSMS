@@ -17,7 +17,6 @@ namespace BloodSMSApp
     {
         Storage storage;
         int bloodCount;
-        int[] bloodTypeCount;
         List<string> notifications;
         graphCommand command;
         Dictionary<DateTime, int> days;
@@ -37,7 +36,6 @@ namespace BloodSMSApp
             //InitializeComponent();
             //InitializeValues();
             storage = new Storage("localhost", "bsms", "root", "root");
-            bloodTypeCount = new int[Enum.GetNames(typeof(bloodType)).Length];
             notifications.Clear();
             //command = graphCommand.Summary;
 
@@ -53,7 +51,6 @@ namespace BloodSMSApp
         void InitializeValues()
         {
             storage = new Storage("localhost", "bsms", "root", "root");
-            bloodTypeCount = new int[Enum.GetNames(typeof(bloodType)).Length];
             notifications = new List<string>();
             command = graphCommand.Summary;
 
@@ -88,7 +85,7 @@ namespace BloodSMSApp
             notifications.Clear();
             //check low level
             bloodType blood_type;
-            for (int i = 0; i < bloodTypeCount.Length; i++)
+            for (int i = 0; i < storage.bloodTypes.Length; i++)
             {
                 blood_type = (bloodType)i;
                 if (storage.AlertLowLevel(i))
@@ -113,20 +110,16 @@ namespace BloodSMSApp
         {
             chart2.Series[0].Points.Clear();
             bloodCount = storage.availableBlood.Count;
-            for (int i = 0; i < bloodTypeCount.Length; i++)
-            {
-                bloodTypeCount[i] = storage.bloodTypes[i].Count;
-            }
             bloodType b;
             chart2.Series[0].Points.AddY(1200 - bloodCount);
             chart2.Series[0].Points[0].LegendText = "Free Space: " + (1200 - bloodCount);
             chart2.Series[0].Points[0].Color = Color.Transparent;
-
-            for (int i = 0; i < bloodTypeCount.Length; i++)
+            List<Blood>[] bloodTypes = storage.bloodTypes;
+            for (int i = 0; i < bloodTypes.Length; i++)
             {
                 b = (bloodType)i;
-                chart2.Series[0].Points.AddY(bloodTypeCount[i]);
-                chart2.Series[0].Points[i].LegendText = MyEnums.GetDescription(b) + ": " + bloodTypeCount[i];
+                chart2.Series[0].Points.AddY(bloodTypes[i].Count);
+                chart2.Series[0].Points[i].LegendText = MyEnums.GetDescription(b) + ": " + bloodTypes[i].Count;
             }
         }
 
