@@ -62,6 +62,9 @@ namespace BloodSMSApp
             //}
             seriesHit = chart1.Series[0];
 
+            dataGridView3.DataSource = storage.donorList;
+            dataGridView2.DataSource = storage.bloodList;
+
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
@@ -354,6 +357,47 @@ namespace BloodSMSApp
                 RefreshGraph();
             }
         }
+
+        private void b_refresh_Click(object sender, EventArgs e)
+        {
+            InitializeValues();
+            RefreshOverview();
+        }
+
+        private void t_inventorySearch_TextChanged(object sender, EventArgs e)
+        {
+            //resultsBox.Items.Clear();
+            //resultsBox.Items.AddRange(storage.searchWithString(oSearchField.Text));
+            if (oSearchField.Text.Length > 0)
+            {
+                foreach (Blood b in storage.searchBloodWithString(t_inventorySearch.Text))
+                {
+                    //resultsBox.Items.Add(s);
+                }
+            }
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch(tabControl1.SelectedIndex)
+            {
+                case 0:
+
+                    break;
+                case 1:
+                    
+                    break;
+                case 2:
+                    
+                    break;
+            }
+        }
+
+        private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+           MessageBox.Show(dataGridView3.SelectedRows.ToString());
+        }
+
 
         #region PieChart
 
