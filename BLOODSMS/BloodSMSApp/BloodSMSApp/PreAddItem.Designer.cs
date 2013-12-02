@@ -52,6 +52,7 @@
             // 
             // aNumber
             // 
+            this.aNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.aNumber.Location = new System.Drawing.Point(140, 12);
             this.aNumber.Name = "aNumber";
             this.aNumber.Size = new System.Drawing.Size(198, 20);
@@ -68,6 +69,7 @@
             // 
             // lName
             // 
+            this.lName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.lName.Enabled = false;
             this.lName.Location = new System.Drawing.Point(16, 58);
             this.lName.Name = "lName";
@@ -94,6 +96,7 @@
             // 
             // fName
             // 
+            this.fName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.fName.Enabled = false;
             this.fName.Location = new System.Drawing.Point(180, 56);
             this.fName.Name = "fName";
@@ -102,6 +105,7 @@
             // 
             // mInitial
             // 
+            this.mInitial.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.mInitial.Enabled = false;
             this.mInitial.Location = new System.Drawing.Point(344, 58);
             this.mInitial.Name = "mInitial";

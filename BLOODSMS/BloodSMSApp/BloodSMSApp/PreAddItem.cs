@@ -38,6 +38,7 @@ namespace BloodSMSApp
                         {
                             AddItem a = new AddItem(storage, d, aNumber.Text);
                             a.Show();
+                            Close();
                         }
                         else
                         {
@@ -48,6 +49,7 @@ namespace BloodSMSApp
                     {
                         AddItem a = new AddItem(storage, aNumber.Text);
                         a.Show();
+                        Close();
                     }
                 }
                 else

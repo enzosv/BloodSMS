@@ -29,7 +29,6 @@ namespace BloodSMSApp
         {
             InitializeComponent();
             InitializeValues();
-            RefreshOverview();
         }
 
         void InitializeValues()
@@ -42,8 +41,8 @@ namespace BloodSMSApp
             days = new Dictionary<DateTime, int>();
             days2 = new Dictionary<int, DateTime>();
 
-            //set this to date of install upon install
             dateTo.MaxDate = DateTime.Today.AddYears(1);
+            //set this to date of install upon install
             dateFrom.MinDate = new DateTime(2010, 9, 1);
 
             dateFrom.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddMonths(-1);
@@ -52,12 +51,7 @@ namespace BloodSMSApp
 
             dataGridView3.DataSource = storage.donorList;
             dataGridView2.DataSource = storage.bloodList;
-
-        }
-
-        private void MainMenu_Load(object sender, EventArgs e)
-        {
-            DisplayOverview();
+            RefreshOverview();
         }
 
         #region overview
@@ -87,6 +81,7 @@ namespace BloodSMSApp
             {
                 notifications.Add("Component " + s[0] + " with Accession Number " + s[1] + " is near expiration");
             }
+            DisplayOverview();
         }
 
         void DisplayOverview()
@@ -112,7 +107,184 @@ namespace BloodSMSApp
         }
         #endregion
 
+        #region graph
+        
+        void RefreshGraph()
+        {
+            for (int i = 0; i < chart1.Series.Count; i++)
+            {
+                chart1.Series[i].Points.Clear();
+            }
+            if (command != graphCommand.Summary)
+            {
+                int[] totals = storage.getBloodModifiedDuring(days, command);
+                int[,] types = storage.getBloodTypeModifiedDuring(days, command);
+                for (int i = 0; i < days.Count; i++)
+                {
+                    chart1.Series[0].Points.AddXY(days2[i].ToString("d MMM yy"), totals[i]);
+                    for (int j = 1; j < Enum.GetNames(typeof(bloodType)).Length; j++)
+                    {
+                        chart1.Series[j].Points.AddXY(days2[i].ToString("d MMM yy"), types[i, j - 1]);
+                    }
+                }
+            }
+            else
+            {
+                int[,] wholes = storage.getSummary(days);
+                for (int i = 0; i < days.Count; i++)
+                {
+                    chart1.Series[0].Points.AddXY(days2[i].ToString("d MMM yy"), wholes[i, 0]);
+                    chart1.Series[1].Points.AddXY(days2[i].ToString("d MMM yy"), wholes[i, 1]);
+                }
+            }
+        }
+
+        private void dateFrom_ValueChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                dateTo.MinDate = dateFrom.Value.AddMonths(1);
+            }
+            catch
+            {
+                dateFrom.Value = dateTo.Value.AddMonths(-1);
+            }
+            ChangeDates();
+        }
+
+        private void dateTo_ValueChanged(object sender, EventArgs e)
+        {
+            dateFrom.MaxDate = dateTo.Value.AddMonths(-1);
+            ChangeDates();
+        }
+
+        void RefreshLegend()
+        {
+            if (command == graphCommand.Summary)
+            {
+                chart1.Series[0].LegendText = "Total";
+                chart1.Series[1].LegendText = "AB+";
+                chart1.Series[2].Enabled = true;
+                chart1.Series[3].Enabled = true;
+                chart1.Series[4].Enabled = true;
+                chart1.Series[5].Enabled = true;
+                chart1.Series[6].Enabled = true;
+                chart1.Series[7].Enabled = true;
+                chart1.Series[8].Enabled = true;
+            }
+        }
+
+        void ChangeDates()
+        {
+            TimeSpan span = dateTo.Value - dateFrom.Value;
+            days.Clear();
+            days2.Clear();
+            int index = 0;
+            for (DateTime day = dateFrom.Value; day <= dateTo.Value; day = day.AddDays(1))
+            {
+                //key, value
+                days.Add(day, index);
+                days2.Add(index, day);
+                index++;
+            }
+            chart1.ChartAreas[0].AxisX.Maximum = span.TotalDays;
+            RefreshGraph();
+        }
+
+        void clearLine()
+        {
+            seriesHit.MarkerStyle = MarkerStyle.None;
+            seriesHit.Color = seriesOldColor;
+            seriesHit.BorderWidth = 1;
+            seriesHit.BorderDashStyle = ChartDashStyle.Dot;
+        }
+
+        private void chart1_MouseClick(object sender, MouseEventArgs e)
+        {
+            clearLine();
+            if (chart1.HitTest(e.X, e.Y).ChartElementType == ChartElementType.LegendItem)
+            {
+                seriesHit = chart1.HitTest(e.X, e.Y).Series;
+                seriesOldColor = seriesHit.Color;
+
+                seriesHit.MarkerStyle = MarkerStyle.Circle;
+                seriesHit.Color = Color.DarkRed;
+                seriesHit.BorderWidth = 3;
+                seriesHit.BorderDashStyle = ChartDashStyle.Solid;
+            }
+        }
+
+        #endregion
+
+        private void oSearchField_TextChanged(object sender, EventArgs e)
+        {
+            resultsBox.Items.Clear();
+            //resultsBox.Items.AddRange(storage.searchWithString(oSearchField.Text));
+            if (oSearchField.Text.Length > 0)
+            {
+                foreach (string s in storage.searchWithString(oSearchField.Text))
+                {
+                    resultsBox.Items.Add(s);
+                }
+            }
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (tabControl1.SelectedIndex)
+            {
+                case 0:
+
+                    break;
+                case 1:
+
+                    break;
+                case 2:
+
+                    break;
+            }
+        }
+
+        private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            MessageBox.Show(dataGridView3.SelectedRows.ToString());
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            label6.Text = DateTime.Now.ToShortTimeString();
+        }
+
         #region buttons
+        private void addedButton_Click(object sender, EventArgs e)
+        {
+            if (command != graphCommand.Add)
+            {
+                RefreshLegend();
+                command = graphCommand.Add;
+                RefreshGraph();
+            }
+        }
+
+        private void removedButton_Click(object sender, EventArgs e)
+        {
+            if (command != graphCommand.Remove)
+            {
+                RefreshLegend();
+                command = graphCommand.Remove;
+                RefreshGraph();
+            }
+        }
+
+        private void releasedButton_Click(object sender, EventArgs e)
+        {
+            if (command != graphCommand.Release)
+            {
+                RefreshLegend();
+                command = graphCommand.Release;
+                RefreshGraph();
+            }
+        }
         private void b_addBlood_Click(object sender, EventArgs e)
         {
             PreAddItem a = new PreAddItem(storage);
@@ -139,8 +311,8 @@ namespace BloodSMSApp
 
         private void b_refresh_Click(object sender, EventArgs e)
         {
+            InitializeComponent();
             InitializeValues();
-            RefreshOverview();
         }
         private void b_addDonor_Click(object sender, EventArgs e)
         {
@@ -196,203 +368,5 @@ namespace BloodSMSApp
             }
         }
         #endregion
-
-        #region graph
-        private void dateFrom_ValueChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                dateTo.MinDate = dateFrom.Value.AddMonths(1);
-            }
-            catch
-            {
-                dateFrom.Value = dateTo.Value.AddMonths(-1);
-            }
-            ChangeDates();
-        }
-
-        private void dateTo_ValueChanged(object sender, EventArgs e)
-        {
-            dateFrom.MaxDate = dateTo.Value.AddMonths(-1);
-            ChangeDates();
-        }
-
-        void RefreshLegend()
-        {
-            if (command == graphCommand.Summary)
-            {
-                chart1.Series[0].LegendText = "Total";
-                chart1.Series[1].LegendText = "AB+";
-                chart1.Series[2].Enabled = true;
-                chart1.Series[3].Enabled = true;
-                chart1.Series[4].Enabled = true;
-                chart1.Series[5].Enabled = true;
-                chart1.Series[6].Enabled = true;
-                chart1.Series[7].Enabled = true;
-                chart1.Series[8].Enabled = true;
-            }
-        }
-
-        void ChangeDates()
-        {
-            TimeSpan span = dateTo.Value - dateFrom.Value;
-            //
-
-            days.Clear();
-            days2.Clear();
-            int index = 0;
-            for (DateTime day = dateFrom.Value; day <= dateTo.Value; day = day.AddDays(1))
-            {
-                //key, value
-                days.Add(day, index);
-                days2.Add(index, day);
-                index++;
-            }
-            chart1.ChartAreas[0].AxisX.Maximum = span.TotalDays;
-            for (int i = 0; i < chart1.Series.Count; i++)
-            {
-                chart1.Series[i].Points.Clear();
-            }
-            RefreshGraph();
-            
-
-        }
-
-        void RefreshGraph()
-        {
-            Random random = new Random();
-            if (command != graphCommand.Summary)
-            {
-                int[] totals = storage.getBloodModifiedDuring(days, command);
-                int[,] types = storage.getBloodTypeModifiedDuring(days, command);
-                for (int i = 0; i < days.Count; i++)
-                {
-                    chart1.Series[0].Points.AddXY(days2[i].ToString("d MMM yy"), totals[i]);
-                    for (int j = 1; j < Enum.GetNames(typeof(bloodType)).Length; j++)
-                    {
-                        chart1.Series[j].Points.AddXY(days2[i].ToString("d MMM yy"), types[i, j - 1]);
-                    }
-                }
-            }
-            else
-            {
-                int[,] wholes = storage.getSummary(days);
-                for (int i = 0; i < days.Count; i++)
-                {
-                    chart1.Series[0].Points.AddXY(days2[i].ToString("d MMM yy"), wholes[i, 0]);
-                    chart1.Series[1].Points.AddXY(days2[i].ToString("d MMM yy"), wholes[i, 1]);
-                }
-            }
-        }
-
-        private void addedButton_Click(object sender, EventArgs e)
-        {
-            if (command != graphCommand.Add)
-            {
-                RefreshLegend();
-                command = graphCommand.Add;
-                RefreshGraph();
-            }
-        }
-
-        private void removedButton_Click(object sender, EventArgs e)
-        {
-            if (command != graphCommand.Remove)
-            {
-                RefreshLegend();
-                command = graphCommand.Remove;
-                RefreshGraph();
-            }
-        }
-
-        private void releasedButton_Click(object sender, EventArgs e)
-        {
-            if (command != graphCommand.Release)
-            {
-                RefreshLegend();
-                command = graphCommand.Release;
-                RefreshGraph();
-            }
-        }
-
-        void clearLine()
-        {
-            seriesHit.MarkerStyle = MarkerStyle.None;
-            seriesHit.Color = seriesOldColor;
-            seriesHit.BorderWidth = 1;
-            seriesHit.BorderDashStyle = ChartDashStyle.Dot;
-        }
-        private void chart1_MouseClick(object sender, MouseEventArgs e)
-        {
-            clearLine();
-            if (chart1.HitTest(e.X, e.Y).ChartElementType == ChartElementType.LegendItem)
-            {
-                seriesHit = chart1.HitTest(e.X, e.Y).Series;
-                seriesOldColor = seriesHit.Color;
-
-                seriesHit.MarkerStyle = MarkerStyle.Circle;
-                seriesHit.Color = Color.DarkRed;
-                seriesHit.BorderWidth = 3;
-                seriesHit.BorderDashStyle = ChartDashStyle.Solid;
-            }
-        }
-
-        #endregion
-
-        private void oSearchField_TextChanged(object sender, EventArgs e)
-        {
-            resultsBox.Items.Clear();
-            //resultsBox.Items.AddRange(storage.searchWithString(oSearchField.Text));
-            if (oSearchField.Text.Length > 0)
-            {
-                foreach (string s in storage.searchWithString(oSearchField.Text))
-                {
-                    resultsBox.Items.Add(s);
-                }
-            }
-        }
-
-        
-
-        //private void t_inventorySearch_TextChanged(object sender, EventArgs e)
-        //{
-        //    //resultsBox.Items.Clear();
-        //    //resultsBox.Items.AddRange(storage.searchWithString(oSearchField.Text));
-        //    if (oSearchField.Text.Length > 0)
-        //    {
-        //        foreach (Blood b in storage.searchBloodWithString(t_inventorySearch.Text))
-        //        {
-        //            //resultsBox.Items.Add(s);
-        //        }
-        //    }
-        //}
-
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch(tabControl1.SelectedIndex)
-            {
-                case 0:
-
-                    break;
-                case 1:
-                    
-                    break;
-                case 2:
-                    
-                    break;
-            }
-        }
-
-        private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-           MessageBox.Show(dataGridView3.SelectedRows.ToString());
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            label6.Text = DateTime.Now.ToShortTimeString();
-        }
-
-        
     }
 }
