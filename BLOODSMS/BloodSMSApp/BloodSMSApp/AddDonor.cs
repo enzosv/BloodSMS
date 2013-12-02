@@ -51,7 +51,7 @@ namespace BloodSMSApp
             Donor x = storage.findDonorWithName(lastName, firstName, middleInitial);
             if (x == null)
             {
-                birthDateField.Value = DateTime.Now.AddYears(-16);
+                birthDateField.Value = DateTime.Today.AddYears(-16);
                 bloodTypeField.SelectedIndex = 0;
                 educationalAttainmentField.SelectedIndex = 0;
                 hProvince.SelectedIndex = Enum.GetNames(typeof(province)).Length - 1;

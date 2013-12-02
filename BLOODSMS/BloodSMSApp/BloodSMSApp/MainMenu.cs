@@ -43,11 +43,11 @@ namespace BloodSMSApp
             days2 = new Dictionary<int, DateTime>();
 
             //set this to date of install upon install
-            dateTo.MaxDate = DateTime.Now.AddYears(1);
+            dateTo.MaxDate = DateTime.Today.AddYears(1);
             dateFrom.MinDate = new DateTime(2010, 9, 1);
 
-            dateFrom.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1).AddMonths(-1);
-            dateTo.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            dateFrom.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddMonths(-1);
+            dateTo.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
             //for (int i = 0; i < chart1.Series.Count; i++)
             //{
             //    chart1.Series[i].IsXValueIndexed = true;

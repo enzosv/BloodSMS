@@ -27,6 +27,9 @@ namespace BloodSMSApp
             }
             bTypeField.SelectedIndex = 0;
             hasDonor = false;
+            d_last.Enabled = false;
+            dFirst.Enabled = false;
+            dMid.Enabled = false;
         }
 
         public AddItem(Storage stor, Donor d, string accNumber)

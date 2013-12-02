@@ -428,7 +428,7 @@ namespace Blood_SMS
 
             comm.Parameters.AddWithValue("@accession_number", x.Accession_number);
             comm.Parameters.AddWithValue("@blood_type", x.Blood_type);
-            if(x.Donor_id.HasValue)
+            if (x.Donor_id.HasValue)
                 comm.Parameters.AddWithValue("@donor_id", x.Donor_id.Value);
             else
                 comm.Parameters.AddWithValue("@donor_id", null);
@@ -728,7 +728,7 @@ namespace Blood_SMS
             {
                 foreach (Component c in b.components)
                 {
-                    TimeSpan span = DateTime.Now - c.Date_expired;
+                    TimeSpan span = DateTime.Today - c.Date_expired.Date;
                     if (span.TotalDays < MINIMUMEXPIRYALERTVALUE)
                         expiringComponents.Add(new string[2] { c.Component_name.ToString(), c.Accession_number });
                 }
@@ -752,7 +752,10 @@ namespace Blood_SMS
                         foreach (Component c in b.components)
                         {
                             if (c.Is_released)
-                                ints[(int)days[c.Date_removed]]++;
+                            {
+                                if (days.ContainsKey(b.Date_removed.Date))
+                                    ints[(int)days[c.Date_removed.Date]]++;
+                            }
                         }
 
                     }
@@ -764,7 +767,10 @@ namespace Blood_SMS
                         foreach (Component c in b.components)
                         {
                             if (c.Is_quarantined)
-                                ints[(int)days[c.Date_removed]]++;
+                            {
+                                if (days.ContainsKey(b.Date_removed.Date))
+                                    ints[(int)days[c.Date_removed.Date]]++;
+                            }
                         }
                     }
                     break;
@@ -775,7 +781,10 @@ namespace Blood_SMS
                         foreach (Component c in b.components)
                         {
                             if (c.Is_reprocessed)
-                                ints[(int)days[c.Date_removed]]++;
+                            {
+                                if (days.ContainsKey(b.Date_removed.Date))
+                                    ints[(int)days[c.Date_removed.Date]]++;
+                            }
                         }
                     }
                     break;
@@ -783,13 +792,15 @@ namespace Blood_SMS
                 case graphCommand.Add:
                     foreach (Blood b in bloodList)
                     {
-                        ints[(int)days[b.Date_donated]]++;
+                        if (days.ContainsKey(b.Date_donated.Date))
+                            ints[(int)days[b.Date_donated.Date]]++;
                     }
                     break;
                 case graphCommand.Remove:
                     foreach (Blood b in bloodList)
                     {
-                        ints[(int)days[b.Date_removed]]++;
+                        if (days.ContainsKey(b.Date_removed.Date))
+                            ints[(int)days[b.Date_removed.Date]]++;
                     }
                     break;
             }
@@ -802,8 +813,10 @@ namespace Blood_SMS
             int[,] ints = new int[days.Count, 2];
             foreach (Blood b in bloodList)
             {
-                ints[(int)days[b.Date_donated], 0]++;
-                ints[(int)days[b.Date_removed], 1]++;
+                if (days.ContainsKey(b.Date_donated.Date))
+                    ints[(int)days[b.Date_donated.Date], 0]++;
+                if (days.ContainsKey(b.Date_removed.Date))
+                    ints[(int)days[b.Date_removed.Date], 1]++;
             }
             return ints;
         }
@@ -820,7 +833,10 @@ namespace Blood_SMS
                         foreach (Component c in b.components)
                         {
                             if (c.Is_released)
-                                ints[(int)days[c.Date_removed], (int)b.Blood_type]++;
+                            {
+                                if (days.ContainsKey(c.Date_removed.Date))
+                                    ints[(int)days[c.Date_removed.Date], (int)b.Blood_type]++;
+                            }
                         }
                     }
                     break;
@@ -830,7 +846,10 @@ namespace Blood_SMS
                         foreach (Component c in b.components)
                         {
                             if (c.Is_quarantined)
-                                ints[(int)days[c.Date_removed], (int)b.Blood_type]++;
+                            {
+                                if (days.ContainsKey(c.Date_removed.Date))
+                                    ints[(int)days[c.Date_removed.Date], (int)b.Blood_type]++;
+                            }
                         }
                     }
                     break;
@@ -840,20 +859,25 @@ namespace Blood_SMS
                         foreach (Component c in b.components)
                         {
                             if (c.Is_reprocessed)
-                                ints[(int)days[c.Date_removed], (int)b.Blood_type]++;
+                            {
+                                if (days.ContainsKey(c.Date_removed.Date))
+                                    ints[(int)days[c.Date_removed.Date], (int)b.Blood_type]++;
+                            }
                         }
                     }
                     break;
                 case graphCommand.Add:
                     foreach (Blood b in bloodList)
                     {
-                        ints[(int)days[b.Date_donated], (int)b.Blood_type]++;
+                        if (days.ContainsKey(b.Date_donated.Date))
+                            ints[(int)days[b.Date_donated.Date], (int)b.Blood_type]++;
                     }
                     break;
                 case graphCommand.Remove:
                     foreach (Blood b in bloodList)
                     {
-                        ints[(int)days[b.Date_removed], (int)b.Blood_type]++;
+                        if (days.ContainsKey(b.Date_removed.Date))
+                            ints[(int)days[b.Date_removed.Date], (int)b.Blood_type]++;
                     }
                     break;
             }
@@ -884,7 +908,7 @@ namespace Blood_SMS
                     }
                 }
             }
-             
+
             return bloods;
         }
 
@@ -911,7 +935,7 @@ namespace Blood_SMS
         public List<Donor> searchDonorsWithString(string s)
         {
             List<Donor> donors = new List<Donor>();
-            foreach(Donor d in donorList)
+            foreach (Donor d in donorList)
             {
                 if (d.Name.Contains(s))
                 {
