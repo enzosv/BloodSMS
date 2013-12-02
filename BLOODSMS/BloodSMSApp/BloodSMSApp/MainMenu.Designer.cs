@@ -174,6 +174,7 @@
             // 
             // oSearchField
             // 
+            this.oSearchField.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.oSearchField.Location = new System.Drawing.Point(492, 8);
             this.oSearchField.Name = "oSearchField";
             this.oSearchField.Size = new System.Drawing.Size(177, 20);

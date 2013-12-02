@@ -326,9 +326,13 @@ namespace BloodSMSApp
         private void oSearchField_TextChanged(object sender, EventArgs e)
         {
             resultsBox.Items.Clear();
-            foreach (string s in storage.searchWithString(oSearchField.Text))
+            //resultsBox.Items.AddRange(storage.searchWithString(oSearchField.Text));
+            if (oSearchField.Text.Length > 0)
             {
-                resultsBox.Items.Add(s);
+                foreach (string s in storage.searchWithString(oSearchField.Text))
+                {
+                    resultsBox.Items.Add(s);
+                }
             }
         }
 

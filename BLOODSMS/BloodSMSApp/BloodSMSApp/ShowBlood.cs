@@ -89,5 +89,10 @@ namespace BloodSMSApp
             cDateRemoved.Value = dateRemoved;
             cReason.Text = reason;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
