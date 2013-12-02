@@ -52,6 +52,18 @@ namespace Blood_SMS
                 is_removed = true;
         }
 
+        //NO DONOR
+        public Blood(string ACCESSION_NUMBER, int BLOOD_TYPE, DateTime DATE_DONATED)
+        {
+            accession_number = ACCESSION_NUMBER;
+            blood_type = (bloodType)BLOOD_TYPE;
+            date_donated = DATE_DONATED;
+
+            date_removed = DateTime.MinValue;
+            is_removed = false;
+            components = new List<Component>();
+        }
+
         public bool checkRemoved()
         {
             bool old_is_removed = is_removed;

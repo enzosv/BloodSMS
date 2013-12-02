@@ -403,9 +403,10 @@ namespace BloodSMSApp
             label6.Text = DateTime.Now.ToShortTimeString();
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
+        private void b_addBlood_Click(object sender, EventArgs e)
         {
-
+            AddItem a = new AddItem(storage);
+            a.Show();
         }
 
 

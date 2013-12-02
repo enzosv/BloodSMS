@@ -391,6 +391,28 @@ namespace Blood_SMS
             return false;
         }
 
+        public bool AddBlood(Blood b, DateTime date_expire, string p_last, string p_first, string p_mid, int p_age)
+        {
+            if (bloodCommands("Insert into Blood " + AddQuery(BLOOD_FIELDS), b))
+            {
+                b.AddComponent(new Component(b.Accession_number, 1, b.Date_donated, date_expire));
+                b.components[0].Assign(p_last, p_first, p_mid, p_age, DateTime.Now);
+                SortBlood(b);
+                return true;
+            }
+            return false;
+        }
+
+        public bool AddBlood(Blood b, DateTime date_expire)
+        {
+            if (bloodCommands("Insert into Blood " + AddQuery(BLOOD_FIELDS), b))
+            {
+                b.AddComponent(new Component(b.Accession_number, 1, b.Date_donated, date_expire));
+                SortBlood(b);
+                return true;
+            }
+            return false;
+        }
         bool UpdateBlood(Blood b)
         {
             if (bloodCommands("UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS, new string[] { "accession_number" }), b))
