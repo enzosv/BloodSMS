@@ -26,7 +26,8 @@ namespace Blood_SMS
         [Description("Cryosupernate")]
         Cryosupernate,
     };
-    public enum graphCommand { Add, Release, Quarantine, Remove, Summary };
+    public enum graphCommand { Add, Release, Quarantine, Remove, Summary, Reprocess };
+    public enum removalType { NotRemoved, Reprocessed, Quarantined, Released };
     public enum bloodType { [Description("AB+")]ABp, [Description("AB-")] ABn, [Description("A+")] Ap, [Description("A-")] An, [Description("B+")] Bp, [Description("B-")] Bn, [Description("O+")] Op, [Description("O-")] On };
     public enum educationalAttainment { [Description("Other")]other, [Description("None")] none, [Description("Grade School")] gradeschool, [Description("High School")] highschool, [Description("College")] college };
     public enum city

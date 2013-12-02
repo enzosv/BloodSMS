@@ -53,6 +53,8 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.oSearchField = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.dateFrom = new System.Windows.Forms.DateTimePicker();
             this.dateTo = new System.Windows.Forms.DateTimePicker();
             this.Summary = new System.Windows.Forms.Button();
@@ -111,6 +113,8 @@
             this.b_contactC1 = new System.Windows.Forms.Button();
             this.t_O1 = new System.Windows.Forms.TextBox();
             this.b_refresh = new System.Windows.Forms.Button();
+            this.resultsBox = new System.Windows.Forms.ListBox();
+            this.reprocessedButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -147,6 +151,10 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.reprocessedButton);
+            this.tabPage1.Controls.Add(this.resultsBox);
+            this.tabPage1.Controls.Add(this.oSearchField);
+            this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.dateFrom);
             this.tabPage1.Controls.Add(this.dateTo);
             this.tabPage1.Controls.Add(this.Summary);
@@ -163,6 +171,23 @@
             this.tabPage1.Size = new System.Drawing.Size(673, 494);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // oSearchField
+            // 
+            this.oSearchField.FormattingEnabled = true;
+            this.oSearchField.Location = new System.Drawing.Point(485, 5);
+            this.oSearchField.Name = "oSearchField";
+            this.oSearchField.Size = new System.Drawing.Size(184, 21);
+            this.oSearchField.TabIndex = 24;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(444, 8);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "Search";
             // 
             // dateFrom
             // 
@@ -329,7 +354,7 @@
             series10.LegendText = "AB+";
             series10.Name = "Series1";
             this.chart2.Series.Add(series10);
-            this.chart2.Size = new System.Drawing.Size(664, 205);
+            this.chart2.Size = new System.Drawing.Size(433, 205);
             this.chart2.TabIndex = 14;
             this.chart2.Text = "chart2";
             // 
@@ -893,6 +918,23 @@
             this.b_refresh.Text = "REFRESH";
             this.b_refresh.UseVisualStyleBackColor = false;
             // 
+            // resultsBox
+            // 
+            this.resultsBox.FormattingEnabled = true;
+            this.resultsBox.Location = new System.Drawing.Point(447, 35);
+            this.resultsBox.Name = "resultsBox";
+            this.resultsBox.Size = new System.Drawing.Size(222, 173);
+            this.resultsBox.TabIndex = 25;
+            // 
+            // reprocessedButton
+            // 
+            this.reprocessedButton.Location = new System.Drawing.Point(569, 423);
+            this.reprocessedButton.Name = "reprocessedButton";
+            this.reprocessedButton.Size = new System.Drawing.Size(100, 23);
+            this.reprocessedButton.TabIndex = 26;
+            this.reprocessedButton.Text = "Reprocessed";
+            this.reprocessedButton.UseVisualStyleBackColor = true;
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -930,6 +972,7 @@
             this.Load += new System.EventHandler(this.MainMenu_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.tabPage3.ResumeLayout(false);
@@ -1006,6 +1049,10 @@
         private System.Windows.Forms.TextBox t_donorSearch;
         private System.Windows.Forms.DateTimePicker dateTo;
         private System.Windows.Forms.DateTimePicker dateFrom;
+        private System.Windows.Forms.ComboBox oSearchField;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ListBox resultsBox;
+        private System.Windows.Forms.Button reprocessedButton;
 
     }
 }

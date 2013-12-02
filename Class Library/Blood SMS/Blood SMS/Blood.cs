@@ -55,24 +55,37 @@ namespace Blood_SMS
         public bool checkRemoved()
         {
             bool old_is_removed = is_removed;
-            is_removed = true;
-            if (components.Count < 1)
+
+            if (components.Count == 1)
             {
+                if (components[0].Is_removed)
+                {
+                    is_removed = true;
+                    if (date_removed == DateTime.MinValue)
+                        date_removed = DateTime.Now;
+                }
+                else
+                {
+                    date_removed = DateTime.MinValue;
+                    is_removed = false;
+                }
+            }
+            else
+            {
+                is_removed = true;
+                if (date_removed == DateTime.MinValue)
+                    date_removed = DateTime.Now;
                 foreach (Component c in components)
                 {
-                    if (c.Date_reprocessed == DateTime.MinValue && !c.Is_quarantined && !c.Is_released)
+                    if (!c.Is_removed)
                     {
-                        date_removed = DateTime.Now;
+                        date_removed = DateTime.MinValue;
                         is_removed = false;
                         break;
                     }
                 }
             }
-            else
-            {
-                date_removed = DateTime.MinValue;
-                is_removed = false;
-            }
+            
             return (old_is_removed != is_removed);
 
         }

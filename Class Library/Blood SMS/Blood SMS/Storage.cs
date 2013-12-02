@@ -9,7 +9,7 @@ using MySql.Data.MySqlClient;
 
 namespace Blood_SMS
 {
-    
+
     public class Storage
     {
         public List<Blood> bloodList;
@@ -33,14 +33,14 @@ namespace Blood_SMS
         //public List<Donor> BannedDonors { get; set; }
 
         string connectionString;
-        
+
         const int MINIMUMBLOODVALUE = 5;
         const int MINIMUMEXPIRYALERTVALUE = 3;
         readonly string[] BLOOD_FIELDS = { "accession_number", "blood_type", "donor_id", "date_donated", "date_removed" };
         readonly string[] DONOR_FIELDS = { "last_name", "first_name", "middle_initial", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "home_landline", "office_landline", "email", "cellphone", "educational_attainment", "birth_date", "date_registered", "next_available", "times_contacted", "is_contactable", "is_viable", "reason_for_deferral" };
         readonly string[] COMPONENT_FIELDS = { "accession_number", "component_name", "date_processed", "date_expire", "date_quarantined", "date_assigned", "date_released", "patient_last_name", "patient_first_name", "patient_middle_initial", "patient_age", "reason_for_removal" };
         int BlOODTYPECOUNT = Enum.GetNames(typeof(bloodType)).Length;
-        
+
 
         public Storage(string host, string db, string user, string pass)
         {
@@ -151,7 +151,7 @@ namespace Blood_SMS
 
         public bool UpdateDonor(Donor d)
         {
-            if (donorCommands("UPDATE donor SET " + UpdateQuery(DONOR_FIELDS, new string[] { "donor_id" } ), d))
+            if (donorCommands("UPDATE donor SET " + UpdateQuery(DONOR_FIELDS, new string[] { "donor_id" }), d))
             {
                 unsortDonor(findDonor(d.Donor_id));
                 sortDonor(d);
@@ -196,7 +196,7 @@ namespace Blood_SMS
             conn.Open();
             int rowsAffected = comm.ExecuteNonQuery();
             long id;
-            
+
             conn.Close();
             if (query.Contains("Insert"))
             {
@@ -288,7 +288,7 @@ namespace Blood_SMS
 
         public int getNumDonations(Donor d)
         {
-            int count =0;
+            int count = 0;
             foreach (Blood b in bloodList)
             {
                 if (b.Donor_id.HasValue && b.Donor_id.Value == d.Donor_id)
@@ -527,19 +527,18 @@ namespace Blood_SMS
             {
                 string accession_number = reader.GetValue(0) as string;
                 int? component_name = reader.GetValue(1) as int?;
-                string patient_last_name = reader.GetValue(2) as string;
-                string patient_first_name = reader.GetValue(3) as string;
-                string patient_middle_initial = reader.GetValue(4) as string;
-                int? patient_age = reader.GetValue(5) as int?;
-                DateTime? date_processed = reader.GetValue(6) as DateTime?;
-                DateTime? date_reprocessed = reader.GetValue(7) as DateTime?;
-                DateTime? date_expired = reader.GetValue(8) as DateTime?;
-                DateTime? date_quarantined = reader.GetValue(9) as DateTime?;
-                DateTime? date_assigned = reader.GetValue(10) as DateTime?;
-                DateTime? date_released = reader.GetValue(11) as DateTime?;
-                string reason_for_removal = reader.GetValue(12) as string;
+                int? removal_type = reader.GetValue(2) as int?;
+                DateTime? date_processed = reader.GetValue(3) as DateTime?;
+                DateTime? date_expired = reader.GetValue(4) as DateTime?;
+                DateTime? date_assigned = reader.GetValue(5) as DateTime?;
+                DateTime? date_removed = reader.GetValue(6) as DateTime?;
+                string patient_last_name = reader.GetValue(7) as string;
+                string patient_first_name = reader.GetValue(8) as string;
+                string patient_middle_initial = reader.GetValue(9) as string;
+                int? patient_age = reader.GetValue(10) as int?;
+                string reason_for_removal = reader.GetValue(11) as string;
 
-                findBlood(accession_number).AddComponent(new Component(accession_number, component_name.Value, date_processed.Value, date_expired.Value, patient_last_name, patient_first_name, patient_middle_initial, patient_age.Value, date_reprocessed.Value, date_quarantined.Value, date_assigned.Value, date_released.Value, reason_for_removal));
+                findBlood(accession_number).AddComponent(new Component(accession_number, component_name.Value, removal_type.Value, date_processed.Value, date_expired.Value, date_assigned.Value, date_removed.Value, patient_last_name, patient_first_name, patient_middle_initial, patient_age.Value, reason_for_removal));
             }
             reader.Close();
             conn.Close();
@@ -590,12 +589,11 @@ namespace Blood_SMS
 
             comm.Parameters.AddWithValue("@accession_number", x.Accession_number);
             comm.Parameters.AddWithValue("@component_name", (int)x.Component_name);
+            comm.Parameters.AddWithValue("@removal_type", (int)x.Removal_Type);
             comm.Parameters.AddWithValue("@date_donated", x.Date_processed);
-            comm.Parameters.AddWithValue("@date_reprocessed", x.Date_reprocessed);
             comm.Parameters.AddWithValue("@date_expired", x.Date_expired);
-            comm.Parameters.AddWithValue("@date_quarantined", x.Date_quarantined);
             comm.Parameters.AddWithValue("@date_assigned", x.Date_assigned);
-            comm.Parameters.AddWithValue("@date_released", x.Date_released);
+            comm.Parameters.AddWithValue("@date_released", x.Date_removed);
             comm.Parameters.AddWithValue("@patient_last_name", x.Patient_last_name);
             comm.Parameters.AddWithValue("@patient_first_name", x.Patient_first_name);
             comm.Parameters.AddWithValue("@patient_middle_initial", x.Patient_middle_initial);
@@ -673,7 +671,7 @@ namespace Blood_SMS
             {
                 valueParameters += " AND Where " + comparator[i] + "=@" + comparator[i];
             }
-            
+
             return valueParameters;
         }
 
@@ -740,7 +738,7 @@ namespace Blood_SMS
                         foreach (Component c in b.components)
                         {
                             if (c.Is_released)
-                                ints[(int)days[c.Date_released]]++;
+                                ints[(int)days[c.Date_removed]]++;
                         }
 
                     }
@@ -752,7 +750,18 @@ namespace Blood_SMS
                         foreach (Component c in b.components)
                         {
                             if (c.Is_quarantined)
-                                ints[(int)days[c.Date_quarantined]]++;
+                                ints[(int)days[c.Date_removed]]++;
+                        }
+                    }
+                    break;
+
+                case graphCommand.Reprocess:
+                    foreach (Blood b in bloodList)
+                    {
+                        foreach (Component c in b.components)
+                        {
+                            if (c.Is_reprocessed)
+                                ints[(int)days[c.Date_removed]]++;
                         }
                     }
                     break;
@@ -797,7 +806,7 @@ namespace Blood_SMS
                         foreach (Component c in b.components)
                         {
                             if (c.Is_released)
-                                ints[(int)days[c.Date_released], (int)b.Blood_type]++;
+                                ints[(int)days[c.Date_removed], (int)b.Blood_type]++;
                         }
                     }
                     break;
@@ -807,7 +816,17 @@ namespace Blood_SMS
                         foreach (Component c in b.components)
                         {
                             if (c.Is_quarantined)
-                                ints[(int)days[c.Date_quarantined], (int)b.Blood_type]++;
+                                ints[(int)days[c.Date_removed], (int)b.Blood_type]++;
+                        }
+                    }
+                    break;
+                case graphCommand.Reprocess:
+                    foreach (Blood b in bloodList)
+                    {
+                        foreach (Component c in b.components)
+                        {
+                            if (c.Is_reprocessed)
+                                ints[(int)days[c.Date_removed], (int)b.Blood_type]++;
                         }
                     }
                     break;
@@ -826,6 +845,60 @@ namespace Blood_SMS
             }
 
             return ints;
+        }
+        #endregion
+
+        #region search
+
+        public List<string> searchBloodWithString(string s)
+        {
+            List<string> bloods = new List<string>();
+            foreach (Blood b in bloodList)
+            {
+                if (b.Accession_number.Contains(s))
+                {
+                    bloods.Add(b.Accession_number);
+                }
+            }
+            return bloods;
+        }
+
+        public List<string> searchWithString(string s)
+        {
+            List<string> objects = new List<string>();
+            foreach (Donor d in donorList)
+            {
+                if (d.Name.Contains(s))
+                {
+                    objects.Add(d.Name);
+                }
+            }
+            objects.AddRange(searchBloodWithString(s));
+            return objects;
+        }
+
+        public List<string> searchDonorsWithString(string s)
+        {
+            List<string> donors = new List<string>();
+            foreach(Donor d in donorList)
+            {
+                if (d.Name.Contains(s))
+                {
+                    donors.Add(d.Name);
+                }
+                if (!donors.Contains(d.Name))
+                {
+                    foreach (Blood b in bloodList)
+                    {
+                        if (b.Donor_id.HasValue && b.Donor_id == d.Donor_id)
+                        {
+                            if (b.Accession_number.Contains(s))
+                                donors.Add(d.Name);
+                        }
+                    }
+                }
+            }
+            return donors;
         }
         #endregion
     }

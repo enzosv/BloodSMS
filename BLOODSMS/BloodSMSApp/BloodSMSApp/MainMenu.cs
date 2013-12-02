@@ -325,14 +325,6 @@ namespace BloodSMSApp
 
         #endregion
 
-        
-
-        
-
-        
-
-        
-
         #region PieChart
 
         
