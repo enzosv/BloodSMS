@@ -38,9 +38,8 @@ namespace Blood_SMS
         const int MINIMUMEXPIRYALERTVALUE = 3;
         readonly string[] BLOOD_FIELDS = { "accession_number", "blood_type", "donor_id", "date_donated", "date_removed" };
         readonly string[] DONOR_FIELDS = { "last_name", "first_name", "middle_initial", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "home_landline", "office_landline", "email", "cellphone", "educational_attainment", "birth_date", "date_registered", "next_available", "times_contacted", "is_contactable", "is_viable", "reason_for_deferral" };
-        readonly string[] COMPONENT_FIELDS = { "accession_number", "component_name", "date_processed", "date_expire", "date_quarantined", "date_assigned", "date_released", "patient_last_name", "patient_first_name", "patient_middle_initial", "patient_age", "reason_for_removal" };
+        readonly string[] COMPONENT_FIELDS = { "accession_number", "component_name", "removal_type", "date_processed", "date_expire", "date_assigned", "date_removed", "patient_last_name", "patient_first_name", "patient_middle_initial", "patient_age", "reason_for_removal" };
         int BlOODTYPECOUNT = Enum.GetNames(typeof(bloodType)).Length;
-
 
         public Storage(string host, string db, string user, string pass)
         {
@@ -515,6 +514,9 @@ namespace Blood_SMS
 
         #region Component methods
 
+        /// <summary>
+        /// Hi enzo
+        /// </summary>
         void getComponentSQL()
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
@@ -850,16 +852,27 @@ namespace Blood_SMS
 
         #region search
 
-        public List<string> searchBloodWithString(string s)
+        public List<Blood> searchBloodWithString(string s)
         {
-            List<string> bloods = new List<string>();
+            List<Blood> bloods = new List<Blood>();
             foreach (Blood b in bloodList)
             {
                 if (b.Accession_number.Contains(s))
                 {
-                    bloods.Add(b.Accession_number);
+                    bloods.Add(b);
+                }
+                else
+                {
+                    foreach (Component c in b.components)
+                    {
+                        if (c.Patient_name.Contains(s))
+                        {
+                            bloods.Add(b);
+                        }
+                    }
                 }
             }
+             
             return bloods;
         }
 
@@ -873,27 +886,33 @@ namespace Blood_SMS
                     objects.Add(d.Name);
                 }
             }
-            objects.AddRange(searchBloodWithString(s));
+            foreach (Blood b in bloodList)
+            {
+                if (b.Accession_number.Contains(s))
+                {
+                    objects.Add(b.Accession_number);
+                }
+            }
             return objects;
         }
 
-        public List<string> searchDonorsWithString(string s)
+        public List<Donor> searchDonorsWithString(string s)
         {
-            List<string> donors = new List<string>();
+            List<Donor> donors = new List<Donor>();
             foreach(Donor d in donorList)
             {
                 if (d.Name.Contains(s))
                 {
-                    donors.Add(d.Name);
+                    donors.Add(d);
                 }
-                if (!donors.Contains(d.Name))
+                if (!donors.Contains(d))
                 {
                     foreach (Blood b in bloodList)
                     {
                         if (b.Donor_id.HasValue && b.Donor_id == d.Donor_id)
                         {
                             if (b.Accession_number.Contains(s))
-                                donors.Add(d.Name);
+                                donors.Add(d);
                         }
                     }
                 }

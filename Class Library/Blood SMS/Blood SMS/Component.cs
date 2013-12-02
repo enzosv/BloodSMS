@@ -42,6 +42,7 @@ namespace Blood_SMS
         public bool Is_quarantined { get { return is_quarantined; } }
         public bool Is_released { get { return is_released; } }
         public bool Is_reprocessed { get { return is_reprocessed; } }
+        public string Patient_name { get { return patient_last_name + ", " + patient_first_name + " " + patient_middle_initial; } }
 
         //from SQL
         public Component(string ACCESSION_NUMBER, int COMPONENT_NAME, int REMOVAL_TYPE, DateTime DATE_PROCESSED, DateTime DATE_EXPIRED, DateTime DATE_ASSIGNED, DateTime DATE_REMOVED, string PATIENT_LAST_NAME, string PATIENT_FIRST_NAME, string PATIENT_MIDDLE_INITIAL, int PATIENT_AGE, string REASON_FOR_REMOVAL)

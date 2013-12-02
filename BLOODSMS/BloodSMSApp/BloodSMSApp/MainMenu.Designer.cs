@@ -53,7 +53,9 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.oSearchField = new System.Windows.Forms.ComboBox();
+            this.oSearchField = new System.Windows.Forms.TextBox();
+            this.reprocessedButton = new System.Windows.Forms.Button();
+            this.resultsBox = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
             this.dateFrom = new System.Windows.Forms.DateTimePicker();
             this.dateTo = new System.Windows.Forms.DateTimePicker();
@@ -113,8 +115,6 @@
             this.b_contactC1 = new System.Windows.Forms.Button();
             this.t_O1 = new System.Windows.Forms.TextBox();
             this.b_refresh = new System.Windows.Forms.Button();
-            this.resultsBox = new System.Windows.Forms.ListBox();
-            this.reprocessedButton = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -151,9 +151,9 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.oSearchField);
             this.tabPage1.Controls.Add(this.reprocessedButton);
             this.tabPage1.Controls.Add(this.resultsBox);
-            this.tabPage1.Controls.Add(this.oSearchField);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.dateFrom);
             this.tabPage1.Controls.Add(this.dateTo);
@@ -174,11 +174,29 @@
             // 
             // oSearchField
             // 
-            this.oSearchField.FormattingEnabled = true;
-            this.oSearchField.Location = new System.Drawing.Point(485, 5);
+            this.oSearchField.Location = new System.Drawing.Point(492, 8);
             this.oSearchField.Name = "oSearchField";
-            this.oSearchField.Size = new System.Drawing.Size(184, 21);
-            this.oSearchField.TabIndex = 24;
+            this.oSearchField.Size = new System.Drawing.Size(177, 20);
+            this.oSearchField.TabIndex = 27;
+            this.oSearchField.TextChanged += new System.EventHandler(this.oSearchField_TextChanged);
+            // 
+            // reprocessedButton
+            // 
+            this.reprocessedButton.Location = new System.Drawing.Point(569, 423);
+            this.reprocessedButton.Name = "reprocessedButton";
+            this.reprocessedButton.Size = new System.Drawing.Size(100, 23);
+            this.reprocessedButton.TabIndex = 26;
+            this.reprocessedButton.Text = "Reprocessed";
+            this.reprocessedButton.UseVisualStyleBackColor = true;
+            this.reprocessedButton.Click += new System.EventHandler(this.reprocessedButton_Click);
+            // 
+            // resultsBox
+            // 
+            this.resultsBox.FormattingEnabled = true;
+            this.resultsBox.Location = new System.Drawing.Point(447, 35);
+            this.resultsBox.Name = "resultsBox";
+            this.resultsBox.Size = new System.Drawing.Size(222, 173);
+            this.resultsBox.TabIndex = 25;
             // 
             // label5
             // 
@@ -249,6 +267,7 @@
             this.quarantinedButton.TabIndex = 17;
             this.quarantinedButton.Text = "Quarantined";
             this.quarantinedButton.UseVisualStyleBackColor = true;
+            this.quarantinedButton.Click += new System.EventHandler(this.quarantinedButton_Click);
             // 
             // removedButton
             // 
@@ -918,23 +937,6 @@
             this.b_refresh.Text = "REFRESH";
             this.b_refresh.UseVisualStyleBackColor = false;
             // 
-            // resultsBox
-            // 
-            this.resultsBox.FormattingEnabled = true;
-            this.resultsBox.Location = new System.Drawing.Point(447, 35);
-            this.resultsBox.Name = "resultsBox";
-            this.resultsBox.Size = new System.Drawing.Size(222, 173);
-            this.resultsBox.TabIndex = 25;
-            // 
-            // reprocessedButton
-            // 
-            this.reprocessedButton.Location = new System.Drawing.Point(569, 423);
-            this.reprocessedButton.Name = "reprocessedButton";
-            this.reprocessedButton.Size = new System.Drawing.Size(100, 23);
-            this.reprocessedButton.TabIndex = 26;
-            this.reprocessedButton.Text = "Reprocessed";
-            this.reprocessedButton.UseVisualStyleBackColor = true;
-            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1049,10 +1051,10 @@
         private System.Windows.Forms.TextBox t_donorSearch;
         private System.Windows.Forms.DateTimePicker dateTo;
         private System.Windows.Forms.DateTimePicker dateFrom;
-        private System.Windows.Forms.ComboBox oSearchField;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ListBox resultsBox;
         private System.Windows.Forms.Button reprocessedButton;
+        private System.Windows.Forms.TextBox oSearchField;
 
     }
 }

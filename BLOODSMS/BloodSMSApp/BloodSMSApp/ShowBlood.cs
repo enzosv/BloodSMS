@@ -68,15 +68,15 @@ namespace BloodSMSApp
             }
             if (component.Is_quarantined)
             {
-                setRemoved("Date Quarantined", component.Date_quarantined, component.Reason_for_removal);
+                setRemoved("Date Quarantined", component.Date_removed, component.Reason_for_removal);
             }
             else if (component.Is_released)
             {
-                setRemoved("Date Released", component.Date_released, component.Reason_for_removal);
+                setRemoved("Date Released", component.Date_removed, component.Reason_for_removal);
             }
-            else if (component.Date_reprocessed != DateTime.MinValue)
+            else if (component.Is_removed)
             {
-                setRemoved("Date Reprocessed", component.Date_reprocessed, component.Reason_for_removal);
+                setRemoved("Date Reprocessed", component.Date_removed, component.Reason_for_removal);
             }
 
 

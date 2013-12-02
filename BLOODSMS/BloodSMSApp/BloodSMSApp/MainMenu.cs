@@ -230,7 +230,12 @@ namespace BloodSMSApp
                 index++;
             }
             chart1.ChartAreas[0].AxisX.Maximum = span.TotalDays;
+            for (int i = 0; i < chart1.Series.Count; i++)
+            {
+                chart1.Series[i].Points.Clear();
+            }
             RefreshGraph();
+            
 
         }
 
@@ -243,9 +248,12 @@ namespace BloodSMSApp
                 int[,] types = storage.getBloodTypeModifiedDuring(days, command);
                 for (int i = 0; i < days.Count; i++)
                 {
+                    chart1.Series[0].Points.Clear();
                     chart1.Series[0].Points.AddXY(days2[i].ToString("d MMM yy"), totals[i] + random.Next(0, i * 3));
+                    
                     for (int j = 1; j < Enum.GetNames(typeof(bloodType)).Length; j++)
                     {
+                        chart1.Series[j].Points.Clear();
                         chart1.Series[j].Points.AddXY(days2[i].ToString("d MMM yy"), types[i, j - 1] + random.Next(0, i * 3));
                     }
                 }
@@ -291,16 +299,6 @@ namespace BloodSMSApp
             }
         }
 
-        private void quarantinedButton_Click(object sender, EventArgs e)
-        {
-            if (command != graphCommand.Quarantine)
-            {
-                RefreshLegend();
-                command = graphCommand.Quarantine;
-                RefreshGraph();
-            }
-        }
-
         void clearLine()
         {
             seriesHit.MarkerStyle = MarkerStyle.None;
@@ -324,6 +322,34 @@ namespace BloodSMSApp
         }
 
         #endregion
+
+        private void oSearchField_TextChanged(object sender, EventArgs e)
+        {
+            resultsBox.Items.Clear();
+            foreach (string s in storage.searchWithString(oSearchField.Text))
+            {
+                resultsBox.Items.Add(s);
+            }
+        }
+
+        private void quarantinedButton_Click(object sender, EventArgs e)
+        {
+            if (command != graphCommand.Quarantine)
+            {
+                RefreshLegend();
+                command = graphCommand.Quarantine;
+                RefreshGraph();
+            }
+        }
+        private void reprocessedButton_Click(object sender, EventArgs e)
+        {
+            if (command != graphCommand.Reprocess)
+            {
+                RefreshLegend();
+                command = graphCommand.Reprocess;
+                RefreshGraph();
+            }
+        }
 
         #region PieChart
 
