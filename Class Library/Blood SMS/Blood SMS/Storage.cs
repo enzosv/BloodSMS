@@ -378,18 +378,6 @@ namespace Blood_SMS
         *</summary>
         */
         //new donation
-        public bool AddBlood(string accession_number, int blood_type, int? donor_id, DateTime date_donated, DateTime date_expire)
-        {
-            Blood x = new Blood(accession_number, blood_type, donor_id, date_donated);
-
-            if (bloodCommands("Insert into Blood " + AddQuery(BLOOD_FIELDS), x))
-            {
-                x.AddComponent(new Component(accession_number, 1, date_donated, date_expire));
-                SortBlood(x);
-                return true;
-            }
-            return false;
-        }
 
         public bool AddBlood(Blood b, DateTime date_expire, string p_last, string p_first, string p_mid, int p_age)
         {
@@ -407,7 +395,7 @@ namespace Blood_SMS
         {
             if (bloodCommands("Insert into Blood " + AddQuery(BLOOD_FIELDS), b))
             {
-                b.AddComponent(new Component(b.Accession_number, 1, b.Date_donated, date_expire));
+                b.AddComponent(new Component(b.Accession_number, 0, b.Date_donated, date_expire));
                 SortBlood(b);
                 return true;
             }
@@ -440,8 +428,10 @@ namespace Blood_SMS
 
             comm.Parameters.AddWithValue("@accession_number", x.Accession_number);
             comm.Parameters.AddWithValue("@blood_type", x.Blood_type);
-            if (x.Donor_id.HasValue)
-                comm.Parameters.AddWithValue("@donor_id", x.Donor_id);
+            if(x.Donor_id.HasValue)
+                comm.Parameters.AddWithValue("@donor_id", x.Donor_id.Value);
+            else
+                comm.Parameters.AddWithValue("@donor_id", null);
             comm.Parameters.AddWithValue("@date_donated", x.Date_donated);
             comm.Parameters.AddWithValue("@date_removed", x.Date_removed);
 

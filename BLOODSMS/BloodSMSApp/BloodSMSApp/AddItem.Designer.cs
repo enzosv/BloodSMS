@@ -162,7 +162,6 @@
             this.t_accessionNumber.Name = "t_accessionNumber";
             this.t_accessionNumber.Size = new System.Drawing.Size(200, 20);
             this.t_accessionNumber.TabIndex = 68;
-            this.t_accessionNumber.TextChanged += new System.EventHandler(this.t_accessionNumber_TextChanged);
             // 
             // baba
             // 

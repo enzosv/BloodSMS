@@ -13,11 +13,40 @@ namespace BloodSMSApp
     public partial class AddItem : Form
     {
         Storage storage;
-        public AddItem(Storage stor)
+        Donor donor;
+        bool hasDonor;
+        public AddItem(Storage stor, string accNumber)
         {
             InitializeComponent();
             storage = stor;
+            t_accessionNumber.Text = accNumber;
+
+            foreach (bloodType x in (bloodType[])Enum.GetValues(typeof(bloodType)))
+            {
+                bTypeField.Items.Add(MyEnums.GetDescription(x));
+            }
+            bTypeField.SelectedIndex = 0;
+            hasDonor = false;
         }
+
+        public AddItem(Storage stor, Donor d, string accNumber)
+        {
+            InitializeComponent();   
+            storage = stor;
+            donor = d;
+            t_accessionNumber.Text = accNumber;
+
+            foreach (bloodType x in (bloodType[])Enum.GetValues(typeof(bloodType)))
+            {
+                bTypeField.Items.Add(MyEnums.GetDescription(x));
+            }
+            bTypeField.SelectedIndex = (int)d.Blood_type;
+            d_last.Text = d.Last_name;
+            dFirst.Text = d.First_name;
+            dMid.Text = d.Middle_initial;
+            hasDonor = true;
+        }
+
 
         void isNumber(KeyPressEventArgs e)
         {
@@ -32,27 +61,37 @@ namespace BloodSMSApp
         private void button1_Click(object sender, EventArgs e)
         {
             int blood_type = (int)MyEnums.GetValueFromDescription<bloodType>(bTypeField.Text);
-            if (isStringValid(t_accessionNumber.Text, 1))
+            //if patient
+            if (isStringValid(pLast.Text, 1) && isStringValid(pFirst.Text, 1) && isStringValid(t_patientAge.Text, 1))
             {
-                if (String.IsNullOrEmpty(takenFromField.Text) || isStringValid(takenFromField.Text, 1))
+                int age;
+                if (int.TryParse(t_patientAge.Text, out age))
                 {
-                    if (isStringValid(pLast.Text, 1) && isStringValid(pFirst.Text, 1) && isStringValid(t_patientAge.Text, 1))
+                    Blood b;
+                    if (hasDonor)
+                        b = new Blood(t_accessionNumber.Text, blood_type, donor.Donor_id, dateAddedField.Value);
+                    else
+                        b = new Blood(t_accessionNumber.Text, blood_type, dateAddedField.Value);
+                    
+                    if (storage.AddBlood(b, dateExpireField.Value, pLast.Text, pFirst.Text, pMid.Text, age))
                     {
-                        int age;
-                        if (int.TryParse(t_patientAge.Text, out age))
-                        {
-                            Blood b = new Blood(t_accessionNumber.Text, blood_type, storage.findDonorWithName(, dateAddedField.Value);
-                            if (storage.AddBlood(b, dateExpireField.Value, pLast.Text, pFirst.Text, pMid.Text, age))
-                            {
-                                MessageBox.Show("Blood added");
-                                Close();
-                            }
-                        }
+                        MessageBox.Show("Blood added");
+                        Close();
                     }
-                    else if (String.IsNullOrEmpty(pLast.Text))
-                    {
-                        Blood b = new Blood(t_accessionNumber.Text, blood_type, dateAddedField.Value);
-                    }
+                }
+            }
+            //if no patient
+            else if (String.IsNullOrEmpty(pLast.Text) && String.IsNullOrEmpty(pFirst.Text) && String.IsNullOrEmpty(t_patientAge.Text))
+            {
+                Blood b;
+                if (hasDonor)
+                    b = new Blood(t_accessionNumber.Text, blood_type, donor.Donor_id, dateAddedField.Value);
+                else
+                    b = new Blood(t_accessionNumber.Text, blood_type, dateAddedField.Value);
+                if (storage.AddBlood(b, dateExpireField.Value))
+                {
+                    MessageBox.Show("Blood added");
+                    Close();
                 }
             }
         }
@@ -65,28 +104,6 @@ namespace BloodSMSApp
         private void dateExpireField_ValueChanged(object sender, EventArgs e)
         {
             dateAddedField.MaxDate = dateExpireField.Value;
-        }
-
-        private void t_accessionNumber_TextChanged(object sender, EventArgs e)
-        {
-            Blood b = storage.findBlood(t_accessionNumber.Text);
-            if (b != null)
-            {
-                if (b.Donor_id.HasValue && storage.findDonor(b.Donor_id.Value) != null)
-                {
-                    Donor d = storage.findDonor(b.Donor_id.Value);
-                    takenFromField.Text = d.Name;
-                    listBox1.Items.Add("Date Registered: " + d.Date_registered);
-                    //listBox1.Items.Add("Date Registered: " + d.Date_registered);
-                }
-                if (b.components[0].Date_assigned != DateTime.MinValue)
-                {
-                    pLast.Text = b.components[0].Patient_name;
-                    t_patientAge.Text = b.components[0].Patient_age.ToString();
-                }
-                dateAddedField.Value = b.Date_donated;
-                dateExpireField.Value = b.components[0].Date_expired;
-            }
         }
 
         private void b_cancel_Click(object sender, EventArgs e)

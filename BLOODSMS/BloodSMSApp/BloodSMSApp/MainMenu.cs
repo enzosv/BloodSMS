@@ -146,7 +146,7 @@ namespace BloodSMSApp
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            AddItem i = new AddItem(storage);
+            PreAddItem i = new PreAddItem(storage);
             i.Show();
         }
 
@@ -405,7 +405,7 @@ namespace BloodSMSApp
 
         private void b_addBlood_Click(object sender, EventArgs e)
         {
-            AddItem a = new AddItem(storage);
+            PreAddItem a = new PreAddItem(storage);
             a.Show();
         }
 
