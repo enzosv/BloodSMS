@@ -364,18 +364,18 @@ namespace BloodSMSApp
             RefreshOverview();
         }
 
-        private void t_inventorySearch_TextChanged(object sender, EventArgs e)
-        {
-            //resultsBox.Items.Clear();
-            //resultsBox.Items.AddRange(storage.searchWithString(oSearchField.Text));
-            if (oSearchField.Text.Length > 0)
-            {
-                foreach (Blood b in storage.searchBloodWithString(t_inventorySearch.Text))
-                {
-                    //resultsBox.Items.Add(s);
-                }
-            }
-        }
+        //private void t_inventorySearch_TextChanged(object sender, EventArgs e)
+        //{
+        //    //resultsBox.Items.Clear();
+        //    //resultsBox.Items.AddRange(storage.searchWithString(oSearchField.Text));
+        //    if (oSearchField.Text.Length > 0)
+        //    {
+        //        foreach (Blood b in storage.searchBloodWithString(t_inventorySearch.Text))
+        //        {
+        //            //resultsBox.Items.Add(s);
+        //        }
+        //    }
+        //}
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -396,6 +396,16 @@ namespace BloodSMSApp
         private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
            MessageBox.Show(dataGridView3.SelectedRows.ToString());
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            label6.Text = DateTime.Now.ToShortTimeString();
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
         }
 
 

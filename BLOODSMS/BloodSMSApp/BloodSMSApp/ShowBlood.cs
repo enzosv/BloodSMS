@@ -56,7 +56,7 @@ namespace BloodSMSApp
         {
             bloodComponents componentName = MyEnums.GetValueFromDescription<bloodComponents>(listBox1.Text);
             Blood_SMS.Component component = storage.findComponentWithAccessionNumberAndName(x.Accession_number, componentName);
-            componentValue.SelectedIndex = (int)componentName;
+            //componentValue.SelectedIndex = (int)componentName;
             dateProcessed.Value = component.Date_processed;
             if (!String.IsNullOrWhiteSpace(component.Patient_first_name))
             {
@@ -93,6 +93,29 @@ namespace BloodSMSApp
         private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void splitContainer2_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void ShowBlood_Load(object sender, EventArgs e)
+        {
+            b_cancel.Hide();
+            b_save.Hide();
+
+        }
+
+        private void b_edit_Click(object sender, EventArgs e)
+        {
+            b_cancel.Show();
+            b_save.Show();
         }
     }
 }

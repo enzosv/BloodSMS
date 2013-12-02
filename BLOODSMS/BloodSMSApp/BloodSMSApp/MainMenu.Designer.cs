@@ -30,26 +30,26 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series21 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series22 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series23 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series24 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series25 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series26 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series27 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series28 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series29 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series30 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -71,8 +71,6 @@
             this.b_inventoryQuarantined = new System.Windows.Forms.Button();
             this.b_inventoryInventory = new System.Windows.Forms.Button();
             this.b_inventoryALL = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.t_inventorySearch = new System.Windows.Forms.TextBox();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -91,8 +89,6 @@
             this.b_donorBanned = new System.Windows.Forms.Button();
             this.b_donorContactable = new System.Windows.Forms.Button();
             this.b_donorAll = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.t_donorSearch = new System.Windows.Forms.TextBox();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.notificationsBox = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -100,21 +96,14 @@
             this.b_addBlood = new System.Windows.Forms.Button();
             this.t_AB1 = new System.Windows.Forms.TextBox();
             this.b_contactAB1 = new System.Windows.Forms.Button();
-            this.b_contactAB2 = new System.Windows.Forms.Button();
-            this.t_AB2 = new System.Windows.Forms.TextBox();
-            this.b_contactA1 = new System.Windows.Forms.Button();
-            this.t_A1 = new System.Windows.Forms.TextBox();
-            this.b_contactB2 = new System.Windows.Forms.Button();
-            this.t_B2 = new System.Windows.Forms.TextBox();
-            this.b_contactB1 = new System.Windows.Forms.Button();
-            this.t_B1 = new System.Windows.Forms.TextBox();
-            this.b_contactA2 = new System.Windows.Forms.Button();
-            this.t_A2 = new System.Windows.Forms.TextBox();
-            this.b_contactC2 = new System.Windows.Forms.Button();
-            this.t_O2 = new System.Windows.Forms.TextBox();
-            this.b_contactC1 = new System.Windows.Forms.Button();
-            this.t_O1 = new System.Windows.Forms.TextBox();
             this.b_refresh = new System.Windows.Forms.Button();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -152,10 +141,9 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.oSearchField);
+            this.tabPage1.Controls.Add(this.label8);
+            this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.reprocessedButton);
-            this.tabPage1.Controls.Add(this.resultsBox);
-            this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.dateFrom);
             this.tabPage1.Controls.Add(this.dateTo);
             this.tabPage1.Controls.Add(this.Summary);
@@ -172,38 +160,43 @@
             this.tabPage1.Size = new System.Drawing.Size(673, 494);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
             // oSearchField
             // 
             this.oSearchField.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.oSearchField.Location = new System.Drawing.Point(492, 8);
+            this.oSearchField.Location = new System.Drawing.Point(59, 77);
             this.oSearchField.Name = "oSearchField";
-            this.oSearchField.Size = new System.Drawing.Size(177, 20);
+            this.oSearchField.Size = new System.Drawing.Size(150, 20);
             this.oSearchField.TabIndex = 27;
             this.oSearchField.TextChanged += new System.EventHandler(this.oSearchField_TextChanged);
             // 
             // reprocessedButton
             // 
-            this.reprocessedButton.Location = new System.Drawing.Point(569, 423);
+            this.reprocessedButton.BackColor = System.Drawing.Color.Firebrick;
+            this.reprocessedButton.FlatAppearance.BorderSize = 0;
+            this.reprocessedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.reprocessedButton.ForeColor = System.Drawing.Color.White;
+            this.reprocessedButton.Location = new System.Drawing.Point(534, 202);
             this.reprocessedButton.Name = "reprocessedButton";
-            this.reprocessedButton.Size = new System.Drawing.Size(100, 23);
+            this.reprocessedButton.Size = new System.Drawing.Size(83, 23);
             this.reprocessedButton.TabIndex = 26;
             this.reprocessedButton.Text = "Reprocessed";
-            this.reprocessedButton.UseVisualStyleBackColor = true;
+            this.reprocessedButton.UseVisualStyleBackColor = false;
             this.reprocessedButton.Click += new System.EventHandler(this.reprocessedButton_Click);
             // 
             // resultsBox
             // 
             this.resultsBox.FormattingEnabled = true;
-            this.resultsBox.Location = new System.Drawing.Point(447, 35);
+            this.resultsBox.Location = new System.Drawing.Point(14, 103);
             this.resultsBox.Name = "resultsBox";
-            this.resultsBox.Size = new System.Drawing.Size(222, 173);
+            this.resultsBox.Size = new System.Drawing.Size(195, 147);
             this.resultsBox.TabIndex = 25;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(444, 8);
+            this.label5.Location = new System.Drawing.Point(11, 77);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 13);
             this.label5.TabIndex = 23;
@@ -213,7 +206,7 @@
             // 
             this.dateFrom.CustomFormat = "MMMM yyyy";
             this.dateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateFrom.Location = new System.Drawing.Point(569, 226);
+            this.dateFrom.Location = new System.Drawing.Point(378, 176);
             this.dateFrom.Name = "dateFrom";
             this.dateFrom.ShowUpDown = true;
             this.dateFrom.Size = new System.Drawing.Size(100, 20);
@@ -224,7 +217,7 @@
             // 
             this.dateTo.CustomFormat = "MMMM yyyy";
             this.dateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTo.Location = new System.Drawing.Point(569, 252);
+            this.dateTo.Location = new System.Drawing.Point(569, 176);
             this.dateTo.Name = "dateTo";
             this.dateTo.ShowUpDown = true;
             this.dateTo.Size = new System.Drawing.Size(100, 20);
@@ -233,160 +226,180 @@
             // 
             // Summary
             // 
-            this.Summary.Location = new System.Drawing.Point(569, 278);
+            this.Summary.BackColor = System.Drawing.Color.Firebrick;
+            this.Summary.FlatAppearance.BorderSize = 0;
+            this.Summary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Summary.ForeColor = System.Drawing.Color.White;
+            this.Summary.Location = new System.Drawing.Point(89, 202);
             this.Summary.Name = "Summary";
-            this.Summary.Size = new System.Drawing.Size(100, 23);
+            this.Summary.Size = new System.Drawing.Size(83, 23);
             this.Summary.TabIndex = 20;
             this.Summary.Text = "Summary";
-            this.Summary.UseVisualStyleBackColor = true;
+            this.Summary.UseVisualStyleBackColor = false;
             this.Summary.Click += new System.EventHandler(this.Summary_Click);
             // 
             // addedButton
             // 
-            this.addedButton.Location = new System.Drawing.Point(569, 307);
+            this.addedButton.BackColor = System.Drawing.Color.Firebrick;
+            this.addedButton.FlatAppearance.BorderSize = 0;
+            this.addedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addedButton.ForeColor = System.Drawing.Color.White;
+            this.addedButton.Location = new System.Drawing.Point(178, 202);
             this.addedButton.Name = "addedButton";
-            this.addedButton.Size = new System.Drawing.Size(100, 23);
+            this.addedButton.Size = new System.Drawing.Size(83, 23);
             this.addedButton.TabIndex = 19;
             this.addedButton.Text = "Added";
-            this.addedButton.UseVisualStyleBackColor = true;
+            this.addedButton.UseVisualStyleBackColor = false;
             this.addedButton.Click += new System.EventHandler(this.addedButton_Click);
             // 
             // releasedButton
             // 
-            this.releasedButton.Location = new System.Drawing.Point(569, 365);
+            this.releasedButton.BackColor = System.Drawing.Color.Firebrick;
+            this.releasedButton.FlatAppearance.BorderSize = 0;
+            this.releasedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.releasedButton.ForeColor = System.Drawing.Color.White;
+            this.releasedButton.Location = new System.Drawing.Point(356, 202);
             this.releasedButton.Name = "releasedButton";
-            this.releasedButton.Size = new System.Drawing.Size(100, 23);
+            this.releasedButton.Size = new System.Drawing.Size(83, 23);
             this.releasedButton.TabIndex = 18;
             this.releasedButton.Text = "Released";
-            this.releasedButton.UseVisualStyleBackColor = true;
+            this.releasedButton.UseVisualStyleBackColor = false;
             this.releasedButton.Click += new System.EventHandler(this.releasedButton_Click);
             // 
             // quarantinedButton
             // 
-            this.quarantinedButton.Location = new System.Drawing.Point(569, 394);
+            this.quarantinedButton.BackColor = System.Drawing.Color.Firebrick;
+            this.quarantinedButton.FlatAppearance.BorderSize = 0;
+            this.quarantinedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.quarantinedButton.ForeColor = System.Drawing.Color.White;
+            this.quarantinedButton.Location = new System.Drawing.Point(445, 202);
             this.quarantinedButton.Name = "quarantinedButton";
-            this.quarantinedButton.Size = new System.Drawing.Size(100, 23);
+            this.quarantinedButton.Size = new System.Drawing.Size(83, 23);
             this.quarantinedButton.TabIndex = 17;
             this.quarantinedButton.Text = "Quarantined";
-            this.quarantinedButton.UseVisualStyleBackColor = true;
+            this.quarantinedButton.UseVisualStyleBackColor = false;
             this.quarantinedButton.Click += new System.EventHandler(this.quarantinedButton_Click);
             // 
             // removedButton
             // 
-            this.removedButton.Location = new System.Drawing.Point(569, 336);
+            this.removedButton.BackColor = System.Drawing.Color.Firebrick;
+            this.removedButton.FlatAppearance.BorderSize = 0;
+            this.removedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.removedButton.ForeColor = System.Drawing.Color.White;
+            this.removedButton.Location = new System.Drawing.Point(267, 202);
             this.removedButton.Name = "removedButton";
-            this.removedButton.Size = new System.Drawing.Size(100, 23);
+            this.removedButton.Size = new System.Drawing.Size(83, 23);
             this.removedButton.TabIndex = 16;
             this.removedButton.Text = "Removed";
-            this.removedButton.UseVisualStyleBackColor = true;
+            this.removedButton.UseVisualStyleBackColor = false;
             this.removedButton.Click += new System.EventHandler(this.removedButton_Click);
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend1.IsDockedInsideChartArea = false;
-            legend1.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(5, 209);
+            chartArea5.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea5);
+            legend5.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend5.IsDockedInsideChartArea = false;
+            legend5.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row;
+            legend5.Name = "Legend1";
+            this.chart1.Legends.Add(legend5);
+            this.chart1.Location = new System.Drawing.Point(-15, 216);
             this.chart1.Name = "chart1";
-            series1.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.LegendText = "Added Blood";
-            series1.Name = "Total";
-            series2.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.LegendText = "Removed Blood";
-            series2.Name = "AB+";
-            series3.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Enabled = false;
-            series3.Legend = "Legend1";
-            series3.Name = "AB-";
-            series4.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.Enabled = false;
-            series4.Legend = "Legend1";
-            series4.Name = "A+";
-            series5.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Enabled = false;
-            series5.Legend = "Legend1";
-            series5.Name = "A-";
-            series6.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series6.Enabled = false;
-            series6.Legend = "Legend1";
-            series6.Name = "B+";
-            series7.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series7.Enabled = false;
-            series7.Legend = "Legend1";
-            series7.Name = "B-";
-            series8.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series8.Enabled = false;
-            series8.Legend = "Legend1";
-            series8.Name = "O+";
-            series9.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series9.ChartArea = "ChartArea1";
-            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series9.Enabled = false;
-            series9.Legend = "Legend1";
-            series9.Name = "O-";
-            this.chart1.Series.Add(series1);
-            this.chart1.Series.Add(series2);
-            this.chart1.Series.Add(series3);
-            this.chart1.Series.Add(series4);
-            this.chart1.Series.Add(series5);
-            this.chart1.Series.Add(series6);
-            this.chart1.Series.Add(series7);
-            this.chart1.Series.Add(series8);
-            this.chart1.Series.Add(series9);
-            this.chart1.Size = new System.Drawing.Size(566, 282);
+            series21.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series21.ChartArea = "ChartArea1";
+            series21.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series21.Legend = "Legend1";
+            series21.LegendText = "Added Blood";
+            series21.Name = "Total";
+            series22.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series22.ChartArea = "ChartArea1";
+            series22.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series22.Legend = "Legend1";
+            series22.LegendText = "Removed Blood";
+            series22.Name = "AB+";
+            series23.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series23.ChartArea = "ChartArea1";
+            series23.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series23.Enabled = false;
+            series23.Legend = "Legend1";
+            series23.Name = "AB-";
+            series24.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series24.ChartArea = "ChartArea1";
+            series24.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series24.Enabled = false;
+            series24.Legend = "Legend1";
+            series24.Name = "A+";
+            series25.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series25.ChartArea = "ChartArea1";
+            series25.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series25.Enabled = false;
+            series25.Legend = "Legend1";
+            series25.Name = "A-";
+            series26.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series26.ChartArea = "ChartArea1";
+            series26.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series26.Enabled = false;
+            series26.Legend = "Legend1";
+            series26.Name = "B+";
+            series27.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series27.ChartArea = "ChartArea1";
+            series27.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series27.Enabled = false;
+            series27.Legend = "Legend1";
+            series27.Name = "B-";
+            series28.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series28.ChartArea = "ChartArea1";
+            series28.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series28.Enabled = false;
+            series28.Legend = "Legend1";
+            series28.Name = "O+";
+            series29.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series29.ChartArea = "ChartArea1";
+            series29.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series29.Enabled = false;
+            series29.Legend = "Legend1";
+            series29.Name = "O-";
+            this.chart1.Series.Add(series21);
+            this.chart1.Series.Add(series22);
+            this.chart1.Series.Add(series23);
+            this.chart1.Series.Add(series24);
+            this.chart1.Series.Add(series25);
+            this.chart1.Series.Add(series26);
+            this.chart1.Series.Add(series27);
+            this.chart1.Series.Add(series28);
+            this.chart1.Series.Add(series29);
+            this.chart1.Size = new System.Drawing.Size(704, 282);
             this.chart1.TabIndex = 15;
             this.chart1.Text = "chart1";
             this.chart1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chart1_MouseClick);
             // 
             // chart2
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart2.Legends.Add(legend2);
+            chartArea6.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chart2.Legends.Add(legend6);
             this.chart2.Location = new System.Drawing.Point(5, 3);
             this.chart2.Name = "chart2";
-            series10.BorderColor = System.Drawing.Color.Black;
-            series10.ChartArea = "ChartArea1";
-            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series10.Legend = "Legend1";
-            series10.LegendText = "AB+";
-            series10.Name = "Series1";
-            this.chart2.Series.Add(series10);
-            this.chart2.Size = new System.Drawing.Size(433, 205);
+            series30.BorderColor = System.Drawing.Color.Black;
+            series30.ChartArea = "ChartArea1";
+            series30.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series30.Legend = "Legend1";
+            series30.LegendText = "AB+";
+            series30.Name = "Series1";
+            this.chart2.Series.Add(series30);
+            this.chart2.Size = new System.Drawing.Size(664, 167);
             this.chart2.TabIndex = 14;
             this.chart2.Text = "chart2";
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.comboBox2);
+            this.tabPage3.Controls.Add(this.label1);
             this.tabPage3.Controls.Add(this.b_inventoryUsed);
             this.tabPage3.Controls.Add(this.b_inventoryQuarantined);
             this.tabPage3.Controls.Add(this.b_inventoryInventory);
             this.tabPage3.Controls.Add(this.b_inventoryALL);
-            this.tabPage3.Controls.Add(this.label1);
-            this.tabPage3.Controls.Add(this.t_inventorySearch);
             this.tabPage3.Controls.Add(this.dataGridView2);
             this.tabPage3.ImageIndex = 2;
             this.tabPage3.Location = new System.Drawing.Point(4, 70);
@@ -402,9 +415,9 @@
             this.b_inventoryUsed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_inventoryUsed.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_inventoryUsed.ForeColor = System.Drawing.Color.White;
-            this.b_inventoryUsed.Location = new System.Drawing.Point(505, 18);
+            this.b_inventoryUsed.Location = new System.Drawing.Point(291, 15);
             this.b_inventoryUsed.Name = "b_inventoryUsed";
-            this.b_inventoryUsed.Size = new System.Drawing.Size(59, 26);
+            this.b_inventoryUsed.Size = new System.Drawing.Size(59, 29);
             this.b_inventoryUsed.TabIndex = 30;
             this.b_inventoryUsed.Text = "USED";
             this.b_inventoryUsed.UseVisualStyleBackColor = false;
@@ -416,9 +429,9 @@
             this.b_inventoryQuarantined.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_inventoryQuarantined.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_inventoryQuarantined.ForeColor = System.Drawing.Color.White;
-            this.b_inventoryQuarantined.Location = new System.Drawing.Point(381, 18);
+            this.b_inventoryQuarantined.Location = new System.Drawing.Point(167, 15);
             this.b_inventoryQuarantined.Name = "b_inventoryQuarantined";
-            this.b_inventoryQuarantined.Size = new System.Drawing.Size(118, 26);
+            this.b_inventoryQuarantined.Size = new System.Drawing.Size(118, 29);
             this.b_inventoryQuarantined.TabIndex = 29;
             this.b_inventoryQuarantined.Text = "QUARANTINED";
             this.b_inventoryQuarantined.UseVisualStyleBackColor = false;
@@ -430,9 +443,9 @@
             this.b_inventoryInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_inventoryInventory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_inventoryInventory.ForeColor = System.Drawing.Color.White;
-            this.b_inventoryInventory.Location = new System.Drawing.Point(275, 18);
+            this.b_inventoryInventory.Location = new System.Drawing.Point(61, 15);
             this.b_inventoryInventory.Name = "b_inventoryInventory";
-            this.b_inventoryInventory.Size = new System.Drawing.Size(100, 26);
+            this.b_inventoryInventory.Size = new System.Drawing.Size(100, 29);
             this.b_inventoryInventory.TabIndex = 28;
             this.b_inventoryInventory.Text = "INVENTORY";
             this.b_inventoryInventory.UseVisualStyleBackColor = false;
@@ -444,40 +457,23 @@
             this.b_inventoryALL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_inventoryALL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_inventoryALL.ForeColor = System.Drawing.Color.White;
-            this.b_inventoryALL.Location = new System.Drawing.Point(218, 18);
+            this.b_inventoryALL.Location = new System.Drawing.Point(4, 15);
             this.b_inventoryALL.Name = "b_inventoryALL";
-            this.b_inventoryALL.Size = new System.Drawing.Size(51, 26);
+            this.b_inventoryALL.Size = new System.Drawing.Size(51, 29);
             this.b_inventoryALL.TabIndex = 27;
             this.b_inventoryALL.Text = "ALL";
             this.b_inventoryALL.UseVisualStyleBackColor = false;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 13);
-            this.label1.TabIndex = 26;
-            this.label1.Text = "SEARCH:";
-            // 
-            // t_inventorySearch
-            // 
-            this.t_inventorySearch.Location = new System.Drawing.Point(69, 22);
-            this.t_inventorySearch.Name = "t_inventorySearch";
-            this.t_inventorySearch.Size = new System.Drawing.Size(131, 20);
-            this.t_inventorySearch.TabIndex = 25;
-            this.t_inventorySearch.TextChanged += new System.EventHandler(this.t_inventorySearch_TextChanged);
-            // 
             // dataGridView2
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column2,
@@ -490,24 +486,24 @@
             this.Column9,
             this.Column10,
             this.Column11});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle17;
             this.dataGridView2.Location = new System.Drawing.Point(0, 60);
             this.dataGridView2.Name = "dataGridView2";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
             this.dataGridView2.Size = new System.Drawing.Size(673, 434);
             this.dataGridView2.TabIndex = 0;
             // 
@@ -569,8 +565,6 @@
             this.tabPage4.Controls.Add(this.b_donorBanned);
             this.tabPage4.Controls.Add(this.b_donorContactable);
             this.tabPage4.Controls.Add(this.b_donorAll);
-            this.tabPage4.Controls.Add(this.label3);
-            this.tabPage4.Controls.Add(this.t_donorSearch);
             this.tabPage4.Controls.Add(this.dataGridView3);
             this.tabPage4.ImageIndex = 3;
             this.tabPage4.Location = new System.Drawing.Point(4, 70);
@@ -591,7 +585,7 @@
             "B-",
             "O+",
             "O-"});
-            this.comboBox1.Location = new System.Drawing.Point(412, 57);
+            this.comboBox1.Location = new System.Drawing.Point(148, 60);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 38;
@@ -599,7 +593,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(275, 60);
+            this.label4.Location = new System.Drawing.Point(11, 63);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(128, 13);
             this.label4.TabIndex = 37;
@@ -612,7 +606,7 @@
             this.b_donorViable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_donorViable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_donorViable.ForeColor = System.Drawing.Color.White;
-            this.b_donorViable.Location = new System.Drawing.Point(539, 13);
+            this.b_donorViable.Location = new System.Drawing.Point(275, 16);
             this.b_donorViable.Name = "b_donorViable";
             this.b_donorViable.Size = new System.Drawing.Size(74, 26);
             this.b_donorViable.TabIndex = 36;
@@ -626,7 +620,7 @@
             this.b_donorBanned.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_donorBanned.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_donorBanned.ForeColor = System.Drawing.Color.White;
-            this.b_donorBanned.Location = new System.Drawing.Point(459, 13);
+            this.b_donorBanned.Location = new System.Drawing.Point(195, 16);
             this.b_donorBanned.Name = "b_donorBanned";
             this.b_donorBanned.Size = new System.Drawing.Size(74, 26);
             this.b_donorBanned.TabIndex = 35;
@@ -640,7 +634,7 @@
             this.b_donorContactable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_donorContactable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_donorContactable.ForeColor = System.Drawing.Color.White;
-            this.b_donorContactable.Location = new System.Drawing.Point(335, 13);
+            this.b_donorContactable.Location = new System.Drawing.Point(71, 16);
             this.b_donorContactable.Name = "b_donorContactable";
             this.b_donorContactable.Size = new System.Drawing.Size(118, 26);
             this.b_donorContactable.TabIndex = 34;
@@ -654,61 +648,45 @@
             this.b_donorAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_donorAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_donorAll.ForeColor = System.Drawing.Color.White;
-            this.b_donorAll.Location = new System.Drawing.Point(278, 13);
+            this.b_donorAll.Location = new System.Drawing.Point(14, 16);
             this.b_donorAll.Name = "b_donorAll";
             this.b_donorAll.Size = new System.Drawing.Size(51, 26);
             this.b_donorAll.TabIndex = 33;
             this.b_donorAll.Text = "ALL";
             this.b_donorAll.UseVisualStyleBackColor = false;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(32, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 13);
-            this.label3.TabIndex = 32;
-            this.label3.Text = "SEARCH:";
-            // 
-            // t_donorSearch
-            // 
-            this.t_donorSearch.Location = new System.Drawing.Point(89, 13);
-            this.t_donorSearch.Name = "t_donorSearch";
-            this.t_donorSearch.Size = new System.Drawing.Size(131, 20);
-            this.t_donorSearch.TabIndex = 31;
-            // 
             // dataGridView3
             // 
             this.dataGridView3.AllowUserToAddRows = false;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle14;
             this.dataGridView3.Location = new System.Drawing.Point(3, 95);
             this.dataGridView3.MultiSelect = false;
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView3.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView3.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView3.Size = new System.Drawing.Size(850, 436);
             this.dataGridView3.TabIndex = 1;
@@ -741,7 +719,7 @@
             this.b_addDonor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_addDonor.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_addDonor.ForeColor = System.Drawing.Color.White;
-            this.b_addDonor.Location = new System.Drawing.Point(28, 76);
+            this.b_addDonor.Location = new System.Drawing.Point(40, 350);
             this.b_addDonor.Name = "b_addDonor";
             this.b_addDonor.Size = new System.Drawing.Size(158, 30);
             this.b_addDonor.TabIndex = 6;
@@ -756,7 +734,7 @@
             this.b_addBlood.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_addBlood.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_addBlood.ForeColor = System.Drawing.Color.White;
-            this.b_addBlood.Location = new System.Drawing.Point(28, 122);
+            this.b_addBlood.Location = new System.Drawing.Point(40, 396);
             this.b_addBlood.Name = "b_addBlood";
             this.b_addBlood.Size = new System.Drawing.Size(158, 30);
             this.b_addBlood.TabIndex = 7;
@@ -765,7 +743,7 @@
             // 
             // t_AB1
             // 
-            this.t_AB1.Location = new System.Drawing.Point(28, 199);
+            this.t_AB1.Location = new System.Drawing.Point(40, 469);
             this.t_AB1.Name = "t_AB1";
             this.t_AB1.Size = new System.Drawing.Size(77, 20);
             this.t_AB1.TabIndex = 8;
@@ -777,159 +755,12 @@
             this.b_contactAB1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_contactAB1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_contactAB1.ForeColor = System.Drawing.Color.White;
-            this.b_contactAB1.Location = new System.Drawing.Point(111, 194);
+            this.b_contactAB1.Location = new System.Drawing.Point(40, 496);
             this.b_contactAB1.Name = "b_contactAB1";
-            this.b_contactAB1.Size = new System.Drawing.Size(75, 30);
+            this.b_contactAB1.Size = new System.Drawing.Size(158, 30);
             this.b_contactAB1.TabIndex = 9;
-            this.b_contactAB1.Text = "Contact AB+";
+            this.b_contactAB1.Text = "SHOW";
             this.b_contactAB1.UseVisualStyleBackColor = false;
-            // 
-            // b_contactAB2
-            // 
-            this.b_contactAB2.BackColor = System.Drawing.Color.DimGray;
-            this.b_contactAB2.FlatAppearance.BorderSize = 0;
-            this.b_contactAB2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_contactAB2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_contactAB2.ForeColor = System.Drawing.Color.White;
-            this.b_contactAB2.Location = new System.Drawing.Point(111, 230);
-            this.b_contactAB2.Name = "b_contactAB2";
-            this.b_contactAB2.Size = new System.Drawing.Size(75, 30);
-            this.b_contactAB2.TabIndex = 11;
-            this.b_contactAB2.Text = "Contact AB-";
-            this.b_contactAB2.UseVisualStyleBackColor = false;
-            // 
-            // t_AB2
-            // 
-            this.t_AB2.Location = new System.Drawing.Point(28, 235);
-            this.t_AB2.Name = "t_AB2";
-            this.t_AB2.Size = new System.Drawing.Size(77, 20);
-            this.t_AB2.TabIndex = 10;
-            // 
-            // b_contactA1
-            // 
-            this.b_contactA1.BackColor = System.Drawing.Color.DimGray;
-            this.b_contactA1.FlatAppearance.BorderSize = 0;
-            this.b_contactA1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_contactA1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_contactA1.ForeColor = System.Drawing.Color.White;
-            this.b_contactA1.Location = new System.Drawing.Point(111, 266);
-            this.b_contactA1.Name = "b_contactA1";
-            this.b_contactA1.Size = new System.Drawing.Size(75, 30);
-            this.b_contactA1.TabIndex = 13;
-            this.b_contactA1.Text = "Contact A+";
-            this.b_contactA1.UseVisualStyleBackColor = false;
-            // 
-            // t_A1
-            // 
-            this.t_A1.Location = new System.Drawing.Point(28, 271);
-            this.t_A1.Name = "t_A1";
-            this.t_A1.Size = new System.Drawing.Size(77, 20);
-            this.t_A1.TabIndex = 12;
-            // 
-            // b_contactB2
-            // 
-            this.b_contactB2.BackColor = System.Drawing.Color.DimGray;
-            this.b_contactB2.FlatAppearance.BorderSize = 0;
-            this.b_contactB2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_contactB2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_contactB2.ForeColor = System.Drawing.Color.White;
-            this.b_contactB2.Location = new System.Drawing.Point(111, 374);
-            this.b_contactB2.Name = "b_contactB2";
-            this.b_contactB2.Size = new System.Drawing.Size(75, 30);
-            this.b_contactB2.TabIndex = 19;
-            this.b_contactB2.Text = "Contact B-";
-            this.b_contactB2.UseVisualStyleBackColor = false;
-            // 
-            // t_B2
-            // 
-            this.t_B2.Location = new System.Drawing.Point(28, 379);
-            this.t_B2.Name = "t_B2";
-            this.t_B2.Size = new System.Drawing.Size(77, 20);
-            this.t_B2.TabIndex = 18;
-            // 
-            // b_contactB1
-            // 
-            this.b_contactB1.BackColor = System.Drawing.Color.DimGray;
-            this.b_contactB1.FlatAppearance.BorderSize = 0;
-            this.b_contactB1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_contactB1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_contactB1.ForeColor = System.Drawing.Color.White;
-            this.b_contactB1.Location = new System.Drawing.Point(111, 338);
-            this.b_contactB1.Name = "b_contactB1";
-            this.b_contactB1.Size = new System.Drawing.Size(75, 30);
-            this.b_contactB1.TabIndex = 17;
-            this.b_contactB1.Text = "Contact B+";
-            this.b_contactB1.UseVisualStyleBackColor = false;
-            // 
-            // t_B1
-            // 
-            this.t_B1.Location = new System.Drawing.Point(28, 343);
-            this.t_B1.Name = "t_B1";
-            this.t_B1.Size = new System.Drawing.Size(77, 20);
-            this.t_B1.TabIndex = 16;
-            // 
-            // b_contactA2
-            // 
-            this.b_contactA2.BackColor = System.Drawing.Color.DimGray;
-            this.b_contactA2.FlatAppearance.BorderSize = 0;
-            this.b_contactA2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_contactA2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_contactA2.ForeColor = System.Drawing.Color.White;
-            this.b_contactA2.Location = new System.Drawing.Point(111, 302);
-            this.b_contactA2.Name = "b_contactA2";
-            this.b_contactA2.Size = new System.Drawing.Size(75, 30);
-            this.b_contactA2.TabIndex = 15;
-            this.b_contactA2.Text = "Contact A-";
-            this.b_contactA2.UseVisualStyleBackColor = false;
-            // 
-            // t_A2
-            // 
-            this.t_A2.Location = new System.Drawing.Point(28, 307);
-            this.t_A2.Name = "t_A2";
-            this.t_A2.Size = new System.Drawing.Size(77, 20);
-            this.t_A2.TabIndex = 14;
-            // 
-            // b_contactC2
-            // 
-            this.b_contactC2.BackColor = System.Drawing.Color.DimGray;
-            this.b_contactC2.FlatAppearance.BorderSize = 0;
-            this.b_contactC2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_contactC2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_contactC2.ForeColor = System.Drawing.Color.White;
-            this.b_contactC2.Location = new System.Drawing.Point(111, 446);
-            this.b_contactC2.Name = "b_contactC2";
-            this.b_contactC2.Size = new System.Drawing.Size(75, 30);
-            this.b_contactC2.TabIndex = 23;
-            this.b_contactC2.Text = "Contact O-";
-            this.b_contactC2.UseVisualStyleBackColor = false;
-            // 
-            // t_O2
-            // 
-            this.t_O2.Location = new System.Drawing.Point(28, 451);
-            this.t_O2.Name = "t_O2";
-            this.t_O2.Size = new System.Drawing.Size(77, 20);
-            this.t_O2.TabIndex = 22;
-            // 
-            // b_contactC1
-            // 
-            this.b_contactC1.BackColor = System.Drawing.Color.DimGray;
-            this.b_contactC1.FlatAppearance.BorderSize = 0;
-            this.b_contactC1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_contactC1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_contactC1.ForeColor = System.Drawing.Color.White;
-            this.b_contactC1.Location = new System.Drawing.Point(111, 410);
-            this.b_contactC1.Name = "b_contactC1";
-            this.b_contactC1.Size = new System.Drawing.Size(75, 30);
-            this.b_contactC1.TabIndex = 21;
-            this.b_contactC1.Text = "Contact O+";
-            this.b_contactC1.UseVisualStyleBackColor = false;
-            // 
-            // t_O1
-            // 
-            this.t_O1.Location = new System.Drawing.Point(28, 415);
-            this.t_O1.Name = "t_O1";
-            this.t_O1.Size = new System.Drawing.Size(77, 20);
-            this.t_O1.TabIndex = 20;
             // 
             // b_refresh
             // 
@@ -938,7 +769,7 @@
             this.b_refresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_refresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_refresh.ForeColor = System.Drawing.Color.White;
-            this.b_refresh.Location = new System.Drawing.Point(28, 539);
+            this.b_refresh.Location = new System.Drawing.Point(40, 598);
             this.b_refresh.Name = "b_refresh";
             this.b_refresh.Size = new System.Drawing.Size(158, 30);
             this.b_refresh.TabIndex = 24;
@@ -946,28 +777,87 @@
             this.b_refresh.UseVisualStyleBackColor = false;
             this.b_refresh.Click += new System.EventHandler(this.b_refresh_Click);
             // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "AB+",
+            "AB-",
+            "A+",
+            "A-",
+            "B+",
+            "B-",
+            "O+",
+            "O-"});
+            this.comboBox2.Location = new System.Drawing.Point(549, 20);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 21);
+            this.comboBox2.TabIndex = 40;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.Control;
+            this.label1.Location = new System.Drawing.Point(412, 23);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(128, 13);
+            this.label1.TabIndex = 39;
+            this.label1.Text = "SORT BY BLOOD TYPE:";
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(123, 469);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(75, 21);
+            this.comboBox3.TabIndex = 28;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(948, 76);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 29;
+            this.label6.Text = "label6";
+            // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.SystemColors.Control;
+            this.label7.Location = new System.Drawing.Point(297, 182);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(75, 13);
+            this.label7.TabIndex = 27;
+            this.label7.Text = "START DATE";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.SystemColors.Control;
+            this.label8.Location = new System.Drawing.Point(501, 182);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(62, 13);
+            this.label8.TabIndex = 28;
+            this.label8.Text = "END DATE";
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::BloodSMSApp.Properties.Resources._2MAINMENU_copy8;
+            this.BackgroundImage = global::BloodSMSApp.Properties.Resources._1425790_3581144864705_1260363695_n;
             this.ClientSize = new System.Drawing.Size(1079, 671);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.oSearchField);
             this.Controls.Add(this.b_refresh);
-            this.Controls.Add(this.b_contactC2);
-            this.Controls.Add(this.t_O2);
-            this.Controls.Add(this.b_contactC1);
-            this.Controls.Add(this.t_O1);
-            this.Controls.Add(this.b_contactB2);
-            this.Controls.Add(this.t_B2);
             this.Controls.Add(this.notificationsBox);
-            this.Controls.Add(this.b_contactB1);
-            this.Controls.Add(this.t_B1);
-            this.Controls.Add(this.b_contactA2);
-            this.Controls.Add(this.t_A2);
-            this.Controls.Add(this.b_contactA1);
-            this.Controls.Add(this.t_A1);
-            this.Controls.Add(this.b_contactAB2);
-            this.Controls.Add(this.t_AB2);
+            this.Controls.Add(this.resultsBox);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.b_contactAB1);
             this.Controls.Add(this.t_AB1);
             this.Controls.Add(this.b_addBlood);
@@ -1029,26 +919,10 @@
         private System.Windows.Forms.Button b_inventoryQuarantined;
         private System.Windows.Forms.Button b_inventoryInventory;
         private System.Windows.Forms.Button b_inventoryALL;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox t_inventorySearch;
         private System.Windows.Forms.Button b_addDonor;
         private System.Windows.Forms.Button b_addBlood;
         private System.Windows.Forms.TextBox t_AB1;
         private System.Windows.Forms.Button b_contactAB1;
-        private System.Windows.Forms.Button b_contactAB2;
-        private System.Windows.Forms.TextBox t_AB2;
-        private System.Windows.Forms.Button b_contactA1;
-        private System.Windows.Forms.TextBox t_A1;
-        private System.Windows.Forms.Button b_contactB2;
-        private System.Windows.Forms.TextBox t_B2;
-        private System.Windows.Forms.Button b_contactB1;
-        private System.Windows.Forms.TextBox t_B1;
-        private System.Windows.Forms.Button b_contactA2;
-        private System.Windows.Forms.TextBox t_A2;
-        private System.Windows.Forms.Button b_contactC2;
-        private System.Windows.Forms.TextBox t_O2;
-        private System.Windows.Forms.Button b_contactC1;
-        private System.Windows.Forms.TextBox t_O1;
         private System.Windows.Forms.Button b_refresh;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label4;
@@ -1056,14 +930,19 @@
         private System.Windows.Forms.Button b_donorBanned;
         private System.Windows.Forms.Button b_donorContactable;
         private System.Windows.Forms.Button b_donorAll;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox t_donorSearch;
         private System.Windows.Forms.DateTimePicker dateTo;
         private System.Windows.Forms.DateTimePicker dateFrom;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ListBox resultsBox;
         private System.Windows.Forms.Button reprocessedButton;
         private System.Windows.Forms.TextBox oSearchField;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
 
     }
 }

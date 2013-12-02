@@ -211,6 +211,8 @@
     <None Include="Resources\addItem copy.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\1450316_3581144904706_1077020895_n.jpg" />
+    <None Include="Resources\1425790_3581144864705_1260363695_n.jpg" />
     <Content Include="Resources\blood.png" />
     <None Include="Resources\container1.png" />
     <None Include="Resources\blood1.png" />
