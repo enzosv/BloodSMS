@@ -104,6 +104,10 @@ namespace Blood_SMS
             date_removed = DateTime.MinValue;
             reason_for_removal = "";
 
+            is_removed = false;
+            is_released = false;
+            is_quarantined = false;
+            is_reprocessed = false;
             Refresh();
         }
 

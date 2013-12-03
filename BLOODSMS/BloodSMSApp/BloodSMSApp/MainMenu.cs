@@ -27,7 +27,7 @@ namespace BloodSMSApp
         public MainMenu()
         {
             InitializeComponent();
-            
+
             InitializeValues();
         }
 
@@ -39,12 +39,12 @@ namespace BloodSMSApp
             notifications.Clear();
             //command = graphCommand.Summary;
 
-            dateFrom.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddMonths(-1);
-            dateTo.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
-            
+            ChangeDates();
+
             //seriesHit = chart1.Series[0];
             dataGridView3.DataSource = storage.donorList;
             dataGridView2.DataSource = storage.bloodList;
+
             RefreshOverview();
         }
 
@@ -57,17 +57,25 @@ namespace BloodSMSApp
             days = new Dictionary<DateTime, int>();
             days2 = new Dictionary<int, DateTime>();
 
-            dateTo.MaxDate = DateTime.Today.AddYears(1);
+
             //set this to date of install upon install
             dateFrom.MinDate = new DateTime(2010, 9, 1);
 
             dateFrom.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1).AddMonths(-1);
-            dateTo.Value = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month));
+            dateTo.Value = DateTime.Today.AddMonths(1);
+            dateTo.MaxDate = dateTo.Value;
 
             seriesHit = chart1.Series[0];
 
             dataGridView3.DataSource = storage.donorList;
             dataGridView2.DataSource = storage.bloodList;
+
+            foreach (bloodType x in (bloodType[])Enum.GetValues(typeof(bloodType)))
+            {
+                contactTypesBox.Items.Add(MyEnums.GetDescription(x));
+            }
+            contactTypesBox.SelectedIndex = 0;
+
             RefreshOverview();
         }
 
@@ -119,14 +127,14 @@ namespace BloodSMSApp
             {
                 b = (bloodType)i;
                 chart2.Series[0].Points.AddY(bloodTypes[i].Count);
-                chart2.Series[0].Points[i].LegendText = MyEnums.GetDescription(b) + ": " + bloodTypes[i].Count;
+                chart2.Series[0].Points[i+1].LegendText = MyEnums.GetDescription(b) + ": " + bloodTypes[i].Count;
             }
         }
 
         #endregion
 
         #region graph
-        
+
         void RefreshGraph()
         {
             for (int i = 0; i < chart1.Series.Count; i++)
@@ -386,5 +394,34 @@ namespace BloodSMSApp
         {
             RefreshOverview();
         }
+
+        private void b_contactAB1_Click(object sender, EventArgs e)
+        {
+            int count;
+            if (int.TryParse(t_AB1.Text, out count))
+            {
+                if (count > 0)
+                {
+                    ContactForm cf = new ContactForm(storage);
+                    cf.ShowDialog();
+                }
+            }
+        }
+
+        private void t_AB1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(Char.IsNumber(e.KeyChar) || e.KeyChar == 8);
+        }
+
+        private void b_inventoryALL_Click(object sender, EventArgs e)
+        {
+            iTypeFilter.SelectedIndex = -1;
+        }
+
+        private void b_donorAll_Click(object sender, EventArgs e)
+        {
+            dTypeFilter.SelectedIndex = -1;
+        }
+
     }
 }

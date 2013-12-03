@@ -38,7 +38,7 @@ namespace Blood_SMS
         const int MINIMUMEXPIRYALERTVALUE = 3;
         readonly string[] BLOOD_FIELDS = { "accession_number", "blood_type", "donor_id", "date_donated", "date_removed" };
         readonly string[] DONOR_FIELDS = { "last_name", "first_name", "middle_initial", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "home_landline", "office_landline", "email", "cellphone", "educational_attainment", "birth_date", "date_registered", "next_available", "times_contacted", "is_contactable", "is_viable", "reason_for_deferral" };
-        readonly string[] COMPONENT_FIELDS = { "accession_number", "component_name", "removal_type", "date_processed", "date_expire", "date_assigned", "date_removed", "patient_last_name", "patient_first_name", "patient_middle_initial", "patient_age", "reason_for_removal" };
+        readonly string[] COMPONENT_FIELDS = { "accession_number", "component_name", "removal_type", "date_processed", "date_expired", "date_assigned", "date_removed", "patient_last_name", "patient_first_name", "patient_middle_initial", "patient_age", "reason_for_removal" };
         int BlOODTYPECOUNT = Enum.GetNames(typeof(bloodType)).Length;
 
         public Storage(string host, string db, string user, string pass)
@@ -523,10 +523,6 @@ namespace Blood_SMS
         #endregion
 
         #region Component methods
-
-        /// <summary>
-        /// Hi enzo
-        /// </summary>
         void getComponentSQL()
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
@@ -630,10 +626,10 @@ namespace Blood_SMS
             comm.Parameters.AddWithValue("@accession_number", x.Accession_number);
             comm.Parameters.AddWithValue("@component_name", (int)x.Component_name);
             comm.Parameters.AddWithValue("@removal_type", (int)x.Removal_Type);
-            comm.Parameters.AddWithValue("@date_donated", x.Date_processed);
+            comm.Parameters.AddWithValue("@date_processed", x.Date_processed);
             comm.Parameters.AddWithValue("@date_expired", x.Date_expired);
             comm.Parameters.AddWithValue("@date_assigned", x.Date_assigned);
-            comm.Parameters.AddWithValue("@date_released", x.Date_removed);
+            comm.Parameters.AddWithValue("@date_removed", x.Date_removed);
             comm.Parameters.AddWithValue("@patient_last_name", x.Patient_last_name);
             comm.Parameters.AddWithValue("@patient_first_name", x.Patient_first_name);
             comm.Parameters.AddWithValue("@patient_middle_initial", x.Patient_middle_initial);
@@ -754,7 +750,7 @@ namespace Blood_SMS
             {
                 foreach (Component c in b.components)
                 {
-                    TimeSpan span = DateTime.Today - c.Date_expired.Date;
+                    TimeSpan span = c.Date_expired.Date - DateTime.Today;
                     if (span.TotalDays < MINIMUMEXPIRYALERTVALUE)
                         expiringComponents.Add(new string[2] { c.Component_name.ToString(), c.Accession_number });
                 }

@@ -17,7 +17,7 @@ namespace Blood_SMS
         public List<Component> components;
 
         public string Accession_number { get { return accession_number; } }
-        public bloodType Blood_type { get { return blood_type; }  }
+        public bloodType Blood_type { get { return blood_type; } }
         public int? Donor_id { get { return donor_id; } }
         public DateTime Date_donated { get { return date_donated; } }
         public DateTime Date_removed { get { return date_removed; } }
@@ -68,36 +68,19 @@ namespace Blood_SMS
         {
             bool old_is_removed = is_removed;
 
-            if (components.Count == 1)
+            is_removed = true;
+            if (date_removed == DateTime.MinValue)
+                date_removed = DateTime.Now;
+            foreach (Component c in components)
             {
-                if (components[0].Is_removed)
-                {
-                    is_removed = true;
-                    if (date_removed == DateTime.MinValue)
-                        date_removed = DateTime.Now;
-                }
-                else
+                if (!c.Is_removed)
                 {
                     date_removed = DateTime.MinValue;
                     is_removed = false;
+                    break;
                 }
             }
-            else
-            {
-                is_removed = true;
-                if (date_removed == DateTime.MinValue)
-                    date_removed = DateTime.Now;
-                foreach (Component c in components)
-                {
-                    if (!c.Is_removed)
-                    {
-                        date_removed = DateTime.MinValue;
-                        is_removed = false;
-                        break;
-                    }
-                }
-            }
-            
+
             return (old_is_removed != is_removed);
 
         }
@@ -109,7 +92,7 @@ namespace Blood_SMS
 
         public void RemoveComponent(Component c)
         {
-            if(components.Contains(c))
+            if (components.Contains(c))
                 components.Remove(c);
         }
 

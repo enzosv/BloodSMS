@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `BSMS`.`component` (
   `patient_last_name` VARCHAR(45) NOT NULL,
   `patient_first_name` VARCHAR(45) NOT NULL,
   `patient_middle_initial` VARCHAR(45) NOT NULL,
-  `patient_age` VARCHAR(45) NOT NULL,
+  `patient_age` INT NOT NULL,
   `reason_for_removal` TEXT NOT NULL,
   PRIMARY KEY (`accession_number`),
   CONSTRAINT `accession_number`
