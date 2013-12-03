@@ -13,10 +13,12 @@ namespace BloodSMSApp
     public partial class PreAddItem : Form
     {
         Storage storage;
-        public PreAddItem(Storage stor)
+        MainMenu parent;
+        public PreAddItem(MainMenu mainmenu)
         {
             InitializeComponent();
-            storage = stor;
+            parent = mainmenu;
+            storage = parent.storage;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -40,6 +42,7 @@ namespace BloodSMSApp
                             else if (d.Is_viable)
                             {
                                 AddItem a = new AddItem(storage, d, aNumber.Text);
+                                parent.RefreshOverview();
                                 a.ShowDialog();
                                 Close();
                             }
@@ -57,7 +60,9 @@ namespace BloodSMSApp
                     {
                         AddItem a = new AddItem(storage, aNumber.Text);
                         a.ShowDialog();
+                        parent.RefreshOverview();
                         Close();
+                        
                     }
                 }
                 else

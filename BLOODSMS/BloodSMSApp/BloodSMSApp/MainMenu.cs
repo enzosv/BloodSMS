@@ -15,7 +15,7 @@ namespace BloodSMSApp
 {
     public partial class MainMenu : Form
     {
-        Storage storage;
+        public Storage storage;
         int bloodCount;
         List<string> notifications;
         graphCommand command;
@@ -27,7 +27,10 @@ namespace BloodSMSApp
         public MainMenu()
         {
             InitializeComponent();
+        }
 
+        private void MainMenu_Load(object sender, EventArgs e)
+        {
             InitializeValues();
         }
 
@@ -36,7 +39,6 @@ namespace BloodSMSApp
             //InitializeComponent();
             //InitializeValues();
             storage = new Storage("localhost", "bsms", "root", "root");
-            notifications.Clear();
             //command = graphCommand.Summary;
 
             ChangeDates();
@@ -81,7 +83,7 @@ namespace BloodSMSApp
 
         #region overview
 
-        void RefreshOverview()
+        public void RefreshOverview()
         {
             RefreshNotifications();
             RefreshPieChart();
@@ -313,7 +315,7 @@ namespace BloodSMSApp
         }
         private void b_addBlood_Click(object sender, EventArgs e)
         {
-            PreAddItem a = new PreAddItem(storage);
+            PreAddItem a = new PreAddItem(this);
             a.ShowDialog();
         }
         private void quarantinedButton_Click(object sender, EventArgs e)
@@ -341,11 +343,6 @@ namespace BloodSMSApp
             a.ShowDialog();
         }
 
-        private void b_donorAdd_Click(object sender, EventArgs e)
-        {
-            PreAddDonor a = new PreAddDonor(storage);
-            a.ShowDialog();
-        }
 
         private void button10_Click(object sender, EventArgs e)
         {
@@ -355,7 +352,7 @@ namespace BloodSMSApp
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            PreAddItem i = new PreAddItem(storage);
+            PreAddItem i = new PreAddItem(this);
             i.ShowDialog();
         }
 
@@ -390,11 +387,6 @@ namespace BloodSMSApp
         }
         #endregion
 
-        private void MainMenu_Activated(object sender, EventArgs e)
-        {
-            RefreshOverview();
-        }
-
         private void b_contactAB1_Click(object sender, EventArgs e)
         {
             int count;
@@ -426,6 +418,5 @@ namespace BloodSMSApp
         {
             dTypeFilter.SelectedIndex = -1;
         }
-
     }
 }

@@ -795,7 +795,7 @@
             this.Padding = new System.Windows.Forms.Padding(3);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Contact AB+";
-            this.Activated += new System.EventHandler(this.MainMenu_Activated);
+            this.Load += new System.EventHandler(this.MainMenu_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();

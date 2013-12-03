@@ -83,8 +83,6 @@ namespace BloodSMSApp
                 contactableYes.Checked = x.Is_contactable;
                 defferalField.Text = x.Reason_for_deferral;
 
-                timesContactedText.Visible = true;
-                timesContactedText.Text = "Times Contacted: " + x.Times_contacted.ToString();
                 ageText.Visible = true;
                 ageText.Text = "Age: " + x.Age;
                 int numDonations = storage.getNumDonations(x);
@@ -139,7 +137,7 @@ namespace BloodSMSApp
                         {
                             if (isStringValid(oLandlineField.Text, 7) || String.IsNullOrEmpty(oLandlineField.Text))
                             {
-                                Donor x = new Donor(id, lastName, firstName, middleInitial, blood_type, h_province, h_city, hStreetField.Text, o_province, o_city, oStreetField.Text, hLandlineField.Text, oLandlineField.Text, emailField.Text, cellphoneField.Text, educational_attainment, birthDateField.Value, dateRegisteredField.Value, nextAvailableField.Value, 0, contactableYes.Checked, viableYes.Checked, defferalField.Text);
+                                Donor x = new Donor(id, lastName, firstName, middleInitial, blood_type, h_province, h_city, hStreetField.Text, o_province, o_city, oStreetField.Text, hLandlineField.Text, oLandlineField.Text, emailField.Text, cellphoneField.Text, educational_attainment, birthDateField.Value, dateRegisteredField.Value, nextAvailableField.Value, contactableYes.Checked, viableYes.Checked, defferalField.Text);
                                 if (!duplicate)
                                 {
                                     if (storage.AddDonor(x))
