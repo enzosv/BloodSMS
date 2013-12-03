@@ -428,7 +428,8 @@ namespace BloodSMSApp
                 Blood b = storage.findBlood(selection);
                 if (b != null)
                 {
-                    ShowBlood sb = new ShowBlood(storage);
+                    ShowBlood sb = new ShowBlood(storage, b);
+                    sb.ShowDialog();
                 }
                 else if (d != null)
                 {
