@@ -383,10 +383,8 @@ namespace Blood_SMS
         {
             if (bloodCommands("Insert into Blood " + AddQuery(BLOOD_FIELDS), b))
             {
-                b.AddComponent(new Component(b.Accession_number, 1, b.Date_donated, date_expire));
-                b.components[0].Assign(p_last, p_first, p_mid, p_age, DateTime.Now);
-                SortBlood(b);
-                return true;
+                if (AddWholeComponent(b, date_expire, p_last, p_first, p_mid, p_age))
+                    return true;
             }
             return false;
         }
@@ -395,9 +393,8 @@ namespace Blood_SMS
         {
             if (bloodCommands("Insert into Blood " + AddQuery(BLOOD_FIELDS), b))
             {
-                b.AddComponent(new Component(b.Accession_number, 0, b.Date_donated, date_expire));
-                SortBlood(b);
-                return true;
+                if(AddWholeComponent(b, date_expire))
+                    return true;
             }
             return false;
         }
@@ -567,6 +564,31 @@ namespace Blood_SMS
             {
                 Blood b = findBlood(ACCESSION_NUMBER);
                 UnsortBlood(b);
+                b.AddComponent(c);
+                SortBlood(b);
+                return true;
+            }
+            return false;
+        }
+
+        bool AddWholeComponent(Blood b, DateTime DATE_EXPIRED)
+        {
+            Component c = new Component(b.Accession_number, 0, b.Date_donated, DATE_EXPIRED);
+            if (ComponentCommands("Insert into component " + AddQuery(COMPONENT_FIELDS), c))
+            {
+                b.AddComponent(c);
+                SortBlood(b);
+                return true;
+            }
+            return false;
+        }
+
+        bool AddWholeComponent(Blood b, DateTime DATE_EXPIRED, string pLast, string pFirst, string pMid, int pAge)
+        {
+            Component c = new Component(b.Accession_number, 0, b.Date_donated, DATE_EXPIRED);
+            c.Assign(pLast, pFirst, pMid, pAge, b.Date_donated);
+            if (ComponentCommands("Insert into component " + AddQuery(COMPONENT_FIELDS), c))
+            {
                 b.AddComponent(c);
                 SortBlood(b);
                 return true;
