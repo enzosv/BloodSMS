@@ -247,6 +247,16 @@ namespace Blood_SMS
             return null;
         }
 
+        public Donor findDonorWithName(string name)
+        {
+            foreach (Donor d in donorList)
+            {
+                if (d.Name == name)
+                    return d;
+            }
+            return null;
+        }
+
         /*
          *<summary>
          *  Iterates through all donor objects in bloodList
@@ -944,6 +954,16 @@ namespace Blood_SMS
                 if (b.Accession_number.Contains(s))
                 {
                     objects.Add(b.Accession_number);
+                }
+                else
+                {
+                    foreach (Component c in b.components)
+                    {
+                        if (c.Patient_name.Contains(s))
+                        {
+                            objects.Add(b.Accession_number);
+                        }
+                    }
                 }
             }
             return objects;

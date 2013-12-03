@@ -247,7 +247,6 @@ namespace BloodSMSApp
         private void oSearchField_TextChanged(object sender, EventArgs e)
         {
             resultsBox.Items.Clear();
-            //resultsBox.Items.AddRange(storage.searchWithString(oSearchField.Text));
             if (oSearchField.Text.Length > 0)
             {
                 foreach (string s in storage.searchWithString(oSearchField.Text))
@@ -418,5 +417,27 @@ namespace BloodSMSApp
         {
             dTypeFilter.SelectedIndex = -1;
         }
+
+        private void resultsBox_DoubleClick(object sender, EventArgs e)
+        {
+            //int selection = resultsBox.SelectedIndex;
+            string selection = resultsBox.Items[resultsBox.SelectedIndex].ToString();
+            if (!String.IsNullOrWhiteSpace(selection))
+            {
+                Donor d = storage.findDonorWithName(selection);
+                Blood b = storage.findBlood(selection);
+                if (b != null)
+                {
+                    ShowBlood sb = new ShowBlood(storage);
+                }
+                else if (d != null)
+                {
+                    
+                }
+
+            }
+            
+        }
+
     }
 }
