@@ -99,10 +99,10 @@ namespace BloodSMSApp
             {
                 notifications.Add("Component " + s[0] + " with Accession Number " + s[1] + " is near expiration");
             }
-            notificationsBox.Items.Clear();
+            notificationsList.Items.Clear();
             for (int i = 0; i < notifications.Count; i++)
             {
-                notificationsBox.Items.Add(notifications[i]);
+                notificationsList.Items.Add(notifications[i]);
             }
         }
 
@@ -140,7 +140,7 @@ namespace BloodSMSApp
                 for (int i = 0; i < days.Count; i++)
                 {
                     chart1.Series[0].Points.AddXY(days2[i].ToString("d MMM yy"), totals[i]);
-                    for (int j = 1; j < Enum.GetNames(typeof(bloodType)).Length; j++)
+                    for (int j = 1; j <= Enum.GetNames(typeof(bloodType)).Length; j++)
                     {
                         chart1.Series[j].Points.AddXY(days2[i].ToString("d MMM yy"), types[i, j - 1]);
                     }
@@ -306,7 +306,7 @@ namespace BloodSMSApp
         private void b_addBlood_Click(object sender, EventArgs e)
         {
             PreAddItem a = new PreAddItem(storage);
-            a.Show();
+            a.ShowDialog();
         }
         private void quarantinedButton_Click(object sender, EventArgs e)
         {
@@ -330,37 +330,37 @@ namespace BloodSMSApp
         private void b_addDonor_Click(object sender, EventArgs e)
         {
             PreAddDonor a = new PreAddDonor(storage);
-            a.Show();
+            a.ShowDialog();
         }
 
         private void b_donorAdd_Click(object sender, EventArgs e)
         {
             PreAddDonor a = new PreAddDonor(storage);
-            a.Show();
+            a.ShowDialog();
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
             ViewDonor v = new ViewDonor();
-            v.Show();
+            v.ShowDialog();
         }
 
         private void button4_Click_1(object sender, EventArgs e)
         {
             PreAddItem i = new PreAddItem(storage);
-            i.Show();
+            i.ShowDialog();
         }
 
         private void button5_Click_1(object sender, EventArgs e)
         {
             RemoveItem r = new RemoveItem();
-            r.Show();
+            r.ShowDialog();
         }
 
         private void button8_Click_1(object sender, EventArgs e)
         {
             DeferDonor d = new DeferDonor();
-            d.Show();
+            d.ShowDialog();
         }
 
         private void Summary_Click(object sender, EventArgs e)
@@ -381,5 +381,10 @@ namespace BloodSMSApp
             }
         }
         #endregion
+
+        private void MainMenu_Activated(object sender, EventArgs e)
+        {
+            RefreshOverview();
+        }
     }
 }

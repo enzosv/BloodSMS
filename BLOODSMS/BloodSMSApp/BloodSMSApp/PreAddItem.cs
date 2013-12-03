@@ -31,13 +31,13 @@ namespace BloodSMSApp
                         if (d == null)
                         {
                             AddDonor ad = new AddDonor(storage, lName.Text, fName.Text, mInitial.Text);
-                            ad.Show();
+                            ad.ShowDialog();
                             MessageBox.Show("Please Add the donor first and try again later");
                         }
                         else if (d.Is_viable)
                         {
                             AddItem a = new AddItem(storage, d, aNumber.Text);
-                            a.Show();
+                            a.ShowDialog();
                             Close();
                         }
                         else
@@ -48,7 +48,7 @@ namespace BloodSMSApp
                     else
                     {
                         AddItem a = new AddItem(storage, aNumber.Text);
-                        a.Show();
+                        a.ShowDialog();
                         Close();
                     }
                 }

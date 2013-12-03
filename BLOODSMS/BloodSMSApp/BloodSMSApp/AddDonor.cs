@@ -220,7 +220,7 @@ namespace BloodSMSApp
         {
             Close();
             PreAddDonor a = new PreAddDonor(storage);
-            a.Show();
+            a.ShowDialog();
         }
 
     }

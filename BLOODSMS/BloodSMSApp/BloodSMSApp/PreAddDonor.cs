@@ -19,7 +19,7 @@ namespace BloodSMSApp
             if (!String.IsNullOrWhiteSpace(lName.Text) && !String.IsNullOrWhiteSpace(fName.Text) && !String.IsNullOrWhiteSpace(mInitial.Text))
             {
                 donorForm = new AddDonor(storage, lName.Text, fName.Text, mInitial.Text);
-                donorForm.Show();
+                donorForm.ShowDialog();
                 Close();
             }
             else

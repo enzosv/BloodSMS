@@ -464,6 +464,7 @@ namespace Blood_SMS
         void SortBlood(Blood b)
         {
             bloodList.Add(b);
+            b.checkRemoved();
             if (!b.Is_removed)
             {
                 availableBlood.Add(b);
@@ -564,7 +565,10 @@ namespace Blood_SMS
 
             if (ComponentCommands("Insert into component " + AddQuery(COMPONENT_FIELDS), c))
             {
-                findBlood(ACCESSION_NUMBER).AddComponent(c);
+                Blood b = findBlood(ACCESSION_NUMBER);
+                UnsortBlood(b);
+                b.AddComponent(c);
+                SortBlood(b);
                 return true;
             }
             return false;
