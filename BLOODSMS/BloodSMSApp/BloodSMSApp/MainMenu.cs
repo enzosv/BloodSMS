@@ -27,11 +27,14 @@ namespace BloodSMSApp
         public MainMenu()
         {
             InitializeComponent();
+            
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
             InitializeValues();
+            timer1.Enabled = true;
+            timer1.Interval = 1000;
         }
 
         private void b_refresh_Click(object sender, EventArgs e)
