@@ -37,7 +37,7 @@ namespace Blood_SMS
         const int MINIMUMBLOODVALUE = 5;
         const int MINIMUMEXPIRYALERTVALUE = 3;
         readonly string[] BLOOD_FIELDS = { "accession_number", "blood_type", "donor_id", "date_donated", "date_removed" };
-        readonly string[] DONOR_FIELDS = { "last_name", "first_name", "middle_initial", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "home_landline", "office_landline", "email", "cellphone", "educational_attainment", "birth_date", "date_registered", "next_available", "times_contacted", "is_contactable", "is_viable", "reason_for_deferral" };
+        readonly string[] DONOR_FIELDS = { "last_name", "first_name", "middle_initial", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "home_landline", "office_landline", "email", "cellphone", "educational_attainment", "birth_date", "date_registered", "next_available", "is_contactable", "is_viable", "reason_for_deferral" };
         readonly string[] COMPONENT_FIELDS = { "accession_number", "component_name", "removal_type", "date_processed", "date_expired", "date_assigned", "date_removed", "patient_last_name", "patient_first_name", "patient_middle_initial", "patient_age", "reason_for_removal" };
         int BlOODTYPECOUNT = Enum.GetNames(typeof(bloodType)).Length;
 
@@ -101,10 +101,9 @@ namespace Blood_SMS
                 DateTime? BIRTH_DATE = reader.GetValue(16) as DateTime?;
                 DateTime? DATE_REGISTERED = reader.GetValue(17) as DateTime?;
                 DateTime? NEXT_AVAILABLE = reader.GetValue(18) as DateTime?;
-                int? TIMES_CONTACTED = reader.GetValue(19) as int?;
-                bool? IS_CONTACTABLE = reader.GetValue(20) as bool?;
-                bool? IS_VIABLE = reader.GetValue(21) as bool?;
-                string REASON_FOR_DEFERRAL = reader.GetValue(22) as string;
+                bool? IS_CONTACTABLE = reader.GetValue(19) as bool?;
+                bool? IS_VIABLE = reader.GetValue(20) as bool?;
+                string REASON_FOR_DEFERRAL = reader.GetValue(21) as string;
 
                 Donor x = new Donor(DONOR_ID.Value, LAST_NAME, FIRST_NAME, MIDDLE_INITIAL,
                     BLOOD_TYPE.Value,
@@ -122,7 +121,6 @@ namespace Blood_SMS
                     BIRTH_DATE.Value,
                     DATE_REGISTERED.Value,
                     NEXT_AVAILABLE.Value,
-                    TIMES_CONTACTED.Value,
                     IS_CONTACTABLE.Value,
                     IS_VIABLE.Value,
                     REASON_FOR_DEFERRAL);
@@ -183,7 +181,6 @@ namespace Blood_SMS
             comm.Parameters.AddWithValue("@birth_date", x.Birth_date);
             comm.Parameters.AddWithValue("@date_registered", x.Date_registered);
             comm.Parameters.AddWithValue("@next_available", x.Next_available);
-            comm.Parameters.AddWithValue("@times_contacted", x.Times_contacted);
             comm.Parameters.AddWithValue("@is_contactable", x.Is_contactable);
             comm.Parameters.AddWithValue("@is_viable", x.Is_viable);
             comm.Parameters.AddWithValue("@reason_for_deferral", x.Reason_for_deferral);
@@ -317,20 +314,17 @@ namespace Blood_SMS
                 bannedDonors.Remove(d);
         }
 
-        public List<Donor> getClosestByType(int count, bloodType blood_type)
+        public List<Donor> getClosestByType(int count, int blood_type)
         {
             int cityCount = Enum.GetNames(typeof(city)).Length;
-            int bType = (int)blood_type;
             List<Donor> closestByType = new List<Donor>();
             for (int i = 0; i < cityCount; i++)
             {
-                foreach (Donor d in donorTypes[bType])
+                foreach (Donor d in donorTypes[blood_type])
                 {
                     if (d.Home_city == ((city)i))
                     {
                         closestByType.Add(d);
-                        d.Times_contacted++;
-                        UpdateDonor(d);
                         if (closestByType.Count >= count)
                             return closestByType;
                     }

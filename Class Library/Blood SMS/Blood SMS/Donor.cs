@@ -27,7 +27,6 @@ namespace Blood_SMS
         DateTime birth_date;
         DateTime date_registered;
         DateTime next_available;
-        int times_contacted;
         bool is_contactable;
         bool is_viable;
         string reason_for_deferral;
@@ -53,7 +52,6 @@ namespace Blood_SMS
         DateTime BIRTH_DATE,
         DateTime DATE_REGISTERED,
         DateTime NEXT_AVAILABLE,
-        int TIMES_CONTACTED,
         bool IS_CONTACTABLE,
         bool IS_VIABLE,
         string REASON_FOR_DEFERRAL
@@ -78,7 +76,6 @@ namespace Blood_SMS
             birth_date = BIRTH_DATE;
             date_registered = DATE_REGISTERED;
             next_available = NEXT_AVAILABLE;
-            times_contacted = TIMES_CONTACTED;
             is_contactable = IS_CONTACTABLE;
             is_viable = IS_VIABLE;
             reason_for_deferral = REASON_FOR_DEFERRAL;
@@ -128,7 +125,6 @@ namespace Blood_SMS
         public DateTime Birth_date { get { return birth_date; } set { birth_date = value; } }
         public DateTime Date_registered { get { return date_registered; } set { date_registered = value; } }
         public DateTime Next_available { get { return next_available; } set { next_available = value; } }
-        public int Times_contacted { get { return times_contacted; } set { times_contacted = value; } }
         public bool Is_contactable { get { return is_contactable; } set { is_contactable = value; } }
         public bool Is_viable { get { return is_viable; } set { is_viable = value; } }
         public string Reason_for_deferral { get { return reason_for_deferral; } set { reason_for_deferral = value; } }

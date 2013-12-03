@@ -31,7 +31,6 @@ CREATE TABLE IF NOT EXISTS `BSMS`.`donor` (
   `birth_date` DATETIME NOT NULL,
   `date_registered` DATETIME NOT NULL,
   `next_available` DATETIME NOT NULL,
-  `times_contacted` INT NOT NULL,
   `is_contactable` TINYINT(1) NOT NULL,
   `is_viable` TINYINT(1) NOT NULL,
   `reason_for_deferral` TEXT NOT NULL,

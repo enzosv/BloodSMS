@@ -402,9 +402,13 @@ namespace BloodSMSApp
             {
                 if (count > 0)
                 {
-                    ContactForm cf = new ContactForm(storage);
+                    ContactForm cf = new ContactForm(storage.getClosestByType(count, contactTypesBox.SelectedIndex));
                     cf.ShowDialog();
                 }
+            }
+            else
+            {
+                MessageBox.Show("Please input number of people to contact");
             }
         }
 
