@@ -28,10 +28,8 @@ namespace BloodSMSApp
             dateExpireField.Value = dateAddedField.Value.AddDays(35);
 
             bTypeField.SelectedIndex = 0;
+            listBox1.Enabled = false;
             hasDonor = false;
-            d_last.Enabled = false;
-            dFirst.Enabled = false;
-            dMid.Enabled = false;
             
         }
 
@@ -49,9 +47,11 @@ namespace BloodSMSApp
             dateExpireField.Value = dateAddedField.Value.AddDays(35);
 
             bTypeField.SelectedIndex = (int)d.Blood_type;
+            bTypeField.Enabled = false;
             d_last.Text = d.Last_name;
             dFirst.Text = d.First_name;
             dMid.Text = d.Middle_initial;
+            
             hasDonor = true;
         }
 

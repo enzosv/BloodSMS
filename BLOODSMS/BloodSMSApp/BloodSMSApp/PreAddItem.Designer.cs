@@ -70,7 +70,6 @@
             // lName
             // 
             this.lName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.lName.Enabled = false;
             this.lName.Location = new System.Drawing.Point(16, 58);
             this.lName.Name = "lName";
             this.lName.Size = new System.Drawing.Size(158, 20);
@@ -97,7 +96,6 @@
             // fName
             // 
             this.fName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.fName.Enabled = false;
             this.fName.Location = new System.Drawing.Point(180, 56);
             this.fName.Name = "fName";
             this.fName.Size = new System.Drawing.Size(158, 20);
@@ -106,7 +104,6 @@
             // mInitial
             // 
             this.mInitial.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.mInitial.Enabled = false;
             this.mInitial.Location = new System.Drawing.Point(344, 58);
             this.mInitial.Name = "mInitial";
             this.mInitial.Size = new System.Drawing.Size(95, 20);
@@ -135,6 +132,8 @@
             // fromDonor
             // 
             this.fromDonor.AutoSize = true;
+            this.fromDonor.Checked = true;
+            this.fromDonor.CheckState = System.Windows.Forms.CheckState.Checked;
             this.fromDonor.Location = new System.Drawing.Point(345, 13);
             this.fromDonor.Name = "fromDonor";
             this.fromDonor.Size = new System.Drawing.Size(81, 17);

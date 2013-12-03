@@ -21,28 +21,36 @@ namespace BloodSMSApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (aNumber.Text.Length > 1)
+            if (aNumber.Text.Length > 0)
             {
                 if (storage.findBlood(aNumber.Text) == null)
                 {
                     if (fromDonor.Checked)
                     {
-                        Donor d = storage.findDonorWithName(lName.Text, fName.Text, mInitial.Text);
-                        if (d == null)
+                        if (lName.Text.Length > 0 && fName.Text.Length > 0 && mInitial.Text.Length > 0)
                         {
-                            AddDonor ad = new AddDonor(storage, lName.Text, fName.Text, mInitial.Text);
-                            ad.ShowDialog();
-                            MessageBox.Show("Please Add the donor first and try again later");
-                        }
-                        else if (d.Is_viable)
-                        {
-                            AddItem a = new AddItem(storage, d, aNumber.Text);
-                            a.ShowDialog();
-                            Close();
+                            Donor d = storage.findDonorWithName(lName.Text, fName.Text, mInitial.Text);
+                            if (d == null)
+                            {
+                                MessageBox.Show("Please Add the donor first and try again later");
+                                AddDonor ad = new AddDonor(storage, lName.Text, fName.Text, mInitial.Text);
+                                ad.ShowDialog();
+                                
+                            }
+                            else if (d.Is_viable)
+                            {
+                                AddItem a = new AddItem(storage, d, aNumber.Text);
+                                a.ShowDialog();
+                                Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Donor is not viable for donations");
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Donor is not viable for donations");
+                            MessageBox.Show("Please input name of donor");
                         }
                     }
                     else
