@@ -433,7 +433,8 @@ namespace BloodSMSApp
                 }
                 else if (d != null)
                 {
-                    
+                    AddDonor a = new AddDonor(storage, d);
+                    a.ShowDialog();
                 }
 
             }

@@ -25,25 +25,13 @@ namespace BloodSMSApp
             firstName = fName;
             middleInitial = mInitial;
             nameLabel.Text = lastName + ", " + firstName + " " + middleInitial;
-            foreach (bloodType x in (bloodType[])Enum.GetValues(typeof(bloodType)))
-            {
-                bloodTypeField.Items.Add(MyEnums.GetDescription(x));
-            }
-            foreach (educationalAttainment x in (educationalAttainment[])Enum.GetValues(typeof(educationalAttainment)))
-            {
-                educationalAttainmentField.Items.Add(MyEnums.GetDescription(x));
-            }
-            foreach (province x in (province[])Enum.GetValues(typeof(province)))
-            {
-                hProvince.Items.Add(MyEnums.GetDescription(x));
-                oProvince.Items.Add(MyEnums.GetDescription(x));
-            }
-            foreach (city x in (city[])Enum.GetValues(typeof(city)))
-            {
-                hCity.Items.Add(MyEnums.GetDescription(x));
-                oCity.Items.Add(MyEnums.GetDescription(x));
-            }
-            populateData();
+        }
+
+        public AddDonor(Storage stor, Donor d)
+        {
+            InitializeComponent();
+            storage = stor;
+            nameLabel.Text = d.Last_name + ", " + d.First_name + " " + d.Middle_initial;
         }
 
         void populateData()
@@ -219,6 +207,29 @@ namespace BloodSMSApp
             Close();
             PreAddDonor a = new PreAddDonor(storage);
             a.ShowDialog();
+        }
+
+        private void AddDonor_Load(object sender, EventArgs e)
+        {
+            foreach (bloodType x in (bloodType[])Enum.GetValues(typeof(bloodType)))
+            {
+                bloodTypeField.Items.Add(MyEnums.GetDescription(x));
+            }
+            foreach (educationalAttainment x in (educationalAttainment[])Enum.GetValues(typeof(educationalAttainment)))
+            {
+                educationalAttainmentField.Items.Add(MyEnums.GetDescription(x));
+            }
+            foreach (province x in (province[])Enum.GetValues(typeof(province)))
+            {
+                hProvince.Items.Add(MyEnums.GetDescription(x));
+                oProvince.Items.Add(MyEnums.GetDescription(x));
+            }
+            foreach (city x in (city[])Enum.GetValues(typeof(city)))
+            {
+                hCity.Items.Add(MyEnums.GetDescription(x));
+                oCity.Items.Add(MyEnums.GetDescription(x));
+            }
+            populateData();
         }
 
     }
