@@ -32,29 +32,9 @@ namespace BloodSMSApp
 
         private void MainMenu_Load(object sender, EventArgs e)
         {
-            InitializeValues();
             timer1.Enabled = true;
             timer1.Interval = 1000;
-        }
-
-        private void b_refresh_Click(object sender, EventArgs e)
-        {
-            //InitializeComponent();
-            //InitializeValues();
-            storage = new Storage("localhost", "bsms", "root", "root");
-            //command = graphCommand.Summary;
-
-            ChangeDates();
-
-            //seriesHit = chart1.Series[0];
-            dataGridView3.DataSource = storage.donorList;
-            dataGridView2.DataSource = storage.bloodList;
-
-            RefreshOverview();
-        }
-
-        void InitializeValues()
-        {
+            label3.Text = DateTime.Now.ToLongDateString();
             storage = new Storage("localhost", "bsms", "root", "root");
             notifications = new List<string>();
             command = graphCommand.Summary;
@@ -80,6 +60,23 @@ namespace BloodSMSApp
                 contactTypesBox.Items.Add(MyEnums.GetDescription(x));
             }
             contactTypesBox.SelectedIndex = 0;
+
+            RefreshOverview();
+            
+        }
+
+        private void b_refresh_Click(object sender, EventArgs e)
+        {
+            //InitializeComponent();
+            //InitializeValues();
+            storage = new Storage("localhost", "bsms", "root", "root");
+            //command = graphCommand.Summary;
+
+            ChangeDates();
+
+            //seriesHit = chart1.Series[0];
+            dataGridView3.DataSource = storage.donorList;
+            dataGridView2.DataSource = storage.bloodList;
 
             RefreshOverview();
         }

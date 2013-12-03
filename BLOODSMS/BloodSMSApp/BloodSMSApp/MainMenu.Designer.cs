@@ -30,23 +30,23 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series41 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series42 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series43 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series44 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series45 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series46 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series47 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series48 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series49 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series50 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -91,6 +91,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.notificationsList = new System.Windows.Forms.ListView();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -284,78 +285,78 @@
             // 
             // chart1
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend1.IsDockedInsideChartArea = false;
-            legend1.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row;
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea9.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea9);
+            legend9.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend9.IsDockedInsideChartArea = false;
+            legend9.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row;
+            legend9.Name = "Legend1";
+            this.chart1.Legends.Add(legend9);
             this.chart1.Location = new System.Drawing.Point(-24, 239);
             this.chart1.Name = "chart1";
-            series1.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Legend = "Legend1";
-            series1.LegendText = "Added Blood";
-            series1.Name = "Total";
-            series2.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series2.Legend = "Legend1";
-            series2.LegendText = "Removed Blood";
-            series2.Name = "AB+";
-            series3.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series3.Enabled = false;
-            series3.Legend = "Legend1";
-            series3.Name = "AB-";
-            series4.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series4.Enabled = false;
-            series4.Legend = "Legend1";
-            series4.Name = "A+";
-            series5.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Enabled = false;
-            series5.Legend = "Legend1";
-            series5.Name = "A-";
-            series6.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series6.Enabled = false;
-            series6.Legend = "Legend1";
-            series6.Name = "B+";
-            series7.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series7.Enabled = false;
-            series7.Legend = "Legend1";
-            series7.Name = "B-";
-            series8.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series8.Enabled = false;
-            series8.Legend = "Legend1";
-            series8.Name = "O+";
-            series9.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series9.ChartArea = "ChartArea1";
-            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series9.Enabled = false;
-            series9.Legend = "Legend1";
-            series9.Name = "O-";
-            this.chart1.Series.Add(series1);
-            this.chart1.Series.Add(series2);
-            this.chart1.Series.Add(series3);
-            this.chart1.Series.Add(series4);
-            this.chart1.Series.Add(series5);
-            this.chart1.Series.Add(series6);
-            this.chart1.Series.Add(series7);
-            this.chart1.Series.Add(series8);
-            this.chart1.Series.Add(series9);
+            series41.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series41.ChartArea = "ChartArea1";
+            series41.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series41.Legend = "Legend1";
+            series41.LegendText = "Added Blood";
+            series41.Name = "Total";
+            series42.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series42.ChartArea = "ChartArea1";
+            series42.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series42.Legend = "Legend1";
+            series42.LegendText = "Removed Blood";
+            series42.Name = "AB+";
+            series43.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series43.ChartArea = "ChartArea1";
+            series43.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series43.Enabled = false;
+            series43.Legend = "Legend1";
+            series43.Name = "AB-";
+            series44.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series44.ChartArea = "ChartArea1";
+            series44.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series44.Enabled = false;
+            series44.Legend = "Legend1";
+            series44.Name = "A+";
+            series45.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series45.ChartArea = "ChartArea1";
+            series45.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series45.Enabled = false;
+            series45.Legend = "Legend1";
+            series45.Name = "A-";
+            series46.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series46.ChartArea = "ChartArea1";
+            series46.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series46.Enabled = false;
+            series46.Legend = "Legend1";
+            series46.Name = "B+";
+            series47.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series47.ChartArea = "ChartArea1";
+            series47.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series47.Enabled = false;
+            series47.Legend = "Legend1";
+            series47.Name = "B-";
+            series48.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series48.ChartArea = "ChartArea1";
+            series48.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series48.Enabled = false;
+            series48.Legend = "Legend1";
+            series48.Name = "O+";
+            series49.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series49.ChartArea = "ChartArea1";
+            series49.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series49.Enabled = false;
+            series49.Legend = "Legend1";
+            series49.Name = "O-";
+            this.chart1.Series.Add(series41);
+            this.chart1.Series.Add(series42);
+            this.chart1.Series.Add(series43);
+            this.chart1.Series.Add(series44);
+            this.chart1.Series.Add(series45);
+            this.chart1.Series.Add(series46);
+            this.chart1.Series.Add(series47);
+            this.chart1.Series.Add(series48);
+            this.chart1.Series.Add(series49);
             this.chart1.Size = new System.Drawing.Size(704, 282);
             this.chart1.TabIndex = 15;
             this.chart1.Text = "chart1";
@@ -363,19 +364,19 @@
             // 
             // chart2
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart2.Legends.Add(legend2);
+            chartArea10.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea10);
+            legend10.Name = "Legend1";
+            this.chart2.Legends.Add(legend10);
             this.chart2.Location = new System.Drawing.Point(5, 3);
             this.chart2.Name = "chart2";
-            series10.BorderColor = System.Drawing.Color.Black;
-            series10.ChartArea = "ChartArea1";
-            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series10.Legend = "Legend1";
-            series10.LegendText = "AB+";
-            series10.Name = "Series1";
-            this.chart2.Series.Add(series10);
+            series50.BorderColor = System.Drawing.Color.Black;
+            series50.ChartArea = "ChartArea1";
+            series50.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series50.Legend = "Legend1";
+            series50.LegendText = "AB+";
+            series50.Name = "Series1";
+            this.chart2.Series.Add(series50);
             this.chart2.Size = new System.Drawing.Size(664, 167);
             this.chart2.TabIndex = 14;
             this.chart2.Text = "chart2";
@@ -399,35 +400,35 @@
             // dataGridView2
             // 
             this.dataGridView2.AllowUserToAddRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle14;
             this.dataGridView2.Location = new System.Drawing.Point(4, 62);
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle15;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView2.Size = new System.Drawing.Size(666, 432);
             this.dataGridView2.TabIndex = 41;
@@ -749,10 +750,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(948, 76);
+            this.label6.Location = new System.Drawing.Point(911, 48);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(0, 13);
+            this.label6.Size = new System.Drawing.Size(30, 13);
             this.label6.TabIndex = 29;
+            this.label6.Text = "Time";
             // 
             // timer1
             // 
@@ -761,13 +763,22 @@
             // notificationsList
             // 
             this.notificationsList.FullRowSelect = true;
-            this.notificationsList.Location = new System.Drawing.Point(914, 134);
+            this.notificationsList.Location = new System.Drawing.Point(914, 77);
             this.notificationsList.MultiSelect = false;
             this.notificationsList.Name = "notificationsList";
-            this.notificationsList.Size = new System.Drawing.Size(158, 494);
+            this.notificationsList.Size = new System.Drawing.Size(158, 551);
             this.notificationsList.TabIndex = 29;
             this.notificationsList.UseCompatibleStateImageBehavior = false;
             this.notificationsList.View = System.Windows.Forms.View.List;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(911, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(30, 13);
+            this.label3.TabIndex = 30;
+            this.label3.Text = "Date";
             // 
             // MainMenu
             // 
@@ -775,6 +786,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BloodSMSApp.Properties.Resources._1425790_3581144864705_1260363695_n;
             this.ClientSize = new System.Drawing.Size(1079, 671);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.notificationsList);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.contactTypesBox);
@@ -857,6 +869,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.ListView notificationsList;
+        private System.Windows.Forms.Label label3;
 
     }
 }
