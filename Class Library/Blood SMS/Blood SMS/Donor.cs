@@ -134,6 +134,7 @@ namespace Blood_SMS
         public string Reason_for_deferral { get { return reason_for_deferral; } set { reason_for_deferral = value; } }
 
         public int Age { get { return age; } set { age = value; } }
+        public string Name { get { return last_name + ", " + first_name + " " + middle_initial; } }
         public List<Blood> Bloods { get { return bloods; } }
         public int Times_donated { get { return times_donated; } set { times_donated = value; } }
 

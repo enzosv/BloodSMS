@@ -100,11 +100,10 @@ namespace BloodSMSApp
 
         void DisplayOverview()
         {
-            
             bloodType b;
-            int freeSpace = 1200 - storage.availableBlood.Count;
-            chart2.Series[0].Points.AddY(freeSpace);
-            chart2.Series[0].Points[0].LegendText = "Available Blood: " + storage.availableBlood.Count;
+            int availableBlood = storage.availableBlood.Count;
+            chart2.Series[0].Points.AddY(1200 - availableBlood);
+            chart2.Series[0].Points[0].LegendText = "Available Blood: " + availableBlood;
             chart2.Series[0].Points[0].Color = Color.Transparent;
 
             for (int i = 1; i < bloodTypeCount.Length; i++)
@@ -118,17 +117,19 @@ namespace BloodSMSApp
             {
                 notificationsBox.Items.Add(notifications[i]);
             }
+            RefreshGraph();
         }
         #endregion
 
         #region buttons
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+
+        private void b_addDonor_Click(object sender, EventArgs e)
         {
-            if (tabControl1.SelectedIndex == 1)
-                RefreshGraph();
+            PreAddDonor a = new PreAddDonor(storage);
+            a.Show();
         }
 
-        private void button9_Click_1(object sender, EventArgs e)
+        private void b_donorAdd_Click(object sender, EventArgs e)
         {
             PreAddDonor a = new PreAddDonor(storage);
             a.Show();
@@ -158,10 +159,22 @@ namespace BloodSMSApp
             d.Show();
         }
 
-        private void button2_Click_1(object sender, EventArgs e)
+        private void Summary_Click(object sender, EventArgs e)
         {
-            PreAddDonor a = new PreAddDonor(storage);
-            a.Show();
+            if (command != graphCommand.Summary)
+            {
+                chart1.Series[0].LegendText = "Added Blood";
+                chart1.Series[1].LegendText = "Removed Blood";
+                chart1.Series[2].Enabled = false;
+                chart1.Series[3].Enabled = false;
+                chart1.Series[4].Enabled = false;
+                chart1.Series[5].Enabled = false;
+                chart1.Series[6].Enabled = false;
+                chart1.Series[7].Enabled = false;
+                chart1.Series[8].Enabled = false;
+                command = graphCommand.Summary;
+                RefreshGraph();
+            }
         }
         #endregion
 
@@ -217,7 +230,12 @@ namespace BloodSMSApp
                 index++;
             }
             chart1.ChartAreas[0].AxisX.Maximum = span.TotalDays;
+            for (int i = 0; i < chart1.Series.Count; i++)
+            {
+                chart1.Series[i].Points.Clear();
+            }
             RefreshGraph();
+            
 
         }
 
@@ -230,9 +248,12 @@ namespace BloodSMSApp
                 int[,] types = storage.getBloodTypeModifiedDuring(days, command);
                 for (int i = 0; i < days.Count; i++)
                 {
+                    chart1.Series[0].Points.Clear();
                     chart1.Series[0].Points.AddXY(days2[i].ToString("d MMM yy"), totals[i] + random.Next(0, i * 3));
+                    
                     for (int j = 1; j < Enum.GetNames(typeof(bloodType)).Length; j++)
                     {
+                        chart1.Series[j].Points.Clear();
                         chart1.Series[j].Points.AddXY(days2[i].ToString("d MMM yy"), types[i, j - 1] + random.Next(0, i * 3));
                     }
                 }
@@ -278,35 +299,6 @@ namespace BloodSMSApp
             }
         }
 
-        private void quarantinedButton_Click(object sender, EventArgs e)
-        {
-            if (command != graphCommand.Quarantine)
-            {
-                RefreshLegend();
-                command = graphCommand.Quarantine;
-                RefreshGraph();
-            }
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            if (command != graphCommand.Summary)
-            {
-                chart1.Series[0].LegendText = "Added Blood";
-                chart1.Series[1].LegendText = "Removed Blood";
-                chart1.Series[2].Enabled = false;
-                chart1.Series[3].Enabled = false;
-                chart1.Series[4].Enabled = false;
-                chart1.Series[5].Enabled = false;
-                chart1.Series[6].Enabled = false;
-                chart1.Series[7].Enabled = false;
-                chart1.Series[8].Enabled = false;
-                command = graphCommand.Summary;
-                RefreshGraph();
-            }
-        }
-        #endregion
-
         void clearLine()
         {
             seriesHit.MarkerStyle = MarkerStyle.None;
@@ -326,6 +318,40 @@ namespace BloodSMSApp
                 seriesHit.Color = Color.DarkRed;
                 seriesHit.BorderWidth = 3;
                 seriesHit.BorderDashStyle = ChartDashStyle.Solid;
+            }
+        }
+
+        #endregion
+
+        private void oSearchField_TextChanged(object sender, EventArgs e)
+        {
+            resultsBox.Items.Clear();
+            //resultsBox.Items.AddRange(storage.searchWithString(oSearchField.Text));
+            if (oSearchField.Text.Length > 0)
+            {
+                foreach (string s in storage.searchWithString(oSearchField.Text))
+                {
+                    resultsBox.Items.Add(s);
+                }
+            }
+        }
+
+        private void quarantinedButton_Click(object sender, EventArgs e)
+        {
+            if (command != graphCommand.Quarantine)
+            {
+                RefreshLegend();
+                command = graphCommand.Quarantine;
+                RefreshGraph();
+            }
+        }
+        private void reprocessedButton_Click(object sender, EventArgs e)
+        {
+            if (command != graphCommand.Reprocess)
+            {
+                RefreshLegend();
+                command = graphCommand.Reprocess;
+                RefreshGraph();
             }
         }
 

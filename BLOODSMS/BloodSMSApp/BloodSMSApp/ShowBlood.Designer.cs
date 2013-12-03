@@ -45,20 +45,20 @@
             this.dateProcessed = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.accessionNumbers = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.cReason = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.fName = new System.Windows.Forms.TextBox();
-            this.mInitial = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.dateRemoved = new System.Windows.Forms.DateTimePicker();
-            this.componentValue = new System.Windows.Forms.ComboBox();
-            this.pFirst = new System.Windows.Forms.TextBox();
-            this.pMid = new System.Windows.Forms.TextBox();
-            this.pAge = new System.Windows.Forms.MaskedTextBox();
+            this.mInitial = new System.Windows.Forms.TextBox();
+            this.fName = new System.Windows.Forms.TextBox();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.cRemovedPanel = new System.Windows.Forms.Panel();
+            this.cReason = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.pAge = new System.Windows.Forms.MaskedTextBox();
+            this.pMid = new System.Windows.Forms.TextBox();
+            this.pFirst = new System.Windows.Forms.TextBox();
+            this.componentValue = new System.Windows.Forms.ComboBox();
+            this.accessionNumbers = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -228,6 +228,36 @@
             this.splitContainer1.SplitterDistance = 287;
             this.splitContainer1.TabIndex = 22;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(5, 183);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(79, 13);
+            this.label11.TabIndex = 12;
+            this.label11.Text = "Date Removed";
+            // 
+            // dateRemoved
+            // 
+            this.dateRemoved.Location = new System.Drawing.Point(8, 200);
+            this.dateRemoved.Name = "dateRemoved";
+            this.dateRemoved.Size = new System.Drawing.Size(200, 20);
+            this.dateRemoved.TabIndex = 13;
+            // 
+            // mInitial
+            // 
+            this.mInitial.Location = new System.Drawing.Point(256, 88);
+            this.mInitial.Name = "mInitial";
+            this.mInitial.Size = new System.Drawing.Size(28, 20);
+            this.mInitial.TabIndex = 11;
+            // 
+            // fName
+            // 
+            this.fName.Location = new System.Drawing.Point(107, 88);
+            this.fName.Name = "fName";
+            this.fName.Size = new System.Drawing.Size(143, 20);
+            this.fName.TabIndex = 10;
+            // 
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -255,23 +285,16 @@
             this.splitContainer2.SplitterDistance = 190;
             this.splitContainer2.TabIndex = 0;
             // 
-            // accessionNumbers
+            // cRemovedPanel
             // 
-            this.accessionNumbers.FormattingEnabled = true;
-            this.accessionNumbers.Location = new System.Drawing.Point(119, 6);
-            this.accessionNumbers.Name = "accessionNumbers";
-            this.accessionNumbers.Size = new System.Drawing.Size(121, 21);
-            this.accessionNumbers.TabIndex = 23;
-            this.accessionNumbers.SelectedIndexChanged += new System.EventHandler(this.accessionNumbers_SelectedIndexChanged);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(246, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 24;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.cRemovedPanel.Controls.Add(this.cRemovedLabel);
+            this.cRemovedPanel.Controls.Add(this.cDateRemoved);
+            this.cRemovedPanel.Controls.Add(this.cReason);
+            this.cRemovedPanel.Controls.Add(this.label10);
+            this.cRemovedPanel.Location = new System.Drawing.Point(8, 201);
+            this.cRemovedPanel.Name = "cRemovedPanel";
+            this.cRemovedPanel.Size = new System.Drawing.Size(369, 202);
+            this.cRemovedPanel.TabIndex = 27;
             // 
             // cReason
             // 
@@ -290,35 +313,27 @@
             this.label10.TabIndex = 23;
             this.label10.Text = "Reason For Removal";
             // 
-            // fName
+            // pAge
             // 
-            this.fName.Location = new System.Drawing.Point(107, 88);
-            this.fName.Name = "fName";
-            this.fName.Size = new System.Drawing.Size(143, 20);
-            this.fName.TabIndex = 10;
+            this.pAge.Location = new System.Drawing.Point(13, 183);
+            this.pAge.Mask = "00";
+            this.pAge.Name = "pAge";
+            this.pAge.Size = new System.Drawing.Size(100, 20);
+            this.pAge.TabIndex = 14;
             // 
-            // mInitial
+            // pMid
             // 
-            this.mInitial.Location = new System.Drawing.Point(256, 88);
-            this.mInitial.Name = "mInitial";
-            this.mInitial.Size = new System.Drawing.Size(28, 20);
-            this.mInitial.TabIndex = 11;
+            this.pMid.Location = new System.Drawing.Point(225, 138);
+            this.pMid.Name = "pMid";
+            this.pMid.Size = new System.Drawing.Size(100, 20);
+            this.pMid.TabIndex = 26;
             // 
-            // label11
+            // pFirst
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(5, 183);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(79, 13);
-            this.label11.TabIndex = 12;
-            this.label11.Text = "Date Removed";
-            // 
-            // dateRemoved
-            // 
-            this.dateRemoved.Location = new System.Drawing.Point(8, 200);
-            this.dateRemoved.Name = "dateRemoved";
-            this.dateRemoved.Size = new System.Drawing.Size(200, 20);
-            this.dateRemoved.TabIndex = 13;
+            this.pFirst.Location = new System.Drawing.Point(119, 138);
+            this.pFirst.Name = "pFirst";
+            this.pFirst.Size = new System.Drawing.Size(100, 20);
+            this.pFirst.TabIndex = 25;
             // 
             // componentValue
             // 
@@ -328,38 +343,24 @@
             this.componentValue.Size = new System.Drawing.Size(121, 21);
             this.componentValue.TabIndex = 24;
             // 
-            // pFirst
+            // accessionNumbers
             // 
-            this.pFirst.Location = new System.Drawing.Point(119, 138);
-            this.pFirst.Name = "pFirst";
-            this.pFirst.Size = new System.Drawing.Size(100, 20);
-            this.pFirst.TabIndex = 25;
+            this.accessionNumbers.FormattingEnabled = true;
+            this.accessionNumbers.Location = new System.Drawing.Point(119, 6);
+            this.accessionNumbers.Name = "accessionNumbers";
+            this.accessionNumbers.Size = new System.Drawing.Size(121, 21);
+            this.accessionNumbers.TabIndex = 23;
+            this.accessionNumbers.SelectedIndexChanged += new System.EventHandler(this.accessionNumbers_SelectedIndexChanged);
             // 
-            // pMid
+            // button1
             // 
-            this.pMid.Location = new System.Drawing.Point(225, 138);
-            this.pMid.Name = "pMid";
-            this.pMid.Size = new System.Drawing.Size(100, 20);
-            this.pMid.TabIndex = 26;
-            // 
-            // pAge
-            // 
-            this.pAge.Location = new System.Drawing.Point(13, 183);
-            this.pAge.Mask = "00";
-            this.pAge.Name = "pAge";
-            this.pAge.Size = new System.Drawing.Size(100, 20);
-            this.pAge.TabIndex = 14;
-            // 
-            // cRemovedPanel
-            // 
-            this.cRemovedPanel.Controls.Add(this.cRemovedLabel);
-            this.cRemovedPanel.Controls.Add(this.cDateRemoved);
-            this.cRemovedPanel.Controls.Add(this.cReason);
-            this.cRemovedPanel.Controls.Add(this.label10);
-            this.cRemovedPanel.Location = new System.Drawing.Point(8, 201);
-            this.cRemovedPanel.Name = "cRemovedPanel";
-            this.cRemovedPanel.Size = new System.Drawing.Size(369, 202);
-            this.cRemovedPanel.TabIndex = 27;
+            this.button1.Location = new System.Drawing.Point(246, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 24;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ShowBlood
             // 
