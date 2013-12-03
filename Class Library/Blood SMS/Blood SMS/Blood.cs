@@ -46,8 +46,8 @@ namespace Blood_SMS
             date_donated = DATE_DONATED;
             date_removed = DATE_REMOVED;
             components = new List<Component>();
-            if (date_removed != DateTime.MinValue)
-                checkRemoved();
+            if (date_removed == DateTime.MinValue)
+                is_removed = false;
             else
                 is_removed = true;
         }
@@ -67,20 +67,23 @@ namespace Blood_SMS
         public bool checkRemoved()
         {
             bool old_is_removed = is_removed;
-
-            is_removed = true;
-            if (date_removed == DateTime.MinValue)
-                date_removed = DateTime.Now;
-            foreach (Component c in components)
+            if (date_removed != DateTime.MinValue)
             {
-                if (!c.Is_removed)
+                is_removed = true;
+                if (date_removed == DateTime.MinValue)
+                    date_removed = DateTime.Now;
+                foreach (Component c in components)
                 {
-                    date_removed = DateTime.MinValue;
-                    is_removed = false;
-                    break;
+                    if (!c.Is_removed)
+                    {
+                        date_removed = DateTime.MinValue;
+                        is_removed = false;
+                        break;
+                    }
                 }
             }
-
+            else
+                is_removed = false;
             return (old_is_removed != is_removed);
 
         }

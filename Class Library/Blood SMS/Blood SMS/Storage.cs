@@ -411,6 +411,7 @@ namespace Blood_SMS
                         UpdateComponent(c, b);
                     }
                 }
+                b.checkRemoved();
                 SortBlood(b);
                 return true;
             }
@@ -461,7 +462,7 @@ namespace Blood_SMS
         void SortBlood(Blood b)
         {
             bloodList.Add(b);
-            b.checkRemoved();
+            
             if (!b.Is_removed)
             {
                 availableBlood.Add(b);
