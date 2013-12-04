@@ -182,6 +182,11 @@ namespace BloodSMSApp
                     b_back.Text = "BACK";
                     MessageBox.Show("Blood Updated");
                 }
+                else
+                {
+                    textBox1.Text = accessionNumbers.Text;
+                    MessageBox.Show("Error updating blood values");
+                }
             }
         }
 

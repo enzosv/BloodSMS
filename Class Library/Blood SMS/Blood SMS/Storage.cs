@@ -404,8 +404,8 @@ namespace Blood_SMS
         }
         public bool UpdateBlood(Blood b, string oldAccessionNumber)
         {
-            
-            if (bloodCommands("UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS, new string[] { "accession_number" }), b, oldAccessionNumber))
+
+            if (bloodCommands("UPDATE Blood SET " + UpdateQueryChangePrimary(BLOOD_FIELDS), b, oldAccessionNumber))
             {
                 UnsortBlood(findBlood(oldAccessionNumber));
                 if (oldAccessionNumber != b.Accession_number)
