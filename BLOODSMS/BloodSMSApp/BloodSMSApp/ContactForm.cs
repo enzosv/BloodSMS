@@ -15,5 +15,10 @@ namespace BloodSMSApp
         {
             InitializeComponent();
         }
+
+        private void ContactForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

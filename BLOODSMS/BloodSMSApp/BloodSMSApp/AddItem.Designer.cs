@@ -52,37 +52,39 @@
             // 
             // dateAddedField
             // 
-            this.dateAddedField.Location = new System.Drawing.Point(44, 488);
+            this.dateAddedField.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateAddedField.Location = new System.Drawing.Point(42, 515);
             this.dateAddedField.Name = "dateAddedField";
-            this.dateAddedField.Size = new System.Drawing.Size(200, 20);
+            this.dateAddedField.Size = new System.Drawing.Size(200, 27);
             this.dateAddedField.TabIndex = 36;
             this.dateAddedField.ValueChanged += new System.EventHandler(this.dateAddedField_ValueChanged);
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(41, 470);
+            this.label20.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(41, 492);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(118, 16);
+            this.label20.Size = new System.Drawing.Size(112, 20);
             this.label20.TabIndex = 33;
             this.label20.Text = "DATE DONATED:";
             // 
             // dateExpireField
             // 
-            this.dateExpireField.Location = new System.Drawing.Point(44, 541);
+            this.dateExpireField.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateExpireField.Location = new System.Drawing.Point(43, 574);
             this.dateExpireField.Name = "dateExpireField";
-            this.dateExpireField.Size = new System.Drawing.Size(200, 20);
+            this.dateExpireField.Size = new System.Drawing.Size(200, 27);
             this.dateExpireField.TabIndex = 38;
             this.dateExpireField.ValueChanged += new System.EventHandler(this.dateExpireField_ValueChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(41, 523);
+            this.label2.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(43, 550);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(152, 16);
+            this.label2.Size = new System.Drawing.Size(148, 20);
             this.label2.TabIndex = 37;
             this.label2.Text = "DATE OF EXPIRATION:";
             // 
@@ -92,9 +94,9 @@
             this.b_add.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.b_add.FlatAppearance.BorderSize = 0;
             this.b_add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_add.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_add.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_add.ForeColor = System.Drawing.Color.White;
-            this.b_add.Location = new System.Drawing.Point(156, 574);
+            this.b_add.Location = new System.Drawing.Point(154, 614);
             this.b_add.Name = "b_add";
             this.b_add.Size = new System.Drawing.Size(88, 33);
             this.b_add.TabIndex = 61;
@@ -105,71 +107,76 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(41, 162);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 16);
+            this.label1.Size = new System.Drawing.Size(102, 20);
             this.label1.TabIndex = 31;
             this.label1.Text = "DONOR NAME:";
             // 
             // listBox1
             // 
             this.listBox1.Enabled = false;
+            this.listBox1.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(44, 203);
+            this.listBox1.ItemHeight = 20;
+            this.listBox1.Location = new System.Drawing.Point(42, 223);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(200, 160);
+            this.listBox1.Size = new System.Drawing.Size(200, 124);
             this.listBox1.TabIndex = 62;
             // 
             // pLast
             // 
-            this.pLast.Location = new System.Drawing.Point(44, 387);
+            this.pLast.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pLast.Location = new System.Drawing.Point(44, 392);
             this.pLast.Name = "pLast";
-            this.pLast.Size = new System.Drawing.Size(75, 20);
+            this.pLast.Size = new System.Drawing.Size(75, 27);
             this.pLast.TabIndex = 64;
             // 
             // t
             // 
             this.t.AutoSize = true;
-            this.t.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.t.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.t.Location = new System.Drawing.Point(41, 368);
             this.t.Name = "t";
-            this.t.Size = new System.Drawing.Size(111, 16);
+            this.t.Size = new System.Drawing.Size(108, 20);
             this.t.TabIndex = 63;
             this.t.Text = "PATIENT NAME:";
             // 
             // t_patientAge
             // 
-            this.t_patientAge.Location = new System.Drawing.Point(44, 438);
+            this.t_patientAge.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.t_patientAge.Location = new System.Drawing.Point(43, 456);
             this.t_patientAge.Name = "t_patientAge";
-            this.t_patientAge.Size = new System.Drawing.Size(200, 20);
+            this.t_patientAge.Size = new System.Drawing.Size(200, 27);
             this.t_patientAge.TabIndex = 66;
             this.t_patientAge.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.t_patientAge_KeyPress);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(41, 419);
+            this.label4.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(41, 431);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(100, 16);
+            this.label4.Size = new System.Drawing.Size(95, 20);
             this.label4.TabIndex = 65;
             this.label4.Text = "PATIENT AGE:";
             // 
             // t_accessionNumber
             // 
-            this.t_accessionNumber.Location = new System.Drawing.Point(44, 87);
+            this.t_accessionNumber.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.t_accessionNumber.Location = new System.Drawing.Point(42, 92);
             this.t_accessionNumber.Name = "t_accessionNumber";
-            this.t_accessionNumber.Size = new System.Drawing.Size(200, 20);
+            this.t_accessionNumber.Size = new System.Drawing.Size(200, 27);
             this.t_accessionNumber.TabIndex = 68;
             // 
             // baba
             // 
             this.baba.AutoSize = true;
-            this.baba.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.baba.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.baba.Location = new System.Drawing.Point(41, 68);
             this.baba.Name = "baba";
-            this.baba.Size = new System.Drawing.Size(150, 16);
+            this.baba.Size = new System.Drawing.Size(150, 20);
             this.baba.TabIndex = 67;
             this.baba.Text = "ACCESSION NUMBER:";
             // 
@@ -179,9 +186,9 @@
             this.b_cancel.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.b_cancel.FlatAppearance.BorderSize = 0;
             this.b_cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_cancel.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_cancel.ForeColor = System.Drawing.Color.White;
-            this.b_cancel.Location = new System.Drawing.Point(44, 574);
+            this.b_cancel.Location = new System.Drawing.Point(42, 614);
             this.b_cancel.Name = "b_cancel";
             this.b_cancel.Size = new System.Drawing.Size(96, 33);
             this.b_cancel.TabIndex = 69;
@@ -191,45 +198,51 @@
             // 
             // pFirst
             // 
-            this.pFirst.Location = new System.Drawing.Point(125, 387);
+            this.pFirst.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pFirst.Location = new System.Drawing.Point(125, 392);
             this.pFirst.Name = "pFirst";
-            this.pFirst.Size = new System.Drawing.Size(75, 20);
+            this.pFirst.Size = new System.Drawing.Size(75, 27);
             this.pFirst.TabIndex = 70;
             // 
             // pMid
             // 
-            this.pMid.Location = new System.Drawing.Point(206, 387);
+            this.pMid.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pMid.Location = new System.Drawing.Point(206, 392);
             this.pMid.Name = "pMid";
-            this.pMid.Size = new System.Drawing.Size(38, 20);
+            this.pMid.Size = new System.Drawing.Size(38, 27);
             this.pMid.TabIndex = 71;
             // 
             // bTypeField
             // 
+            this.bTypeField.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bTypeField.FormattingEnabled = true;
-            this.bTypeField.Location = new System.Drawing.Point(44, 113);
+            this.bTypeField.Location = new System.Drawing.Point(42, 123);
             this.bTypeField.Name = "bTypeField";
-            this.bTypeField.Size = new System.Drawing.Size(121, 21);
+            this.bTypeField.Size = new System.Drawing.Size(121, 28);
             this.bTypeField.TabIndex = 72;
             // 
             // dMid
             // 
-            this.dMid.Location = new System.Drawing.Point(206, 181);
+            this.dMid.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dMid.Location = new System.Drawing.Point(204, 190);
             this.dMid.Name = "dMid";
-            this.dMid.Size = new System.Drawing.Size(38, 20);
+            this.dMid.Size = new System.Drawing.Size(38, 27);
             this.dMid.TabIndex = 75;
             // 
             // dFirst
             // 
-            this.dFirst.Location = new System.Drawing.Point(125, 181);
+            this.dFirst.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dFirst.Location = new System.Drawing.Point(123, 190);
             this.dFirst.Name = "dFirst";
-            this.dFirst.Size = new System.Drawing.Size(75, 20);
+            this.dFirst.Size = new System.Drawing.Size(75, 27);
             this.dFirst.TabIndex = 74;
             // 
             // d_last
             // 
-            this.d_last.Location = new System.Drawing.Point(44, 181);
+            this.d_last.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.d_last.Location = new System.Drawing.Point(42, 190);
             this.d_last.Name = "d_last";
-            this.d_last.Size = new System.Drawing.Size(75, 20);
+            this.d_last.Size = new System.Drawing.Size(75, 27);
             this.d_last.TabIndex = 73;
             // 
             // AddItem
@@ -237,7 +250,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BloodSMSApp.Properties.Resources.addItem_copy;
-            this.ClientSize = new System.Drawing.Size(286, 593);
+            this.ClientSize = new System.Drawing.Size(286, 661);
             this.Controls.Add(this.dMid);
             this.Controls.Add(this.dFirst);
             this.Controls.Add(this.d_last);

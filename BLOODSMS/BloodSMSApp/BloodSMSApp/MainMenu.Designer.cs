@@ -30,26 +30,23 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainMenu));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series51 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series52 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series53 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series54 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series55 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series56 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series57 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series58 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series59 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series60 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -125,7 +122,7 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.Padding = new System.Drawing.Point(0, 0);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(681, 568);
+            this.tabControl1.Size = new System.Drawing.Size(681, 580);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
@@ -147,7 +144,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 70);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(0);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(673, 494);
+            this.tabPage1.Size = new System.Drawing.Size(673, 506);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
@@ -155,9 +152,10 @@
             // 
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.SystemColors.Control;
-            this.label8.Location = new System.Drawing.Point(484, 182);
+            this.label8.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(262, 185);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(62, 13);
+            this.label8.Size = new System.Drawing.Size(74, 20);
             this.label8.TabIndex = 28;
             this.label8.Text = "END DATE";
             // 
@@ -165,9 +163,10 @@
             // 
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.SystemColors.Control;
-            this.label7.Location = new System.Drawing.Point(280, 182);
+            this.label7.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(29, 185);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(75, 13);
+            this.label7.Size = new System.Drawing.Size(87, 20);
             this.label7.TabIndex = 27;
             this.label7.Text = "START DATE";
             // 
@@ -176,12 +175,13 @@
             this.reprocessedButton.BackColor = System.Drawing.Color.Firebrick;
             this.reprocessedButton.FlatAppearance.BorderSize = 0;
             this.reprocessedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.reprocessedButton.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.reprocessedButton.ForeColor = System.Drawing.Color.White;
-            this.reprocessedButton.Location = new System.Drawing.Point(534, 202);
+            this.reprocessedButton.Location = new System.Drawing.Point(538, 211);
             this.reprocessedButton.Name = "reprocessedButton";
-            this.reprocessedButton.Size = new System.Drawing.Size(83, 23);
+            this.reprocessedButton.Size = new System.Drawing.Size(116, 35);
             this.reprocessedButton.TabIndex = 26;
-            this.reprocessedButton.Text = "Reprocessed";
+            this.reprocessedButton.Text = "REPROCESSED";
             this.reprocessedButton.UseVisualStyleBackColor = false;
             this.reprocessedButton.Click += new System.EventHandler(this.reprocessedButton_Click);
             // 
@@ -189,7 +189,7 @@
             // 
             this.dateFrom.CustomFormat = "d MMMM yyyy";
             this.dateFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateFrom.Location = new System.Drawing.Point(356, 176);
+            this.dateFrom.Location = new System.Drawing.Point(122, 185);
             this.dateFrom.Name = "dateFrom";
             this.dateFrom.ShowUpDown = true;
             this.dateFrom.Size = new System.Drawing.Size(122, 20);
@@ -200,7 +200,7 @@
             // 
             this.dateTo.CustomFormat = "d MMMM yyyy";
             this.dateTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTo.Location = new System.Drawing.Point(547, 176);
+            this.dateTo.Location = new System.Drawing.Point(342, 185);
             this.dateTo.Name = "dateTo";
             this.dateTo.ShowUpDown = true;
             this.dateTo.Size = new System.Drawing.Size(122, 20);
@@ -212,12 +212,13 @@
             this.Summary.BackColor = System.Drawing.Color.Firebrick;
             this.Summary.FlatAppearance.BorderSize = 0;
             this.Summary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Summary.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Summary.ForeColor = System.Drawing.Color.White;
-            this.Summary.Location = new System.Drawing.Point(89, 202);
+            this.Summary.Location = new System.Drawing.Point(23, 211);
             this.Summary.Name = "Summary";
-            this.Summary.Size = new System.Drawing.Size(83, 23);
+            this.Summary.Size = new System.Drawing.Size(93, 35);
             this.Summary.TabIndex = 20;
-            this.Summary.Text = "Summary";
+            this.Summary.Text = "SUMMARY";
             this.Summary.UseVisualStyleBackColor = false;
             this.Summary.Click += new System.EventHandler(this.Summary_Click);
             // 
@@ -226,12 +227,13 @@
             this.addedButton.BackColor = System.Drawing.Color.Firebrick;
             this.addedButton.FlatAppearance.BorderSize = 0;
             this.addedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addedButton.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addedButton.ForeColor = System.Drawing.Color.White;
-            this.addedButton.Location = new System.Drawing.Point(178, 202);
+            this.addedButton.Location = new System.Drawing.Point(122, 211);
             this.addedButton.Name = "addedButton";
-            this.addedButton.Size = new System.Drawing.Size(83, 23);
+            this.addedButton.Size = new System.Drawing.Size(85, 35);
             this.addedButton.TabIndex = 19;
-            this.addedButton.Text = "Added";
+            this.addedButton.Text = "ADDED";
             this.addedButton.UseVisualStyleBackColor = false;
             this.addedButton.Click += new System.EventHandler(this.addedButton_Click);
             // 
@@ -240,12 +242,13 @@
             this.releasedButton.BackColor = System.Drawing.Color.Firebrick;
             this.releasedButton.FlatAppearance.BorderSize = 0;
             this.releasedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.releasedButton.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.releasedButton.ForeColor = System.Drawing.Color.White;
-            this.releasedButton.Location = new System.Drawing.Point(356, 202);
+            this.releasedButton.Location = new System.Drawing.Point(315, 211);
             this.releasedButton.Name = "releasedButton";
-            this.releasedButton.Size = new System.Drawing.Size(83, 23);
+            this.releasedButton.Size = new System.Drawing.Size(95, 35);
             this.releasedButton.TabIndex = 18;
-            this.releasedButton.Text = "Released";
+            this.releasedButton.Text = "RELEASED";
             this.releasedButton.UseVisualStyleBackColor = false;
             this.releasedButton.Click += new System.EventHandler(this.releasedButton_Click);
             // 
@@ -254,12 +257,13 @@
             this.quarantinedButton.BackColor = System.Drawing.Color.Firebrick;
             this.quarantinedButton.FlatAppearance.BorderSize = 0;
             this.quarantinedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.quarantinedButton.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.quarantinedButton.ForeColor = System.Drawing.Color.White;
-            this.quarantinedButton.Location = new System.Drawing.Point(445, 202);
+            this.quarantinedButton.Location = new System.Drawing.Point(416, 211);
             this.quarantinedButton.Name = "quarantinedButton";
-            this.quarantinedButton.Size = new System.Drawing.Size(83, 23);
+            this.quarantinedButton.Size = new System.Drawing.Size(116, 35);
             this.quarantinedButton.TabIndex = 17;
-            this.quarantinedButton.Text = "Quarantined";
+            this.quarantinedButton.Text = "QUARANTINED";
             this.quarantinedButton.UseVisualStyleBackColor = false;
             this.quarantinedButton.Click += new System.EventHandler(this.quarantinedButton_Click);
             // 
@@ -268,89 +272,90 @@
             this.removedButton.BackColor = System.Drawing.Color.Firebrick;
             this.removedButton.FlatAppearance.BorderSize = 0;
             this.removedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.removedButton.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removedButton.ForeColor = System.Drawing.Color.White;
-            this.removedButton.Location = new System.Drawing.Point(267, 202);
+            this.removedButton.Location = new System.Drawing.Point(213, 211);
             this.removedButton.Name = "removedButton";
-            this.removedButton.Size = new System.Drawing.Size(83, 23);
+            this.removedButton.Size = new System.Drawing.Size(96, 35);
             this.removedButton.TabIndex = 16;
-            this.removedButton.Text = "Removed";
+            this.removedButton.Text = "REMOVED";
             this.removedButton.UseVisualStyleBackColor = false;
             this.removedButton.Click += new System.EventHandler(this.removedButton_Click);
             // 
             // chart1
             // 
-            chartArea11.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea11);
-            legend11.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
-            legend11.IsDockedInsideChartArea = false;
-            legend11.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row;
-            legend11.Name = "Legend1";
-            this.chart1.Legends.Add(legend11);
-            this.chart1.Location = new System.Drawing.Point(-15, 216);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
+            legend1.IsDockedInsideChartArea = false;
+            legend1.LegendStyle = System.Windows.Forms.DataVisualization.Charting.LegendStyle.Row;
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(-24, 239);
             this.chart1.Name = "chart1";
-            series51.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series51.ChartArea = "ChartArea1";
-            series51.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series51.Legend = "Legend1";
-            series51.LegendText = "Added Blood";
-            series51.Name = "Total";
-            series52.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series52.ChartArea = "ChartArea1";
-            series52.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series52.Legend = "Legend1";
-            series52.LegendText = "Removed Blood";
-            series52.Name = "AB+";
-            series53.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series53.ChartArea = "ChartArea1";
-            series53.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series53.Enabled = false;
-            series53.Legend = "Legend1";
-            series53.Name = "AB-";
-            series54.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series54.ChartArea = "ChartArea1";
-            series54.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series54.Enabled = false;
-            series54.Legend = "Legend1";
-            series54.Name = "A+";
-            series55.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series55.ChartArea = "ChartArea1";
-            series55.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series55.Enabled = false;
-            series55.Legend = "Legend1";
-            series55.Name = "A-";
-            series56.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series56.ChartArea = "ChartArea1";
-            series56.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series56.Enabled = false;
-            series56.Legend = "Legend1";
-            series56.Name = "B+";
-            series57.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series57.ChartArea = "ChartArea1";
-            series57.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series57.Enabled = false;
-            series57.Legend = "Legend1";
-            series57.Name = "B-";
-            series58.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series58.ChartArea = "ChartArea1";
-            series58.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series58.Enabled = false;
-            series58.Legend = "Legend1";
-            series58.Name = "O+";
-            series59.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
-            series59.ChartArea = "ChartArea1";
-            series59.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series59.Enabled = false;
-            series59.Legend = "Legend1";
-            series59.Name = "O-";
-            this.chart1.Series.Add(series51);
-            this.chart1.Series.Add(series52);
-            this.chart1.Series.Add(series53);
-            this.chart1.Series.Add(series54);
-            this.chart1.Series.Add(series55);
-            this.chart1.Series.Add(series56);
-            this.chart1.Series.Add(series57);
-            this.chart1.Series.Add(series58);
-            this.chart1.Series.Add(series59);
+            series1.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.LegendText = "Added Blood";
+            series1.Name = "Total";
+            series2.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend1";
+            series2.LegendText = "Removed Blood";
+            series2.Name = "AB+";
+            series3.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series3.Enabled = false;
+            series3.Legend = "Legend1";
+            series3.Name = "AB-";
+            series4.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series4.Enabled = false;
+            series4.Legend = "Legend1";
+            series4.Name = "A+";
+            series5.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series5.Enabled = false;
+            series5.Legend = "Legend1";
+            series5.Name = "A-";
+            series6.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series6.Enabled = false;
+            series6.Legend = "Legend1";
+            series6.Name = "B+";
+            series7.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series7.Enabled = false;
+            series7.Legend = "Legend1";
+            series7.Name = "B-";
+            series8.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series8.Enabled = false;
+            series8.Legend = "Legend1";
+            series8.Name = "O+";
+            series9.BorderDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Dot;
+            series9.ChartArea = "ChartArea1";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series9.Enabled = false;
+            series9.Legend = "Legend1";
+            series9.Name = "O-";
+            this.chart1.Series.Add(series1);
+            this.chart1.Series.Add(series2);
+            this.chart1.Series.Add(series3);
+            this.chart1.Series.Add(series4);
+            this.chart1.Series.Add(series5);
+            this.chart1.Series.Add(series6);
+            this.chart1.Series.Add(series7);
+            this.chart1.Series.Add(series8);
+            this.chart1.Series.Add(series9);
             this.chart1.Size = new System.Drawing.Size(704, 282);
             this.chart1.TabIndex = 15;
             this.chart1.Text = "chart1";
@@ -358,19 +363,19 @@
             // 
             // chart2
             // 
-            chartArea12.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea12);
-            legend12.Name = "Legend1";
-            this.chart2.Legends.Add(legend12);
+            chartArea2.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart2.Legends.Add(legend2);
             this.chart2.Location = new System.Drawing.Point(5, 3);
             this.chart2.Name = "chart2";
-            series60.BorderColor = System.Drawing.Color.Black;
-            series60.ChartArea = "ChartArea1";
-            series60.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series60.Legend = "Legend1";
-            series60.LegendText = "AB+";
-            series60.Name = "Series1";
-            this.chart2.Series.Add(series60);
+            series10.BorderColor = System.Drawing.Color.Black;
+            series10.ChartArea = "ChartArea1";
+            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series10.Legend = "Legend1";
+            series10.LegendText = "AB+";
+            series10.Name = "Series1";
+            this.chart2.Series.Add(series10);
             this.chart2.Size = new System.Drawing.Size(664, 167);
             this.chart2.TabIndex = 14;
             this.chart2.Text = "chart2";
@@ -387,42 +392,42 @@
             this.tabPage3.ImageIndex = 2;
             this.tabPage3.Location = new System.Drawing.Point(4, 70);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(673, 494);
+            this.tabPage3.Size = new System.Drawing.Size(673, 506);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // dataGridView2
             // 
             this.dataGridView2.AllowUserToAddRows = false;
-            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle31.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle31.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle31.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle31.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle31;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle32.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle32.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle32.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle32.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle32.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle32;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView2.Location = new System.Drawing.Point(4, 62);
             this.dataGridView2.MultiSelect = false;
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
-            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle33.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle33.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle33.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle33.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle33.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle33.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle33;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView2.Size = new System.Drawing.Size(666, 432);
             this.dataGridView2.TabIndex = 41;
@@ -448,9 +453,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.Location = new System.Drawing.Point(412, 23);
+            this.label1.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(388, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(128, 13);
+            this.label1.Size = new System.Drawing.Size(155, 20);
             this.label1.TabIndex = 39;
             this.label1.Text = "SORT BY BLOOD TYPE:";
             // 
@@ -459,9 +465,9 @@
             this.b_inventoryUsed.BackColor = System.Drawing.Color.DimGray;
             this.b_inventoryUsed.FlatAppearance.BorderSize = 0;
             this.b_inventoryUsed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_inventoryUsed.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_inventoryUsed.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_inventoryUsed.ForeColor = System.Drawing.Color.White;
-            this.b_inventoryUsed.Location = new System.Drawing.Point(291, 15);
+            this.b_inventoryUsed.Location = new System.Drawing.Point(290, 15);
             this.b_inventoryUsed.Name = "b_inventoryUsed";
             this.b_inventoryUsed.Size = new System.Drawing.Size(59, 29);
             this.b_inventoryUsed.TabIndex = 30;
@@ -473,9 +479,9 @@
             this.b_inventoryQuarantined.BackColor = System.Drawing.Color.DimGray;
             this.b_inventoryQuarantined.FlatAppearance.BorderSize = 0;
             this.b_inventoryQuarantined.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_inventoryQuarantined.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_inventoryQuarantined.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_inventoryQuarantined.ForeColor = System.Drawing.Color.White;
-            this.b_inventoryQuarantined.Location = new System.Drawing.Point(167, 15);
+            this.b_inventoryQuarantined.Location = new System.Drawing.Point(166, 15);
             this.b_inventoryQuarantined.Name = "b_inventoryQuarantined";
             this.b_inventoryQuarantined.Size = new System.Drawing.Size(118, 29);
             this.b_inventoryQuarantined.TabIndex = 29;
@@ -487,9 +493,9 @@
             this.b_inventoryInventory.BackColor = System.Drawing.Color.DimGray;
             this.b_inventoryInventory.FlatAppearance.BorderSize = 0;
             this.b_inventoryInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_inventoryInventory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_inventoryInventory.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_inventoryInventory.ForeColor = System.Drawing.Color.White;
-            this.b_inventoryInventory.Location = new System.Drawing.Point(61, 15);
+            this.b_inventoryInventory.Location = new System.Drawing.Point(60, 15);
             this.b_inventoryInventory.Name = "b_inventoryInventory";
             this.b_inventoryInventory.Size = new System.Drawing.Size(100, 29);
             this.b_inventoryInventory.TabIndex = 28;
@@ -501,9 +507,9 @@
             this.b_inventoryALL.BackColor = System.Drawing.Color.DimGray;
             this.b_inventoryALL.FlatAppearance.BorderSize = 0;
             this.b_inventoryALL.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_inventoryALL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_inventoryALL.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_inventoryALL.ForeColor = System.Drawing.Color.White;
-            this.b_inventoryALL.Location = new System.Drawing.Point(4, 15);
+            this.b_inventoryALL.Location = new System.Drawing.Point(3, 15);
             this.b_inventoryALL.Name = "b_inventoryALL";
             this.b_inventoryALL.Size = new System.Drawing.Size(51, 29);
             this.b_inventoryALL.TabIndex = 27;
@@ -519,10 +525,11 @@
             this.tabPage4.Controls.Add(this.b_donorContactable);
             this.tabPage4.Controls.Add(this.b_donorAll);
             this.tabPage4.Controls.Add(this.dataGridView3);
+            this.tabPage4.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage4.ImageIndex = 3;
             this.tabPage4.Location = new System.Drawing.Point(4, 70);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(673, 494);
+            this.tabPage4.Size = new System.Drawing.Size(673, 506);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
@@ -538,17 +545,18 @@
             "B-",
             "O+",
             "O-"});
-            this.comboBox1.Location = new System.Drawing.Point(148, 60);
+            this.comboBox1.Location = new System.Drawing.Point(540, 13);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.Size = new System.Drawing.Size(121, 28);
             this.comboBox1.TabIndex = 38;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 63);
+            this.label4.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(379, 16);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(128, 13);
+            this.label4.Size = new System.Drawing.Size(155, 20);
             this.label4.TabIndex = 37;
             this.label4.Text = "SORT BY BLOOD TYPE:";
             // 
@@ -557,7 +565,7 @@
             this.b_donorViable.BackColor = System.Drawing.Color.DimGray;
             this.b_donorViable.FlatAppearance.BorderSize = 0;
             this.b_donorViable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_donorViable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_donorViable.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_donorViable.ForeColor = System.Drawing.Color.White;
             this.b_donorViable.Location = new System.Drawing.Point(275, 16);
             this.b_donorViable.Name = "b_donorViable";
@@ -571,7 +579,7 @@
             this.b_donorBanned.BackColor = System.Drawing.Color.DimGray;
             this.b_donorBanned.FlatAppearance.BorderSize = 0;
             this.b_donorBanned.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_donorBanned.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_donorBanned.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_donorBanned.ForeColor = System.Drawing.Color.White;
             this.b_donorBanned.Location = new System.Drawing.Point(195, 16);
             this.b_donorBanned.Name = "b_donorBanned";
@@ -585,7 +593,7 @@
             this.b_donorContactable.BackColor = System.Drawing.Color.DimGray;
             this.b_donorContactable.FlatAppearance.BorderSize = 0;
             this.b_donorContactable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_donorContactable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_donorContactable.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_donorContactable.ForeColor = System.Drawing.Color.White;
             this.b_donorContactable.Location = new System.Drawing.Point(71, 16);
             this.b_donorContactable.Name = "b_donorContactable";
@@ -599,7 +607,7 @@
             this.b_donorAll.BackColor = System.Drawing.Color.DimGray;
             this.b_donorAll.FlatAppearance.BorderSize = 0;
             this.b_donorAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_donorAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_donorAll.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_donorAll.ForeColor = System.Drawing.Color.White;
             this.b_donorAll.Location = new System.Drawing.Point(14, 16);
             this.b_donorAll.Name = "b_donorAll";
@@ -611,44 +619,20 @@
             // dataGridView3
             // 
             this.dataGridView3.AllowUserToAddRows = false;
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle34.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle34.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle34.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle34.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle34.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle34;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle35.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle35.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle35.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle35.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle35.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle35.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView3.DefaultCellStyle = dataGridViewCellStyle35;
-            this.dataGridView3.Location = new System.Drawing.Point(3, 95);
+            this.dataGridView3.Location = new System.Drawing.Point(3, 61);
             this.dataGridView3.MultiSelect = false;
             this.dataGridView3.Name = "dataGridView3";
             this.dataGridView3.ReadOnly = true;
-            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle36.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle36.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle36.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle36.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle36.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle36.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView3.RowHeadersDefaultCellStyle = dataGridViewCellStyle36;
             this.dataGridView3.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView3.Size = new System.Drawing.Size(850, 436);
+            this.dataGridView3.Size = new System.Drawing.Size(850, 470);
             this.dataGridView3.TabIndex = 1;
             this.dataGridView3.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView3_CellContentClick);
             // 
             // oSearchField
             // 
             this.oSearchField.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.oSearchField.Location = new System.Drawing.Point(59, 77);
+            this.oSearchField.Location = new System.Drawing.Point(71, 77);
             this.oSearchField.Name = "oSearchField";
             this.oSearchField.Size = new System.Drawing.Size(150, 20);
             this.oSearchField.TabIndex = 27;
@@ -657,17 +641,18 @@
             // resultsBox
             // 
             this.resultsBox.FormattingEnabled = true;
-            this.resultsBox.Location = new System.Drawing.Point(14, 103);
+            this.resultsBox.Location = new System.Drawing.Point(6, 103);
             this.resultsBox.Name = "resultsBox";
-            this.resultsBox.Size = new System.Drawing.Size(195, 147);
+            this.resultsBox.Size = new System.Drawing.Size(215, 147);
             this.resultsBox.TabIndex = 25;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 77);
+            this.label5.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(6, 77);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 13);
+            this.label5.Size = new System.Drawing.Size(56, 20);
             this.label5.TabIndex = 23;
             this.label5.Text = "Search";
             // 
@@ -688,11 +673,11 @@
             this.b_addDonor.BackColor = System.Drawing.Color.DimGray;
             this.b_addDonor.FlatAppearance.BorderSize = 0;
             this.b_addDonor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_addDonor.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_addDonor.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_addDonor.ForeColor = System.Drawing.Color.White;
-            this.b_addDonor.Location = new System.Drawing.Point(40, 350);
+            this.b_addDonor.Location = new System.Drawing.Point(6, 319);
             this.b_addDonor.Name = "b_addDonor";
-            this.b_addDonor.Size = new System.Drawing.Size(158, 30);
+            this.b_addDonor.Size = new System.Drawing.Size(215, 30);
             this.b_addDonor.TabIndex = 6;
             this.b_addDonor.Text = "ADD DONOR";
             this.b_addDonor.UseVisualStyleBackColor = false;
@@ -703,11 +688,11 @@
             this.b_addBlood.BackColor = System.Drawing.Color.DimGray;
             this.b_addBlood.FlatAppearance.BorderSize = 0;
             this.b_addBlood.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_addBlood.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_addBlood.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_addBlood.ForeColor = System.Drawing.Color.White;
-            this.b_addBlood.Location = new System.Drawing.Point(40, 396);
+            this.b_addBlood.Location = new System.Drawing.Point(6, 365);
             this.b_addBlood.Name = "b_addBlood";
-            this.b_addBlood.Size = new System.Drawing.Size(158, 30);
+            this.b_addBlood.Size = new System.Drawing.Size(215, 30);
             this.b_addBlood.TabIndex = 7;
             this.b_addBlood.Text = "ADD BLOOD";
             this.b_addBlood.UseVisualStyleBackColor = false;
@@ -715,9 +700,9 @@
             // 
             // t_AB1
             // 
-            this.t_AB1.Location = new System.Drawing.Point(40, 469);
+            this.t_AB1.Location = new System.Drawing.Point(6, 469);
             this.t_AB1.Name = "t_AB1";
-            this.t_AB1.Size = new System.Drawing.Size(77, 20);
+            this.t_AB1.Size = new System.Drawing.Size(111, 20);
             this.t_AB1.TabIndex = 8;
             // 
             // b_contactAB1
@@ -725,13 +710,13 @@
             this.b_contactAB1.BackColor = System.Drawing.Color.DimGray;
             this.b_contactAB1.FlatAppearance.BorderSize = 0;
             this.b_contactAB1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_contactAB1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_contactAB1.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_contactAB1.ForeColor = System.Drawing.Color.White;
-            this.b_contactAB1.Location = new System.Drawing.Point(40, 496);
+            this.b_contactAB1.Location = new System.Drawing.Point(6, 496);
             this.b_contactAB1.Name = "b_contactAB1";
-            this.b_contactAB1.Size = new System.Drawing.Size(158, 30);
+            this.b_contactAB1.Size = new System.Drawing.Size(215, 30);
             this.b_contactAB1.TabIndex = 9;
-            this.b_contactAB1.Text = "SHOW";
+            this.b_contactAB1.Text = "CONTACT";
             this.b_contactAB1.UseVisualStyleBackColor = false;
             // 
             // b_refresh
@@ -739,11 +724,11 @@
             this.b_refresh.BackColor = System.Drawing.Color.DimGray;
             this.b_refresh.FlatAppearance.BorderSize = 0;
             this.b_refresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_refresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_refresh.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_refresh.ForeColor = System.Drawing.Color.White;
-            this.b_refresh.Location = new System.Drawing.Point(40, 598);
+            this.b_refresh.Location = new System.Drawing.Point(6, 598);
             this.b_refresh.Name = "b_refresh";
-            this.b_refresh.Size = new System.Drawing.Size(158, 30);
+            this.b_refresh.Size = new System.Drawing.Size(215, 30);
             this.b_refresh.TabIndex = 24;
             this.b_refresh.Text = "REFRESH";
             this.b_refresh.UseVisualStyleBackColor = false;
@@ -754,7 +739,7 @@
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Location = new System.Drawing.Point(123, 469);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(75, 21);
+            this.comboBox3.Size = new System.Drawing.Size(98, 21);
             this.comboBox3.TabIndex = 28;
             // 
             // label6
