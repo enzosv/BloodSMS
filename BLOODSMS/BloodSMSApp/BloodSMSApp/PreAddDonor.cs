@@ -7,10 +7,12 @@ namespace BloodSMSApp
     public partial class PreAddDonor : Form
     {
         Storage storage;
-        public PreAddDonor(Storage stor)
+        MainMenu parent;
+        public PreAddDonor(MainMenu mainmenu)
         {
             InitializeComponent();
-            storage = stor;
+            parent = mainmenu;
+            storage = parent.storage;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -21,6 +23,7 @@ namespace BloodSMSApp
                 donorForm = new AddDonor(storage, lName.Text, fName.Text, mInitial.Text);
                 donorForm.ShowDialog();
                 Close();
+                parent.RefreshOverview();
             }
             else
             {

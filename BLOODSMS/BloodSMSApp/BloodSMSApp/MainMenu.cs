@@ -23,6 +23,8 @@ namespace BloodSMSApp
         Dictionary<int, DateTime> days2;
         Series seriesHit;
         Color seriesOldColor;
+        List<Donor> donorList;
+        List<Blood> bloodList;
 
         public MainMenu()
         {
@@ -52,8 +54,7 @@ namespace BloodSMSApp
 
             seriesHit = chart1.Series[0];
 
-            dataGridView3.DataSource = storage.donorList;
-            dataGridView2.DataSource = storage.bloodList;
+            
 
             foreach (bloodType x in (bloodType[])Enum.GetValues(typeof(bloodType)))
             {
@@ -75,8 +76,6 @@ namespace BloodSMSApp
             ChangeDates();
 
             //seriesHit = chart1.Series[0];
-            dataGridView3.DataSource = storage.donorList;
-            dataGridView2.DataSource = storage.bloodList;
 
             RefreshOverview();
         }
@@ -85,9 +84,40 @@ namespace BloodSMSApp
 
         public void RefreshOverview()
         {
+            //dataGridView3.DataSource = storage.donorList;
+            donorList = storage.donorList;
+            bloodList = storage.bloodList;
             RefreshNotifications();
             RefreshPieChart();
             RefreshGraph();
+
+            dataGridView3.Rows.Clear();
+            for (int i = 0; i < donorList.Count; i++)
+            {
+                dataGridView3.Rows.Add();
+                Donor d = donorList[i];
+                dataGridView3.Rows[i].Cells[0].Value = d.Name;
+                dataGridView3.Rows[i].Cells[1].Value = MyEnums.GetDescription(d.Blood_type);
+                dataGridView3.Rows[i].Cells[2].Value = MyEnums.GetDescription(d.Home_city);
+                dataGridView3.Rows[i].Cells[3].Value = d.Date_registered.ToShortDateString();
+                dataGridView3.Rows[i].Cells[4].Value = d.Is_viable;
+                dataGridView3.Rows[i].Cells[5].Value = d.Is_contactable;
+            }
+
+            dataGridView2.Rows.Clear();
+            for (int i = 0; i < bloodList.Count; i++)
+            {
+                dataGridView2.Rows.Add();
+                Blood b = bloodList[i];
+                dataGridView2.Rows[i].Cells[0].Value = b.Accession_number;
+                dataGridView2.Rows[i].Cells[1].Value = MyEnums.GetDescription(b.Blood_type);
+                if (b.Donor_id.HasValue)
+                    dataGridView2.Rows[i].Cells[2].Value = storage.findDonor(b.Donor_id.Value).Name;
+                else
+                    dataGridView2.Rows[i].Cells[2].Value = "Bought from other bank";
+                dataGridView2.Rows[i].Cells[3].Value = b.Date_donated.ToShortDateString();
+                dataGridView2.Rows[i].Cells[4].Value = b.Is_removed;
+            }
         }
 
         void RefreshNotifications()
@@ -256,27 +286,6 @@ namespace BloodSMSApp
             }
         }
 
-        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (tabControl1.SelectedIndex)
-            {
-                case 0:
-
-                    break;
-                case 1:
-
-                    break;
-                case 2:
-
-                    break;
-            }
-        }
-
-        private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            MessageBox.Show(dataGridView3.SelectedRows.ToString());
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             label6.Text = DateTime.Now.ToShortTimeString();
@@ -338,7 +347,7 @@ namespace BloodSMSApp
 
         private void b_addDonor_Click(object sender, EventArgs e)
         {
-            PreAddDonor a = new PreAddDonor(storage);
+            PreAddDonor a = new PreAddDonor(this);
             a.ShowDialog();
         }
 
@@ -439,6 +448,26 @@ namespace BloodSMSApp
 
             }
             
+        }
+
+        private void dataGridView2_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Blood b = storage.findBlood(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
+            if (b != null)
+            {
+                ShowBlood sb = new ShowBlood(storage, b);
+                sb.ShowDialog();
+            }
+        }
+
+        private void dataGridView3_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Donor d = storage.findDonorWithName(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
+            if (d != null)
+            {
+                AddDonor a = new AddDonor(storage, d);
+                a.ShowDialog();
+            }
         }
 
     }

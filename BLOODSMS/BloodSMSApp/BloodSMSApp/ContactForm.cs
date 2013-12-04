@@ -18,7 +18,13 @@ namespace BloodSMSApp
         {
             InitializeComponent();
             contacts = CONTACTS;
-            dataGridView1.DataSource = contacts;
+            //dataGridView1.DataSource = contacts;
+            for(int i=0; i<contacts.Count; i++)
+            {
+                dataGridView1.Rows[i].Cells[0].Value = contacts[i].Name;
+                dataGridView1.Rows[i].Cells[1].Value = contacts[i].Cellphone;
+                dataGridView1.Rows[i].Cells[2].Value = contacts[i].Email;
+            }
             emailTos = new List<Donor>();
             
         }
