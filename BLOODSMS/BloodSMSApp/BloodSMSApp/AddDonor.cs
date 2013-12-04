@@ -202,11 +202,6 @@ namespace BloodSMSApp
             Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         private void AddDonor_Load(object sender, EventArgs e)
         {
             foreach (bloodType x in (bloodType[])Enum.GetValues(typeof(bloodType)))

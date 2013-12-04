@@ -76,9 +76,7 @@
             this.hLandlineField = new System.Windows.Forms.TextBox();
             this.oLandlineField = new System.Windows.Forms.TextBox();
             this.cellphoneField = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.ageText = new System.Windows.Forms.Label();
-            this.timesContactedText = new System.Windows.Forms.Label();
             this.timesDonated = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.contactPanel.SuspendLayout();
@@ -581,17 +579,6 @@
             this.cellphoneField.Size = new System.Drawing.Size(159, 26);
             this.cellphoneField.TabIndex = 75;
             // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(100, 61);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 76;
-            this.button1.Text = "Change Name";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // ageText
             // 
             this.ageText.AutoSize = true;
@@ -603,22 +590,11 @@
             this.ageText.Text = "label11";
             this.ageText.Visible = false;
             // 
-            // timesContactedText
-            // 
-            this.timesContactedText.AutoSize = true;
-            this.timesContactedText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timesContactedText.Location = new System.Drawing.Point(443, 61);
-            this.timesContactedText.Name = "timesContactedText";
-            this.timesContactedText.Size = new System.Drawing.Size(60, 20);
-            this.timesContactedText.TabIndex = 78;
-            this.timesContactedText.Text = "label11";
-            this.timesContactedText.Visible = false;
-            // 
             // timesDonated
             // 
             this.timesDonated.AutoSize = true;
             this.timesDonated.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.timesDonated.Location = new System.Drawing.Point(490, 61);
+            this.timesDonated.Location = new System.Drawing.Point(471, 61);
             this.timesDonated.Name = "timesDonated";
             this.timesDonated.Size = new System.Drawing.Size(60, 20);
             this.timesDonated.TabIndex = 79;
@@ -632,9 +608,7 @@
             this.BackgroundImage = global::BloodSMSApp.Properties.Resources.addDonor_copy;
             this.ClientSize = new System.Drawing.Size(535, 703);
             this.Controls.Add(this.timesDonated);
-            this.Controls.Add(this.timesContactedText);
             this.Controls.Add(this.ageText);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.cellphoneField);
             this.Controls.Add(this.oLandlineField);
             this.Controls.Add(this.hLandlineField);
@@ -741,9 +715,7 @@
         private System.Windows.Forms.TextBox hLandlineField;
         private System.Windows.Forms.TextBox oLandlineField;
         private System.Windows.Forms.TextBox cellphoneField;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label ageText;
-        private System.Windows.Forms.Label timesContactedText;
         private System.Windows.Forms.Label timesDonated;
     }
 }

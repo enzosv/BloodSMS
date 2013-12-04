@@ -488,7 +488,6 @@ namespace Blood_SMS
 
         bool DeleteBloodWithAccessionNumber(string accession_number)
         {
-
             MySqlConnection conn = new MySqlConnection(connectionString);
             string query = "DELETE FROM Blood WHERE accession_number =@accession_number";
             MySqlCommand comm = new MySqlCommand(query, conn);
