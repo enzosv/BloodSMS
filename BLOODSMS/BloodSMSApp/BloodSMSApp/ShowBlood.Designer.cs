@@ -36,12 +36,14 @@
             this.dateDonated = new System.Windows.Forms.DateTimePicker();
             this.bloodTypeField = new System.Windows.Forms.ComboBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.mInitial = new System.Windows.Forms.TextBox();
             this.fName = new System.Windows.Forms.TextBox();
+            this.pAge = new System.Windows.Forms.TextBox();
             this.pMid = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
-            this.pAge = new System.Windows.Forms.MaskedTextBox();
             this.cRemovedPanel = new System.Windows.Forms.Panel();
             this.cRemovedLabel = new System.Windows.Forms.Label();
             this.cDateRemoved = new System.Windows.Forms.DateTimePicker();
@@ -57,8 +59,6 @@
             this.accessionNumbers = new System.Windows.Forms.ComboBox();
             this.b_edit = new System.Windows.Forms.Button();
             this.b_back = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -163,9 +163,9 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.pAge);
             this.splitContainer1.Panel2.Controls.Add(this.pMid);
             this.splitContainer1.Panel2.Controls.Add(this.listBox1);
-            this.splitContainer1.Panel2.Controls.Add(this.pAge);
             this.splitContainer1.Panel2.Controls.Add(this.cRemovedPanel);
             this.splitContainer1.Panel2.Controls.Add(this.label6);
             this.splitContainer1.Panel2.Controls.Add(this.label8);
@@ -177,6 +177,28 @@
             this.splitContainer1.Size = new System.Drawing.Size(862, 329);
             this.splitContainer1.SplitterDistance = 287;
             this.splitContainer1.TabIndex = 22;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.Control;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(9, 250);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(142, 20);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "DATE REMOVED:";
+            // 
+            // textBox1
+            // 
+            this.textBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(7, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(119, 26);
+            this.textBox1.TabIndex = 14;
+            this.textBox1.Visible = false;
+            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
             // label11
             // 
@@ -207,6 +229,17 @@
             this.fName.Size = new System.Drawing.Size(120, 26);
             this.fName.TabIndex = 10;
             // 
+            // pAge
+            // 
+            this.pAge.Enabled = false;
+            this.pAge.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pAge.Location = new System.Drawing.Point(2, 290);
+            this.pAge.MaxLength = 3;
+            this.pAge.Name = "pAge";
+            this.pAge.Size = new System.Drawing.Size(100, 26);
+            this.pAge.TabIndex = 28;
+            this.pAge.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.pAge_KeyPress);
+            // 
             // pMid
             // 
             this.pMid.Enabled = false;
@@ -227,16 +260,6 @@
             this.listBox1.Size = new System.Drawing.Size(219, 84);
             this.listBox1.TabIndex = 10;
             this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            // 
-            // pAge
-            // 
-            this.pAge.Enabled = false;
-            this.pAge.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pAge.Location = new System.Drawing.Point(2, 290);
-            this.pAge.Mask = "00";
-            this.pAge.Name = "pAge";
-            this.pAge.Size = new System.Drawing.Size(100, 26);
-            this.pAge.TabIndex = 14;
             // 
             // cRemovedPanel
             // 
@@ -326,7 +349,6 @@
             this.label9.Size = new System.Drawing.Size(118, 20);
             this.label9.TabIndex = 21;
             this.label9.Text = "PATIENT AGE:";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // pLast
             // 
@@ -371,7 +393,7 @@
             // 
             this.accessionNumbers.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.accessionNumbers.FormattingEnabled = true;
-            this.accessionNumbers.Location = new System.Drawing.Point(174, 69);
+            this.accessionNumbers.Location = new System.Drawing.Point(202, 67);
             this.accessionNumbers.Name = "accessionNumbers";
             this.accessionNumbers.Size = new System.Drawing.Size(121, 28);
             this.accessionNumbers.TabIndex = 23;
@@ -407,28 +429,6 @@
             this.b_back.Text = "BACK";
             this.b_back.UseVisualStyleBackColor = false;
             this.b_back.Click += new System.EventHandler(this.b_back_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(7, 3);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(119, 26);
-            this.textBox1.TabIndex = 14;
-            this.textBox1.Visible = false;
-            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.SystemColors.Control;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(9, 250);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(142, 20);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "DATE REMOVED:";
             // 
             // ShowBlood
             // 
@@ -477,7 +477,6 @@
         private System.Windows.Forms.Button b_back;
         private System.Windows.Forms.TextBox pMid;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.MaskedTextBox pAge;
         private System.Windows.Forms.Panel cRemovedPanel;
         private System.Windows.Forms.Label cRemovedLabel;
         private System.Windows.Forms.DateTimePicker cDateRemoved;
@@ -492,5 +491,6 @@
         private System.Windows.Forms.TextBox pFirst;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox pAge;
     }
 }

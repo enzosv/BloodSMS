@@ -15,20 +15,12 @@ namespace BloodSMSApp
         Storage storage;
         List<Blood> bloodList;
         Blood b;
-        public ShowBlood(Storage stor)
-        {
-            InitializeComponent();
-            storage = stor;
-            foreach (bloodType x in (bloodType[])Enum.GetValues(typeof(bloodType)))
-            {
-                bloodTypeField.Items.Add(MyEnums.GetDescription(x));
-            }
-        }
+        MainMenu parent;
 
-        public ShowBlood(Storage stor, Blood blood)
+        public ShowBlood(MainMenu mainmenu, Blood blood)
         {
             InitializeComponent();
-            storage = stor;
+            parent = mainmenu;
             b = blood;
             accessionNumbers.Text = b.Accession_number;
             foreach (bloodType x in (bloodType[])Enum.GetValues(typeof(bloodType)))
@@ -118,46 +110,44 @@ namespace BloodSMSApp
             cReason.Text = reason;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void splitContainer2_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void ShowBlood_Load(object sender, EventArgs e)
         {
+            Reload();
+        }
+
+        void Reload()
+        {
+            storage = parent.storage;
             bloodList = storage.bloodList;
+            accessionNumbers.Items.Clear();
             foreach (Blood b in bloodList)
             {
                 accessionNumbers.Items.Add(b.Accession_number);
             }
-
         }
 
         private void b_edit_Click(object sender, EventArgs e)
         {
             if (b_edit.Text == "EDIT")
             {
-                accessionNumbers.Enabled = false;
-                bloodTypeField.Enabled = true;
-                lName.Enabled = true;
-                fName.Enabled = true;
-                mInitial.Enabled = true;
-                dateDonated.Enabled = true;
-                textBox1.Visible = true;
-                textBox1.Text = accessionNumbers.Text;
+                if (storage.findBlood(accessionNumbers.Text) != null)
+                {
+                    accessionNumbers.Enabled = false;
+                    bloodTypeField.Enabled = true;
+                    lName.Enabled = true;
+                    fName.Enabled = true;
+                    mInitial.Enabled = true;
+                    dateDonated.Enabled = true;
+                    textBox1.Visible = true;
+                    textBox1.Text = accessionNumbers.Text;
 
-                b_edit.Text = "SAVE";
-                b_back.Text = "CANCEL";
+                    b_edit.Text = "SAVE";
+                    b_back.Text = "CANCEL";
+                }
+                else
+                {
+                    MessageBox.Show("Please select an accession number from the list");
+                }
             }
             else
             {
@@ -180,6 +170,9 @@ namespace BloodSMSApp
 
                     b_edit.Text = "EDIT";
                     b_back.Text = "BACK";
+                    parent.RefreshStorage();
+                    Reload();
+                    accessionNumbers.Text = b.Accession_number;
                     MessageBox.Show("Blood Updated");
                 }
                 else
@@ -231,6 +224,11 @@ namespace BloodSMSApp
                 b_edit.Text = "EDIT";
                 b_back.Text = "BACK";
             }
+        }
+
+        private void pAge_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(Char.IsNumber(e.KeyChar) || e.KeyChar == 8);
         }
     }
 }

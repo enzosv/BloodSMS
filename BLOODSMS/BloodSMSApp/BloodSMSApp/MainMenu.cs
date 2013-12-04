@@ -66,15 +66,13 @@ namespace BloodSMSApp
 
         private void b_refresh_Click(object sender, EventArgs e)
         {
-            //InitializeComponent();
-            //InitializeValues();
+            RefreshStorage();   
+        }
+
+        public void RefreshStorage()
+        {
             storage = new Storage("localhost", "bsms", "root", "root");
-            //command = graphCommand.Summary;
-
             ChangeDates();
-
-            //seriesHit = chart1.Series[0];
-
             RefreshOverview();
         }
 
@@ -82,7 +80,7 @@ namespace BloodSMSApp
 
         public void RefreshOverview()
         {
-            //dataGridView3.DataSource = storage.donorList;
+            oSearchField.Clear();
             RefreshNotifications();
             RefreshPieChart();
             RefreshGraph();
@@ -434,22 +432,25 @@ namespace BloodSMSApp
         private void resultsBox_DoubleClick(object sender, EventArgs e)
         {
             //int selection = resultsBox.SelectedIndex;
-            string selection = resultsBox.Items[resultsBox.SelectedIndex].ToString();
-            if (!String.IsNullOrWhiteSpace(selection))
+            if (resultsBox.SelectedIndex != -1)
             {
-                Donor d = storage.findDonorWithName(selection);
-                Blood b = storage.findBlood(selection);
-                if (b != null)
+                string selection = resultsBox.Items[resultsBox.SelectedIndex].ToString();
+                if (!String.IsNullOrWhiteSpace(selection))
                 {
-                    ShowBlood sb = new ShowBlood(storage, b);
-                    sb.ShowDialog();
-                }
-                else if (d != null)
-                {
-                    AddDonor a = new AddDonor(storage, d);
-                    a.ShowDialog();
-                }
+                    Donor d = storage.findDonorWithName(selection);
+                    Blood b = storage.findBlood(selection);
+                    if (b != null)
+                    {
+                        ShowBlood sb = new ShowBlood(this, b);
+                        sb.ShowDialog();
+                    }
+                    else if (d != null)
+                    {
+                        AddDonor a = new AddDonor(storage, d);
+                        a.ShowDialog();
+                    }
 
+                }
             }
             
         }
@@ -459,7 +460,7 @@ namespace BloodSMSApp
             Blood b = storage.findBlood(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
             if (b != null)
             {
-                ShowBlood sb = new ShowBlood(storage, b);
+                ShowBlood sb = new ShowBlood(this, b);
                 sb.ShowDialog();
             }
         }
