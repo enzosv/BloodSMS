@@ -196,7 +196,7 @@ namespace BloodSMSApp
                 MessageBox.Show("Blood with accession number already exists");
                 textBox1.Focus();
             }
-            
+
         }
 
         bool isStringValid(string s, int minLength)
@@ -229,6 +229,102 @@ namespace BloodSMSApp
         private void pAge_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !(Char.IsNumber(e.KeyChar) || e.KeyChar == 8);
+        }
+
+        private void editComponent_Click(object sender, EventArgs e)
+        {
+            if (editComponent.Text == "EDIT")
+            {
+                if (listBox1.SelectedIndex != -1)
+                {
+                    Blood_SMS.Component c = storage.findComponentWithAccessionNumberAndName(accessionNumbers.Text, MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString()));
+                    if (c != null)
+                    {
+                        editComponent.Text = "SAVE";
+                        listBox1.Enabled = false;
+                        dateProcessed.Enabled = true;
+                        if (c.Date_assigned != DateTime.MinValue)
+                        {
+                            pLast.Enabled = true;
+                            pFirst.Enabled = true;
+                            pMid.Enabled = true;
+                            pAge.Enabled = true;
+                        }
+                        if (c.Is_removed)
+                        {
+                            cRemovedPanel.Visible = true;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Component not found. Please refresh and try again");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select a component to edit");
+                }
+            }
+            else
+            {
+                Blood_SMS.Component c;
+                int removal_type = 0;
+                DateTime date_removed = DateTime.MinValue;
+                if (cDateRemoved.Enabled)
+                {
+                    switch (cRemovedLabel.Text)
+                    {
+                        case "DATE QUARANTINED":
+                            removal_type = 2;
+                            date_removed = cDateRemoved.Value;
+                            break;
+                        case "DATE RELEASED":
+                            removal_type = 3;
+                            date_removed = cDateRemoved.Value;
+                            break;
+                        case "DATE_REPROCESSED":
+                            removal_type = 1;
+                            date_removed = cDateRemoved.Value;
+                            break;
+                    }
+                }
+                int age;
+                if (pLast.Enabled && !String.IsNullOrWhiteSpace(pLast.Text) && !String.IsNullOrWhiteSpace(pFirst.Text) && !String.IsNullOrWhiteSpace(pMid.Text) && !String.IsNullOrWhiteSpace(pAge.Text))
+                {
+                    if (int.TryParse(pAge.Text, out age))
+                    {
+                        c = new Blood_SMS.Component(accessionNumbers.Text, (int)MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString()), removal_type, dateProcessed.Value, expiryDate.Value, dateAssigned.Value, date_removed, pLast.Text, pFirst.Text, pMid.Text, age, cReason.Text);
+                        if (storage.UpdateComponent(c))
+                        {
+                            MessageBox.Show("Component was successfully updated");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Error updating component. Please try again later");
+                        }
+                    }
+                }
+                else
+                {
+                    c = new Blood_SMS.Component(accessionNumbers.Text, (int)MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString()), removal_type, dateProcessed.Value, expiryDate.Value, DateTime.MinValue, date_removed, "", "", "", 0, cReason.Text);
+                    if (storage.UpdateComponent(c))
+                    {
+                        MessageBox.Show("Component was successfully updated");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error updating component. Please try again later");
+                    }
+                }
+
+            }
+
+
+        }
+
+        private void addComponent_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

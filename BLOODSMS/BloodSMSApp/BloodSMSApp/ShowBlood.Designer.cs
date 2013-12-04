@@ -59,6 +59,12 @@
             this.accessionNumbers = new System.Windows.Forms.ComboBox();
             this.b_edit = new System.Windows.Forms.Button();
             this.b_back = new System.Windows.Forms.Button();
+            this.addComponent = new System.Windows.Forms.Button();
+            this.editComponent = new System.Windows.Forms.Button();
+            this.expiryDate = new System.Windows.Forms.DateTimePicker();
+            this.label12 = new System.Windows.Forms.Label();
+            this.dateAssigned = new System.Windows.Forms.DateTimePicker();
+            this.label13 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -163,6 +169,12 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.label13);
+            this.splitContainer1.Panel2.Controls.Add(this.dateAssigned);
+            this.splitContainer1.Panel2.Controls.Add(this.expiryDate);
+            this.splitContainer1.Panel2.Controls.Add(this.label12);
+            this.splitContainer1.Panel2.Controls.Add(this.editComponent);
+            this.splitContainer1.Panel2.Controls.Add(this.addComponent);
             this.splitContainer1.Panel2.Controls.Add(this.pAge);
             this.splitContainer1.Panel2.Controls.Add(this.pMid);
             this.splitContainer1.Panel2.Controls.Add(this.listBox1);
@@ -233,7 +245,7 @@
             // 
             this.pAge.Enabled = false;
             this.pAge.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pAge.Location = new System.Drawing.Point(2, 290);
+            this.pAge.Location = new System.Drawing.Point(270, 75);
             this.pAge.MaxLength = 3;
             this.pAge.Name = "pAge";
             this.pAge.Size = new System.Drawing.Size(100, 26);
@@ -244,18 +256,17 @@
             // 
             this.pMid.Enabled = false;
             this.pMid.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pMid.Location = new System.Drawing.Point(214, 228);
+            this.pMid.Location = new System.Drawing.Point(478, 26);
             this.pMid.Name = "pMid";
             this.pMid.Size = new System.Drawing.Size(28, 26);
             this.pMid.TabIndex = 14;
             // 
             // listBox1
             // 
-            this.listBox1.Enabled = false;
             this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(3, 50);
+            this.listBox1.Location = new System.Drawing.Point(3, 26);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(219, 84);
             this.listBox1.TabIndex = 10;
@@ -269,9 +280,9 @@
             this.cRemovedPanel.Controls.Add(this.label10);
             this.cRemovedPanel.Enabled = false;
             this.cRemovedPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cRemovedPanel.Location = new System.Drawing.Point(266, 33);
+            this.cRemovedPanel.Location = new System.Drawing.Point(266, 105);
             this.cRemovedPanel.Name = "cRemovedPanel";
-            this.cRemovedPanel.Size = new System.Drawing.Size(302, 262);
+            this.cRemovedPanel.Size = new System.Drawing.Size(302, 211);
             this.cRemovedPanel.TabIndex = 27;
             this.cRemovedPanel.Visible = false;
             // 
@@ -280,7 +291,7 @@
             this.cRemovedLabel.AutoSize = true;
             this.cRemovedLabel.BackColor = System.Drawing.SystemColors.Control;
             this.cRemovedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cRemovedLabel.Location = new System.Drawing.Point(3, -4);
+            this.cRemovedLabel.Location = new System.Drawing.Point(0, 8);
             this.cRemovedLabel.Name = "cRemovedLabel";
             this.cRemovedLabel.Size = new System.Drawing.Size(142, 20);
             this.cRemovedLabel.TabIndex = 16;
@@ -289,7 +300,7 @@
             // cDateRemoved
             // 
             this.cDateRemoved.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cDateRemoved.Location = new System.Drawing.Point(3, 19);
+            this.cDateRemoved.Location = new System.Drawing.Point(0, 31);
             this.cDateRemoved.Name = "cDateRemoved";
             this.cDateRemoved.Size = new System.Drawing.Size(200, 26);
             this.cDateRemoved.TabIndex = 17;
@@ -297,7 +308,7 @@
             // cReason
             // 
             this.cReason.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cReason.Location = new System.Drawing.Point(4, 106);
+            this.cReason.Location = new System.Drawing.Point(-3, 83);
             this.cReason.Multiline = true;
             this.cReason.Name = "cReason";
             this.cReason.Size = new System.Drawing.Size(295, 131);
@@ -308,7 +319,7 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.SystemColors.Control;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(2, 83);
+            this.label10.Location = new System.Drawing.Point(-4, 60);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(202, 20);
             this.label10.TabIndex = 23;
@@ -320,7 +331,7 @@
             this.label6.BackColor = System.Drawing.SystemColors.Control;
             this.label6.Enabled = false;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(2, 205);
+            this.label6.Location = new System.Drawing.Point(266, 3);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(129, 20);
             this.label6.TabIndex = 15;
@@ -332,7 +343,7 @@
             this.label8.BackColor = System.Drawing.SystemColors.Control;
             this.label8.Enabled = false;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(3, 27);
+            this.label8.Location = new System.Drawing.Point(3, 3);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(163, 20);
             this.label8.TabIndex = 12;
@@ -344,7 +355,7 @@
             this.label9.BackColor = System.Drawing.SystemColors.Control;
             this.label9.Enabled = false;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(3, 267);
+            this.label9.Location = new System.Drawing.Point(271, 52);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(118, 20);
             this.label9.TabIndex = 21;
@@ -354,7 +365,7 @@
             // 
             this.pLast.Enabled = false;
             this.pLast.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pLast.Location = new System.Drawing.Point(2, 228);
+            this.pLast.Location = new System.Drawing.Point(266, 26);
             this.pLast.Name = "pLast";
             this.pLast.Size = new System.Drawing.Size(100, 26);
             this.pLast.TabIndex = 14;
@@ -363,7 +374,7 @@
             // 
             this.dateProcessed.Enabled = false;
             this.dateProcessed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateProcessed.Location = new System.Drawing.Point(2, 165);
+            this.dateProcessed.Location = new System.Drawing.Point(3, 136);
             this.dateProcessed.Name = "dateProcessed";
             this.dateProcessed.Size = new System.Drawing.Size(200, 26);
             this.dateProcessed.TabIndex = 19;
@@ -374,7 +385,7 @@
             this.label7.BackColor = System.Drawing.SystemColors.Control;
             this.label7.Enabled = false;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(3, 142);
+            this.label7.Location = new System.Drawing.Point(3, 113);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(161, 20);
             this.label7.TabIndex = 13;
@@ -384,7 +395,7 @@
             // 
             this.pFirst.Enabled = false;
             this.pFirst.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pFirst.Location = new System.Drawing.Point(108, 228);
+            this.pFirst.Location = new System.Drawing.Point(372, 26);
             this.pFirst.Name = "pFirst";
             this.pFirst.Size = new System.Drawing.Size(100, 26);
             this.pFirst.TabIndex = 25;
@@ -429,6 +440,78 @@
             this.b_back.Text = "BACK";
             this.b_back.UseVisualStyleBackColor = false;
             this.b_back.Click += new System.EventHandler(this.b_back_Click);
+            // 
+            // addComponent
+            // 
+            this.addComponent.BackColor = System.Drawing.Color.Firebrick;
+            this.addComponent.FlatAppearance.BorderSize = 0;
+            this.addComponent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addComponent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addComponent.ForeColor = System.Drawing.Color.White;
+            this.addComponent.Location = new System.Drawing.Point(201, 87);
+            this.addComponent.Name = "addComponent";
+            this.addComponent.Size = new System.Drawing.Size(21, 29);
+            this.addComponent.TabIndex = 26;
+            this.addComponent.Text = "+";
+            this.addComponent.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.addComponent.UseVisualStyleBackColor = false;
+            this.addComponent.Click += new System.EventHandler(this.addComponent_Click);
+            // 
+            // editComponent
+            // 
+            this.editComponent.BackColor = System.Drawing.Color.Firebrick;
+            this.editComponent.FlatAppearance.BorderSize = 0;
+            this.editComponent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editComponent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editComponent.ForeColor = System.Drawing.Color.White;
+            this.editComponent.Location = new System.Drawing.Point(7, 238);
+            this.editComponent.Name = "editComponent";
+            this.editComponent.Size = new System.Drawing.Size(75, 32);
+            this.editComponent.TabIndex = 26;
+            this.editComponent.Text = "EDIT";
+            this.editComponent.UseVisualStyleBackColor = false;
+            this.editComponent.Click += new System.EventHandler(this.editComponent_Click);
+            // 
+            // expiryDate
+            // 
+            this.expiryDate.Enabled = false;
+            this.expiryDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.expiryDate.Location = new System.Drawing.Point(3, 191);
+            this.expiryDate.Name = "expiryDate";
+            this.expiryDate.Size = new System.Drawing.Size(200, 26);
+            this.expiryDate.TabIndex = 30;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.SystemColors.Control;
+            this.label12.Enabled = false;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(3, 168);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(129, 20);
+            this.label12.TabIndex = 29;
+            this.label12.Text = "EXPIRTY DATE:";
+            // 
+            // dateAssigned
+            // 
+            this.dateAssigned.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateAssigned.Location = new System.Drawing.Point(376, 75);
+            this.dateAssigned.Name = "dateAssigned";
+            this.dateAssigned.Size = new System.Drawing.Size(200, 26);
+            this.dateAssigned.TabIndex = 24;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.SystemColors.Control;
+            this.label13.Enabled = false;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(404, 55);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(145, 20);
+            this.label13.TabIndex = 31;
+            this.label13.Text = "DATE ASSIGNED:";
             // 
             // ShowBlood
             // 
@@ -492,5 +575,11 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox pAge;
+        private System.Windows.Forms.Button addComponent;
+        private System.Windows.Forms.Button editComponent;
+        private System.Windows.Forms.DateTimePicker expiryDate;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.DateTimePicker dateAssigned;
     }
 }
