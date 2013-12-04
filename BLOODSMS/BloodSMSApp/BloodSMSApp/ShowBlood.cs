@@ -244,6 +244,10 @@ namespace BloodSMSApp
                     Blood_SMS.Component c = storage.findComponentWithAccessionNumberAndName(accessionNumbers.Text, MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString()));
                     if (c != null)
                     {
+                        assignButton.Visible = false;
+                        quarantineButton.Visible = false;
+                        reprocessButton.Visible = false;
+                        deleteButton.Text = "CANCEL";
                         editComponent.Text = "SAVE";
                         listBox1.Enabled = false;
                         dateProcessed.Enabled = true;
@@ -278,7 +282,7 @@ namespace BloodSMSApp
                 }
                 else
                 {
-                    MessageBox.Show("Please select a component to edit");
+                    MessageBox.Show("Component may not be edited");
                 }
             }
             else

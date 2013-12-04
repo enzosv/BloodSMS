@@ -66,6 +66,10 @@
             this.b_edit = new System.Windows.Forms.Button();
             this.b_back = new System.Windows.Forms.Button();
             this.cNameBox = new System.Windows.Forms.ComboBox();
+            this.reprocessButton = new System.Windows.Forms.Button();
+            this.quarantineButton = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
+            this.assignButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -170,6 +174,10 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.assignButton);
+            this.splitContainer1.Panel2.Controls.Add(this.deleteButton);
+            this.splitContainer1.Panel2.Controls.Add(this.quarantineButton);
+            this.splitContainer1.Panel2.Controls.Add(this.reprocessButton);
             this.splitContainer1.Panel2.Controls.Add(this.cNameBox);
             this.splitContainer1.Panel2.Controls.Add(this.label13);
             this.splitContainer1.Panel2.Controls.Add(this.dateAssigned);
@@ -291,7 +299,7 @@
             this.editComponent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editComponent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editComponent.ForeColor = System.Drawing.Color.White;
-            this.editComponent.Location = new System.Drawing.Point(7, 284);
+            this.editComponent.Location = new System.Drawing.Point(3, 293);
             this.editComponent.Name = "editComponent";
             this.editComponent.Size = new System.Drawing.Size(75, 32);
             this.editComponent.TabIndex = 26;
@@ -525,6 +533,62 @@
             this.cNameBox.TabIndex = 26;
             this.cNameBox.Visible = false;
             // 
+            // reprocessButton
+            // 
+            this.reprocessButton.BackColor = System.Drawing.Color.Firebrick;
+            this.reprocessButton.FlatAppearance.BorderSize = 0;
+            this.reprocessButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.reprocessButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reprocessButton.ForeColor = System.Drawing.Color.White;
+            this.reprocessButton.Location = new System.Drawing.Point(84, 255);
+            this.reprocessButton.Name = "reprocessButton";
+            this.reprocessButton.Size = new System.Drawing.Size(75, 32);
+            this.reprocessButton.TabIndex = 32;
+            this.reprocessButton.Text = "REPROCESS";
+            this.reprocessButton.UseVisualStyleBackColor = false;
+            // 
+            // quarantineButton
+            // 
+            this.quarantineButton.BackColor = System.Drawing.Color.Firebrick;
+            this.quarantineButton.FlatAppearance.BorderSize = 0;
+            this.quarantineButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.quarantineButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quarantineButton.ForeColor = System.Drawing.Color.White;
+            this.quarantineButton.Location = new System.Drawing.Point(165, 255);
+            this.quarantineButton.Name = "quarantineButton";
+            this.quarantineButton.Size = new System.Drawing.Size(75, 32);
+            this.quarantineButton.TabIndex = 33;
+            this.quarantineButton.Text = "QUARANTINE";
+            this.quarantineButton.UseVisualStyleBackColor = false;
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.BackColor = System.Drawing.Color.Firebrick;
+            this.deleteButton.FlatAppearance.BorderSize = 0;
+            this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteButton.ForeColor = System.Drawing.Color.White;
+            this.deleteButton.Location = new System.Drawing.Point(84, 293);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(75, 32);
+            this.deleteButton.TabIndex = 34;
+            this.deleteButton.Text = "DELETE";
+            this.deleteButton.UseVisualStyleBackColor = false;
+            // 
+            // assignButton
+            // 
+            this.assignButton.BackColor = System.Drawing.Color.Firebrick;
+            this.assignButton.FlatAppearance.BorderSize = 0;
+            this.assignButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.assignButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.assignButton.ForeColor = System.Drawing.Color.White;
+            this.assignButton.Location = new System.Drawing.Point(3, 255);
+            this.assignButton.Name = "assignButton";
+            this.assignButton.Size = new System.Drawing.Size(75, 32);
+            this.assignButton.TabIndex = 35;
+            this.assignButton.Text = "ASSIGN";
+            this.assignButton.UseVisualStyleBackColor = false;
+            // 
             // ShowBlood
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -594,5 +658,9 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.DateTimePicker dateAssigned;
         private System.Windows.Forms.ComboBox cNameBox;
+        private System.Windows.Forms.Button assignButton;
+        private System.Windows.Forms.Button deleteButton;
+        private System.Windows.Forms.Button quarantineButton;
+        private System.Windows.Forms.Button reprocessButton;
     }
 }
