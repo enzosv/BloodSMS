@@ -402,12 +402,13 @@ namespace Blood_SMS
             }
             return false;
         }
-        bool UpdateBlood(Blood b)
+        public bool UpdateBlood(Blood b, string oldAccessionNumber)
         {
-            if (bloodCommands("UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS, new string[] { "accession_number" }), b))
+            
+            if (bloodCommands("UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS, new string[] { "accession_number" }), b, oldAccessionNumber))
             {
-                UnsortBlood(findBlood(b.Accession_number));
-                if (findBlood(b.Accession_number).Accession_number != b.Accession_number)
+                UnsortBlood(findBlood(oldAccessionNumber));
+                if (oldAccessionNumber != b.Accession_number)
                 {
                     foreach (Component c in b.components)
                     {
@@ -415,6 +416,18 @@ namespace Blood_SMS
                         UpdateComponent(c, b);
                     }
                 }
+                b.checkRemoved();
+                SortBlood(b);
+                return true;
+            }
+            return false;
+        }
+
+        bool UpdateBlood(Blood b)
+        {
+            if (bloodCommands("UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS, new string[] { "accession_number" }), b))
+            {
+                UnsortBlood(findBlood(b.Accession_number));
                 b.checkRemoved();
                 SortBlood(b);
                 return true;
@@ -436,6 +449,28 @@ namespace Blood_SMS
                 comm.Parameters.AddWithValue("@donor_id", null);
             comm.Parameters.AddWithValue("@date_donated", x.Date_donated);
             comm.Parameters.AddWithValue("@date_removed", x.Date_removed);
+
+            conn.Open();
+            int rowsAffected = comm.ExecuteNonQuery();
+            conn.Close();
+            return (rowsAffected > 0);
+        }
+
+        bool bloodCommands(string query, Blood x, string oldKey)
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            comm.CommandType = CommandType.Text;
+
+            comm.Parameters.AddWithValue("@accession_number", x.Accession_number);
+            comm.Parameters.AddWithValue("@blood_type", x.Blood_type);
+            if (x.Donor_id.HasValue)
+                comm.Parameters.AddWithValue("@donor_id", x.Donor_id.Value);
+            else
+                comm.Parameters.AddWithValue("@donor_id", null);
+            comm.Parameters.AddWithValue("@date_donated", x.Date_donated);
+            comm.Parameters.AddWithValue("@date_removed", x.Date_removed);
+            comm.Parameters.AddWithValue("@oldPrimaryKey", oldKey);
 
             conn.Open();
             int rowsAffected = comm.ExecuteNonQuery();
@@ -596,7 +631,7 @@ namespace Blood_SMS
             return false;
         }
 
-        bool UpdateComponent(Component c)
+        public bool UpdateComponent(Component c)
         {
             if (ComponentCommands("Update component set " + UpdateQuery(COMPONENT_FIELDS, new string[] { "accession_number", "component_name" }), c))
             {
@@ -711,6 +746,18 @@ namespace Blood_SMS
             {
                 valueParameters += " AND Where " + comparator[i] + "=@" + comparator[i];
             }
+
+            return valueParameters;
+        }
+
+        string UpdateQueryChangePrimary(string[] fields)
+        {
+            string valueParameters = fields[1] + "=@" + fields[1];
+            for (int i = 2; i < fields.Length; i++)
+            {
+                valueParameters += ", " + fields[i] + "=@" + fields[i];
+            }
+            valueParameters += " Where " + fields[0] + "=@oldPrimaryKey";
 
             return valueParameters;
         }

@@ -48,8 +48,7 @@ namespace BloodSMSApp
             pMid.Clear();
             pFirst.Clear();
             pAge.Clear();
-            dateRemoved.Visible = false;
-            label11.Visible = false;
+            label5.Text = "Not Removed";
             cRemovedPanel.Visible = false;
             if (b != null)
             {
@@ -67,9 +66,7 @@ namespace BloodSMSApp
                 dateDonated.Value = b.Date_donated;
                 if (b.Is_removed)
                 {
-                    label11.Visible = true;
-                    dateRemoved.Visible = true;
-                    dateRemoved.Value = b.Date_removed;
+                    label5.Text = b.Date_removed.ToLongDateString();
                 }
                 foreach (Blood_SMS.Component c in b.components)
                 {
@@ -148,14 +145,87 @@ namespace BloodSMSApp
 
         private void b_edit_Click(object sender, EventArgs e)
         {
-            b_cancel.Show();
-            b_save.Show();
+            if (b_edit.Text == "EDIT")
+            {
+                accessionNumbers.Enabled = false;
+                bloodTypeField.Enabled = true;
+                lName.Enabled = true;
+                fName.Enabled = true;
+                mInitial.Enabled = true;
+                dateDonated.Enabled = true;
+                textBox1.Visible = true;
+                textBox1.Text = accessionNumbers.Text;
+
+                b_edit.Text = "SAVE";
+                b_back.Text = "CANCEL";
+            }
+            else
+            {
+                Blood b;
+                Donor d = storage.findDonorWithName(lName.Text, fName.Text, mInitial.Text);
+                if (d != null)
+                    b = new Blood(textBox1.Text, bloodTypeField.SelectedIndex, d.Donor_id, dateDonated.Value);
+                else
+                    b = new Blood(textBox1.Text, bloodTypeField.SelectedIndex, dateDonated.Value);
+                if (storage.UpdateBlood(b, accessionNumbers.Text))
+                {
+                    accessionNumbers.Enabled = true;
+                    bloodTypeField.Enabled = false;
+                    lName.Enabled = false;
+                    fName.Enabled = false;
+                    mInitial.Enabled = false;
+                    dateDonated.Enabled = false;
+                    textBox1.Visible = false;
+                    textBox1.Clear();
+
+                    b_edit.Text = "EDIT";
+                    b_back.Text = "BACK";
+                    MessageBox.Show("Blood Updated");
+                }
+            }
         }
 
         private void accessionNumbers_TextUpdate(object sender, EventArgs e)
         {
             b = storage.findBlood(accessionNumbers.Text);
             DisplayBlood();
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            if (textBox1.Text != accessionNumbers.Text && storage.findBlood(textBox1.Text) != null)
+            {
+                MessageBox.Show("Blood with accession number already exists");
+                textBox1.Focus();
+            }
+            
+        }
+
+        bool isStringValid(string s, int minLength)
+        {
+            return (!String.IsNullOrWhiteSpace(s) && s.Length >= minLength);
+        }
+
+        private void b_back_Click(object sender, EventArgs e)
+        {
+            if (b_back.Text == "BACK")
+            {
+                Close();
+            }
+            else
+            {
+                accessionNumbers.Enabled = true;
+                bloodTypeField.Enabled = false;
+                lName.Enabled = false;
+                fName.Enabled = false;
+                mInitial.Enabled = false;
+                dateDonated.Enabled = false;
+                textBox1.Visible = false;
+                textBox1.Clear();
+
+                b_edit.Text = "EDIT";
+                b_back.Text = "BACK";
+            }
         }
     }
 }

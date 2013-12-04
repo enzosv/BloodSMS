@@ -69,9 +69,7 @@ namespace Blood_SMS
             bool old_is_removed = is_removed;
             if (date_removed != DateTime.MinValue)
             {
-                is_removed = true;
-                if (date_removed == DateTime.MinValue)
-                    date_removed = DateTime.Now;
+                DateTime latestDate = DateTime.MinValue;
                 foreach (Component c in components)
                 {
                     if (!c.Is_removed)
@@ -80,10 +78,20 @@ namespace Blood_SMS
                         is_removed = false;
                         break;
                     }
+                    else
+                    {
+                        if (c.Date_removed > latestDate)
+                            latestDate = c.Date_removed;
+                        is_removed = true;
+                        date_removed = latestDate;
+                    }
                 }
             }
             else
+            {
+                date_removed = DateTime.MinValue;
                 is_removed = false;
+            }
             return (old_is_removed != is_removed);
 
         }

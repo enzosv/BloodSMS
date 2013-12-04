@@ -68,7 +68,6 @@ namespace BloodSMSApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int blood_type = (int)MyEnums.GetValueFromDescription<bloodType>(bTypeField.Text);
             //if patient
             if (isStringValid(pLast.Text, 1) && isStringValid(pFirst.Text, 1) && isStringValid(t_patientAge.Text, 1))
             {
@@ -77,9 +76,9 @@ namespace BloodSMSApp
                 {
                     Blood b;
                     if (hasDonor)
-                        b = new Blood(t_accessionNumber.Text, blood_type, donor.Donor_id, dateAddedField.Value);
+                        b = new Blood(t_accessionNumber.Text, bTypeField.SelectedIndex, donor.Donor_id, dateAddedField.Value);
                     else
-                        b = new Blood(t_accessionNumber.Text, blood_type, dateAddedField.Value);
+                        b = new Blood(t_accessionNumber.Text, bTypeField.SelectedIndex, dateAddedField.Value);
                     
                     if (storage.AddBlood(b, dateExpireField.Value, pLast.Text, pFirst.Text, pMid.Text, age))
                     {
@@ -93,9 +92,9 @@ namespace BloodSMSApp
             {
                 Blood b;
                 if (hasDonor)
-                    b = new Blood(t_accessionNumber.Text, blood_type, donor.Donor_id, dateAddedField.Value);
+                    b = new Blood(t_accessionNumber.Text, bTypeField.SelectedIndex, donor.Donor_id, dateAddedField.Value);
                 else
-                    b = new Blood(t_accessionNumber.Text, blood_type, dateAddedField.Value);
+                    b = new Blood(t_accessionNumber.Text, bTypeField.SelectedIndex, dateAddedField.Value);
                 if (storage.AddBlood(b, dateExpireField.Value))
                 {
                     MessageBox.Show("Blood added");

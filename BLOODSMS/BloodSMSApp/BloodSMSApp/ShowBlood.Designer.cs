@@ -37,7 +37,6 @@
             this.bloodTypeField = new System.Windows.Forms.ComboBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label11 = new System.Windows.Forms.Label();
-            this.dateRemoved = new System.Windows.Forms.DateTimePicker();
             this.mInitial = new System.Windows.Forms.TextBox();
             this.fName = new System.Windows.Forms.TextBox();
             this.pMid = new System.Windows.Forms.TextBox();
@@ -58,8 +57,8 @@
             this.accessionNumbers = new System.Windows.Forms.ComboBox();
             this.b_edit = new System.Windows.Forms.Button();
             this.b_back = new System.Windows.Forms.Button();
-            this.b_save = new System.Windows.Forms.Button();
-            this.b_cancel = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -84,7 +83,7 @@
             this.label2.BackColor = System.Drawing.SystemColors.Control;
             this.label2.Enabled = false;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(9, 27);
+            this.label2.Location = new System.Drawing.Point(9, 33);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(114, 20);
             this.label2.TabIndex = 3;
@@ -137,7 +136,7 @@
             this.bloodTypeField.Enabled = false;
             this.bloodTypeField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bloodTypeField.FormattingEnabled = true;
-            this.bloodTypeField.Location = new System.Drawing.Point(5, 50);
+            this.bloodTypeField.Location = new System.Drawing.Point(5, 56);
             this.bloodTypeField.Name = "bloodTypeField";
             this.bloodTypeField.Size = new System.Drawing.Size(121, 28);
             this.bloodTypeField.TabIndex = 9;
@@ -150,8 +149,9 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.label5);
+            this.splitContainer1.Panel1.Controls.Add(this.textBox1);
             this.splitContainer1.Panel1.Controls.Add(this.label11);
-            this.splitContainer1.Panel1.Controls.Add(this.dateRemoved);
             this.splitContainer1.Panel1.Controls.Add(this.mInitial);
             this.splitContainer1.Panel1.Controls.Add(this.fName);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
@@ -182,24 +182,12 @@
             // 
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.SystemColors.Control;
-            this.label11.Enabled = false;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.Location = new System.Drawing.Point(9, 228);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(142, 20);
             this.label11.TabIndex = 12;
             this.label11.Text = "DATE REMOVED:";
-            this.label11.Visible = false;
-            // 
-            // dateRemoved
-            // 
-            this.dateRemoved.Enabled = false;
-            this.dateRemoved.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateRemoved.Location = new System.Drawing.Point(7, 253);
-            this.dateRemoved.Name = "dateRemoved";
-            this.dateRemoved.Size = new System.Drawing.Size(200, 26);
-            this.dateRemoved.TabIndex = 13;
-            this.dateRemoved.Visible = false;
             // 
             // mInitial
             // 
@@ -397,7 +385,7 @@
             this.b_edit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_edit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_edit.ForeColor = System.Drawing.Color.White;
-            this.b_edit.Location = new System.Drawing.Point(799, 70);
+            this.b_edit.Location = new System.Drawing.Point(12, 442);
             this.b_edit.Name = "b_edit";
             this.b_edit.Size = new System.Drawing.Size(75, 32);
             this.b_edit.TabIndex = 24;
@@ -412,42 +400,35 @@
             this.b_back.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.b_back.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_back.ForeColor = System.Drawing.Color.White;
-            this.b_back.Location = new System.Drawing.Point(799, 442);
+            this.b_back.Location = new System.Drawing.Point(93, 442);
             this.b_back.Name = "b_back";
             this.b_back.Size = new System.Drawing.Size(75, 32);
             this.b_back.TabIndex = 25;
             this.b_back.Text = "BACK";
             this.b_back.UseVisualStyleBackColor = false;
+            this.b_back.Click += new System.EventHandler(this.b_back_Click);
             // 
-            // b_save
+            // textBox1
             // 
-            this.b_save.BackColor = System.Drawing.Color.Firebrick;
-            this.b_save.FlatAppearance.BorderSize = 0;
-            this.b_save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_save.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_save.ForeColor = System.Drawing.Color.White;
-            this.b_save.Location = new System.Drawing.Point(12, 443);
-            this.b_save.Name = "b_save";
-            this.b_save.Size = new System.Drawing.Size(75, 32);
-            this.b_save.TabIndex = 26;
-            this.b_save.Text = "SAVE";
-            this.b_save.UseVisualStyleBackColor = false;
-            this.b_save.Visible = false;
+            this.textBox1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(7, 3);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(119, 26);
+            this.textBox1.TabIndex = 14;
+            this.textBox1.Visible = false;
+            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
-            // b_cancel
+            // label5
             // 
-            this.b_cancel.BackColor = System.Drawing.Color.Firebrick;
-            this.b_cancel.FlatAppearance.BorderSize = 0;
-            this.b_cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_cancel.ForeColor = System.Drawing.Color.White;
-            this.b_cancel.Location = new System.Drawing.Point(93, 443);
-            this.b_cancel.Name = "b_cancel";
-            this.b_cancel.Size = new System.Drawing.Size(85, 32);
-            this.b_cancel.TabIndex = 27;
-            this.b_cancel.Text = "CANCEL";
-            this.b_cancel.UseVisualStyleBackColor = false;
-            this.b_cancel.Visible = false;
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.Control;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(9, 250);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(142, 20);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "DATE REMOVED:";
             // 
             // ShowBlood
             // 
@@ -457,8 +438,6 @@
             this.BackgroundImage = global::BloodSMSApp.Properties.Resources._1450316_3581144904706_1077020895_n;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(885, 485);
-            this.Controls.Add(this.b_cancel);
-            this.Controls.Add(this.b_save);
             this.Controls.Add(this.b_back);
             this.Controls.Add(this.b_edit);
             this.Controls.Add(this.accessionNumbers);
@@ -494,7 +473,6 @@
         private System.Windows.Forms.TextBox mInitial;
         private System.Windows.Forms.TextBox fName;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.DateTimePicker dateRemoved;
         private System.Windows.Forms.Button b_edit;
         private System.Windows.Forms.Button b_back;
         private System.Windows.Forms.TextBox pMid;
@@ -512,7 +490,7 @@
         private System.Windows.Forms.DateTimePicker dateProcessed;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox pFirst;
-        private System.Windows.Forms.Button b_save;
-        private System.Windows.Forms.Button b_cancel;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label5;
     }
 }
