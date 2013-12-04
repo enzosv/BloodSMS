@@ -41,6 +41,12 @@
             this.label11 = new System.Windows.Forms.Label();
             this.mInitial = new System.Windows.Forms.TextBox();
             this.fName = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.dateAssigned = new System.Windows.Forms.DateTimePicker();
+            this.expiryDate = new System.Windows.Forms.DateTimePicker();
+            this.label12 = new System.Windows.Forms.Label();
+            this.editComponent = new System.Windows.Forms.Button();
+            this.addComponent = new System.Windows.Forms.Button();
             this.pAge = new System.Windows.Forms.TextBox();
             this.pMid = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
@@ -59,12 +65,7 @@
             this.accessionNumbers = new System.Windows.Forms.ComboBox();
             this.b_edit = new System.Windows.Forms.Button();
             this.b_back = new System.Windows.Forms.Button();
-            this.addComponent = new System.Windows.Forms.Button();
-            this.editComponent = new System.Windows.Forms.Button();
-            this.expiryDate = new System.Windows.Forms.DateTimePicker();
-            this.label12 = new System.Windows.Forms.Label();
-            this.dateAssigned = new System.Windows.Forms.DateTimePicker();
-            this.label13 = new System.Windows.Forms.Label();
+            this.cNameBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -169,6 +170,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.cNameBox);
             this.splitContainer1.Panel2.Controls.Add(this.label13);
             this.splitContainer1.Panel2.Controls.Add(this.dateAssigned);
             this.splitContainer1.Panel2.Controls.Add(this.expiryDate);
@@ -240,6 +242,78 @@
             this.fName.Name = "fName";
             this.fName.Size = new System.Drawing.Size(120, 26);
             this.fName.TabIndex = 10;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.SystemColors.Control;
+            this.label13.Enabled = false;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(404, 55);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(145, 20);
+            this.label13.TabIndex = 31;
+            this.label13.Text = "DATE ASSIGNED:";
+            // 
+            // dateAssigned
+            // 
+            this.dateAssigned.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateAssigned.Location = new System.Drawing.Point(376, 75);
+            this.dateAssigned.Name = "dateAssigned";
+            this.dateAssigned.Size = new System.Drawing.Size(200, 26);
+            this.dateAssigned.TabIndex = 24;
+            // 
+            // expiryDate
+            // 
+            this.expiryDate.Enabled = false;
+            this.expiryDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.expiryDate.Location = new System.Drawing.Point(3, 223);
+            this.expiryDate.Name = "expiryDate";
+            this.expiryDate.Size = new System.Drawing.Size(200, 26);
+            this.expiryDate.TabIndex = 30;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.SystemColors.Control;
+            this.label12.Enabled = false;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(3, 197);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(129, 20);
+            this.label12.TabIndex = 29;
+            this.label12.Text = "EXPIRTY DATE:";
+            // 
+            // editComponent
+            // 
+            this.editComponent.BackColor = System.Drawing.Color.Firebrick;
+            this.editComponent.FlatAppearance.BorderSize = 0;
+            this.editComponent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editComponent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editComponent.ForeColor = System.Drawing.Color.White;
+            this.editComponent.Location = new System.Drawing.Point(7, 284);
+            this.editComponent.Name = "editComponent";
+            this.editComponent.Size = new System.Drawing.Size(75, 32);
+            this.editComponent.TabIndex = 26;
+            this.editComponent.Text = "EDIT";
+            this.editComponent.UseVisualStyleBackColor = false;
+            this.editComponent.Click += new System.EventHandler(this.editComponent_Click);
+            // 
+            // addComponent
+            // 
+            this.addComponent.BackColor = System.Drawing.Color.Firebrick;
+            this.addComponent.FlatAppearance.BorderSize = 0;
+            this.addComponent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addComponent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addComponent.ForeColor = System.Drawing.Color.White;
+            this.addComponent.Location = new System.Drawing.Point(201, 87);
+            this.addComponent.Name = "addComponent";
+            this.addComponent.Size = new System.Drawing.Size(21, 29);
+            this.addComponent.TabIndex = 26;
+            this.addComponent.Text = "+";
+            this.addComponent.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.addComponent.UseVisualStyleBackColor = false;
+            this.addComponent.Click += new System.EventHandler(this.addComponent_Click);
             // 
             // pAge
             // 
@@ -374,7 +448,7 @@
             // 
             this.dateProcessed.Enabled = false;
             this.dateProcessed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateProcessed.Location = new System.Drawing.Point(3, 136);
+            this.dateProcessed.Location = new System.Drawing.Point(3, 168);
             this.dateProcessed.Name = "dateProcessed";
             this.dateProcessed.Size = new System.Drawing.Size(200, 26);
             this.dateProcessed.TabIndex = 19;
@@ -385,7 +459,7 @@
             this.label7.BackColor = System.Drawing.SystemColors.Control;
             this.label7.Enabled = false;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(3, 113);
+            this.label7.Location = new System.Drawing.Point(3, 145);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(161, 20);
             this.label7.TabIndex = 13;
@@ -441,77 +515,15 @@
             this.b_back.UseVisualStyleBackColor = false;
             this.b_back.Click += new System.EventHandler(this.b_back_Click);
             // 
-            // addComponent
+            // cNameBox
             // 
-            this.addComponent.BackColor = System.Drawing.Color.Firebrick;
-            this.addComponent.FlatAppearance.BorderSize = 0;
-            this.addComponent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addComponent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addComponent.ForeColor = System.Drawing.Color.White;
-            this.addComponent.Location = new System.Drawing.Point(201, 87);
-            this.addComponent.Name = "addComponent";
-            this.addComponent.Size = new System.Drawing.Size(21, 29);
-            this.addComponent.TabIndex = 26;
-            this.addComponent.Text = "+";
-            this.addComponent.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.addComponent.UseVisualStyleBackColor = false;
-            this.addComponent.Click += new System.EventHandler(this.addComponent_Click);
-            // 
-            // editComponent
-            // 
-            this.editComponent.BackColor = System.Drawing.Color.Firebrick;
-            this.editComponent.FlatAppearance.BorderSize = 0;
-            this.editComponent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.editComponent.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.editComponent.ForeColor = System.Drawing.Color.White;
-            this.editComponent.Location = new System.Drawing.Point(7, 238);
-            this.editComponent.Name = "editComponent";
-            this.editComponent.Size = new System.Drawing.Size(75, 32);
-            this.editComponent.TabIndex = 26;
-            this.editComponent.Text = "EDIT";
-            this.editComponent.UseVisualStyleBackColor = false;
-            this.editComponent.Click += new System.EventHandler(this.editComponent_Click);
-            // 
-            // expiryDate
-            // 
-            this.expiryDate.Enabled = false;
-            this.expiryDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.expiryDate.Location = new System.Drawing.Point(3, 191);
-            this.expiryDate.Name = "expiryDate";
-            this.expiryDate.Size = new System.Drawing.Size(200, 26);
-            this.expiryDate.TabIndex = 30;
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.BackColor = System.Drawing.SystemColors.Control;
-            this.label12.Enabled = false;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(3, 168);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(129, 20);
-            this.label12.TabIndex = 29;
-            this.label12.Text = "EXPIRTY DATE:";
-            // 
-            // dateAssigned
-            // 
-            this.dateAssigned.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateAssigned.Location = new System.Drawing.Point(376, 75);
-            this.dateAssigned.Name = "dateAssigned";
-            this.dateAssigned.Size = new System.Drawing.Size(200, 26);
-            this.dateAssigned.TabIndex = 24;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.SystemColors.Control;
-            this.label13.Enabled = false;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(404, 55);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(145, 20);
-            this.label13.TabIndex = 31;
-            this.label13.Text = "DATE ASSIGNED:";
+            this.cNameBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cNameBox.FormattingEnabled = true;
+            this.cNameBox.Location = new System.Drawing.Point(3, 116);
+            this.cNameBox.Name = "cNameBox";
+            this.cNameBox.Size = new System.Drawing.Size(219, 28);
+            this.cNameBox.TabIndex = 26;
+            this.cNameBox.Visible = false;
             // 
             // ShowBlood
             // 
@@ -581,5 +593,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.DateTimePicker dateAssigned;
+        private System.Windows.Forms.ComboBox cNameBox;
     }
 }

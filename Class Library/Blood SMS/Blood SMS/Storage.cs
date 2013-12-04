@@ -634,6 +634,20 @@ namespace Blood_SMS
             return false;
         }
 
+        public bool UpdateComponent(Component c, int oldName)
+        {
+            if (ComponentCommands("Update component set " + UpdateQueryChangeComponentName(COMPONENT_FIELDS, new string[] { "accession_number", "component_name" }), c, oldName))
+            {
+                Blood b = findBlood(c.Accession_number);
+                b.RemoveComponent(findComponentWithAccessionNumberAndName(c.Accession_number, c.Component_name));
+                b.AddComponent(c);
+                if (b.checkRemoved())
+                    UpdateBlood(b);
+                return true;
+            }
+            return false;
+        }
+
         bool UpdateComponent(Component c, Blood b)
         {
             if (ComponentCommands("Update component set " + UpdateQuery(COMPONENT_FIELDS, new string[] { "accession_number", "component_name" }), c))
@@ -663,6 +677,31 @@ namespace Blood_SMS
             comm.Parameters.AddWithValue("@patient_middle_initial", x.Patient_middle_initial);
             comm.Parameters.AddWithValue("@patient_age", x.Patient_age);
             comm.Parameters.AddWithValue("@reason_for_removal", x.Reason_for_removal);
+            conn.Open();
+            int rowsAffected = comm.ExecuteNonQuery();
+            conn.Close();
+            return (rowsAffected > 0);
+        }
+
+        bool ComponentCommands(string query, Component x, int oldKey)
+        {
+            MySqlConnection conn = new MySqlConnection(connectionString);
+            MySqlCommand comm = new MySqlCommand(query, conn);
+            comm.CommandType = CommandType.Text;
+
+            comm.Parameters.AddWithValue("@accession_number", x.Accession_number);
+            comm.Parameters.AddWithValue("@component_name", (int)x.Component_name);
+            comm.Parameters.AddWithValue("@removal_type", (int)x.Removal_Type);
+            comm.Parameters.AddWithValue("@date_processed", x.Date_processed);
+            comm.Parameters.AddWithValue("@date_expired", x.Date_expired);
+            comm.Parameters.AddWithValue("@date_assigned", x.Date_assigned);
+            comm.Parameters.AddWithValue("@date_removed", x.Date_removed);
+            comm.Parameters.AddWithValue("@patient_last_name", x.Patient_last_name);
+            comm.Parameters.AddWithValue("@patient_first_name", x.Patient_first_name);
+            comm.Parameters.AddWithValue("@patient_middle_initial", x.Patient_middle_initial);
+            comm.Parameters.AddWithValue("@patient_age", x.Patient_age);
+            comm.Parameters.AddWithValue("@reason_for_removal", x.Reason_for_removal);
+            comm.Parameters.AddWithValue("@oldKey", oldKey);
             conn.Open();
             int rowsAffected = comm.ExecuteNonQuery();
             conn.Close();
@@ -733,8 +772,21 @@ namespace Blood_SMS
             valueParameters += " Where " + comparator[0] + "=@" + comparator[0];
             for (int i = 1; i < comparator.Length; i++)
             {
-                valueParameters += " AND Where " + comparator[i] + "=@" + comparator[i];
+                valueParameters += " AND " + comparator[i] + "=@" + comparator[i];
             }
+
+            return valueParameters;
+        }
+
+        string UpdateQueryChangeComponentName(string[] fields, string[] comparator)
+        {
+            string valueParameters = fields[1] + "=@" + fields[1];
+            for (int i = 2; i < fields.Length; i++)
+            {
+                valueParameters += ", " + fields[i] + "=@" + fields[i];
+            }
+            valueParameters += " Where " + comparator[0] + "=@" + comparator[0];
+            valueParameters += " AND " + comparator[1] + "=@oldKey";
 
             return valueParameters;
         }

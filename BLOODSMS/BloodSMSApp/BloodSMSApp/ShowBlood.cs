@@ -27,7 +27,7 @@ namespace BloodSMSApp
             {
                 bloodTypeField.Items.Add(MyEnums.GetDescription(x));
             }
-            DisplayBlood();
+
         }
 
         void DisplayBlood()
@@ -64,7 +64,9 @@ namespace BloodSMSApp
                 {
                     listBox1.Items.Add(MyEnums.GetDescription(c.Component_name));
                 }
+                listBox1.SelectedIndex = 0;
             }
+
         }
         private void accessionNumbers_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -78,9 +80,10 @@ namespace BloodSMSApp
             Blood_SMS.Component component = storage.findComponentWithAccessionNumberAndName(b.Accession_number, componentName);
             //componentValue.SelectedIndex = (int)componentName;
             dateProcessed.Value = component.Date_processed;
+            expiryDate.Value = component.Date_expired;
             if (!String.IsNullOrWhiteSpace(component.Patient_first_name))
             {
-                pLast.Text = component.Patient_first_name;
+                pLast.Text = component.Patient_last_name;
                 pFirst.Text = component.Patient_first_name;
                 pMid.Text = component.Patient_middle_initial;
                 pAge.Text = component.Patient_age.ToString();
@@ -124,6 +127,7 @@ namespace BloodSMSApp
             {
                 accessionNumbers.Items.Add(b.Accession_number);
             }
+            DisplayBlood();
         }
 
         private void b_edit_Click(object sender, EventArgs e)
@@ -235,7 +239,7 @@ namespace BloodSMSApp
         {
             if (editComponent.Text == "EDIT")
             {
-                if (listBox1.SelectedIndex != -1)
+                if (listBox1.SelectedIndex > 0)
                 {
                     Blood_SMS.Component c = storage.findComponentWithAccessionNumberAndName(accessionNumbers.Text, MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString()));
                     if (c != null)
@@ -243,6 +247,7 @@ namespace BloodSMSApp
                         editComponent.Text = "SAVE";
                         listBox1.Enabled = false;
                         dateProcessed.Enabled = true;
+                        expiryDate.Enabled = true;
                         if (c.Date_assigned != DateTime.MinValue)
                         {
                             pLast.Enabled = true;
@@ -254,6 +259,17 @@ namespace BloodSMSApp
                         {
                             cRemovedPanel.Visible = true;
                         }
+                        cNameBox.Visible = true;
+                        cNameBox.Items.Clear();
+                        cNameBox.Items.Add(listBox1.SelectedItem.ToString());
+                        foreach (bloodComponents x in (bloodComponents[])Enum.GetValues(typeof(bloodComponents)))
+                        {
+                            if (!listBox1.Items.Contains(MyEnums.GetDescription(x)))
+                            {
+                                cNameBox.Items.Add(MyEnums.GetDescription(x));
+                            }
+                        }
+                        cNameBox.SelectedIndex = 0;
                     }
                     else
                     {
@@ -293,8 +309,8 @@ namespace BloodSMSApp
                 {
                     if (int.TryParse(pAge.Text, out age))
                     {
-                        c = new Blood_SMS.Component(accessionNumbers.Text, (int)MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString()), removal_type, dateProcessed.Value, expiryDate.Value, dateAssigned.Value, date_removed, pLast.Text, pFirst.Text, pMid.Text, age, cReason.Text);
-                        if (storage.UpdateComponent(c))
+                        c = new Blood_SMS.Component(accessionNumbers.Text, (int)MyEnums.GetValueFromDescription<bloodComponents>(cNameBox.SelectedItem.ToString()), removal_type, dateProcessed.Value, expiryDate.Value, dateAssigned.Value, date_removed, pLast.Text, pFirst.Text, pMid.Text, age, cReason.Text);
+                        if (storage.UpdateComponent(c, (int)MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString())))
                         {
                             MessageBox.Show("Component was successfully updated");
                         }
@@ -306,9 +322,22 @@ namespace BloodSMSApp
                 }
                 else
                 {
-                    c = new Blood_SMS.Component(accessionNumbers.Text, (int)MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString()), removal_type, dateProcessed.Value, expiryDate.Value, DateTime.MinValue, date_removed, "", "", "", 0, cReason.Text);
-                    if (storage.UpdateComponent(c))
+                    c = new Blood_SMS.Component(accessionNumbers.Text, (int)MyEnums.GetValueFromDescription<bloodComponents>(cNameBox.SelectedItem.ToString()), removal_type, dateProcessed.Value, expiryDate.Value, DateTime.MinValue, date_removed, "", "", "", 0, cReason.Text);
+                    if (storage.UpdateComponent(c, (int)MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString())))
                     {
+                        editComponent.Text = "EDIT";
+                        listBox1.Enabled = true;
+                        dateProcessed.Enabled = false;
+                        expiryDate.Enabled = false;
+                        pLast.Enabled = false;
+                        pFirst.Enabled = false;
+                        pMid.Enabled = false;
+                        pAge.Enabled = false;
+
+                        cRemovedPanel.Visible = false;
+                        cNameBox.Visible = false;
+                        parent.RefreshStorage();
+                        Reload();
                         MessageBox.Show("Component was successfully updated");
                     }
                     else
