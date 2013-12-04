@@ -22,16 +22,6 @@ namespace Blood_SMS
         public List<Donor> viableDonors;
         public List<Donor> bannedDonors;
 
-        //public List<Blood> BloodList { get; set; }
-        //public List<Blood>[] BloodTypes { get; set; }
-        //public List<Blood> AvailableBlood { get { return availableBlood; } set; }
-        //public List<Blood> QuarantinedBlood { get; set; }
-        //public List<Blood> UsedBlood { get; set; }
-        //public List<Donor> DonorList { get; set; }
-        //public List<Donor>[] DonorTypes { get; set; }
-        //public List<Donor> ViableDonors { get; set; }
-        //public List<Donor> BannedDonors { get; set; }
-
         string connectionString;
 
         const int MINIMUMBLOODVALUE = 5;
@@ -404,18 +394,17 @@ namespace Blood_SMS
         }
         public bool UpdateBlood(Blood b, string oldAccessionNumber)
         {
-
+            if (oldAccessionNumber != b.Accession_number)
+            {
+                foreach (Component c in b.components)
+                {
+                    c.Accession_number = b.Accession_number;
+                    UpdateComponent(c, b);
+                }
+            }
             if (bloodCommands("UPDATE Blood SET " + UpdateQueryChangePrimary(BLOOD_FIELDS), b, oldAccessionNumber))
             {
                 UnsortBlood(findBlood(oldAccessionNumber));
-                if (oldAccessionNumber != b.Accession_number)
-                {
-                    foreach (Component c in b.components)
-                    {
-                        c.Accession_number = b.Accession_number;
-                        UpdateComponent(c, b);
-                    }
-                }
                 b.checkRemoved();
                 SortBlood(b);
                 return true;
@@ -752,8 +741,8 @@ namespace Blood_SMS
 
         string UpdateQueryChangePrimary(string[] fields)
         {
-            string valueParameters = fields[1] + "=@" + fields[1];
-            for (int i = 2; i < fields.Length; i++)
+            string valueParameters = fields[0] + "=@" + fields[0];
+            for (int i = 1; i < fields.Length; i++)
             {
                 valueParameters += ", " + fields[i] + "=@" + fields[i];
             }

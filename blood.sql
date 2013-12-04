@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `BSMS`.`component` (
     FOREIGN KEY (`accession_number`)
     REFERENCES `BSMS`.`blood` (`accession_number`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
