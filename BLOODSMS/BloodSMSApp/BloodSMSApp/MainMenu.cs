@@ -23,8 +23,6 @@ namespace BloodSMSApp
         Dictionary<int, DateTime> days2;
         Series seriesHit;
         Color seriesOldColor;
-        List<Donor> donorList;
-        List<Blood> bloodList;
 
         public MainMenu()
         {
@@ -85,30 +83,20 @@ namespace BloodSMSApp
         public void RefreshOverview()
         {
             //dataGridView3.DataSource = storage.donorList;
-            donorList = storage.donorList;
-            bloodList = storage.bloodList;
             RefreshNotifications();
             RefreshPieChart();
             RefreshGraph();
+            RefreshBloodGrid(storage.bloodList);
+            RefreshDonorGrid(storage.donorList);
+        }
 
-            dataGridView3.Rows.Clear();
-            for (int i = 0; i < donorList.Count; i++)
-            {
-                dataGridView3.Rows.Add();
-                Donor d = donorList[i];
-                dataGridView3.Rows[i].Cells[0].Value = d.Name;
-                dataGridView3.Rows[i].Cells[1].Value = MyEnums.GetDescription(d.Blood_type);
-                dataGridView3.Rows[i].Cells[2].Value = MyEnums.GetDescription(d.Home_city);
-                dataGridView3.Rows[i].Cells[3].Value = d.Date_registered.ToShortDateString();
-                dataGridView3.Rows[i].Cells[4].Value = d.Is_viable;
-                dataGridView3.Rows[i].Cells[5].Value = d.Is_contactable;
-            }
-
+        void RefreshBloodGrid(List<Blood> bloods)
+        {
             dataGridView2.Rows.Clear();
-            for (int i = 0; i < bloodList.Count; i++)
+            for (int i = 0; i < bloods.Count; i++)
             {
                 dataGridView2.Rows.Add();
-                Blood b = bloodList[i];
+                Blood b = bloods[i];
                 dataGridView2.Rows[i].Cells[0].Value = b.Accession_number;
                 dataGridView2.Rows[i].Cells[1].Value = MyEnums.GetDescription(b.Blood_type);
                 if (b.Donor_id.HasValue)
@@ -117,6 +105,22 @@ namespace BloodSMSApp
                     dataGridView2.Rows[i].Cells[2].Value = "Bought from other bank";
                 dataGridView2.Rows[i].Cells[3].Value = b.Date_donated.ToShortDateString();
                 dataGridView2.Rows[i].Cells[4].Value = b.Is_removed;
+            }
+        }
+
+        public void RefreshDonorGrid(List<Donor> donors)
+        {
+            dataGridView3.Rows.Clear();
+            for (int i = 0; i < donors.Count; i++)
+            {
+                dataGridView3.Rows.Add();
+                Donor d = donors[i];
+                dataGridView3.Rows[i].Cells[0].Value = d.Name;
+                dataGridView3.Rows[i].Cells[1].Value = MyEnums.GetDescription(d.Blood_type);
+                dataGridView3.Rows[i].Cells[2].Value = MyEnums.GetDescription(d.Home_city);
+                dataGridView3.Rows[i].Cells[3].Value = d.Date_registered.ToShortDateString();
+                dataGridView3.Rows[i].Cells[4].Value = d.Is_viable;
+                dataGridView3.Rows[i].Cells[5].Value = d.Is_contactable;
             }
         }
 
@@ -419,12 +423,12 @@ namespace BloodSMSApp
 
         private void b_inventoryALL_Click(object sender, EventArgs e)
         {
-            iTypeFilter.SelectedIndex = -1;
+            RefreshBloodGrid(storage.bloodList);
         }
 
         private void b_donorAll_Click(object sender, EventArgs e)
         {
-            dTypeFilter.SelectedIndex = -1;
+            RefreshDonorGrid(storage.donorList);
         }
 
         private void resultsBox_DoubleClick(object sender, EventArgs e)
@@ -468,6 +472,41 @@ namespace BloodSMSApp
                 AddDonor a = new AddDonor(storage, d);
                 a.ShowDialog();
             }
+        }
+
+        private void b_inventoryInventory_Click(object sender, EventArgs e)
+        {
+            RefreshBloodGrid(storage.availableBlood);
+        }
+
+        private void b_inventoryQuarantined_Click(object sender, EventArgs e)
+        {
+            RefreshBloodGrid(storage.unavailableBlood);
+        }
+
+        private void iTypeFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshBloodGrid(storage.bloodTypes[iTypeFilter.SelectedIndex]);
+        }
+
+        private void b_donorContactable_Click(object sender, EventArgs e)
+        {
+            RefreshDonorGrid(storage.contactableDonors);
+        }
+
+        private void b_donorBanned_Click(object sender, EventArgs e)
+        {
+            RefreshDonorGrid(storage.bannedDonors);
+        }
+
+        private void b_donorViable_Click(object sender, EventArgs e)
+        {
+            RefreshDonorGrid(storage.viableDonors);
+        }
+
+        private void dTypeFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshDonorGrid(storage.donorTypes[dTypeFilter.SelectedIndex]);
         }
 
     }

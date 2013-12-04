@@ -42,7 +42,7 @@ namespace BloodSMSApp
                             else if (d.Is_viable)
                             {
                                 AddItem a = new AddItem(storage, d, aNumber.Text);
-                                parent.RefreshOverview();
+                                parent.RefreshDonorGrid(storage.donorList);
                                 a.ShowDialog();
                                 Close();
                             }
