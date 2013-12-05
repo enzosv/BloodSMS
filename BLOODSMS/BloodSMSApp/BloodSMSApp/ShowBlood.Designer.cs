@@ -41,6 +41,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.mInitial = new System.Windows.Forms.TextBox();
             this.fName = new System.Windows.Forms.TextBox();
+            this.saveButton = new System.Windows.Forms.Button();
             this.assignButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
             this.quarantineButton = new System.Windows.Forms.Button();
@@ -70,7 +71,6 @@
             this.accessionNumbers = new System.Windows.Forms.ComboBox();
             this.b_edit = new System.Windows.Forms.Button();
             this.b_back = new System.Windows.Forms.Button();
-            this.saveButton = new System.Windows.Forms.Button();
             this.bDeleteButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -254,6 +254,21 @@
             this.fName.Size = new System.Drawing.Size(120, 26);
             this.fName.TabIndex = 10;
             // 
+            // saveButton
+            // 
+            this.saveButton.BackColor = System.Drawing.Color.Firebrick;
+            this.saveButton.FlatAppearance.BorderSize = 0;
+            this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.ForeColor = System.Drawing.Color.White;
+            this.saveButton.Location = new System.Drawing.Point(84, 293);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 32);
+            this.saveButton.TabIndex = 36;
+            this.saveButton.Text = "SAVE";
+            this.saveButton.UseVisualStyleBackColor = false;
+            this.saveButton.Visible = false;
+            // 
             // assignButton
             // 
             this.assignButton.BackColor = System.Drawing.Color.Firebrick;
@@ -267,6 +282,7 @@
             this.assignButton.TabIndex = 35;
             this.assignButton.Text = "ASSIGN";
             this.assignButton.UseVisualStyleBackColor = false;
+            this.assignButton.Click += new System.EventHandler(this.assignButton_Click);
             // 
             // deleteButton
             // 
@@ -593,21 +609,6 @@
             this.b_back.Text = "BACK";
             this.b_back.UseVisualStyleBackColor = false;
             this.b_back.Click += new System.EventHandler(this.b_back_Click);
-            // 
-            // saveButton
-            // 
-            this.saveButton.BackColor = System.Drawing.Color.Firebrick;
-            this.saveButton.FlatAppearance.BorderSize = 0;
-            this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.ForeColor = System.Drawing.Color.White;
-            this.saveButton.Location = new System.Drawing.Point(84, 293);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 32);
-            this.saveButton.TabIndex = 36;
-            this.saveButton.Text = "SAVE";
-            this.saveButton.UseVisualStyleBackColor = false;
-            this.saveButton.Visible = false;
             // 
             // bDeleteButton
             // 

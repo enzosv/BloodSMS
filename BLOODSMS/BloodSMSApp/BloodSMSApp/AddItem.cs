@@ -15,7 +15,7 @@ namespace BloodSMSApp
         Storage storage;
         Donor donor;
         bool hasDonor;
-        public AddItem(Storage stor, string accNumber)
+        public AddItem(Storage stor, string accNumber, DateTime date_donated)
         {
             InitializeComponent();
             storage = stor;
@@ -25,6 +25,7 @@ namespace BloodSMSApp
             {
                 bTypeField.Items.Add(MyEnums.GetDescription(x));
             }
+            dateAddedField.Value = date_donated;
             dateExpireField.Value = dateAddedField.Value.AddDays(35);
 
             bTypeField.SelectedIndex = 0;
@@ -33,7 +34,7 @@ namespace BloodSMSApp
             
         }
 
-        public AddItem(Storage stor, Donor d, string accNumber)
+        public AddItem(Storage stor, Donor d, string accNumber, DateTime date_donated)
         {
             InitializeComponent();   
             storage = stor;
@@ -44,6 +45,7 @@ namespace BloodSMSApp
             {
                 bTypeField.Items.Add(MyEnums.GetDescription(x));
             }
+            dateAddedField.Value = date_donated;
             dateExpireField.Value = dateAddedField.Value.AddDays(35);
 
             bTypeField.SelectedIndex = (int)d.Blood_type;
@@ -101,11 +103,6 @@ namespace BloodSMSApp
                     Close();
                 }
             }
-        }
-
-        private void dateAddedField_ValueChanged(object sender, EventArgs e)
-        {
-            dateExpireField.MinDate = dateAddedField.Value;
         }
 
         private void dateExpireField_ValueChanged(object sender, EventArgs e)

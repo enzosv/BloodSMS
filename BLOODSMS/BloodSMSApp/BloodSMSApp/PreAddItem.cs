@@ -19,6 +19,7 @@ namespace BloodSMSApp
             InitializeComponent();
             parent = mainmenu;
             storage = parent.storage;
+            dateTimePicker1.MaxDate = DateTime.Now;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -37,15 +38,19 @@ namespace BloodSMSApp
                                 MessageBox.Show("Please Add the donor first and try again later");
                                 AddDonor ad = new AddDonor(storage, lName.Text, fName.Text, mInitial.Text);
                                 ad.ShowDialog();
-                                
                             }
-                            else if (d.Is_viable && d.Next_available <= DateTime.Today)
+                            else if (d.Is_viable)
                             {
-                                AddItem a = new AddItem(storage, d, aNumber.Text);
-                                parent.RefreshDonorGrid(storage.donorList);
-                                a.ShowDialog();
-                                parent.RefreshOverview();
-                                Close();
+                                if (d.Next_available <= dateTimePicker1.Value)
+                                {
+                                    AddItem a = new AddItem(storage, d, aNumber.Text, dateTimePicker1.Value);
+                                    parent.RefreshDonorGrid(storage.donorList);
+                                    a.ShowDialog();
+                                    parent.RefreshOverview();
+                                    Close();
+                                }
+                                else
+                                    MessageBox.Show("Donor is not yet valid for donations\nNext available donation for donor is " + d.Next_available.ToString("MMMM d, yyyy"));
                             }
                             else
                             {
@@ -59,7 +64,7 @@ namespace BloodSMSApp
                     }
                     else
                     {
-                        AddItem a = new AddItem(storage, aNumber.Text);
+                        AddItem a = new AddItem(storage, aNumber.Text, dateTimePicker1.Value);
                         a.ShowDialog();
                         parent.RefreshOverview();
                         Close();

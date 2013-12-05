@@ -52,12 +52,12 @@
             // 
             // dateAddedField
             // 
+            this.dateAddedField.Enabled = false;
             this.dateAddedField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateAddedField.Location = new System.Drawing.Point(42, 515);
             this.dateAddedField.Name = "dateAddedField";
             this.dateAddedField.Size = new System.Drawing.Size(200, 26);
             this.dateAddedField.TabIndex = 36;
-            this.dateAddedField.ValueChanged += new System.EventHandler(this.dateAddedField_ValueChanged);
             // 
             // label20
             // 
