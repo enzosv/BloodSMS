@@ -41,7 +41,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.mInitial = new System.Windows.Forms.TextBox();
             this.fName = new System.Windows.Forms.TextBox();
-            this.saveButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.assignButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
             this.quarantineButton = new System.Windows.Forms.Button();
@@ -72,6 +72,7 @@
             this.b_edit = new System.Windows.Forms.Button();
             this.b_back = new System.Windows.Forms.Button();
             this.bDeleteButton = new System.Windows.Forms.Button();
+            this.cReturn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -176,7 +177,7 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.saveButton);
+            this.splitContainer1.Panel2.Controls.Add(this.cancelButton);
             this.splitContainer1.Panel2.Controls.Add(this.assignButton);
             this.splitContainer1.Panel2.Controls.Add(this.deleteButton);
             this.splitContainer1.Panel2.Controls.Add(this.quarantineButton);
@@ -199,6 +200,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.dateProcessed);
             this.splitContainer1.Panel2.Controls.Add(this.label7);
             this.splitContainer1.Panel2.Controls.Add(this.pFirst);
+            this.splitContainer1.Panel2.Controls.Add(this.cReturn);
             this.splitContainer1.Size = new System.Drawing.Size(862, 329);
             this.splitContainer1.SplitterDistance = 287;
             this.splitContainer1.TabIndex = 22;
@@ -254,20 +256,21 @@
             this.fName.Size = new System.Drawing.Size(120, 26);
             this.fName.TabIndex = 10;
             // 
-            // saveButton
+            // cancelButton
             // 
-            this.saveButton.BackColor = System.Drawing.Color.Firebrick;
-            this.saveButton.FlatAppearance.BorderSize = 0;
-            this.saveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.ForeColor = System.Drawing.Color.White;
-            this.saveButton.Location = new System.Drawing.Point(84, 293);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 32);
-            this.saveButton.TabIndex = 36;
-            this.saveButton.Text = "SAVE";
-            this.saveButton.UseVisualStyleBackColor = false;
-            this.saveButton.Visible = false;
+            this.cancelButton.BackColor = System.Drawing.Color.Firebrick;
+            this.cancelButton.FlatAppearance.BorderSize = 0;
+            this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelButton.ForeColor = System.Drawing.Color.White;
+            this.cancelButton.Location = new System.Drawing.Point(84, 293);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 32);
+            this.cancelButton.TabIndex = 36;
+            this.cancelButton.Text = "CANCEL";
+            this.cancelButton.UseVisualStyleBackColor = false;
+            this.cancelButton.Visible = false;
+            this.cancelButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // assignButton
             // 
@@ -352,6 +355,7 @@
             // 
             // dateAssigned
             // 
+            this.dateAssigned.Enabled = false;
             this.dateAssigned.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateAssigned.Location = new System.Drawing.Point(376, 75);
             this.dateAssigned.Name = "dateAssigned";
@@ -625,6 +629,21 @@
             this.bDeleteButton.UseVisualStyleBackColor = false;
             this.bDeleteButton.Visible = false;
             // 
+            // cReturn
+            // 
+            this.cReturn.BackColor = System.Drawing.Color.Firebrick;
+            this.cReturn.FlatAppearance.BorderSize = 0;
+            this.cReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cReturn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cReturn.ForeColor = System.Drawing.Color.White;
+            this.cReturn.Location = new System.Drawing.Point(3, 255);
+            this.cReturn.Name = "cReturn";
+            this.cReturn.Size = new System.Drawing.Size(237, 32);
+            this.cReturn.TabIndex = 37;
+            this.cReturn.Text = "RETURN TO INVENTORY";
+            this.cReturn.UseVisualStyleBackColor = false;
+            this.cReturn.Visible = false;
+            // 
             // ShowBlood
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -699,7 +718,8 @@
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button quarantineButton;
         private System.Windows.Forms.Button reprocessButton;
-        private System.Windows.Forms.Button saveButton;
+        private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button bDeleteButton;
+        private System.Windows.Forms.Button cReturn;
     }
 }

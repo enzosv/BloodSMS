@@ -29,9 +29,21 @@ namespace BloodSMSApp
             }
 
         }
-
-        void DisplayBlood()
+        #region BLOOD
+        private void ShowBlood_Load(object sender, EventArgs e)
         {
+            Reload();
+        }
+
+        void Reload()
+        {
+            storage = parent.storage;
+            bloodList = storage.bloodList;
+            accessionNumbers.Items.Clear();
+            foreach (Blood b in bloodList)
+            {
+                accessionNumbers.Items.Add(b.Accession_number);
+            }
             listBox1.Items.Clear();
             lName.Clear();
             fName.Clear();
@@ -42,6 +54,11 @@ namespace BloodSMSApp
             pAge.Clear();
             label5.Text = "Not Removed";
             cRemovedPanel.Visible = false;
+            DisplayBlood();
+        }
+
+        void DisplayBlood()
+        {
             if (b != null)
             {
                 bloodTypeField.SelectedIndex = (int)b.Blood_type;
@@ -72,13 +89,23 @@ namespace BloodSMSApp
         {
             b = storage.findBlood(accessionNumbers.Text);
             if (b != null)
-            {
                 DisplayBlood();
-            }
             else
                 MessageBox.Show("Error displaying blood. Please try again");
         }
 
+        private void b_back_Click(object sender, EventArgs e)
+        {
+            if (b_back.Text == "BACK")
+                Close();
+            else
+            {
+                bDisableEdit();
+            }
+        }
+#endregion
+
+        #region COMPONENT
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             bloodComponents componentName = MyEnums.GetValueFromDescription<bloodComponents>(listBox1.Text);
@@ -94,21 +121,23 @@ namespace BloodSMSApp
                 pAge.Text = component.Patient_age.ToString();
 
             }
+            
             if (component.Date_assigned != DateTime.MinValue)
-            {
                 assignButton.Text = "RELEASE";
-            }
-            if (component.Is_quarantined)
+            if (component.Is_removed)
             {
-                setRemoved("Date Quarantined", component.Date_removed, component.Reason_for_removal);
+                if (component.Is_quarantined)
+                    setRemoved("Date Quarantined", component.Date_removed, component.Reason_for_removal);
+                else if (component.Is_released)
+                    setRemoved("Date Released", component.Date_removed, component.Reason_for_removal);
+                else
+                    setRemoved("Date Reprocessed", component.Date_removed, component.Reason_for_removal);
             }
-            else if (component.Is_released)
+            else
             {
-                setRemoved("Date Released", component.Date_removed, component.Reason_for_removal);
-            }
-            else if (component.Is_removed)
-            {
-                setRemoved("Date Reprocessed", component.Date_removed, component.Reason_for_removal);
+                quarantineButton.Visible = true;
+                assignButton.Visible = true;
+                reprocessButton.Visible = true;
             }
 
 
@@ -124,26 +153,10 @@ namespace BloodSMSApp
             quarantineButton.Visible = false;
             assignButton.Visible = false;
             reprocessButton.Visible = false;
-
-            assignButton.Text = "Return inventory";
         }
+        #endregion
 
-        private void ShowBlood_Load(object sender, EventArgs e)
-        {
-            Reload();
-        }
-
-        void Reload()
-        {
-            storage = parent.storage;
-            bloodList = storage.bloodList;
-            accessionNumbers.Items.Clear();
-            foreach (Blood b in bloodList)
-            {
-                accessionNumbers.Items.Add(b.Accession_number);
-            }
-            DisplayBlood();
-        }
+        #region BLOOD EDITS
 
         void bEnableEdit()
         {
@@ -176,18 +189,15 @@ namespace BloodSMSApp
             b_back.Text = "BACK";
             bDeleteButton.Visible = false;
         }
+
         private void b_edit_Click(object sender, EventArgs e)
         {
             if (b_edit.Text == "EDIT")
             {
                 if (storage.findBlood(accessionNumbers.Text) != null)
-                {
                     bEnableEdit();
-                }
                 else
-                {
                     MessageBox.Show("Please select an accession number from the list");
-                }
             }
             else
             {
@@ -229,29 +239,20 @@ namespace BloodSMSApp
 
         }
 
-        private void b_back_Click(object sender, EventArgs e)
-        {
-            if (b_back.Text == "BACK")
-            {
-                Close();
-            }
-            else
-            {
-                bDisableEdit();
-            }
-        }
+        #endregion
 
-        private void pAge_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !(Char.IsNumber(e.KeyChar) || e.KeyChar == 8);
-        }
-
-
+        #region COMPONENT EDITS
         void cEnableEdit(Blood_SMS.Component c)
         {
             assignButton.Visible = false;
             quarantineButton.Visible = false;
             reprocessButton.Visible = false;
+            cancelButton.Visible = true;
+            if (c.Is_removed)
+            {
+                cReturn.Visible = true;
+            }
+
             deleteButton.Text = "CANCEL";
             editComponent.Text = "SAVE";
             listBox1.Enabled = false;
@@ -283,8 +284,13 @@ namespace BloodSMSApp
 
         void cDisableEdit()
         {
+            assignButton.Visible = true;
+            quarantineButton.Visible = true;
+            reprocessButton.Visible = true;
+            cancelButton.Visible = false;
+            cReturn.Visible = false;
             editComponent.Text = "EDIT";
-            saveButton.Visible = true;
+            cancelButton.Visible = true;
             deleteButton.Visible = true;
             listBox1.Enabled = true;
             dateProcessed.Enabled = false;
@@ -307,18 +313,13 @@ namespace BloodSMSApp
                 {
                     Blood_SMS.Component c = storage.findComponentWithAccessionNumberAndName(accessionNumbers.Text, MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString()));
                     if (c != null)
-                    {
                         cEnableEdit(c);
-                    }
                     else
-                    {
-                        MessageBox.Show("Component not found. Please refresh and try again");
-                    }
+                       MessageBox.Show("Component not found. Please refresh and try again");
+                    
                 }
                 else
-                {
-                    MessageBox.Show("Component may not be edited");
-                }
+                   MessageBox.Show("Component may not be edited");
             }
             else
             {
@@ -355,9 +356,7 @@ namespace BloodSMSApp
                             MessageBox.Show("Component was successfully updated");
                         }
                         else
-                        {
                             MessageBox.Show("Error updating component. Please try again later");
-                        }
                     }
                 }
                 else
@@ -369,16 +368,19 @@ namespace BloodSMSApp
                         MessageBox.Show("Component was successfully updated");
                     }
                     else
-                    {
                         MessageBox.Show("Error updating component. Please try again later");
-                    }
                 }
 
             }
-
-
         }
 
+        private void pAge_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !(Char.IsNumber(e.KeyChar) || e.KeyChar == 8);
+        }
+#endregion
+
+        #region COMPONENT BUTTONS
         private void addComponent_Click(object sender, EventArgs e)
         {
 
@@ -395,7 +397,15 @@ namespace BloodSMSApp
 
         private void assignButton_Click(object sender, EventArgs e)
         {
+            if (assignButton.Text == "ASSIGN")
+            {
 
+            }
+            else
+            {
+
+            }
         }
+        #endregion
     }
 }
