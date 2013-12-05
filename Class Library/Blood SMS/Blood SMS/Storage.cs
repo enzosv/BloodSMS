@@ -377,6 +377,10 @@ namespace Blood_SMS
         {
             if (bloodCommands("Insert into Blood " + AddQuery(BLOOD_FIELDS), b))
             {
+                if (b.Donor_id.HasValue)
+                {
+                    findDonor(b.Donor_id.Value).Next_available = b.Date_donated.AddMonths(3);
+                }
                 if (AddWholeComponent(b, date_expire, p_last, p_first, p_mid, p_age))
                     return true;
             }
@@ -387,6 +391,10 @@ namespace Blood_SMS
         {
             if (bloodCommands("Insert into Blood " + AddQuery(BLOOD_FIELDS), b))
             {
+                if (b.Donor_id.HasValue)
+                {
+                    findDonor(b.Donor_id.Value).Next_available = b.Date_donated.AddMonths(3);
+                }
                 if(AddWholeComponent(b, date_expire))
                     return true;
             }

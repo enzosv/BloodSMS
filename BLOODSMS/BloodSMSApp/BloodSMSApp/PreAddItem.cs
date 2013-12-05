@@ -39,11 +39,12 @@ namespace BloodSMSApp
                                 ad.ShowDialog();
                                 
                             }
-                            else if (d.Is_viable)
+                            else if (d.Is_viable && d.Next_available <= DateTime.Today)
                             {
                                 AddItem a = new AddItem(storage, d, aNumber.Text);
                                 parent.RefreshDonorGrid(storage.donorList);
                                 a.ShowDialog();
+                                parent.RefreshOverview();
                                 Close();
                             }
                             else

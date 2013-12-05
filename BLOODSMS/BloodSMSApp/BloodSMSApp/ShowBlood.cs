@@ -147,6 +147,7 @@ namespace BloodSMSApp
 
                     b_edit.Text = "SAVE";
                     b_back.Text = "CANCEL";
+                    bDeleteButton.Visible = true;
                 }
                 else
                 {
@@ -174,6 +175,7 @@ namespace BloodSMSApp
 
                     b_edit.Text = "EDIT";
                     b_back.Text = "BACK";
+                    bDeleteButton.Visible = false;
                     parent.RefreshStorage();
                     Reload();
                     accessionNumbers.Text = b.Accession_number;
@@ -227,6 +229,7 @@ namespace BloodSMSApp
 
                 b_edit.Text = "EDIT";
                 b_back.Text = "BACK";
+                bDeleteButton.Visible = false;
             }
         }
 
@@ -330,6 +333,8 @@ namespace BloodSMSApp
                     if (storage.UpdateComponent(c, (int)MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString())))
                     {
                         editComponent.Text = "EDIT";
+                        saveButton.Visible = true;
+                        deleteButton.Visible = true;
                         listBox1.Enabled = true;
                         dateProcessed.Enabled = false;
                         expiryDate.Enabled = false;
@@ -358,6 +363,11 @@ namespace BloodSMSApp
         private void addComponent_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            storage.DeleteComponentWithAccessionNumberAndName(accessionNumbers.Text, MyEnums.GetValueFromDescription<bloodComponents>(textBox1.Text));
         }
     }
 }
