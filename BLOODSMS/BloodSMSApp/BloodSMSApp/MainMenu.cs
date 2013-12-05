@@ -467,7 +467,7 @@ namespace BloodSMSApp
 
         private void dataGridView3_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            Donor d = storage.findDonorWithName(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
+            Donor d = storage.findDonorWithName(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
             if (d != null)
             {
                 AddDonor a = new AddDonor(storage, d);
@@ -509,6 +509,7 @@ namespace BloodSMSApp
         {
             RefreshDonorGrid(storage.donorTypes[dTypeFilter.SelectedIndex]);
         }
+
 
     }
 }

@@ -17,6 +17,7 @@ namespace BloodSMSApp
         string lastName, firstName, middleInitial;
         bool duplicate;
         int id;
+        Donor x;
         public AddDonor(Storage stor, string lName, string fName, string mInitial)
         {
             InitializeComponent();
@@ -31,12 +32,17 @@ namespace BloodSMSApp
         {
             InitializeComponent();
             storage = stor;
+            x = d;
             nameLabel.Text = d.Last_name + ", " + d.First_name + " " + d.Middle_initial;
+            
         }
 
         void populateData()
         {
-            Donor x = storage.findDonorWithName(lastName, firstName, middleInitial);
+            if (x == null)
+            {
+                x = storage.findDonorWithName(lastName, firstName, middleInitial);
+            }
             if (x == null)
             {
                 birthDateField.Value = DateTime.Today.AddYears(-16);
@@ -80,7 +86,65 @@ namespace BloodSMSApp
                     timesDonated.Text = "Times Donated: " + numDonations.ToString();
                 }
                 duplicate = true;
+                AddDonorButton.Hide();
+                editButton.Visible = true;
+                DisableEdit();
             }
+        }
+
+        void DisableEdit()
+        {
+            editButton.Text = "EDIT";
+            deleteButton.Visible = false;
+
+            bloodTypeField.Enabled = false;
+            educationalAttainmentField.Enabled = false;
+            hProvince.Enabled = false;
+            hCity.Enabled = false;
+            oProvince.Enabled = false;
+            oCity.Enabled = false;
+            dateRegisteredField.Enabled = false;
+            birthDateField.Enabled = false;
+            nextAvailableField.Enabled = false;
+            hStreetField.Enabled = false;
+            oStreetField.Enabled = false;
+            hLandlineField.Enabled = false;
+            oLandlineField.Enabled = false;
+            emailField.Enabled = false;
+            cellphoneField.Enabled = false;
+            viableYes.Enabled = false;
+            viableNo.Enabled = false;
+            contactableYes.Enabled = false;
+            contactableNo.Enabled = false;
+            defferalField.Enabled = false;
+            
+        }
+
+        void EnableEdit()
+        {
+            editButton.Text = "SAVE";
+            deleteButton.Visible = true;
+            
+            bloodTypeField.Enabled = true;
+            educationalAttainmentField.Enabled = true;
+            hProvince.Enabled = true;
+            hCity.Enabled = true;
+            oProvince.Enabled = true;
+            oCity.Enabled = true;
+            dateRegisteredField.Enabled = true;
+            birthDateField.Enabled = true;
+            nextAvailableField.Enabled = true;
+            hStreetField.Enabled = true;
+            oStreetField.Enabled = true;
+            hLandlineField.Enabled = true;
+            oLandlineField.Enabled = true;
+            emailField.Enabled = true;
+            cellphoneField.Enabled = true;
+            viableYes.Enabled = true;
+            viableNo.Enabled = true;
+            contactableYes.Enabled = true;
+            contactableNo.Enabled = true;
+            defferalField.Enabled = true;
         }
 
         bool isEmailValid(string emailaddress)
@@ -106,7 +170,8 @@ namespace BloodSMSApp
             e.Handled = !(Char.IsNumber(e.KeyChar) || e.KeyChar == 8);
         }
 
-        private void AddDonorButton_Click(object sender, EventArgs e)
+
+        Donor GenerateDonorFromFields()
         {
             int blood_type = (int)MyEnums.GetValueFromDescription<bloodType>(bloodTypeField.Text);
             int educational_attainment = (int)MyEnums.GetValueFromDescription<educationalAttainment>(educationalAttainmentField.Text);
@@ -115,7 +180,7 @@ namespace BloodSMSApp
             int o_province = (int)MyEnums.GetValueFromDescription<province>(oProvince.Text);
             int o_city = (int)MyEnums.GetValueFromDescription<city>(oCity.Text);
 
-            if ((!viableYes.Checked && isStringValid(defferalField.Text,2)) || (viableYes.Checked))
+            if ((!viableYes.Checked && isStringValid(defferalField.Text, 2)) || (viableYes.Checked))
             {
                 if ((isStringValid(emailField.Text, 6) && isEmailValid(emailField.Text)) || String.IsNullOrEmpty(emailField.Text))
                 {
@@ -125,27 +190,8 @@ namespace BloodSMSApp
                         {
                             if (isStringValid(oLandlineField.Text, 7) || String.IsNullOrEmpty(oLandlineField.Text))
                             {
-                                Donor x = new Donor(id, lastName, firstName, middleInitial, blood_type, h_province, h_city, hStreetField.Text, o_province, o_city, oStreetField.Text, hLandlineField.Text, oLandlineField.Text, emailField.Text, cellphoneField.Text, educational_attainment, birthDateField.Value, dateRegisteredField.Value, nextAvailableField.Value, contactableYes.Checked, viableYes.Checked, defferalField.Text);
-                                if (!duplicate)
-                                {
-                                    if (storage.AddDonor(x))
-                                    {
-                                        MessageBox.Show("Donor added");
-                                        Close();
-                                    }
-                                    else
-                                        MessageBox.Show("Failed to add new donor");
-                                }
-                                else
-                                {
-                                    if (storage.UpdateDonor(x))
-                                    {
-                                        MessageBox.Show("Updated Donor");
-                                        Close();
-                                    }
-                                    else
-                                        MessageBox.Show("Failed to update donor");
-                                }
+                                Donor d = new Donor(id, lastName, firstName, middleInitial, blood_type, h_province, h_city, hStreetField.Text, o_province, o_city, oStreetField.Text, hLandlineField.Text, oLandlineField.Text, emailField.Text, cellphoneField.Text, educational_attainment, birthDateField.Value, dateRegisteredField.Value, nextAvailableField.Value, contactableYes.Checked, viableYes.Checked, defferalField.Text);
+                                return d;
                             }
                             else
                                 MessageBox.Show("Invalid office landline number");
@@ -155,14 +201,42 @@ namespace BloodSMSApp
                     }
                     else
                         MessageBox.Show("Invalid cellphone number");
-                    
+
                 }
                 else
                     MessageBox.Show("Invalid Email");
             }
             else
                 MessageBox.Show("Please provide a reason for defferal");
+            return null;
 
+        }
+        private void AddDonorButton_Click(object sender, EventArgs e)
+        {
+            Donor d = GenerateDonorFromFields();
+            if (d != null)
+            {
+                if (!duplicate)
+                {
+                    if (storage.AddDonor(d))
+                    {
+                        MessageBox.Show("Donor added");
+                        Close();
+                    }
+                    else
+                        MessageBox.Show("Failed to add new donor");
+                }
+                else
+                {
+                    if (storage.UpdateDonor(d))
+                    {
+                        MessageBox.Show("Updated Donor");
+                        Close();
+                    }
+                    else
+                        MessageBox.Show("Failed to update donor");
+                }
+            }
         }
 
         private void oLandlineField_KeyPress(object sender, KeyPressEventArgs e)
@@ -199,7 +273,10 @@ namespace BloodSMSApp
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            Close();
+            if (editButton.Text == "EDIT")
+                Close();
+            else
+                DisableEdit();
         }
 
         private void AddDonor_Load(object sender, EventArgs e)
@@ -223,6 +300,30 @@ namespace BloodSMSApp
                 oCity.Items.Add(MyEnums.GetDescription(x));
             }
             populateData();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (editButton.Text == "EDIT")
+                EnableEdit();
+            else
+            {
+                Donor d = GenerateDonorFromFields();
+                if(d!=null)
+                {
+                    if(storage.UpdateDonor(d))
+                    DisableEdit();
+                }
+            }
+        }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            if (storage.DeleteDonorWithId(id))
+            {
+                MessageBox.Show("Donor removed from database");
+                Close();
+            }
         }
 
     }

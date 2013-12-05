@@ -78,6 +78,8 @@
             this.cellphoneField = new System.Windows.Forms.TextBox();
             this.ageText = new System.Windows.Forms.Label();
             this.timesDonated = new System.Windows.Forms.Label();
+            this.editButton = new System.Windows.Forms.Button();
+            this.deleteButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.contactPanel.SuspendLayout();
             this.defferalPanel.SuspendLayout();
@@ -601,12 +603,48 @@
             this.timesDonated.Text = "label11";
             this.timesDonated.Visible = false;
             // 
+            // editButton
+            // 
+            this.editButton.BackColor = System.Drawing.Color.Firebrick;
+            this.editButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.editButton.FlatAppearance.BorderSize = 0;
+            this.editButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.editButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.editButton.ForeColor = System.Drawing.Color.White;
+            this.editButton.Location = new System.Drawing.Point(146, 642);
+            this.editButton.Name = "editButton";
+            this.editButton.Size = new System.Drawing.Size(94, 38);
+            this.editButton.TabIndex = 80;
+            this.editButton.Text = "EDIT";
+            this.editButton.UseVisualStyleBackColor = false;
+            this.editButton.Visible = false;
+            this.editButton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.BackColor = System.Drawing.Color.Firebrick;
+            this.deleteButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.deleteButton.FlatAppearance.BorderSize = 0;
+            this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteButton.ForeColor = System.Drawing.Color.White;
+            this.deleteButton.Location = new System.Drawing.Point(246, 642);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(94, 38);
+            this.deleteButton.TabIndex = 81;
+            this.deleteButton.Text = "DELETE";
+            this.deleteButton.UseVisualStyleBackColor = false;
+            this.deleteButton.Visible = false;
+            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            // 
             // AddDonor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::BloodSMSApp.Properties.Resources.addDonor_copy;
             this.ClientSize = new System.Drawing.Size(535, 703);
+            this.Controls.Add(this.deleteButton);
+            this.Controls.Add(this.editButton);
             this.Controls.Add(this.timesDonated);
             this.Controls.Add(this.ageText);
             this.Controls.Add(this.cellphoneField);
@@ -717,5 +755,7 @@
         private System.Windows.Forms.TextBox cellphoneField;
         private System.Windows.Forms.Label ageText;
         private System.Windows.Forms.Label timesDonated;
+        private System.Windows.Forms.Button editButton;
+        private System.Windows.Forms.Button deleteButton;
     }
 }
