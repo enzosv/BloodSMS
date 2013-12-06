@@ -850,12 +850,14 @@ namespace Blood_SMS
             {
                 foreach (Component c in b.components)
                 {
-                    TimeSpan span = c.Date_expired.Date - DateTime.Today;
-                    if (span.TotalDays < MINIMUMEXPIRYALERTVALUE)
-                        expiringComponents.Add(new string[2] { c.Component_name.ToString(), c.Accession_number });
+                    if (!c.Is_removed)
+                    {
+                        TimeSpan span = c.Date_expired.Date - DateTime.Today;
+                        if (span.TotalDays < MINIMUMEXPIRYALERTVALUE)
+                            expiringComponents.Add(new string[2] { c.Component_name.ToString(), c.Accession_number });
+                    }
                 }
             }
-
             return expiringComponents;
         }
 
