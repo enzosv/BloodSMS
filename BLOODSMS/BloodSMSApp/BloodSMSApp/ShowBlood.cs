@@ -318,7 +318,7 @@ namespace BloodSMSApp
         {
             if (editComponent.Text == "EDIT")
             {
-                if (listBox1.SelectedIndex > 0)
+                if (listBox1.SelectedIndex > -1)
                 {
                     Blood_SMS.Component c = storage.findComponentWithAccessionNumberAndName(accessionNumbers.Text, MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString()));
                     if (c != null)
@@ -328,7 +328,7 @@ namespace BloodSMSApp
                     
                 }
                 else
-                   MessageBox.Show("Component may not be edited");
+                   MessageBox.Show("Please select a component to edit");
             }
             else
             {
@@ -416,7 +416,7 @@ namespace BloodSMSApp
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            if (storage.DeleteComponentWithAccessionNumberAndName(accessionNumbers.Text, MyEnums.GetValueFromDescription<bloodComponents>(textBox1.Text)))
+            if (storage.DeleteComponentWithAccessionNumberAndName(accessionNumbers.Text, MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString())))
             {
                 MessageBox.Show("Component was successfully deleted");
                 cDisableEdit();
