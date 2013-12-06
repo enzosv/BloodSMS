@@ -420,7 +420,7 @@ namespace Blood_SMS
             return false;
         }
 
-        bool UpdateBlood(Blood b)
+        public bool UpdateBlood(Blood b)
         {
             if (bloodCommands("UPDATE Blood SET " + UpdateQuery(BLOOD_FIELDS, new string[] { "accession_number" }), b))
             {

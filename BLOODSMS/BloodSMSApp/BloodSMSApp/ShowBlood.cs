@@ -387,7 +387,16 @@ namespace BloodSMSApp
         #region COMPONENT BUTTONS
         private void addComponent_Click(object sender, EventArgs e)
         {
-
+            List<string> componentNames = new List<string>();
+            foreach (bloodComponents x in (bloodComponents[])Enum.GetValues(typeof(bloodComponents)))
+            {
+                if (!listBox1.Items.Contains(MyEnums.GetDescription(x)))
+                {
+                    componentNames.Add(MyEnums.GetDescription(x));
+                }
+            }
+            AddComponent ac = new AddComponent(storage, b, componentNames);
+            ac.Show();
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
