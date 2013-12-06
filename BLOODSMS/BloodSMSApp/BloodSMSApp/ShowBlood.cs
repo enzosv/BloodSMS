@@ -15,6 +15,7 @@ namespace BloodSMSApp
         Storage storage;
         List<Blood> bloodList;
         Blood b;
+        Blood_SMS.Component component;
         MainMenu parent;
 
         public ShowBlood(MainMenu mainmenu, Blood blood)
@@ -106,10 +107,11 @@ namespace BloodSMSApp
 #endregion
 
         #region COMPONENT
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+
+        void DisplayComponent()
         {
             bloodComponents componentName = MyEnums.GetValueFromDescription<bloodComponents>(listBox1.Text);
-            Blood_SMS.Component component = storage.findComponentWithAccessionNumberAndName(b.Accession_number, componentName);
+            component = storage.findComponentWithAccessionNumberAndName(b.Accession_number, componentName);
 
             dateProcessed.Value = component.Date_processed;
             expiryDate.Value = component.Date_expired;
@@ -121,7 +123,7 @@ namespace BloodSMSApp
                 pAge.Text = component.Patient_age.ToString();
 
             }
-            
+
             if (component.Date_assigned != DateTime.MinValue)
                 assignButton.Text = "RELEASE";
             if (component.Is_removed)
@@ -139,8 +141,10 @@ namespace BloodSMSApp
                 assignButton.Visible = true;
                 reprocessButton.Visible = true;
             }
-
-
+        }
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DisplayComponent();
         }
 
         void setRemoved(string labelText, DateTime dateRemoved, string reason)
@@ -242,13 +246,13 @@ namespace BloodSMSApp
         #endregion
 
         #region COMPONENT EDITS
-        void cEnableEdit(Blood_SMS.Component c)
+        void cEnableEdit()
         {
             assignButton.Visible = false;
             quarantineButton.Visible = false;
             reprocessButton.Visible = false;
             cancelButton.Visible = true;
-            if (c.Is_removed)
+            if (component.Is_removed)
             {
                 cReturn.Visible = true;
             }
@@ -258,14 +262,14 @@ namespace BloodSMSApp
             listBox1.Enabled = false;
             dateProcessed.Enabled = true;
             expiryDate.Enabled = true;
-            if (c.Date_assigned != DateTime.MinValue)
+            if (component.Date_assigned != DateTime.MinValue)
             {
                 pLast.Enabled = true;
                 pFirst.Enabled = true;
                 pMid.Enabled = true;
                 pAge.Enabled = true;
             }
-            if (c.Is_removed)
+            if (component.Is_removed)
             {
                 cRemovedPanel.Visible = true;
             }
@@ -313,7 +317,7 @@ namespace BloodSMSApp
                 {
                     Blood_SMS.Component c = storage.findComponentWithAccessionNumberAndName(accessionNumbers.Text, MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString()));
                     if (c != null)
-                        cEnableEdit(c);
+                        cEnableEdit();
                     else
                        MessageBox.Show("Component not found. Please refresh and try again");
                     
@@ -399,7 +403,9 @@ namespace BloodSMSApp
         {
             if (assignButton.Text == "ASSIGN")
             {
-
+                Assign_Form af = new Assign_Form(storage, component);
+                af.Show();
+                DisplayComponent();
             }
             else
             {
