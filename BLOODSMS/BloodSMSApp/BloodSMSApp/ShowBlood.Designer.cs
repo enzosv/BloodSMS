@@ -41,7 +41,6 @@
             this.label11 = new System.Windows.Forms.Label();
             this.mInitial = new System.Windows.Forms.TextBox();
             this.fName = new System.Windows.Forms.TextBox();
-            this.cancelButton = new System.Windows.Forms.Button();
             this.assignButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
             this.quarantineButton = new System.Windows.Forms.Button();
@@ -73,6 +72,7 @@
             this.b_edit = new System.Windows.Forms.Button();
             this.b_back = new System.Windows.Forms.Button();
             this.bDeleteButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -254,20 +254,6 @@
             this.fName.Name = "fName";
             this.fName.Size = new System.Drawing.Size(120, 26);
             this.fName.TabIndex = 10;
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.BackColor = System.Drawing.Color.Firebrick;
-            this.cancelButton.FlatAppearance.BorderSize = 0;
-            this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelButton.ForeColor = System.Drawing.Color.White;
-            this.cancelButton.Location = new System.Drawing.Point(84, 293);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 32);
-            this.cancelButton.TabIndex = 36;
-            this.cancelButton.Text = "CANCEL";
-            this.cancelButton.UseVisualStyleBackColor = false;
             // 
             // assignButton
             // 
@@ -643,6 +629,22 @@
             this.bDeleteButton.UseVisualStyleBackColor = false;
             this.bDeleteButton.Visible = false;
             // 
+            // cancelButton
+            // 
+            this.cancelButton.BackColor = System.Drawing.Color.Firebrick;
+            this.cancelButton.FlatAppearance.BorderSize = 0;
+            this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelButton.ForeColor = System.Drawing.Color.White;
+            this.cancelButton.Location = new System.Drawing.Point(84, 293);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 32);
+            this.cancelButton.TabIndex = 36;
+            this.cancelButton.Text = "CANCEL";
+            this.cancelButton.UseVisualStyleBackColor = false;
+            this.cancelButton.Visible = false;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
             // ShowBlood
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -716,8 +718,8 @@
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.Button quarantineButton;
         private System.Windows.Forms.Button reprocessButton;
-        private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button bDeleteButton;
         private System.Windows.Forms.Button cReturn;
+        private System.Windows.Forms.Button cancelButton;
     }
 }

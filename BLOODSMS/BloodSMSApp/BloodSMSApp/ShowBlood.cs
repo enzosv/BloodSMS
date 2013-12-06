@@ -138,12 +138,15 @@ namespace BloodSMSApp
                     setRemoved("Date Released", component.Date_removed, component.Reason_for_removal);
                 else
                     setRemoved("Date Reprocessed", component.Date_removed, component.Reason_for_removal);
+
+                cRemovedPanel.Visible = true;
             }
             else
             {
                 quarantineButton.Visible = true;
                 assignButton.Visible = true;
                 reprocessButton.Visible = true;
+                cRemovedPanel.Visible = false;
             }
         }
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -256,12 +259,11 @@ namespace BloodSMSApp
             quarantineButton.Visible = false;
             reprocessButton.Visible = false;
             cancelButton.Visible = true;
+            deleteButton.Visible = true;
             if (component.Is_removed)
             {
                 cReturn.Visible = true;
             }
-
-            deleteButton.Text = "CANCEL";
             editComponent.Text = "SAVE";
             listBox1.Enabled = false;
             dateProcessed.Enabled = true;
@@ -296,10 +298,9 @@ namespace BloodSMSApp
             quarantineButton.Visible = true;
             reprocessButton.Visible = true;
             cancelButton.Visible = false;
+            deleteButton.Visible = false;
             cReturn.Visible = false;
             editComponent.Text = "EDIT";
-            cancelButton.Visible = true;
-            deleteButton.Visible = true;
             listBox1.Enabled = true;
             dateProcessed.Enabled = false;
             expiryDate.Enabled = false;
@@ -420,6 +421,8 @@ namespace BloodSMSApp
                 MessageBox.Show("Component was successfully deleted");
                 cDisableEdit();
             }
+            else
+                MessageBox.Show("Component could not be deleted. Please try again");
         }
 
         private void assignButton_Click(object sender, EventArgs e)
@@ -451,6 +454,11 @@ namespace BloodSMSApp
             RemoveItem ri = new RemoveItem(storage, component, removalType.Quarantined);
             ri.ShowDialog();
             DisplayComponent();
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            cDisableEdit();
         }
     }
 }
