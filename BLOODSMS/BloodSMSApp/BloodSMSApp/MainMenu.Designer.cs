@@ -561,7 +561,6 @@
             this.tabPage4.Size = new System.Drawing.Size(673, 526);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.UseVisualStyleBackColor = true;
-            this.tabPage4.Click += new System.EventHandler(this.tabPage4_Click);
             // 
             // dTypeFilter
             // 
@@ -919,7 +918,6 @@
             this.label10.Size = new System.Drawing.Size(158, 20);
             this.label10.TabIndex = 35;
             this.label10.Text = "INVENTORY SUMMARY:";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // panel3
             // 
@@ -948,7 +946,6 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(671, 38);
             this.panel4.TabIndex = 37;
-            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // panel5
             // 

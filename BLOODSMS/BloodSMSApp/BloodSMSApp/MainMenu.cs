@@ -34,7 +34,7 @@ namespace BloodSMSApp
         {
             timer1.Enabled = true;
             timer1.Interval = 1000;
-            label3.Text = DateTime.Now.ToLongDateString();
+            label3.Text = DateTime.Now.ToString("MMMM d, yyyy");
             storage = new Storage("localhost", "bsms", "root", "root");
             notifications = new List<string>();
             command = graphCommand.Summary;
@@ -351,13 +351,6 @@ namespace BloodSMSApp
             a.ShowDialog();
         }
 
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            ViewDonor v = new ViewDonor();
-            v.ShowDialog();
-        }
-
         private void button4_Click_1(object sender, EventArgs e)
         {
             PreAddItem i = new PreAddItem(this);
@@ -506,22 +499,6 @@ namespace BloodSMSApp
         {
             this.Close();
         }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void tabPage4_Click(object sender, EventArgs e)
-        {
-
-        }
-
 
     }
 }
