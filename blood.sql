@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `BSMS`.`component` (
   `patient_middle_initial` VARCHAR(45) NOT NULL,
   `patient_age` INT NOT NULL,
   `reason_for_removal` TEXT NOT NULL,
-  PRIMARY KEY (`accession_number`),
+  PRIMARY KEY (`accession_number`, `component_name`),
   CONSTRAINT `accession_number`
     FOREIGN KEY (`accession_number`)
     REFERENCES `BSMS`.`blood` (`accession_number`)

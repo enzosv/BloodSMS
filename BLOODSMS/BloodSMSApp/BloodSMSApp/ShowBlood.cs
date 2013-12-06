@@ -60,6 +60,7 @@ namespace BloodSMSApp
 
         void DisplayBlood()
         {
+            
             if (b != null)
             {
                 bloodTypeField.SelectedIndex = (int)b.Blood_type;
@@ -78,6 +79,7 @@ namespace BloodSMSApp
                 {
                     label5.Text = b.Date_removed.ToLongDateString();
                 }
+                listBox1.Items.Clear();
                 foreach (Blood_SMS.Component c in b.components)
                 {
                     listBox1.Items.Add(MyEnums.GetDescription(c.Component_name));
@@ -110,7 +112,7 @@ namespace BloodSMSApp
 
         void DisplayComponent()
         {
-            bloodComponents componentName = MyEnums.GetValueFromDescription<bloodComponents>(listBox1.Text);
+            bloodComponents componentName = MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString());
             component = storage.findComponentWithAccessionNumberAndName(b.Accession_number, componentName);
 
             dateProcessed.Value = component.Date_processed;
@@ -126,6 +128,8 @@ namespace BloodSMSApp
 
             if (component.Date_assigned != DateTime.MinValue)
                 assignButton.Text = "RELEASE";
+            else
+                assignButton.Text = "ASSIGN";
             if (component.Is_removed)
             {
                 if (component.Is_quarantined)
@@ -395,8 +399,18 @@ namespace BloodSMSApp
                     componentNames.Add(MyEnums.GetDescription(x));
                 }
             }
-            AddComponent ac = new AddComponent(storage, b, componentNames);
-            ac.Show();
+            if (componentNames.Count > 0)
+            {
+                AddComponent ac = new AddComponent(storage, b, componentNames);
+                ac.ShowDialog();
+                parent.RefreshStorage();
+                b = storage.findBlood(accessionNumbers.Text);
+                listBox1.Items.Clear();
+                foreach (Blood_SMS.Component c in b.components)
+                {
+                    listBox1.Items.Add(MyEnums.GetDescription(c.Component_name));
+                }
+            }
         }
 
         private void deleteButton_Click(object sender, EventArgs e)

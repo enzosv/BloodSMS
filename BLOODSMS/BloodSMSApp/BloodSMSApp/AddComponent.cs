@@ -28,8 +28,7 @@ namespace BloodSMSApp
 
         private void b_add_Click(object sender, EventArgs e)
         {
-            blood.AddComponent(new Blood_SMS.Component(blood.Accession_number, (int)MyEnums.GetValueFromDescription<bloodComponents>(componentName.Text), dateTimePicker1.Value, dateTimePicker2.Value));
-            if (storage.UpdateBlood(blood))
+            if (storage.AddComponent(blood.Accession_number, (int)MyEnums.GetValueFromDescription<bloodComponents>(componentName.Text), dateTimePicker1.Value, dateTimePicker2.Value))
             {
                 MessageBox.Show("Component successfully added");
                 Close();
@@ -37,6 +36,11 @@ namespace BloodSMSApp
             else
                 MessageBox.Show("Component could not be added. Please try again");
             
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
     }

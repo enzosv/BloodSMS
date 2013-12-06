@@ -588,7 +588,7 @@ namespace Blood_SMS
             conn.Close();
         }
 
-        bool AddComponent(string ACCESSION_NUMBER, int COMPONENT_NAME, DateTime DATE_PROCESSED, DateTime DATE_EXPIRED)
+        public bool AddComponent(string ACCESSION_NUMBER, int COMPONENT_NAME, DateTime DATE_PROCESSED, DateTime DATE_EXPIRED)
         {
             Component c = new Component(ACCESSION_NUMBER, COMPONENT_NAME, DATE_PROCESSED, DATE_EXPIRED);
 
