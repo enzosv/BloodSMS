@@ -185,11 +185,11 @@
             this.reprocessedButton.BackColor = System.Drawing.Color.Firebrick;
             this.reprocessedButton.FlatAppearance.BorderSize = 0;
             this.reprocessedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.reprocessedButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reprocessedButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.reprocessedButton.ForeColor = System.Drawing.Color.White;
-            this.reprocessedButton.Location = new System.Drawing.Point(538, 211);
+            this.reprocessedButton.Location = new System.Drawing.Point(548, 211);
             this.reprocessedButton.Name = "reprocessedButton";
-            this.reprocessedButton.Size = new System.Drawing.Size(116, 35);
+            this.reprocessedButton.Size = new System.Drawing.Size(106, 35);
             this.reprocessedButton.TabIndex = 26;
             this.reprocessedButton.Text = "REPROCESSED";
             this.reprocessedButton.UseVisualStyleBackColor = false;
@@ -222,7 +222,7 @@
             this.Summary.BackColor = System.Drawing.Color.Firebrick;
             this.Summary.FlatAppearance.BorderSize = 0;
             this.Summary.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Summary.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Summary.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Summary.ForeColor = System.Drawing.Color.White;
             this.Summary.Location = new System.Drawing.Point(23, 211);
             this.Summary.Name = "Summary";
@@ -237,7 +237,7 @@
             this.addedButton.BackColor = System.Drawing.Color.Firebrick;
             this.addedButton.FlatAppearance.BorderSize = 0;
             this.addedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addedButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addedButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addedButton.ForeColor = System.Drawing.Color.White;
             this.addedButton.Location = new System.Drawing.Point(122, 211);
             this.addedButton.Name = "addedButton";
@@ -252,7 +252,7 @@
             this.releasedButton.BackColor = System.Drawing.Color.Firebrick;
             this.releasedButton.FlatAppearance.BorderSize = 0;
             this.releasedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.releasedButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.releasedButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.releasedButton.ForeColor = System.Drawing.Color.White;
             this.releasedButton.Location = new System.Drawing.Point(315, 211);
             this.releasedButton.Name = "releasedButton";
@@ -267,11 +267,11 @@
             this.quarantinedButton.BackColor = System.Drawing.Color.Firebrick;
             this.quarantinedButton.FlatAppearance.BorderSize = 0;
             this.quarantinedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.quarantinedButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quarantinedButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.quarantinedButton.ForeColor = System.Drawing.Color.White;
             this.quarantinedButton.Location = new System.Drawing.Point(416, 211);
             this.quarantinedButton.Name = "quarantinedButton";
-            this.quarantinedButton.Size = new System.Drawing.Size(116, 35);
+            this.quarantinedButton.Size = new System.Drawing.Size(126, 35);
             this.quarantinedButton.TabIndex = 17;
             this.quarantinedButton.Text = "QUARANTINED";
             this.quarantinedButton.UseVisualStyleBackColor = false;
@@ -282,7 +282,7 @@
             this.removedButton.BackColor = System.Drawing.Color.Firebrick;
             this.removedButton.FlatAppearance.BorderSize = 0;
             this.removedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.removedButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removedButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.removedButton.ForeColor = System.Drawing.Color.White;
             this.removedButton.Location = new System.Drawing.Point(213, 211);
             this.removedButton.Name = "removedButton";
@@ -502,7 +502,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Control;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(388, 20);
+            this.label1.Location = new System.Drawing.Point(355, 21);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(188, 20);
             this.label1.TabIndex = 39;
@@ -517,7 +517,7 @@
             this.b_inventoryQuarantined.ForeColor = System.Drawing.Color.White;
             this.b_inventoryQuarantined.Location = new System.Drawing.Point(166, 15);
             this.b_inventoryQuarantined.Name = "b_inventoryQuarantined";
-            this.b_inventoryQuarantined.Size = new System.Drawing.Size(118, 29);
+            this.b_inventoryQuarantined.Size = new System.Drawing.Size(129, 29);
             this.b_inventoryQuarantined.TabIndex = 29;
             this.b_inventoryQuarantined.Text = "UNAVAILABLE";
             this.b_inventoryQuarantined.UseVisualStyleBackColor = false;
@@ -528,7 +528,7 @@
             this.b_inventoryInventory.BackColor = System.Drawing.Color.DimGray;
             this.b_inventoryInventory.FlatAppearance.BorderSize = 0;
             this.b_inventoryInventory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_inventoryInventory.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_inventoryInventory.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.b_inventoryInventory.ForeColor = System.Drawing.Color.White;
             this.b_inventoryInventory.Location = new System.Drawing.Point(60, 15);
             this.b_inventoryInventory.Name = "b_inventoryInventory";
@@ -886,7 +886,7 @@
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            //this.Name = "MainMenu";
+            this.Name = "MainMenu";
             this.Padding = new System.Windows.Forms.Padding(3);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Contact AB+";

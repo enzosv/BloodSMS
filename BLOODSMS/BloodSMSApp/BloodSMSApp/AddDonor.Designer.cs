@@ -260,7 +260,7 @@
             this.dateRegisteredField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateRegisteredField.Location = new System.Drawing.Point(299, 84);
             this.dateRegisteredField.Name = "dateRegisteredField";
-            this.dateRegisteredField.Size = new System.Drawing.Size(200, 26);
+            this.dateRegisteredField.Size = new System.Drawing.Size(213, 26);
             this.dateRegisteredField.TabIndex = 28;
             // 
             // bloodTypeField
@@ -345,7 +345,7 @@
             this.birthDateField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.birthDateField.Location = new System.Drawing.Point(47, 136);
             this.birthDateField.Name = "birthDateField";
-            this.birthDateField.Size = new System.Drawing.Size(200, 26);
+            this.birthDateField.Size = new System.Drawing.Size(213, 26);
             this.birthDateField.TabIndex = 29;
             // 
             // nextAvailableField
@@ -353,7 +353,7 @@
             this.nextAvailableField.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nextAvailableField.Location = new System.Drawing.Point(299, 192);
             this.nextAvailableField.Name = "nextAvailableField";
-            this.nextAvailableField.Size = new System.Drawing.Size(200, 26);
+            this.nextAvailableField.Size = new System.Drawing.Size(213, 26);
             this.nextAvailableField.TabIndex = 47;
             // 
             // viableYes

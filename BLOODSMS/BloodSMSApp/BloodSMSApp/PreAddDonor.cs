@@ -35,5 +35,10 @@ namespace BloodSMSApp
         {
             Close();
         }
+
+        private void lName_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
