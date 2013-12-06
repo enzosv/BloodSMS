@@ -40,7 +40,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button3 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.titleLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -161,7 +161,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Firebrick;
             this.panel1.Controls.Add(this.button3);
-            this.panel1.Controls.Add(this.label2);
+            this.panel1.Controls.Add(this.titleLabel);
             this.panel1.Location = new System.Drawing.Point(-6, -2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(267, 47);
@@ -182,18 +182,18 @@
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // label2
+            // titleLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Firebrick;
-            this.label2.Font = new System.Drawing.Font("Arial Narrow", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.label2.Location = new System.Drawing.Point(11, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(149, 29);
-            this.label2.TabIndex = 73;
-            this.label2.Text = "REMOVE ITEM";
+            this.titleLabel.AutoSize = true;
+            this.titleLabel.BackColor = System.Drawing.Color.Firebrick;
+            this.titleLabel.Font = new System.Drawing.Font("Arial Narrow", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel.ForeColor = System.Drawing.Color.White;
+            this.titleLabel.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.titleLabel.Location = new System.Drawing.Point(11, 10);
+            this.titleLabel.Name = "titleLabel";
+            this.titleLabel.Size = new System.Drawing.Size(149, 29);
+            this.titleLabel.TabIndex = 73;
+            this.titleLabel.Text = "REMOVE ITEM";
             // 
             // RemoveItem
             // 
@@ -238,6 +238,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label titleLabel;
     }
 }

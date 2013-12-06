@@ -37,13 +37,15 @@ namespace BloodSMSApp
         void Reload()
         {
             storage = parent.storage;
+            //storage.getBloodSQL();
+            //storage.getComponentSQL();
             bloodList = storage.bloodList;
             accessionNumbers.Items.Clear();
             foreach (Blood bl in bloodList)
             {
                 accessionNumbers.Items.Add(bl.Accession_number);
             }
-            listBox1.Items.Clear();
+
             lName.Clear();
             fName.Clear();
             mInitial.Clear();
@@ -53,6 +55,13 @@ namespace BloodSMSApp
             pAge.Clear();
             label5.Text = "Not Removed";
             cRemovedPanel.Visible = false;
+
+            quarantineButton.Visible = false;
+            assignButton.Visible = false;
+            reprocessButton.Visible = false;
+            cRemovedPanel.Visible = false;
+            editComponent.Visible = false;
+
             DisplayBlood();
         }
 
@@ -62,6 +71,7 @@ namespace BloodSMSApp
             if (b != null)
             {
                 bloodTypeField.SelectedIndex = (int)b.Blood_type;
+                dateDonated.Value = b.Date_donated;
                 if (b.Donor_id.HasValue)
                 {
                     Donor d = storage.findDonor(b.Donor_id.Value);
@@ -72,27 +82,25 @@ namespace BloodSMSApp
                         mInitial.Text = d.Middle_initial;
                     }
                 }
-                dateDonated.Value = b.Date_donated;
                 if (b.Is_removed)
                 {
                     label5.Text = b.Date_removed.ToLongDateString();
                 }
+
                 listBox1.Items.Clear();
                 foreach (Blood_SMS.Component c in b.components)
                 {
                     listBox1.Items.Add(MyEnums.GetDescription(c.Component_name));
                 }
-                listBox1.SelectedIndex = 0;
+                //listBox1.SelectedIndex = 0;
             }
+            else
+                MessageBox.Show("Error displaying blood. Please try again");
 
         }
         private void accessionNumbers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            b = storage.findBlood(accessionNumbers.Text);
-            if (b != null)
-                DisplayBlood();
-            else
-                MessageBox.Show("Error displaying blood. Please try again");
+            Reload();
         }
 
         private void b_back_Click(object sender, EventArgs e)
@@ -100,52 +108,152 @@ namespace BloodSMSApp
             if (b_back.Text == "BACK")
                 Close();
             else
-            {
                 bDisableEdit();
+        }
+        #endregion
+
+        #region BLOOD EDITS
+
+        void bDisableEdit()
+        {
+            accessionNumbers.Enabled = true;
+            bloodTypeField.Enabled = false;
+            lName.Enabled = false;
+            fName.Enabled = false;
+            mInitial.Enabled = false;
+            dateDonated.Enabled = false;
+            textBox1.Visible = false;
+            textBox1.Clear();
+
+            b_edit.Text = "EDIT";
+            b_back.Text = "BACK";
+            bDeleteButton.Visible = false;
+        }
+
+        void bEnableEdit()
+        {
+            accessionNumbers.Enabled = false;
+            bloodTypeField.Enabled = true;
+            lName.Enabled = true;
+            fName.Enabled = true;
+            mInitial.Enabled = true;
+            dateDonated.Enabled = true;
+            textBox1.Visible = true;
+            textBox1.Text = accessionNumbers.Text;
+
+            b_edit.Text = "SAVE";
+            b_back.Text = "CANCEL";
+            bDeleteButton.Visible = true;
+        }
+
+        private void b_edit_Click(object sender, EventArgs e)
+        {
+            if (b_edit.Text == "EDIT")
+            {
+                if (b != null)
+                    bEnableEdit();
+                else
+                    MessageBox.Show("Please select an accession number from the list");
+            }
+            else //SAVE
+            {
+                Blood b;
+                Donor d = storage.findDonorWithName(lName.Text, fName.Text, mInitial.Text);
+
+                if (d != null)
+                    b = new Blood(textBox1.Text, bloodTypeField.SelectedIndex, d.Donor_id, dateDonated.Value);
+                else
+                {
+                    b = new Blood(textBox1.Text, bloodTypeField.SelectedIndex, dateDonated.Value);
+                    MessageBox.Show("Donor could not be found. Please try again");
+                }
+                if (storage.UpdateBlood(b, accessionNumbers.Text))
+                {
+                    bDisableEdit();
+                    storage.getBloodSQL();
+                    Reload();
+                    accessionNumbers.Text = b.Accession_number;
+                    MessageBox.Show("Blood Updated");
+                }
+                else
+                {
+                    textBox1.Text = accessionNumbers.Text;
+                    MessageBox.Show("Error updating blood values");
+                }
             }
         }
-#endregion
+
+        private void accessionNumbers_TextUpdate(object sender, EventArgs e)
+        {
+            Reload();
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            if (textBox1.Text != accessionNumbers.Text && storage.findBlood(textBox1.Text) != null)
+            {
+                MessageBox.Show("Blood with accession number already exists");
+                textBox1.Focus();
+            }
+        }
+
+        #endregion
 
         #region COMPONENT
 
         void DisplayComponent()
         {
-            storage.getComponentSQL();
-            bloodComponents componentName = MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString());
-            component = storage.findComponentWithAccessionNumberAndName(b.Accession_number, componentName);
-
-            dateProcessed.Value = component.Date_processed;
-            expiryDate.Value = component.Date_expired;
-            if (!String.IsNullOrWhiteSpace(component.Patient_first_name))
+            if (listBox1.SelectedIndex > -1)
             {
-                pLast.Text = component.Patient_last_name;
-                pFirst.Text = component.Patient_first_name;
-                pMid.Text = component.Patient_middle_initial;
-                pAge.Text = component.Patient_age.ToString();
+                bloodComponents componentName = MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString());
+                component = storage.findComponentWithAccessionNumberAndName(b.Accession_number, componentName);
 
-            }
-
-            if (component.Date_assigned != DateTime.MinValue)
-                assignButton.Text = "RELEASE";
-            else
-                assignButton.Text = "ASSIGN";
-            if (component.Is_removed)
-            {
-                if (component.Is_quarantined)
-                    setRemoved("Date Quarantined", component.Date_removed, component.Reason_for_removal);
-                else if (component.Is_released)
-                    setRemoved("Date Released", component.Date_removed, component.Reason_for_removal);
+                dateProcessed.Value = component.Date_processed;
+                expiryDate.Value = component.Date_expired;
+                if (!String.IsNullOrWhiteSpace(component.Patient_first_name))
+                {
+                    pLast.Text = component.Patient_last_name;
+                    pFirst.Text = component.Patient_first_name;
+                    pMid.Text = component.Patient_middle_initial;
+                    pAge.Text = component.Patient_age.ToString();
+                }
                 else
-                    setRemoved("Date Reprocessed", component.Date_removed, component.Reason_for_removal);
+                {
+                    pLast.Text = "";
+                    pFirst.Text = "";
+                    pMid.Text = "";
+                    pAge.Text = "";
+                }
 
-                cRemovedPanel.Visible = true;
+                if (component.Date_assigned != DateTime.MinValue)
+                    assignButton.Text = "RELEASE";
+                else
+                    assignButton.Text = "ASSIGN";
+
+                if (component.Is_removed)
+                {
+                    if (component.Is_quarantined)
+                        setRemoved("Date Quarantined", component.Date_removed, component.Reason_for_removal);
+                    else if (component.Is_released)
+                        setRemoved("Date Released", component.Date_removed, component.Reason_for_removal);
+                    else
+                        setRemoved("Date Reprocessed", component.Date_removed, component.Reason_for_removal);
+
+                    cRemovedPanel.Visible = true;
+                }
+                else
+                {
+                    quarantineButton.Visible = true;
+                    assignButton.Visible = true;
+                    reprocessButton.Visible = true;
+                    cRemovedPanel.Visible = false;
+                }
+                editComponent.Visible = true;
             }
             else
             {
-                quarantineButton.Visible = true;
-                assignButton.Visible = true;
-                reprocessButton.Visible = true;
-                cRemovedPanel.Visible = false;
+                listBox1.SelectedIndex = 0;
+                DisplayComponent();
             }
         }
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -166,129 +274,55 @@ namespace BloodSMSApp
         }
         #endregion
 
-        #region BLOOD EDITS
-
-        void bEnableEdit()
-        {
-            accessionNumbers.Enabled = false;
-            bloodTypeField.Enabled = true;
-            lName.Enabled = true;
-            fName.Enabled = true;
-            mInitial.Enabled = true;
-            dateDonated.Enabled = true;
-            textBox1.Visible = true;
-            textBox1.Text = accessionNumbers.Text;
-
-            b_edit.Text = "SAVE";
-            b_back.Text = "CANCEL";
-            bDeleteButton.Visible = true;
-        }
-
-        void bDisableEdit()
-        {
-            accessionNumbers.Enabled = true;
-            bloodTypeField.Enabled = false;
-            lName.Enabled = false;
-            fName.Enabled = false;
-            mInitial.Enabled = false;
-            dateDonated.Enabled = false;
-            textBox1.Visible = false;
-            textBox1.Clear();
-
-            b_edit.Text = "EDIT";
-            b_back.Text = "BACK";
-            bDeleteButton.Visible = false;
-        }
-
-        private void b_edit_Click(object sender, EventArgs e)
-        {
-            if (b_edit.Text == "EDIT")
-            {
-                if (storage.findBlood(accessionNumbers.Text) != null)
-                    bEnableEdit();
-                else
-                    MessageBox.Show("Please select an accession number from the list");
-            }
-            else
-            {
-                Blood b;
-                Donor d = storage.findDonorWithName(lName.Text, fName.Text, mInitial.Text);
-                if (d != null)
-                    b = new Blood(textBox1.Text, bloodTypeField.SelectedIndex, d.Donor_id, dateDonated.Value);
-                else
-                    b = new Blood(textBox1.Text, bloodTypeField.SelectedIndex, dateDonated.Value);
-                if (storage.UpdateBlood(b, accessionNumbers.Text))
-                {
-                    bDisableEdit();
-                    storage.getBloodSQL();
-                    Reload();
-                    accessionNumbers.Text = b.Accession_number;
-                    MessageBox.Show("Blood Updated");
-                }
-                else
-                {
-                    textBox1.Text = accessionNumbers.Text;
-                    MessageBox.Show("Error updating blood values");
-                }
-            }
-        }
-
-        private void accessionNumbers_TextUpdate(object sender, EventArgs e)
-        {
-            b = storage.findBlood(accessionNumbers.Text);
-            DisplayBlood();
-        }
-
-        private void textBox1_Leave(object sender, EventArgs e)
-        {
-            if (textBox1.Text != accessionNumbers.Text && storage.findBlood(textBox1.Text) != null)
-            {
-                MessageBox.Show("Blood with accession number already exists");
-                textBox1.Focus();
-            }
-
-        }
-
-        #endregion
-
         #region COMPONENT EDITS
         void cEnableEdit()
         {
+            if (listBox1.SelectedItem.ToString() == "Whole")
+            {
+                deleteButton.Visible = false;
+                cNameBox.Text = "Whole";
+            }
+            else
+            {
+                deleteButton.Visible = true;
+                cNameBox.Visible = true;
+                cNameBox.Items.Clear();
+                cNameBox.Items.Add(listBox1.SelectedItem.ToString());
+                foreach (bloodComponents x in (bloodComponents[])Enum.GetValues(typeof(bloodComponents)))
+                {
+                    if (!listBox1.Items.Contains(MyEnums.GetDescription(x)))
+                    {
+                        cNameBox.Items.Add(MyEnums.GetDescription(x));
+                    }
+                }
+                cNameBox.SelectedIndex = 0;
+            }
             assignButton.Visible = false;
             quarantineButton.Visible = false;
             reprocessButton.Visible = false;
             cancelButton.Visible = true;
-            deleteButton.Visible = true;
-            if (component.Is_removed)
-            {
-                cReturn.Visible = true;
-            }
+
             editComponent.Text = "SAVE";
             listBox1.Enabled = false;
             dateProcessed.Enabled = true;
             expiryDate.Enabled = true;
-            if (component.Date_assigned != DateTime.MinValue)
-            {
-                pLast.Enabled = true;
-                pFirst.Enabled = true;
-                pMid.Enabled = true;
-                pAge.Enabled = true;
-            }
             if (component.Is_removed)
             {
                 cRemovedPanel.Visible = true;
+                cReturn.Visible = true;
+                cReturn.Text = "RETURN TO INVENTORY";
             }
-            cNameBox.Visible = true;
-            cNameBox.Items.Clear();
-            cNameBox.Items.Add(listBox1.SelectedItem.ToString());
-            foreach (bloodComponents x in (bloodComponents[])Enum.GetValues(typeof(bloodComponents)))
+            else if (component.Date_assigned != DateTime.MinValue)
             {
-                if (!listBox1.Items.Contains(MyEnums.GetDescription(x)))
-                {
-                    cNameBox.Items.Add(MyEnums.GetDescription(x));
-                }
+                //pLast.Enabled = true;
+                //pFirst.Enabled = true;
+                //pMid.Enabled = true;
+                //pAge.Enabled = true;
+                cReturn.Visible = true;
+                cReturn.Text = "UNASSIGN COMPONENT";
             }
-            cNameBox.SelectedIndex = 0;
+
+
         }
 
         void cDisableEdit()
@@ -310,7 +344,7 @@ namespace BloodSMSApp
 
             cRemovedPanel.Visible = false;
             cNameBox.Visible = false;
-            parent.RefreshStorage();
+            //parent.RefreshStorage();
             Reload();
         }
         private void editComponent_Click(object sender, EventArgs e)
@@ -319,74 +353,69 @@ namespace BloodSMSApp
             {
                 if (listBox1.SelectedIndex > -1)
                 {
-                    Blood_SMS.Component c = storage.findComponentWithAccessionNumberAndName(accessionNumbers.Text, MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString()));
-                    if (c != null)
+                    if (component != null)
                         cEnableEdit();
                     else
-                       MessageBox.Show("Component not found. Please refresh and try again");
-                    
+                        MessageBox.Show("Component not found. Please refresh and try again");
                 }
                 else
-                   MessageBox.Show("Please select a component to edit");
+                    MessageBox.Show("Please select a component to edit");
             }
+            //SAVE
             else
             {
                 Blood_SMS.Component c;
-                int removal_type = 0;
-                DateTime date_removed = DateTime.MinValue;
-                if (cDateRemoved.Enabled)
+                int removal_type;
+                DateTime date_removed;
+                switch (cRemovedLabel.Text)
                 {
-                    switch (cRemovedLabel.Text)
-                    {
-                        case "DATE QUARANTINED":
-                            removal_type = 2;
-                            date_removed = cDateRemoved.Value;
-                            break;
-                        case "DATE RELEASED":
-                            removal_type = 3;
-                            date_removed = cDateRemoved.Value;
-                            break;
-                        case "DATE_REPROCESSED":
-                            removal_type = 1;
-                            date_removed = cDateRemoved.Value;
-                            break;
-                    }
+                    case "DATE QUARANTINED":
+                        removal_type = 2;
+                        date_removed = cDateRemoved.Value;
+                        break;
+                    case "DATE RELEASED":
+                        removal_type = 3;
+                        date_removed = cDateRemoved.Value;
+                        break;
+                    case "DATE_REPROCESSED":
+                        removal_type = 1;
+                        date_removed = cDateRemoved.Value;
+                        break;
+                    default:
+                        removal_type = 0;
+                        date_removed = DateTime.MinValue;
+                        break;
                 }
                 int age;
-                if (pLast.Enabled && !String.IsNullOrWhiteSpace(pLast.Text) && !String.IsNullOrWhiteSpace(pFirst.Text) && !String.IsNullOrWhiteSpace(pMid.Text) && !String.IsNullOrWhiteSpace(pAge.Text))
+                if (int.TryParse(pAge.Text, out age))
                 {
-                    if (int.TryParse(pAge.Text, out age))
-                    {
-                        c = new Blood_SMS.Component(accessionNumbers.Text, (int)MyEnums.GetValueFromDescription<bloodComponents>(cNameBox.SelectedItem.ToString()), removal_type, dateProcessed.Value, expiryDate.Value, dateAssigned.Value, date_removed, pLast.Text, pFirst.Text, pMid.Text, age, cReason.Text);
-                        if (storage.UpdateComponent(c, (int)MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString())))
-                        {
-                            cDisableEdit();
-                            MessageBox.Show("Component was successfully updated");
-                        }
-                        else
-                            MessageBox.Show("Error updating component. Please try again later");
-                    }
+                    c = new Blood_SMS.Component(accessionNumbers.Text, (int)MyEnums.GetValueFromDescription<bloodComponents>(cNameBox.Text.ToString()), removal_type, dateProcessed.Value, expiryDate.Value, dateAssigned.Value, date_removed, pLast.Text, pFirst.Text, pMid.Text, age, cReason.Text);
+                    UpdateComponent(c);
                 }
                 else
                 {
-                    c = new Blood_SMS.Component(accessionNumbers.Text, (int)MyEnums.GetValueFromDescription<bloodComponents>(cNameBox.SelectedItem.ToString()), removal_type, dateProcessed.Value, expiryDate.Value, DateTime.MinValue, date_removed, "", "", "", 0, cReason.Text);
-                    if (storage.UpdateComponent(c, (int)MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString())))
-                    {
-                        cDisableEdit();
-                        MessageBox.Show("Component was successfully updated");
-                    }
-                    else
-                        MessageBox.Show("Error updating component. Please try again later");
+                    c = new Blood_SMS.Component(accessionNumbers.Text, (int)MyEnums.GetValueFromDescription<bloodComponents>(cNameBox.Text.ToString()), removal_type, dateProcessed.Value, expiryDate.Value, DateTime.MinValue, date_removed, "", "", "", 0, cReason.Text);
+                    UpdateComponent(c);
                 }
 
             }
         }
 
+        void UpdateComponent(Blood_SMS.Component c)
+        {
+            if (storage.UpdateComponent(c, (int)MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString())))
+            {
+                cDisableEdit();
+                MessageBox.Show("Component was successfully updated");
+            }
+            else
+                MessageBox.Show("Error updating component. Please try again later");
+        }
         private void pAge_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !(Char.IsNumber(e.KeyChar) || e.KeyChar == 8);
         }
-#endregion
+        #endregion
 
         #region COMPONENT BUTTONS
         private void addComponent_Click(object sender, EventArgs e)
@@ -403,25 +432,21 @@ namespace BloodSMSApp
             {
                 AddComponent ac = new AddComponent(storage, b, componentNames);
                 ac.ShowDialog();
-                storage.getComponentSQL();
-                b = storage.findBlood(accessionNumbers.Text);
-                listBox1.Items.Clear();
-                foreach (Blood_SMS.Component c in b.components)
-                {
-                    listBox1.Items.Add(MyEnums.GetDescription(c.Component_name));
-                }
+                DisplayBlood();
             }
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            if (storage.DeleteComponentWithAccessionNumberAndName(accessionNumbers.Text, MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString())))
+
+            if (storage.DeleteComponentWithAccessionNumberAndName(accessionNumbers.Text, (int)MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString())))
             {
                 MessageBox.Show("Component was successfully deleted");
                 cDisableEdit();
             }
             else
                 MessageBox.Show("Component could not be deleted. Please try again");
+
         }
 
         private void assignButton_Click(object sender, EventArgs e)
@@ -430,7 +455,7 @@ namespace BloodSMSApp
             {
                 Assign_Form af = new Assign_Form(storage, component);
                 af.Show();
-                storage.getComponentSQL();
+                DisplayBlood();
                 DisplayComponent();
             }
             else
@@ -438,7 +463,6 @@ namespace BloodSMSApp
                 RemoveItem(removalType.Released);
             }
         }
-        #endregion
 
         private void reprocessButton_Click(object sender, EventArgs e)
         {
@@ -459,8 +483,40 @@ namespace BloodSMSApp
         {
             RemoveItem ri = new RemoveItem(storage, component, rt);
             ri.ShowDialog();
+            DisplayBlood();
             DisplayComponent();
-            storage.getComponentSQL();
         }
+
+        private void cReturn_Click(object sender, EventArgs e)
+        {
+            if (cReturn.Text == "RETURN TO INVENTORY")
+            {
+                component.Unremove();
+                DisplayBlood();
+                DisplayComponent();
+                cEnableEdit();
+                //if (storage.UpdateComponent(component))
+                //{
+                //    MessageBox.Show("Component returned to inventory");
+
+                //}
+            }
+            //UNASSIGN
+            else
+            {
+                component.Unassign();
+                DisplayBlood();
+                DisplayComponent();
+                cEnableEdit();
+                assignButton.Text = "ASSIGN";
+                //if (storage.UpdateComponent(component))
+                //{
+                //    MessageBox.Show("Unassigned component");
+
+                //}
+            }
+            cReturn.Visible = false;
+        }
+        #endregion
     }
 }

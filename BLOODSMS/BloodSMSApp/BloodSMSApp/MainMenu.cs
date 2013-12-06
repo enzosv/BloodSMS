@@ -427,7 +427,7 @@ namespace BloodSMSApp
                     Blood b = storage.findBlood(selection);
                     if (b != null)
                     {
-                        ShowBlood sb = new ShowBlood(this, b);
+                        ShowBlood sb = new ShowBlood(this, b.Accession_number);
                         sb.ShowDialog();
                     }
                     else if (d != null)
@@ -448,7 +448,7 @@ namespace BloodSMSApp
                 Blood b = storage.findBlood(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
                 if (b != null)
                 {
-                    ShowBlood sb = new ShowBlood(this, b);
+                    ShowBlood sb = new ShowBlood(this, b.Accession_number);
                     sb.ShowDialog();
                 }
             }

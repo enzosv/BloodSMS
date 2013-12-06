@@ -399,11 +399,12 @@ namespace Blood_SMS
                 {
                     findDonor(b.Donor_id.Value).Next_available = b.Date_donated.AddMonths(3);
                 }
-                if(AddWholeComponent(b, date_expire))
+                if (AddWholeComponent(b, date_expire))
                     return true;
             }
             return false;
         }
+
         public bool UpdateBlood(Blood b, string oldAccessionNumber)
         {
             if (oldAccessionNumber != b.Accession_number)
@@ -502,7 +503,7 @@ namespace Blood_SMS
         void SortBlood(Blood b)
         {
             bloodList.Add(b);
-            
+
             if (!b.Is_removed)
             {
                 availableBlood.Add(b);
@@ -610,7 +611,7 @@ namespace Blood_SMS
                 }
                 else
                     SortBlood(b);
-                
+
                 return true;
             }
             return false;
@@ -660,7 +661,7 @@ namespace Blood_SMS
             if (ComponentCommands("Update component set " + UpdateQueryChangeComponentName(COMPONENT_FIELDS, new string[] { "accession_number", "component_name" }), c, oldName))
             {
                 Blood b = findBlood(c.Accession_number);
-                b.RemoveComponent(findComponentWithAccessionNumberAndName(c.Accession_number, c.Component_name));
+                b.RemoveComponent(findComponentWithAccessionNumberAndName(c.Accession_number, (bloodComponents)oldName));
                 b.AddComponent(c);
                 if (b.checkRemoved())
                     UpdateBlood(b);
@@ -739,19 +740,19 @@ namespace Blood_SMS
             return null;
         }
 
-        public bool DeleteComponentWithAccessionNumberAndName(string accession_number, bloodComponents name)
+        public bool DeleteComponentWithAccessionNumberAndName(string accession_number, int name)
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
             string query = "DELETE FROM component WHERE accession_number = @accession_number AND component_name = @component_name";
             MySqlCommand comm = new MySqlCommand(query, conn);
             comm.Parameters.AddWithValue("@accession_number", accession_number);
-            comm.Parameters.AddWithValue("@component_name", (int)name);
+            comm.Parameters.AddWithValue("@component_name", name);
             conn.Open();
             int rowsAffected = comm.ExecuteNonQuery();
             conn.Close();
             if (rowsAffected > 0)
             {
-                findBlood(accession_number).RemoveComponent(findComponentWithAccessionNumberAndName(accession_number, name));
+                findBlood(accession_number).RemoveComponent(findComponentWithAccessionNumberAndName(accession_number, (bloodComponents)name));
                 return true;
             }
             return false;
