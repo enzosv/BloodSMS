@@ -137,8 +137,10 @@
             // 
             // dateDonated
             // 
+            this.dateDonated.CustomFormat = "MMMM d, yyyy";
             this.dateDonated.Enabled = false;
             this.dateDonated.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateDonated.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateDonated.Location = new System.Drawing.Point(7, 191);
             this.dateDonated.Name = "dateDonated";
             this.dateDonated.Size = new System.Drawing.Size(200, 26);
@@ -365,8 +367,10 @@
             // 
             // expiryDate
             // 
+            this.expiryDate.CustomFormat = "MMMM d, yyyy";
             this.expiryDate.Enabled = false;
             this.expiryDate.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.expiryDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.expiryDate.Location = new System.Drawing.Point(21, 223);
             this.expiryDate.Name = "expiryDate";
             this.expiryDate.Size = new System.Drawing.Size(200, 26);
@@ -546,8 +550,10 @@
             // 
             // dateProcessed
             // 
+            this.dateProcessed.CustomFormat = "MMMM d, yyyy";
             this.dateProcessed.Enabled = false;
             this.dateProcessed.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateProcessed.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateProcessed.Location = new System.Drawing.Point(21, 168);
             this.dateProcessed.Name = "dateProcessed";
             this.dateProcessed.Size = new System.Drawing.Size(200, 26);

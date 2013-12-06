@@ -53,8 +53,10 @@
             // 
             // dateAddedField
             // 
+            this.dateAddedField.CustomFormat = "MMMM d, yyyy";
             this.dateAddedField.Enabled = false;
             this.dateAddedField.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateAddedField.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateAddedField.Location = new System.Drawing.Point(42, 515);
             this.dateAddedField.Name = "dateAddedField";
             this.dateAddedField.Size = new System.Drawing.Size(200, 26);
@@ -72,7 +74,9 @@
             // 
             // dateExpireField
             // 
+            this.dateExpireField.CustomFormat = "MMMM d, yyyy";
             this.dateExpireField.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateExpireField.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateExpireField.Location = new System.Drawing.Point(43, 574);
             this.dateExpireField.Name = "dateExpireField";
             this.dateExpireField.Size = new System.Drawing.Size(200, 26);
