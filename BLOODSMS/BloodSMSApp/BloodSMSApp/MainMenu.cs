@@ -457,21 +457,27 @@ namespace BloodSMSApp
 
         private void dataGridView2_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            Blood b = storage.findBlood(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
-            if (b != null)
+            if (e.RowIndex > -1)
             {
-                ShowBlood sb = new ShowBlood(this, b);
-                sb.ShowDialog();
+                Blood b = storage.findBlood(dataGridView2.Rows[e.RowIndex].Cells[0].Value.ToString());
+                if (b != null)
+                {
+                    ShowBlood sb = new ShowBlood(this, b);
+                    sb.ShowDialog();
+                }
             }
         }
 
         private void dataGridView3_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            Donor d = storage.findDonorWithName(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
-            if (d != null)
+            if (e.RowIndex > -1)
             {
-                AddDonor a = new AddDonor(storage, d);
-                a.ShowDialog();
+                Donor d = storage.findDonorWithName(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
+                if (d != null)
+                {
+                    AddDonor a = new AddDonor(storage, d);
+                    a.ShowDialog();
+                }
             }
         }
 
