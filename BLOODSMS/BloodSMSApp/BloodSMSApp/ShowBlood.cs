@@ -46,9 +46,10 @@ namespace BloodSMSApp
                 accessionNumbers.Items.Add(bl.Accession_number);
             }
 
-            lName.Clear();
-            fName.Clear();
-            mInitial.Clear();
+            foreach (Donor d in storage.donorList)
+            {
+                dNameBox.Items.Add(d.Name);
+            }
             pLast.Clear();
             pMid.Clear();
             pFirst.Clear();
@@ -77,9 +78,7 @@ namespace BloodSMSApp
                     Donor d = storage.findDonor(b.Donor_id.Value);
                     if (d != null)
                     {
-                        lName.Text = d.Last_name;
-                        fName.Text = d.First_name;
-                        mInitial.Text = d.Middle_initial;
+                        dNameBox.Text = d.Name;
                     }
                 }
                 if (b.Is_removed)
@@ -118,9 +117,7 @@ namespace BloodSMSApp
         {
             accessionNumbers.Enabled = true;
             bloodTypeField.Enabled = false;
-            lName.Enabled = false;
-            fName.Enabled = false;
-            mInitial.Enabled = false;
+            dNameBox.Enabled = false;
             dateDonated.Enabled = false;
             textBox1.Visible = false;
             textBox1.Clear();
@@ -134,9 +131,7 @@ namespace BloodSMSApp
         {
             accessionNumbers.Enabled = false;
             bloodTypeField.Enabled = true;
-            lName.Enabled = true;
-            fName.Enabled = true;
-            mInitial.Enabled = true;
+            dNameBox.Enabled = true;
             dateDonated.Enabled = true;
             textBox1.Visible = true;
             textBox1.Text = accessionNumbers.Text;
@@ -158,14 +153,13 @@ namespace BloodSMSApp
             else //SAVE
             {
                 Blood b;
-                Donor d = storage.findDonorWithName(lName.Text, fName.Text, mInitial.Text);
+                Donor d = storage.findDonorWithName(dNameBox.Text);
 
                 if (d != null)
                     b = new Blood(textBox1.Text, bloodTypeField.SelectedIndex, d.Donor_id, dateDonated.Value);
                 else
                 {
                     b = new Blood(textBox1.Text, bloodTypeField.SelectedIndex, dateDonated.Value);
-                    MessageBox.Show("Donor could not be found. Please try again");
                 }
                 if (storage.UpdateBlood(b, accessionNumbers.Text))
                 {

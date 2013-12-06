@@ -32,15 +32,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.lName = new System.Windows.Forms.TextBox();
             this.dateDonated = new System.Windows.Forms.DateTimePicker();
             this.bloodTypeField = new System.Windows.Forms.ComboBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.mInitial = new System.Windows.Forms.TextBox();
-            this.fName = new System.Windows.Forms.TextBox();
             this.cancelButton = new System.Windows.Forms.Button();
             this.assignButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
@@ -73,6 +70,7 @@
             this.b_edit = new System.Windows.Forms.Button();
             this.b_back = new System.Windows.Forms.Button();
             this.bDeleteButton = new System.Windows.Forms.Button();
+            this.dNameBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -126,15 +124,6 @@
             this.label4.TabIndex = 7;
             this.label4.Text = "DATE DONATED:";
             // 
-            // lName
-            // 
-            this.lName.Enabled = false;
-            this.lName.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lName.Location = new System.Drawing.Point(4, 121);
-            this.lName.Name = "lName";
-            this.lName.Size = new System.Drawing.Size(119, 26);
-            this.lName.TabIndex = 4;
-            // 
             // dateDonated
             // 
             this.dateDonated.CustomFormat = "MMMM d, yyyy";
@@ -164,13 +153,11 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.dNameBox);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
             this.splitContainer1.Panel1.Controls.Add(this.textBox1);
             this.splitContainer1.Panel1.Controls.Add(this.label11);
-            this.splitContainer1.Panel1.Controls.Add(this.mInitial);
-            this.splitContainer1.Panel1.Controls.Add(this.fName);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
-            this.splitContainer1.Panel1.Controls.Add(this.lName);
             this.splitContainer1.Panel1.Controls.Add(this.label3);
             this.splitContainer1.Panel1.Controls.Add(this.label4);
             this.splitContainer1.Panel1.Controls.Add(this.dateDonated);
@@ -238,24 +225,6 @@
             this.label11.Size = new System.Drawing.Size(117, 20);
             this.label11.TabIndex = 12;
             this.label11.Text = "DATE REMOVED:";
-            // 
-            // mInitial
-            // 
-            this.mInitial.Enabled = false;
-            this.mInitial.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mInitial.Location = new System.Drawing.Point(255, 121);
-            this.mInitial.Name = "mInitial";
-            this.mInitial.Size = new System.Drawing.Size(28, 26);
-            this.mInitial.TabIndex = 11;
-            // 
-            // fName
-            // 
-            this.fName.Enabled = false;
-            this.fName.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fName.Location = new System.Drawing.Point(129, 121);
-            this.fName.Name = "fName";
-            this.fName.Size = new System.Drawing.Size(120, 26);
-            this.fName.TabIndex = 10;
             // 
             // cancelButton
             // 
@@ -370,12 +339,8 @@
             this.expiryDate.CustomFormat = "MMMM d, yyyy";
             this.expiryDate.Enabled = false;
             this.expiryDate.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<<<<<<< HEAD
-            this.expiryDate.Location = new System.Drawing.Point(39, 223);
-=======
             this.expiryDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.expiryDate.Location = new System.Drawing.Point(21, 223);
->>>>>>> 4db267423f38454282d8445149ecc4d10a8a89ee
             this.expiryDate.Name = "expiryDate";
             this.expiryDate.Size = new System.Drawing.Size(200, 26);
             this.expiryDate.TabIndex = 30;
@@ -557,12 +522,8 @@
             this.dateProcessed.CustomFormat = "MMMM d, yyyy";
             this.dateProcessed.Enabled = false;
             this.dateProcessed.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-<<<<<<< HEAD
-            this.dateProcessed.Location = new System.Drawing.Point(39, 168);
-=======
             this.dateProcessed.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateProcessed.Location = new System.Drawing.Point(21, 168);
->>>>>>> 4db267423f38454282d8445149ecc4d10a8a89ee
             this.dateProcessed.Name = "dateProcessed";
             this.dateProcessed.Size = new System.Drawing.Size(200, 26);
             this.dateProcessed.TabIndex = 19;
@@ -660,6 +621,16 @@
             this.bDeleteButton.UseVisualStyleBackColor = false;
             this.bDeleteButton.Visible = false;
             // 
+            // dNameBox
+            // 
+            this.dNameBox.Enabled = false;
+            this.dNameBox.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dNameBox.FormattingEnabled = true;
+            this.dNameBox.Location = new System.Drawing.Point(7, 119);
+            this.dNameBox.Name = "dNameBox";
+            this.dNameBox.Size = new System.Drawing.Size(219, 28);
+            this.dNameBox.TabIndex = 38;
+            // 
             // ShowBlood
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -696,13 +667,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox lName;
         private System.Windows.Forms.DateTimePicker dateDonated;
         private System.Windows.Forms.ComboBox bloodTypeField;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.ComboBox accessionNumbers;
-        private System.Windows.Forms.TextBox mInitial;
-        private System.Windows.Forms.TextBox fName;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button b_edit;
         private System.Windows.Forms.Button b_back;
@@ -737,5 +705,6 @@
         private System.Windows.Forms.Button bDeleteButton;
         private System.Windows.Forms.Button cReturn;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.ComboBox dNameBox;
     }
 }
