@@ -536,7 +536,7 @@
             this.cancelButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelButton.ForeColor = System.Drawing.Color.White;
-            this.cancelButton.Location = new System.Drawing.Point(49, 642);
+            this.cancelButton.Location = new System.Drawing.Point(4, 642);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(94, 38);
             this.cancelButton.TabIndex = 71;
@@ -611,7 +611,7 @@
             this.editButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editButton.ForeColor = System.Drawing.Color.White;
-            this.editButton.Location = new System.Drawing.Point(146, 642);
+            this.editButton.Location = new System.Drawing.Point(101, 642);
             this.editButton.Name = "editButton";
             this.editButton.Size = new System.Drawing.Size(94, 38);
             this.editButton.TabIndex = 80;
@@ -628,13 +628,12 @@
             this.deleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.deleteButton.ForeColor = System.Drawing.Color.White;
-            this.deleteButton.Location = new System.Drawing.Point(246, 642);
+            this.deleteButton.Location = new System.Drawing.Point(201, 642);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(94, 38);
             this.deleteButton.TabIndex = 81;
-            this.deleteButton.Text = "DELETE";
+            this.deleteButton.Text = "DEFER";
             this.deleteButton.UseVisualStyleBackColor = false;
-            this.deleteButton.Visible = false;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // AddDonor

@@ -18,6 +18,7 @@ namespace BloodSMSApp
         bool duplicate;
         int id;
         Donor x;
+        MainMenu parent;
         public AddDonor(Storage stor, string lName, string fName, string mInitial)
         {
             InitializeComponent();
@@ -27,10 +28,11 @@ namespace BloodSMSApp
             middleInitial = mInitial;
         }
 
-        public AddDonor(Storage stor, Donor d)
+        public AddDonor(MainMenu mm, Donor d)
         {
             InitializeComponent();
-            storage = stor;
+            parent = mm;
+            storage = parent.storage;
             x = d;
             lastName = d.Last_name;
             firstName = d.First_name;
@@ -75,7 +77,9 @@ namespace BloodSMSApp
                 emailField.Text = x.Email;
                 cellphoneField.Text = x.Cellphone;
                 viableYes.Checked = x.Is_viable;
+                viableNo.Checked = !x.Is_viable;
                 contactableYes.Checked = x.Is_contactable;
+                contactableNo.Checked = !x.Is_contactable;
                 defferalField.Text = x.Reason_for_deferral;
 
                 ageText.Visible = true;
@@ -96,7 +100,7 @@ namespace BloodSMSApp
         void DisableEdit()
         {
             editButton.Text = "EDIT";
-            deleteButton.Visible = false;
+            deleteButton.Text = "DEFER";
 
             bloodTypeField.Enabled = false;
             educationalAttainmentField.Enabled = false;
@@ -124,7 +128,7 @@ namespace BloodSMSApp
         void EnableEdit()
         {
             editButton.Text = "SAVE";
-            deleteButton.Visible = true;
+            deleteButton.Text = "DELETE";
             
             bloodTypeField.Enabled = true;
             educationalAttainmentField.Enabled = true;
@@ -314,6 +318,9 @@ namespace BloodSMSApp
                 {
                     if (storage.UpdateDonor(d))
                     {
+                        x = d;
+                        parent.RefreshStorage();
+                        populateData();
                         DisableEdit();
                         MessageBox.Show("Donor Updated");
                     }
@@ -323,10 +330,20 @@ namespace BloodSMSApp
 
         private void deleteButton_Click(object sender, EventArgs e)
         {
-            if (storage.DeleteDonorWithId(id))
+            if (deleteButton.Text == "DELETE")
             {
-                MessageBox.Show("Donor removed from database");
-                Close();
+                if (storage.DeleteDonorWithId(id))
+                {
+                    MessageBox.Show("Donor removed from database");
+                    Close();
+                }
+            }
+            else
+            {
+                DeferDonor dd = new DeferDonor(storage, x);
+                dd.ShowDialog();
+                parent.RefreshStorage();
+                populateData();
             }
         }
 

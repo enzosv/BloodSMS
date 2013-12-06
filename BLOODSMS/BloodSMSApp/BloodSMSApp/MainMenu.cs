@@ -366,18 +366,6 @@ namespace BloodSMSApp
             i.ShowDialog();
         }
 
-        private void button5_Click_1(object sender, EventArgs e)
-        {
-            RemoveItem r = new RemoveItem();
-            r.ShowDialog();
-        }
-
-        private void button8_Click_1(object sender, EventArgs e)
-        {
-            DeferDonor d = new DeferDonor();
-            d.ShowDialog();
-        }
-
         private void Summary_Click(object sender, EventArgs e)
         {
             if (command != graphCommand.Summary)
@@ -446,7 +434,7 @@ namespace BloodSMSApp
                     }
                     else if (d != null)
                     {
-                        AddDonor a = new AddDonor(storage, d);
+                        AddDonor a = new AddDonor(this, d);
                         a.ShowDialog();
                     }
 
@@ -475,7 +463,7 @@ namespace BloodSMSApp
                 Donor d = storage.findDonorWithName(dataGridView3.Rows[e.RowIndex].Cells[0].Value.ToString());
                 if (d != null)
                 {
-                    AddDonor a = new AddDonor(storage, d);
+                    AddDonor a = new AddDonor(this, d);
                     a.ShowDialog();
                 }
             }
