@@ -18,17 +18,15 @@ namespace BloodSMSApp
         Blood_SMS.Component component;
         MainMenu parent;
 
-        public ShowBlood(MainMenu mainmenu, Blood blood)
+        public ShowBlood(MainMenu mainmenu, string accessionNumber)
         {
             InitializeComponent();
             parent = mainmenu;
-            b = blood;
-            accessionNumbers.Text = b.Accession_number;
+            accessionNumbers.Text = accessionNumber;
             foreach (bloodType x in (bloodType[])Enum.GetValues(typeof(bloodType)))
             {
                 bloodTypeField.Items.Add(MyEnums.GetDescription(x));
             }
-
         }
         #region BLOOD
         private void ShowBlood_Load(object sender, EventArgs e)
@@ -41,9 +39,9 @@ namespace BloodSMSApp
             storage = parent.storage;
             bloodList = storage.bloodList;
             accessionNumbers.Items.Clear();
-            foreach (Blood b in bloodList)
+            foreach (Blood bl in bloodList)
             {
-                accessionNumbers.Items.Add(b.Accession_number);
+                accessionNumbers.Items.Add(bl.Accession_number);
             }
             listBox1.Items.Clear();
             lName.Clear();
@@ -60,7 +58,7 @@ namespace BloodSMSApp
 
         void DisplayBlood()
         {
-            
+            b = storage.findBlood(accessionNumbers.Text);
             if (b != null)
             {
                 bloodTypeField.SelectedIndex = (int)b.Blood_type;
@@ -112,6 +110,7 @@ namespace BloodSMSApp
 
         void DisplayComponent()
         {
+            storage.getComponentSQL();
             bloodComponents componentName = MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString());
             component = storage.findComponentWithAccessionNumberAndName(b.Accession_number, componentName);
 
@@ -221,7 +220,7 @@ namespace BloodSMSApp
                 if (storage.UpdateBlood(b, accessionNumbers.Text))
                 {
                     bDisableEdit();
-                    parent.RefreshStorage();
+                    storage.getBloodSQL();
                     Reload();
                     accessionNumbers.Text = b.Accession_number;
                     MessageBox.Show("Blood Updated");
@@ -404,7 +403,7 @@ namespace BloodSMSApp
             {
                 AddComponent ac = new AddComponent(storage, b, componentNames);
                 ac.ShowDialog();
-                parent.RefreshStorage();
+                storage.getComponentSQL();
                 b = storage.findBlood(accessionNumbers.Text);
                 listBox1.Items.Clear();
                 foreach (Blood_SMS.Component c in b.components)
@@ -431,35 +430,37 @@ namespace BloodSMSApp
             {
                 Assign_Form af = new Assign_Form(storage, component);
                 af.Show();
-                parent.RefreshStorage();
+                storage.getComponentSQL();
                 DisplayComponent();
             }
             else
             {
-                RemoveItem ri = new RemoveItem(storage, component, removalType.Released);
-                ri.ShowDialog();
-                DisplayComponent();
+                RemoveItem(removalType.Released);
             }
         }
         #endregion
 
         private void reprocessButton_Click(object sender, EventArgs e)
         {
-            RemoveItem ri = new RemoveItem(storage, component, removalType.Reprocessed);
-            ri.ShowDialog();
-            DisplayComponent();
+            RemoveItem(removalType.Reprocessed);
         }
 
         private void quarantineButton_Click(object sender, EventArgs e)
         {
-            RemoveItem ri = new RemoveItem(storage, component, removalType.Quarantined);
-            ri.ShowDialog();
-            DisplayComponent();
+            RemoveItem(removalType.Quarantined);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
             cDisableEdit();
+        }
+
+        void RemoveItem(removalType rt)
+        {
+            RemoveItem ri = new RemoveItem(storage, component, rt);
+            ri.ShowDialog();
+            DisplayComponent();
+            storage.getComponentSQL();
         }
     }
 }

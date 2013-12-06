@@ -35,21 +35,6 @@ namespace Blood_SMS
         {
             connectionString = string.Format("Server={0};Database={1};Uid={2};Pwd={3}", host, db, user, pass);
 
-            bloodList = new List<Blood>();
-            bloodTypes = new List<Blood>[BlOODTYPECOUNT];
-            availableBlood = new List<Blood>();
-            unavailableBlood = new List<Blood>();
-            donorList = new List<Donor>();
-            donorTypes = new List<Donor>[BlOODTYPECOUNT];
-            for (int i = 0; i < BlOODTYPECOUNT; i++)
-            {
-                bloodTypes[i] = new List<Blood>();
-                donorTypes[i] = new List<Donor>();
-            }
-            contactableDonors = new List<Donor>();
-            viableDonors = new List<Donor>();
-            bannedDonors = new List<Donor>();
-
             getDonorSQL();
             getBloodSQL();
             getComponentSQL();
@@ -62,8 +47,18 @@ namespace Blood_SMS
         *  Gets all rows from the SQL Donor table and adds them to the donorList
         *</summary>
         */
-        void getDonorSQL()
+        public void getDonorSQL()
         {
+            donorList = new List<Donor>();
+            donorTypes = new List<Donor>[BlOODTYPECOUNT];
+            for (int i = 0; i < BlOODTYPECOUNT; i++)
+            {
+                donorTypes[i] = new List<Donor>();
+            }
+            contactableDonors = new List<Donor>();
+            viableDonors = new List<Donor>();
+            bannedDonors = new List<Donor>();
+
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
 
@@ -343,8 +338,17 @@ namespace Blood_SMS
         *  Gets all rows from the SQL blood table and adds them to the bloodList
         *</summary>
         */
-        void getBloodSQL()
+        public void getBloodSQL()
         {
+            bloodList = new List<Blood>();
+            bloodTypes = new List<Blood>[BlOODTYPECOUNT];
+            availableBlood = new List<Blood>();
+            unavailableBlood = new List<Blood>();
+            for (int i = 0; i < BlOODTYPECOUNT; i++)
+            {
+                bloodTypes[i] = new List<Blood>();
+            }
+
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
 
@@ -559,7 +563,7 @@ namespace Blood_SMS
         #endregion
 
         #region Component methods
-        void getComponentSQL()
+        public void getComponentSQL()
         {
             MySqlConnection conn = new MySqlConnection(connectionString);
             conn.Open();
