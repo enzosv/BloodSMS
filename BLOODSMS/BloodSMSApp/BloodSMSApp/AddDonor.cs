@@ -25,7 +25,6 @@ namespace BloodSMSApp
             lastName = lName;
             firstName = fName;
             middleInitial = mInitial;
-            nameLabel.Text = lastName + ", " + firstName + " " + middleInitial;
         }
 
         public AddDonor(Storage stor, Donor d)
@@ -33,12 +32,14 @@ namespace BloodSMSApp
             InitializeComponent();
             storage = stor;
             x = d;
-            nameLabel.Text = d.Last_name + ", " + d.First_name + " " + d.Middle_initial;
-            
+            lastName = d.Last_name;
+            firstName = d.First_name;
+            middleInitial = d.Middle_initial;
         }
 
         void populateData()
         {
+            nameLabel.Text = lastName + ", " + firstName + " " + middleInitial;
             if (x == null)
             {
                 x = storage.findDonorWithName(lastName, firstName, middleInitial);
@@ -311,8 +312,11 @@ namespace BloodSMSApp
                 Donor d = GenerateDonorFromFields();
                 if(d!=null)
                 {
-                    if(storage.UpdateDonor(d))
-                    DisableEdit();
+                    if (storage.UpdateDonor(d))
+                    {
+                        DisableEdit();
+                        MessageBox.Show("Donor Updated");
+                    }
                 }
             }
         }
