@@ -20,8 +20,8 @@ namespace Blood_SMS
         public bloodType Blood_type { get { return blood_type; } }
         public int? Donor_id { get { return donor_id; } }
         public DateTime Date_donated { get { return date_donated; } }
-        public DateTime Date_removed { get { return date_removed; } }
-        public bool Is_removed { get { return is_removed; } }
+        public DateTime Date_removed { get { return date_removed; } set { date_removed = value; } }
+        public bool Is_removed { get { return is_removed; } set { is_removed = value; } }
 
         //new donation
         public Blood(string ACCESSION_NUMBER, int BLOOD_TYPE, int? DONOR_ID, DateTime DATE_DONATED)

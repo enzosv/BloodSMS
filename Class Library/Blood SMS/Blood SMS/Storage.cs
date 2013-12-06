@@ -596,8 +596,17 @@ namespace Blood_SMS
             {
                 Blood b = findBlood(ACCESSION_NUMBER);
                 UnsortBlood(b);
+
                 b.AddComponent(c);
-                SortBlood(b);
+                if (b.Is_removed)
+                {
+                    b.Is_removed = false;
+                    b.Date_removed = DateTime.MinValue;
+                    UpdateBlood(b);
+                }
+                else
+                    SortBlood(b);
+                
                 return true;
             }
             return false;

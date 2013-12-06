@@ -52,8 +52,6 @@ namespace BloodSMSApp
 
             seriesHit = chart1.Series[0];
 
-            
-
             foreach (bloodType x in (bloodType[])Enum.GetValues(typeof(bloodType)))
             {
                 contactTypesBox.Items.Add(MyEnums.GetDescription(x));
@@ -507,16 +505,6 @@ namespace BloodSMSApp
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
 

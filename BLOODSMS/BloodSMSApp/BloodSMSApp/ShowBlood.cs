@@ -431,6 +431,7 @@ namespace BloodSMSApp
             {
                 Assign_Form af = new Assign_Form(storage, component);
                 af.Show();
+                parent.RefreshStorage();
                 DisplayComponent();
             }
             else
