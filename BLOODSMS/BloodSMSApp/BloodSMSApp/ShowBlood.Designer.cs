@@ -82,7 +82,7 @@
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
+//            this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Control;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(15, 70);
@@ -269,7 +269,7 @@
             this.cancelButton.TabIndex = 36;
             this.cancelButton.Text = "CANCEL";
             this.cancelButton.UseVisualStyleBackColor = false;
-            this.cancelButton.Visible = false;;
+//            this.cancelButton.Visible = false;;
             // 
             // assignButton
             // 
