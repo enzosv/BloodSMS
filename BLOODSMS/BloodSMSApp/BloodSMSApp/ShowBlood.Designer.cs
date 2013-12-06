@@ -68,11 +68,11 @@
             this.dateProcessed = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.pFirst = new System.Windows.Forms.TextBox();
+            this.cReturn = new System.Windows.Forms.Button();
             this.accessionNumbers = new System.Windows.Forms.ComboBox();
             this.b_edit = new System.Windows.Forms.Button();
             this.b_back = new System.Windows.Forms.Button();
             this.bDeleteButton = new System.Windows.Forms.Button();
-            this.cReturn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -82,7 +82,6 @@
             // 
             // label1
             // 
-//            this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Control;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(15, 70);
@@ -269,7 +268,6 @@
             this.cancelButton.TabIndex = 36;
             this.cancelButton.Text = "CANCEL";
             this.cancelButton.UseVisualStyleBackColor = false;
-//            this.cancelButton.Visible = false;;
             // 
             // assignButton
             // 
@@ -315,6 +313,7 @@
             this.quarantineButton.TabIndex = 33;
             this.quarantineButton.Text = "QUARANTINE";
             this.quarantineButton.UseVisualStyleBackColor = false;
+            this.quarantineButton.Click += new System.EventHandler(this.quarantineButton_Click);
             // 
             // reprocessButton
             // 
@@ -329,6 +328,7 @@
             this.reprocessButton.TabIndex = 32;
             this.reprocessButton.Text = "REPROCESS";
             this.reprocessButton.UseVisualStyleBackColor = false;
+            this.reprocessButton.Click += new System.EventHandler(this.reprocessButton_Click);
             // 
             // cNameBox
             // 
@@ -572,6 +572,21 @@
             this.pFirst.Size = new System.Drawing.Size(100, 26);
             this.pFirst.TabIndex = 25;
             // 
+            // cReturn
+            // 
+            this.cReturn.BackColor = System.Drawing.Color.Firebrick;
+            this.cReturn.FlatAppearance.BorderSize = 0;
+            this.cReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cReturn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cReturn.ForeColor = System.Drawing.Color.White;
+            this.cReturn.Location = new System.Drawing.Point(3, 255);
+            this.cReturn.Name = "cReturn";
+            this.cReturn.Size = new System.Drawing.Size(237, 32);
+            this.cReturn.TabIndex = 37;
+            this.cReturn.Text = "RETURN TO INVENTORY";
+            this.cReturn.UseVisualStyleBackColor = false;
+            this.cReturn.Visible = false;
+            // 
             // accessionNumbers
             // 
             this.accessionNumbers.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -628,21 +643,6 @@
             this.bDeleteButton.UseVisualStyleBackColor = false;
             this.bDeleteButton.Visible = false;
             // 
-            // cReturn
-            // 
-            this.cReturn.BackColor = System.Drawing.Color.Firebrick;
-            this.cReturn.FlatAppearance.BorderSize = 0;
-            this.cReturn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cReturn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cReturn.ForeColor = System.Drawing.Color.White;
-            this.cReturn.Location = new System.Drawing.Point(3, 255);
-            this.cReturn.Name = "cReturn";
-            this.cReturn.Size = new System.Drawing.Size(237, 32);
-            this.cReturn.TabIndex = 37;
-            this.cReturn.Text = "RETURN TO INVENTORY";
-            this.cReturn.UseVisualStyleBackColor = false;
-            this.cReturn.Visible = false;
-            // 
             // ShowBlood
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -669,7 +669,6 @@
             this.cRemovedPanel.ResumeLayout(false);
             this.cRemovedPanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

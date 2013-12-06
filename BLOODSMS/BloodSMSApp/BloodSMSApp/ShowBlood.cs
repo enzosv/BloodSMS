@@ -432,9 +432,25 @@ namespace BloodSMSApp
             }
             else
             {
-
+                RemoveItem ri = new RemoveItem(storage, component, removalType.Released);
+                ri.ShowDialog();
+                DisplayComponent();
             }
         }
         #endregion
+
+        private void reprocessButton_Click(object sender, EventArgs e)
+        {
+            RemoveItem ri = new RemoveItem(storage, component, removalType.Reprocessed);
+            ri.ShowDialog();
+            DisplayComponent();
+        }
+
+        private void quarantineButton_Click(object sender, EventArgs e)
+        {
+            RemoveItem ri = new RemoveItem(storage, component, removalType.Quarantined);
+            ri.ShowDialog();
+            DisplayComponent();
+        }
     }
 }
