@@ -101,9 +101,17 @@ namespace Blood_SMS
             bloods.Remove(b);
         }
 
-        public void SendEmail(string subject, string body)
+        public bool SendEmail(string subject, string body)
         {
-            Email mail = new Email(email, subject, body);
+            try
+            {
+                Email mail = new Email(email, subject, body);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public int Donor_id { get { return donor_id; } set { donor_id = value; } }

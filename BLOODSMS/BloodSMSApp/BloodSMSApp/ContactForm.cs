@@ -45,10 +45,9 @@ namespace BloodSMSApp
         {
             if (textBox3.Text.Length > 0 && richTextBox1.Text.Length > 0)
             {
-                foreach (Donor d in emailTos)
-                {
-                    d.SendEmail(textBox3.Text, richTextBox1.Text);
-                }
+                Loading l = new Loading(emailTos, textBox3.Text, richTextBox1.Text);
+                l.ShowDialog();
+                Close();
             }
         }
     }
