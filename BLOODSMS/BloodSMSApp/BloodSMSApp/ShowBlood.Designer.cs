@@ -630,6 +630,7 @@
             this.dNameBox.Name = "dNameBox";
             this.dNameBox.Size = new System.Drawing.Size(219, 28);
             this.dNameBox.TabIndex = 38;
+            this.dNameBox.Leave += new System.EventHandler(this.dNameBox_Leave);
             // 
             // ShowBlood
             // 

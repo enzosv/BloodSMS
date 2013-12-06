@@ -510,5 +510,14 @@ namespace BloodSMSApp
         }
         #endregion
 
+        private void dNameBox_Leave(object sender, EventArgs e)
+        {
+            if (!dNameBox.Items.Contains(dNameBox.Text))
+            {
+                MessageBox.Show("Donor could not be found");
+                dNameBox.Text = "";
+            }
+        }
+
     }
 }
