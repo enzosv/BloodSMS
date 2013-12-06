@@ -588,6 +588,7 @@
             this.cReturn.Text = "RETURN TO INVENTORY";
             this.cReturn.UseVisualStyleBackColor = false;
             this.cReturn.Visible = false;
+            this.cReturn.Click += new System.EventHandler(this.cReturn_Click);
             // 
             // accessionNumbers
             // 

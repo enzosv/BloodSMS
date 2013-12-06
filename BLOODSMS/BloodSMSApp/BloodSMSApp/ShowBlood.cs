@@ -455,8 +455,9 @@ namespace BloodSMSApp
             {
                 Assign_Form af = new Assign_Form(storage, component);
                 af.Show();
-                DisplayBlood();
+                Reload();
                 DisplayComponent();
+                assignButton.Text = "RELEASE";
             }
             else
             {
@@ -495,11 +496,7 @@ namespace BloodSMSApp
                 DisplayBlood();
                 DisplayComponent();
                 cEnableEdit();
-                //if (storage.UpdateComponent(component))
-                //{
-                //    MessageBox.Show("Component returned to inventory");
-
-                //}
+                cRemovedPanel.Visible = false;
             }
             //UNASSIGN
             else
@@ -518,5 +515,6 @@ namespace BloodSMSApp
             cReturn.Visible = false;
         }
         #endregion
+
     }
 }
