@@ -55,6 +55,8 @@ namespace BloodSMSApp
                 hCity.SelectedIndex = Enum.GetNames(typeof(city)).Length - 1;
                 oProvince.SelectedIndex = Enum.GetNames(typeof(province)).Length - 1;
                 oCity.SelectedIndex = Enum.GetNames(typeof(city)).Length - 1;
+                editButton.Visible = false;
+                deleteButton.Visible = false;
                 duplicate = false;
             }
             else
@@ -91,7 +93,7 @@ namespace BloodSMSApp
                     timesDonated.Text = "Times Donated: " + numDonations.ToString();
                 }
                 duplicate = true;
-                AddDonorButton.Hide();
+                AddDonorButton.Visible = false;
                 editButton.Visible = true;
                 DisableEdit();
             }
@@ -101,7 +103,10 @@ namespace BloodSMSApp
         {
             editButton.Text = "EDIT";
             deleteButton.Text = "DEFER";
-
+            if (viableYes.Checked)
+                deleteButton.Visible = true;
+            else
+                deleteButton.Visible = false;
             bloodTypeField.Enabled = false;
             educationalAttainmentField.Enabled = false;
             hProvince.Enabled = false;

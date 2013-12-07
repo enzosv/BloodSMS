@@ -640,6 +640,7 @@
             this.deleteButton.TabIndex = 81;
             this.deleteButton.Text = "DEFER";
             this.deleteButton.UseVisualStyleBackColor = false;
+            this.deleteButton.Visible = false;
             this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
             // 
             // AddDonor
