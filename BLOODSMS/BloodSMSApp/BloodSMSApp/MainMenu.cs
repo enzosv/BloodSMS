@@ -504,6 +504,21 @@ namespace BloodSMSApp
             RefreshDonorGrid(storage.donorTypes[dTypeFilter.SelectedIndex]);
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
 
     }
 }
