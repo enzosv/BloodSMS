@@ -280,7 +280,7 @@
             this.assignButton.ForeColor = System.Drawing.Color.White;
             this.assignButton.Location = new System.Drawing.Point(3, 255);
             this.assignButton.Name = "assignButton";
-            this.assignButton.Size = new System.Drawing.Size(75, 32);
+            this.assignButton.Size = new System.Drawing.Size(84, 32);
             this.assignButton.TabIndex = 35;
             this.assignButton.Text = "ASSIGN";
             this.assignButton.UseVisualStyleBackColor = false;
@@ -295,7 +295,7 @@
             this.deleteButton.ForeColor = System.Drawing.Color.White;
             this.deleteButton.Location = new System.Drawing.Point(165, 293);
             this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(101, 32);
+            this.deleteButton.Size = new System.Drawing.Size(114, 32);
             this.deleteButton.TabIndex = 34;
             this.deleteButton.Text = "DELETE";
             this.deleteButton.UseVisualStyleBackColor = false;
@@ -309,7 +309,7 @@
             this.quarantineButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.quarantineButton.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.quarantineButton.ForeColor = System.Drawing.Color.White;
-            this.quarantineButton.Location = new System.Drawing.Point(165, 255);
+            this.quarantineButton.Location = new System.Drawing.Point(178, 255);
             this.quarantineButton.Name = "quarantineButton";
             this.quarantineButton.Size = new System.Drawing.Size(101, 32);
             this.quarantineButton.TabIndex = 33;
@@ -324,9 +324,9 @@
             this.reprocessButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.reprocessButton.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.reprocessButton.ForeColor = System.Drawing.Color.White;
-            this.reprocessButton.Location = new System.Drawing.Point(74, 255);
+            this.reprocessButton.Location = new System.Drawing.Point(85, 255);
             this.reprocessButton.Name = "reprocessButton";
-            this.reprocessButton.Size = new System.Drawing.Size(101, 32);
+            this.reprocessButton.Size = new System.Drawing.Size(99, 32);
             this.reprocessButton.TabIndex = 32;
             this.reprocessButton.Text = "REPROCESS";
             this.reprocessButton.UseVisualStyleBackColor = false;
@@ -336,7 +336,7 @@
             // 
             this.cNameBox.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cNameBox.FormattingEnabled = true;
-            this.cNameBox.Location = new System.Drawing.Point(21, 116);
+            this.cNameBox.Location = new System.Drawing.Point(39, 116);
             this.cNameBox.Name = "cNameBox";
             this.cNameBox.Size = new System.Drawing.Size(219, 28);
             this.cNameBox.TabIndex = 26;
@@ -348,7 +348,7 @@
             this.label13.BackColor = System.Drawing.SystemColors.Control;
             this.label13.Enabled = false;
             this.label13.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(404, 55);
+            this.label13.Location = new System.Drawing.Point(423, 53);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(118, 20);
             this.label13.TabIndex = 31;
@@ -358,16 +358,16 @@
             // 
             this.dateAssigned.Enabled = false;
             this.dateAssigned.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateAssigned.Location = new System.Drawing.Point(376, 75);
+            this.dateAssigned.Location = new System.Drawing.Point(395, 73);
             this.dateAssigned.Name = "dateAssigned";
-            this.dateAssigned.Size = new System.Drawing.Size(200, 26);
+            this.dateAssigned.Size = new System.Drawing.Size(173, 26);
             this.dateAssigned.TabIndex = 24;
             // 
             // expiryDate
             // 
             this.expiryDate.Enabled = false;
             this.expiryDate.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.expiryDate.Location = new System.Drawing.Point(21, 223);
+            this.expiryDate.Location = new System.Drawing.Point(39, 223);
             this.expiryDate.Name = "expiryDate";
             this.expiryDate.Size = new System.Drawing.Size(200, 26);
             this.expiryDate.TabIndex = 30;
@@ -378,7 +378,7 @@
             this.label12.BackColor = System.Drawing.SystemColors.Control;
             this.label12.Enabled = false;
             this.label12.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(21, 197);
+            this.label12.Location = new System.Drawing.Point(39, 197);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(105, 20);
             this.label12.TabIndex = 29;
@@ -406,7 +406,7 @@
             this.addComponent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addComponent.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addComponent.ForeColor = System.Drawing.Color.White;
-            this.addComponent.Location = new System.Drawing.Point(219, 81);
+            this.addComponent.Location = new System.Drawing.Point(237, 81);
             this.addComponent.Name = "addComponent";
             this.addComponent.Size = new System.Drawing.Size(21, 29);
             this.addComponent.TabIndex = 26;
@@ -419,7 +419,7 @@
             // 
             this.pAge.Enabled = false;
             this.pAge.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pAge.Location = new System.Drawing.Point(270, 75);
+            this.pAge.Location = new System.Drawing.Point(289, 73);
             this.pAge.MaxLength = 3;
             this.pAge.Name = "pAge";
             this.pAge.Size = new System.Drawing.Size(100, 26);
@@ -430,7 +430,7 @@
             // 
             this.pMid.Enabled = false;
             this.pMid.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pMid.Location = new System.Drawing.Point(478, 26);
+            this.pMid.Location = new System.Drawing.Point(540, 24);
             this.pMid.Name = "pMid";
             this.pMid.Size = new System.Drawing.Size(28, 26);
             this.pMid.TabIndex = 14;
@@ -440,7 +440,7 @@
             this.listBox1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 20;
-            this.listBox1.Location = new System.Drawing.Point(21, 26);
+            this.listBox1.Location = new System.Drawing.Point(39, 26);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(219, 84);
             this.listBox1.TabIndex = 10;
@@ -465,7 +465,7 @@
             this.cRemovedLabel.AutoSize = true;
             this.cRemovedLabel.BackColor = System.Drawing.SystemColors.Control;
             this.cRemovedLabel.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cRemovedLabel.Location = new System.Drawing.Point(0, 8);
+            this.cRemovedLabel.Location = new System.Drawing.Point(21, 11);
             this.cRemovedLabel.Name = "cRemovedLabel";
             this.cRemovedLabel.Size = new System.Drawing.Size(117, 20);
             this.cRemovedLabel.TabIndex = 16;
@@ -474,7 +474,7 @@
             // cDateRemoved
             // 
             this.cDateRemoved.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cDateRemoved.Location = new System.Drawing.Point(0, 31);
+            this.cDateRemoved.Location = new System.Drawing.Point(21, 34);
             this.cDateRemoved.Name = "cDateRemoved";
             this.cDateRemoved.Size = new System.Drawing.Size(200, 26);
             this.cDateRemoved.TabIndex = 17;
@@ -482,10 +482,10 @@
             // cReason
             // 
             this.cReason.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cReason.Location = new System.Drawing.Point(-3, 83);
+            this.cReason.Location = new System.Drawing.Point(19, 83);
             this.cReason.Multiline = true;
             this.cReason.Name = "cReason";
-            this.cReason.Size = new System.Drawing.Size(295, 131);
+            this.cReason.Size = new System.Drawing.Size(273, 131);
             this.cReason.TabIndex = 22;
             // 
             // label10
@@ -493,7 +493,7 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.SystemColors.Control;
             this.label10.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(-4, 60);
+            this.label10.Location = new System.Drawing.Point(20, 63);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(167, 20);
             this.label10.TabIndex = 23;
@@ -505,7 +505,7 @@
             this.label6.BackColor = System.Drawing.SystemColors.Control;
             this.label6.Enabled = false;
             this.label6.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(266, 3);
+            this.label6.Location = new System.Drawing.Point(290, 1);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(108, 20);
             this.label6.TabIndex = 15;
@@ -517,7 +517,7 @@
             this.label8.BackColor = System.Drawing.SystemColors.Control;
             this.label8.Enabled = false;
             this.label8.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(21, 3);
+            this.label8.Location = new System.Drawing.Point(39, 3);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(138, 20);
             this.label8.TabIndex = 12;
@@ -529,7 +529,7 @@
             this.label9.BackColor = System.Drawing.SystemColors.Control;
             this.label9.Enabled = false;
             this.label9.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(271, 52);
+            this.label9.Location = new System.Drawing.Point(290, 50);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(98, 20);
             this.label9.TabIndex = 21;
@@ -539,16 +539,16 @@
             // 
             this.pLast.Enabled = false;
             this.pLast.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pLast.Location = new System.Drawing.Point(266, 26);
+            this.pLast.Location = new System.Drawing.Point(289, 24);
             this.pLast.Name = "pLast";
-            this.pLast.Size = new System.Drawing.Size(100, 26);
+            this.pLast.Size = new System.Drawing.Size(132, 26);
             this.pLast.TabIndex = 14;
             // 
             // dateProcessed
             // 
             this.dateProcessed.Enabled = false;
             this.dateProcessed.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateProcessed.Location = new System.Drawing.Point(21, 168);
+            this.dateProcessed.Location = new System.Drawing.Point(39, 168);
             this.dateProcessed.Name = "dateProcessed";
             this.dateProcessed.Size = new System.Drawing.Size(200, 26);
             this.dateProcessed.TabIndex = 19;
@@ -559,7 +559,7 @@
             this.label7.BackColor = System.Drawing.SystemColors.Control;
             this.label7.Enabled = false;
             this.label7.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(21, 145);
+            this.label7.Location = new System.Drawing.Point(39, 145);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(133, 20);
             this.label7.TabIndex = 13;
@@ -569,9 +569,9 @@
             // 
             this.pFirst.Enabled = false;
             this.pFirst.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.pFirst.Location = new System.Drawing.Point(372, 26);
+            this.pFirst.Location = new System.Drawing.Point(427, 24);
             this.pFirst.Name = "pFirst";
-            this.pFirst.Size = new System.Drawing.Size(100, 26);
+            this.pFirst.Size = new System.Drawing.Size(107, 26);
             this.pFirst.TabIndex = 25;
             // 
             // cReturn
@@ -583,7 +583,7 @@
             this.cReturn.ForeColor = System.Drawing.Color.White;
             this.cReturn.Location = new System.Drawing.Point(3, 255);
             this.cReturn.Name = "cReturn";
-            this.cReturn.Size = new System.Drawing.Size(237, 32);
+            this.cReturn.Size = new System.Drawing.Size(263, 32);
             this.cReturn.TabIndex = 37;
             this.cReturn.Text = "RETURN TO INVENTORY";
             this.cReturn.UseVisualStyleBackColor = false;
