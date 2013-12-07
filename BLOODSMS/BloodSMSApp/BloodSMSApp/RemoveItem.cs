@@ -79,5 +79,10 @@ namespace BloodSMSApp
             label3.Text = component.Accession_number;
             label4.Text = MyEnums.GetDescription(component.Component_name);
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

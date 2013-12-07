@@ -54,5 +54,10 @@ namespace BloodSMSApp
         {
             label3.Text = donor.Name;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
     }
 }

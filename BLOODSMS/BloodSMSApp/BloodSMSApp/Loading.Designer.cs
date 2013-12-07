@@ -35,7 +35,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(13, 13);
+            this.progressBar1.Location = new System.Drawing.Point(22, 14);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(239, 23);
             this.progressBar1.TabIndex = 0;
@@ -48,7 +48,7 @@
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(258, 12);
+            this.button1.Location = new System.Drawing.Point(267, 13);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(61, 24);
             this.button1.TabIndex = 27;
@@ -70,15 +70,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(327, 46);
+            this.ClientSize = new System.Drawing.Size(341, 53);
             this.ControlBox = false;
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Loading";
             this.ShowInTaskbar = false;
             this.Text = "Loading";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.Loading_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
