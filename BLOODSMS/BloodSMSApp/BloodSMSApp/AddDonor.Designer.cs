@@ -257,7 +257,9 @@
             // 
             // dateRegisteredField
             // 
+            this.dateRegisteredField.CustomFormat = "MMMM d, yyyy";
             this.dateRegisteredField.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateRegisteredField.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateRegisteredField.Location = new System.Drawing.Point(299, 87);
             this.dateRegisteredField.Name = "dateRegisteredField";
             this.dateRegisteredField.Size = new System.Drawing.Size(213, 26);
@@ -342,7 +344,9 @@
             // 
             // birthDateField
             // 
+            this.birthDateField.CustomFormat = "MMMM d, yyyy";
             this.birthDateField.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.birthDateField.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.birthDateField.Location = new System.Drawing.Point(47, 139);
             this.birthDateField.Name = "birthDateField";
             this.birthDateField.Size = new System.Drawing.Size(213, 26);
@@ -350,7 +354,9 @@
             // 
             // nextAvailableField
             // 
+            this.nextAvailableField.CustomFormat = "MMMM d, yyyy";
             this.nextAvailableField.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nextAvailableField.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.nextAvailableField.Location = new System.Drawing.Point(299, 195);
             this.nextAvailableField.Name = "nextAvailableField";
             this.nextAvailableField.Size = new System.Drawing.Size(213, 26);

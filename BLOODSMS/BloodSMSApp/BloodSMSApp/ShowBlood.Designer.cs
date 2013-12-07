@@ -137,8 +137,10 @@
             // 
             // dateDonated
             // 
+            this.dateDonated.CustomFormat = "MMMM d, yyyy";
             this.dateDonated.Enabled = false;
             this.dateDonated.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateDonated.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateDonated.Location = new System.Drawing.Point(7, 191);
             this.dateDonated.Name = "dateDonated";
             this.dateDonated.Size = new System.Drawing.Size(200, 26);
@@ -365,9 +367,15 @@
             // 
             // expiryDate
             // 
+            this.expiryDate.CustomFormat = "MMMM d, yyyy";
             this.expiryDate.Enabled = false;
             this.expiryDate.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<<<<<<< HEAD
             this.expiryDate.Location = new System.Drawing.Point(39, 223);
+=======
+            this.expiryDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.expiryDate.Location = new System.Drawing.Point(21, 223);
+>>>>>>> 4db267423f38454282d8445149ecc4d10a8a89ee
             this.expiryDate.Name = "expiryDate";
             this.expiryDate.Size = new System.Drawing.Size(200, 26);
             this.expiryDate.TabIndex = 30;
@@ -546,9 +554,15 @@
             // 
             // dateProcessed
             // 
+            this.dateProcessed.CustomFormat = "MMMM d, yyyy";
             this.dateProcessed.Enabled = false;
             this.dateProcessed.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+<<<<<<< HEAD
             this.dateProcessed.Location = new System.Drawing.Point(39, 168);
+=======
+            this.dateProcessed.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateProcessed.Location = new System.Drawing.Point(21, 168);
+>>>>>>> 4db267423f38454282d8445149ecc4d10a8a89ee
             this.dateProcessed.Name = "dateProcessed";
             this.dateProcessed.Size = new System.Drawing.Size(200, 26);
             this.dateProcessed.TabIndex = 19;
