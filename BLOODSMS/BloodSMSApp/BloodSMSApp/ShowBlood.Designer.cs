@@ -35,6 +35,7 @@
             this.dateDonated = new System.Windows.Forms.DateTimePicker();
             this.bloodTypeField = new System.Windows.Forms.ComboBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.dNameBox = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -70,7 +71,6 @@
             this.b_edit = new System.Windows.Forms.Button();
             this.b_back = new System.Windows.Forms.Button();
             this.bDeleteButton = new System.Windows.Forms.Button();
-            this.dNameBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -192,6 +192,17 @@
             this.splitContainer1.Size = new System.Drawing.Size(862, 329);
             this.splitContainer1.SplitterDistance = 287;
             this.splitContainer1.TabIndex = 22;
+            // 
+            // dNameBox
+            // 
+            this.dNameBox.Enabled = false;
+            this.dNameBox.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dNameBox.FormattingEnabled = true;
+            this.dNameBox.Location = new System.Drawing.Point(7, 119);
+            this.dNameBox.Name = "dNameBox";
+            this.dNameBox.Size = new System.Drawing.Size(219, 28);
+            this.dNameBox.TabIndex = 38;
+            this.dNameBox.Leave += new System.EventHandler(this.dNameBox_Leave);
             // 
             // label5
             // 
@@ -620,17 +631,7 @@
             this.bDeleteButton.Text = "DELETE";
             this.bDeleteButton.UseVisualStyleBackColor = false;
             this.bDeleteButton.Visible = false;
-            // 
-            // dNameBox
-            // 
-            this.dNameBox.Enabled = false;
-            this.dNameBox.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dNameBox.FormattingEnabled = true;
-            this.dNameBox.Location = new System.Drawing.Point(7, 119);
-            this.dNameBox.Name = "dNameBox";
-            this.dNameBox.Size = new System.Drawing.Size(219, 28);
-            this.dNameBox.TabIndex = 38;
-            this.dNameBox.Leave += new System.EventHandler(this.dNameBox_Leave);
+            this.bDeleteButton.Click += new System.EventHandler(this.bDeleteButton_Click);
             // 
             // ShowBlood
             // 

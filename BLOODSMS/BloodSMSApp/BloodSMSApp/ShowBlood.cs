@@ -519,5 +519,18 @@ namespace BloodSMSApp
             }
         }
 
+        private void bDeleteButton_Click(object sender, EventArgs e)
+        {
+            if (storage.DeleteBloodWithAccessionNumber(accessionNumbers.Text))
+            {
+                parent.RefreshOverview();
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Blood could not be deleted. Please refresh and try again");
+            }
+        }
+
     }
 }

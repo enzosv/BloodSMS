@@ -132,6 +132,7 @@
             // 
             // pLast
             // 
+            this.pLast.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.pLast.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pLast.Location = new System.Drawing.Point(44, 392);
             this.pLast.Name = "pLast";
@@ -204,6 +205,7 @@
             // 
             // pFirst
             // 
+            this.pFirst.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.pFirst.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pFirst.Location = new System.Drawing.Point(125, 392);
             this.pFirst.Name = "pFirst";
@@ -212,6 +214,7 @@
             // 
             // pMid
             // 
+            this.pMid.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.pMid.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pMid.Location = new System.Drawing.Point(206, 392);
             this.pMid.Name = "pMid";
@@ -229,6 +232,7 @@
             // 
             // dMid
             // 
+            this.dMid.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.dMid.Enabled = false;
             this.dMid.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dMid.Location = new System.Drawing.Point(204, 190);
@@ -238,6 +242,7 @@
             // 
             // dFirst
             // 
+            this.dFirst.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.dFirst.Enabled = false;
             this.dFirst.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dFirst.Location = new System.Drawing.Point(123, 190);
@@ -247,6 +252,7 @@
             // 
             // d_last
             // 
+            this.d_last.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.d_last.Enabled = false;
             this.d_last.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.d_last.Location = new System.Drawing.Point(42, 190);
