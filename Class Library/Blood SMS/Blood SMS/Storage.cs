@@ -525,6 +525,10 @@ namespace Blood_SMS
 
         public bool DeleteBloodWithAccessionNumber(string accession_number)
         {
+            foreach (Component c in findBlood(accession_number).components)
+            {
+                DeleteAllComponentsWithAccessionNumber(accession_number);
+            }
             MySqlConnection conn = new MySqlConnection(connectionString);
             string query = "DELETE FROM Blood WHERE accession_number =@accession_number";
             MySqlCommand comm = new MySqlCommand(query, conn);
@@ -534,10 +538,7 @@ namespace Blood_SMS
             conn.Close();
             if (rowsAffected > 0)
             {
-                foreach (Component c in findBlood(accession_number).components)
-                {
-                    DeleteAllComponentsWithAccessionNumber(accession_number);
-                }
+                
                 UnsortBlood(findBlood(accession_number));
                 return true;
             }
