@@ -496,11 +496,8 @@ namespace BloodSMSApp
             if (cReturn.Text == "RETURN TO INVENTORY")
             {
                 component.Unremove();
-                
-                DisplayBlood();
-                DisplayComponent();
-                cEnableEdit();
-                cRemovedPanel.Visible = false;
+
+                UpdateComponent(component);
             }
             //UNASSIGN
             else
