@@ -144,6 +144,7 @@ namespace Blood_SMS
             is_quarantined = false;
             is_reprocessed = false;
             is_removed = false;
+            removal_type = removalType.NotRemoved;
         }
 
         public void Release(DateTime date, string REASON_FOR_REMOVAL)

@@ -405,12 +405,13 @@ namespace BloodSMSApp
             if (storage.UpdateComponent(c, (int)MyEnums.GetValueFromDescription<bloodComponents>(listBox1.SelectedItem.ToString())))
             {
                 cDisableEdit();
+                DisplayBlood();
+                DisplayComponent();
                 MessageBox.Show("Component was successfully updated");
             }
             else
                 MessageBox.Show("Error updating component. Please try again later");
-            DisplayBlood();
-            DisplayComponent();
+            
         }
         private void pAge_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -455,10 +456,11 @@ namespace BloodSMSApp
             if (assignButton.Text == "ASSIGN")
             {
                 Assign_Form af = new Assign_Form(storage, component);
-                af.Show();
+                af.ShowDialog();
                 Reload();
                 DisplayComponent();
-                assignButton.Text = "RELEASE";
+                if(component.Date_assigned != DateTime.MinValue)
+                    assignButton.Text = "RELEASE";
             }
             else
             {
@@ -496,17 +498,14 @@ namespace BloodSMSApp
             if (cReturn.Text == "RETURN TO INVENTORY")
             {
                 component.Unremove();
-
                 UpdateComponent(component);
             }
             //UNASSIGN
             else
             {
                 component.Unassign();
-                DisplayBlood();
-                DisplayComponent();
-                cEnableEdit();
                 assignButton.Text = "ASSIGN";
+                UpdateComponent(component);
                 //if (storage.UpdateComponent(component))
                 //{
                 //    MessageBox.Show("Unassigned component");
