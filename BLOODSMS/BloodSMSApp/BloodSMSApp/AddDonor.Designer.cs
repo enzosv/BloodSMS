@@ -568,6 +568,7 @@
             this.hLandlineField.Name = "hLandlineField";
             this.hLandlineField.Size = new System.Drawing.Size(200, 26);
             this.hLandlineField.TabIndex = 73;
+            this.hLandlineField.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.hLandlineField_KeyPress);
             // 
             // oLandlineField
             // 
@@ -577,6 +578,7 @@
             this.oLandlineField.Name = "oLandlineField";
             this.oLandlineField.Size = new System.Drawing.Size(200, 26);
             this.oLandlineField.TabIndex = 74;
+            this.oLandlineField.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.oLandlineField_KeyPress);
             // 
             // cellphoneField
             // 
@@ -586,6 +588,7 @@
             this.cellphoneField.Name = "cellphoneField";
             this.cellphoneField.Size = new System.Drawing.Size(159, 26);
             this.cellphoneField.TabIndex = 75;
+            this.cellphoneField.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cellphoneField_KeyPress);
             // 
             // ageText
             // 
