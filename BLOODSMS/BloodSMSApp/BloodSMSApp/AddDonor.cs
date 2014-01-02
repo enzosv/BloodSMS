@@ -201,7 +201,7 @@ namespace BloodSMSApp
                         {
                             if (isStringValid(oLandlineField.Text, 7) || String.IsNullOrEmpty(oLandlineField.Text))
                             {
-                                if(contactableYes.Checked && (!String.IsNullOrEmpty(emailField.Text) || !String.IsNullOrEmpty(cellphoneField.Text)))
+                                if((contactableYes.Checked && (!String.IsNullOrEmpty(emailField.Text) || !String.IsNullOrEmpty(cellphoneField.Text))) || !contactableYes.Checked)
                                 {
                                     Donor d = new Donor(id, lastName, firstName, middleInitial, blood_type, h_province, h_city, hStreetField.Text, o_province, o_city, oStreetField.Text, hLandlineField.Text, oLandlineField.Text, emailField.Text, cellphoneField.Text, educational_attainment, birthDateField.Value, dateRegisteredField.Value, nextAvailableField.Value, contactableYes.Checked, viableYes.Checked, defferalField.Text);
                                     return d;
