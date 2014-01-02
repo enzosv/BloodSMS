@@ -237,6 +237,10 @@ namespace BloodSMSApp
                 }
                 else
                 {
+                    cRemovedLabel.Enabled = false;
+                    cRemovedLabel.Text = "Not Removed";
+                    cDateRemoved.Value = component.Date_processed;
+                    cReason.Text = "Not Removed";
                     quarantineButton.Visible = true;
                     assignButton.Visible = true;
                     reprocessButton.Visible = true;
@@ -363,15 +367,15 @@ namespace BloodSMSApp
                 DateTime date_removed;
                 switch (cRemovedLabel.Text)
                 {
-                    case "DATE QUARANTINED":
+                    case "Date Quarantined":
                         removal_type = 2;
                         date_removed = cDateRemoved.Value;
                         break;
-                    case "DATE RELEASED":
+                    case "Date Released":
                         removal_type = 3;
                         date_removed = cDateRemoved.Value;
                         break;
-                    case "DATE_REPROCESSED":
+                    case "Date Reprocessed":
                         removal_type = 1;
                         date_removed = cDateRemoved.Value;
                         break;
@@ -381,6 +385,7 @@ namespace BloodSMSApp
                         break;
                 }
                 int age;
+                //parent.RefreshStorage();
                 if (int.TryParse(pAge.Text, out age))
                 {
                     c = new Blood_SMS.Component(accessionNumbers.Text, (int)MyEnums.GetValueFromDescription<bloodComponents>(cNameBox.Text.ToString()), removal_type, dateProcessed.Value, expiryDate.Value, dateAssigned.Value, date_removed, pLast.Text, pFirst.Text, pMid.Text, age, cReason.Text);
@@ -404,6 +409,8 @@ namespace BloodSMSApp
             }
             else
                 MessageBox.Show("Error updating component. Please try again later");
+            DisplayBlood();
+            DisplayComponent();
         }
         private void pAge_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -472,6 +479,8 @@ namespace BloodSMSApp
         private void cancelButton_Click(object sender, EventArgs e)
         {
             cDisableEdit();
+            DisplayBlood();
+            DisplayComponent();
         }
 
         void RemoveItem(removalType rt)
@@ -487,10 +496,8 @@ namespace BloodSMSApp
             if (cReturn.Text == "RETURN TO INVENTORY")
             {
                 component.Unremove();
-                DisplayBlood();
-                DisplayComponent();
-                cEnableEdit();
-                cRemovedPanel.Visible = false;
+
+                UpdateComponent(component);
             }
             //UNASSIGN
             else

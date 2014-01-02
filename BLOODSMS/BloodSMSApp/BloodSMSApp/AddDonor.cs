@@ -201,8 +201,13 @@ namespace BloodSMSApp
                         {
                             if (isStringValid(oLandlineField.Text, 7) || String.IsNullOrEmpty(oLandlineField.Text))
                             {
-                                Donor d = new Donor(id, lastName, firstName, middleInitial, blood_type, h_province, h_city, hStreetField.Text, o_province, o_city, oStreetField.Text, hLandlineField.Text, oLandlineField.Text, emailField.Text, cellphoneField.Text, educational_attainment, birthDateField.Value, dateRegisteredField.Value, nextAvailableField.Value, contactableYes.Checked, viableYes.Checked, defferalField.Text);
-                                return d;
+                                if(contactableYes.Checked && (!String.IsNullOrEmpty(emailField.Text) || !String.IsNullOrEmpty(cellphoneField.Text)))
+                                {
+                                    Donor d = new Donor(id, lastName, firstName, middleInitial, blood_type, h_province, h_city, hStreetField.Text, o_province, o_city, oStreetField.Text, hLandlineField.Text, oLandlineField.Text, emailField.Text, cellphoneField.Text, educational_attainment, birthDateField.Value, dateRegisteredField.Value, nextAvailableField.Value, contactableYes.Checked, viableYes.Checked, defferalField.Text);
+                                    return d;
+                                }
+                                else
+                                    MessageBox.Show("Please provide either an email address or a cellphone number");
                             }
                             else
                                 MessageBox.Show("Invalid office landline number");

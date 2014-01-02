@@ -130,14 +130,14 @@ namespace BloodSMSApp
                 blood_type = (bloodType)i;
                 if (storage.AlertLowLevel(i))
                 {
-                    notifications.Add("Supply on " + MyEnums.GetDescription(blood_type) + " is critically low");
+                    notifications.Add("Low " + MyEnums.GetDescription(blood_type) + " Supply");
                 }
             }
 
             //check near expirations
             foreach (string[] s in storage.AlertNearExpiration())
             {
-                notifications.Add("Component " + s[0] + " with Accession Number " + s[1] + " is near expiration");
+                notifications.Add(s[1] + " - " + s[0] + " near expiration");
             }
             notificationsList.Items.Clear();
             for (int i = 0; i < notifications.Count; i++)
