@@ -133,6 +133,7 @@ namespace BloodSMSApp
         void EnableEdit()
         {
             editButton.Text = "SAVE";
+            deleteButton.Visible = true;
             deleteButton.Text = "DELETE";
             
             bloodTypeField.Enabled = true;
