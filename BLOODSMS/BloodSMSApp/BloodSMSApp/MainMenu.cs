@@ -500,5 +500,20 @@ namespace BloodSMSApp
             this.Close();
         }
 
+        private void notificationsList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            string item = notificationsList.SelectedItems[0].Text;
+            if (item.Contains("expiration"))
+            {
+                string[] tokens = item.Split(' ');
+                Blood b = storage.findBlood(tokens[0]);
+                if (b != null)
+                {
+                    ShowBlood sb = new ShowBlood(this, b.Accession_number);
+                    sb.ShowDialog();
+                }
+            }
+        }
+
     }
 }

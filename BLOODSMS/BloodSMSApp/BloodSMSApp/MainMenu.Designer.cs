@@ -47,7 +47,9 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.label8 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.quarantinedButton = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.reprocessedButton = new System.Windows.Forms.Button();
             this.dateFrom = new System.Windows.Forms.DateTimePicker();
@@ -55,9 +57,11 @@
             this.Summary = new System.Windows.Forms.Button();
             this.addedButton = new System.Windows.Forms.Button();
             this.releasedButton = new System.Windows.Forms.Button();
-            this.quarantinedButton = new System.Windows.Forms.Button();
             this.removedButton = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
@@ -71,13 +75,9 @@
             this.b_inventoryQuarantined = new System.Windows.Forms.Button();
             this.b_inventoryInventory = new System.Windows.Forms.Button();
             this.b_inventoryALL = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.dTypeFilter = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.b_donorViable = new System.Windows.Forms.Button();
-            this.b_donorBanned = new System.Windows.Forms.Button();
-            this.b_donorContactable = new System.Windows.Forms.Button();
-            this.b_donorAll = new System.Windows.Forms.Button();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.dName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BloodType = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,6 +85,12 @@
             this.DateRegistered = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Viable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Contactable = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.b_donorAll = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.b_donorContactable = new System.Windows.Forms.Button();
+            this.b_donorViable = new System.Windows.Forms.Button();
+            this.b_donorBanned = new System.Windows.Forms.Button();
             this.oSearchField = new System.Windows.Forms.TextBox();
             this.resultsBox = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -103,24 +109,18 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label11 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
-            this.panel2.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -172,16 +172,42 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // label8
+            // label11
             // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.SystemColors.Control;
-            this.label8.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(451, 6);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(74, 20);
-            this.label8.TabIndex = 28;
-            this.label8.Text = "END DATE";
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.SystemColors.Control;
+            this.label11.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(3, 205);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(187, 20);
+            this.label11.TabIndex = 37;
+            this.label11.Text = "INVENTORY TRENDS FROM:";
+            // 
+            // quarantinedButton
+            // 
+            this.quarantinedButton.BackColor = System.Drawing.Color.Firebrick;
+            this.quarantinedButton.FlatAppearance.BorderSize = 0;
+            this.quarantinedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.quarantinedButton.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.quarantinedButton.ForeColor = System.Drawing.Color.White;
+            this.quarantinedButton.Location = new System.Drawing.Point(420, 230);
+            this.quarantinedButton.Name = "quarantinedButton";
+            this.quarantinedButton.Size = new System.Drawing.Size(126, 35);
+            this.quarantinedButton.TabIndex = 17;
+            this.quarantinedButton.Text = "QUARANTINED";
+            this.quarantinedButton.UseVisualStyleBackColor = false;
+            this.quarantinedButton.Click += new System.EventHandler(this.quarantinedButton_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.SystemColors.Control;
+            this.label10.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(3, 2);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(158, 20);
+            this.label10.TabIndex = 35;
+            this.label10.Text = "INVENTORY SUMMARY:";
             // 
             // label7
             // 
@@ -278,21 +304,6 @@
             this.releasedButton.UseVisualStyleBackColor = false;
             this.releasedButton.Click += new System.EventHandler(this.releasedButton_Click);
             // 
-            // quarantinedButton
-            // 
-            this.quarantinedButton.BackColor = System.Drawing.Color.Firebrick;
-            this.quarantinedButton.FlatAppearance.BorderSize = 0;
-            this.quarantinedButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.quarantinedButton.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quarantinedButton.ForeColor = System.Drawing.Color.White;
-            this.quarantinedButton.Location = new System.Drawing.Point(420, 230);
-            this.quarantinedButton.Name = "quarantinedButton";
-            this.quarantinedButton.Size = new System.Drawing.Size(126, 35);
-            this.quarantinedButton.TabIndex = 17;
-            this.quarantinedButton.Text = "QUARANTINED";
-            this.quarantinedButton.UseVisualStyleBackColor = false;
-            this.quarantinedButton.Click += new System.EventHandler(this.quarantinedButton_Click);
-            // 
             // removedButton
             // 
             this.removedButton.BackColor = System.Drawing.Color.Firebrick;
@@ -386,6 +397,34 @@
             this.chart1.TabIndex = 15;
             this.chart1.Text = "chart1";
             this.chart1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chart1_MouseClick);
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.SystemColors.Control;
+            this.panel3.Location = new System.Drawing.Point(2, 2);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(671, 21);
+            this.panel3.TabIndex = 36;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.SystemColors.Control;
+            this.panel4.Controls.Add(this.label8);
+            this.panel4.Location = new System.Drawing.Point(0, 199);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(671, 38);
+            this.panel4.TabIndex = 37;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.SystemColors.Control;
+            this.label8.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(451, 6);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(74, 20);
+            this.label8.TabIndex = 28;
+            this.label8.Text = "END DATE";
             // 
             // chart2
             // 
@@ -549,6 +588,14 @@
             this.b_inventoryALL.UseVisualStyleBackColor = false;
             this.b_inventoryALL.Click += new System.EventHandler(this.b_inventoryALL_Click);
             // 
+            // panel5
+            // 
+            this.panel5.BackColor = System.Drawing.Color.Firebrick;
+            this.panel5.Location = new System.Drawing.Point(-14, 8);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(694, 43);
+            this.panel5.TabIndex = 42;
+            // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.dTypeFilter);
@@ -580,77 +627,6 @@
             this.dTypeFilter.Size = new System.Drawing.Size(106, 28);
             this.dTypeFilter.TabIndex = 38;
             this.dTypeFilter.SelectedIndexChanged += new System.EventHandler(this.dTypeFilter_SelectedIndexChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(404, 10);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(157, 20);
-            this.label4.TabIndex = 37;
-            this.label4.Text = "SORT BY BLOOD TYPE:";
-            // 
-            // b_donorViable
-            // 
-            this.b_donorViable.BackColor = System.Drawing.Color.Firebrick;
-            this.b_donorViable.FlatAppearance.BorderSize = 0;
-            this.b_donorViable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_donorViable.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_donorViable.ForeColor = System.Drawing.Color.White;
-            this.b_donorViable.Location = new System.Drawing.Point(277, 4);
-            this.b_donorViable.Name = "b_donorViable";
-            this.b_donorViable.Size = new System.Drawing.Size(77, 33);
-            this.b_donorViable.TabIndex = 36;
-            this.b_donorViable.Text = "VIABLE";
-            this.b_donorViable.UseVisualStyleBackColor = false;
-            this.b_donorViable.Click += new System.EventHandler(this.b_donorViable_Click);
-            // 
-            // b_donorBanned
-            // 
-            this.b_donorBanned.BackColor = System.Drawing.Color.Firebrick;
-            this.b_donorBanned.FlatAppearance.BorderSize = 0;
-            this.b_donorBanned.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_donorBanned.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_donorBanned.ForeColor = System.Drawing.Color.White;
-            this.b_donorBanned.Location = new System.Drawing.Point(187, 4);
-            this.b_donorBanned.Name = "b_donorBanned";
-            this.b_donorBanned.Size = new System.Drawing.Size(83, 33);
-            this.b_donorBanned.TabIndex = 35;
-            this.b_donorBanned.Text = "BANNED";
-            this.b_donorBanned.UseVisualStyleBackColor = false;
-            this.b_donorBanned.Click += new System.EventHandler(this.b_donorBanned_Click);
-            // 
-            // b_donorContactable
-            // 
-            this.b_donorContactable.BackColor = System.Drawing.Color.Firebrick;
-            this.b_donorContactable.FlatAppearance.BorderSize = 0;
-            this.b_donorContactable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_donorContactable.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_donorContactable.ForeColor = System.Drawing.Color.White;
-            this.b_donorContactable.Location = new System.Drawing.Point(63, 4);
-            this.b_donorContactable.Name = "b_donorContactable";
-            this.b_donorContactable.Size = new System.Drawing.Size(118, 33);
-            this.b_donorContactable.TabIndex = 34;
-            this.b_donorContactable.Text = "CONTACTABLE";
-            this.b_donorContactable.UseVisualStyleBackColor = false;
-            this.b_donorContactable.Click += new System.EventHandler(this.b_donorContactable_Click);
-            // 
-            // b_donorAll
-            // 
-            this.b_donorAll.BackColor = System.Drawing.Color.Firebrick;
-            this.b_donorAll.FlatAppearance.BorderSize = 0;
-            this.b_donorAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.b_donorAll.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.b_donorAll.ForeColor = System.Drawing.Color.White;
-            this.b_donorAll.Location = new System.Drawing.Point(6, 4);
-            this.b_donorAll.Name = "b_donorAll";
-            this.b_donorAll.Size = new System.Drawing.Size(51, 33);
-            this.b_donorAll.TabIndex = 33;
-            this.b_donorAll.Text = "ALL";
-            this.b_donorAll.UseVisualStyleBackColor = false;
-            this.b_donorAll.Click += new System.EventHandler(this.b_donorAll_Click);
             // 
             // dataGridView3
             // 
@@ -708,6 +684,90 @@
             this.Contactable.Name = "Contactable";
             this.Contactable.ReadOnly = true;
             // 
+            // panel6
+            // 
+            this.panel6.BackColor = System.Drawing.Color.Firebrick;
+            this.panel6.Controls.Add(this.b_donorAll);
+            this.panel6.Controls.Add(this.label4);
+            this.panel6.Controls.Add(this.b_donorContactable);
+            this.panel6.Controls.Add(this.b_donorViable);
+            this.panel6.Controls.Add(this.b_donorBanned);
+            this.panel6.Location = new System.Drawing.Point(-3, 9);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(694, 43);
+            this.panel6.TabIndex = 43;
+            // 
+            // b_donorAll
+            // 
+            this.b_donorAll.BackColor = System.Drawing.Color.Firebrick;
+            this.b_donorAll.FlatAppearance.BorderSize = 0;
+            this.b_donorAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_donorAll.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_donorAll.ForeColor = System.Drawing.Color.White;
+            this.b_donorAll.Location = new System.Drawing.Point(6, 4);
+            this.b_donorAll.Name = "b_donorAll";
+            this.b_donorAll.Size = new System.Drawing.Size(51, 33);
+            this.b_donorAll.TabIndex = 33;
+            this.b_donorAll.Text = "ALL";
+            this.b_donorAll.UseVisualStyleBackColor = false;
+            this.b_donorAll.Click += new System.EventHandler(this.b_donorAll_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(404, 10);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(157, 20);
+            this.label4.TabIndex = 37;
+            this.label4.Text = "SORT BY BLOOD TYPE:";
+            // 
+            // b_donorContactable
+            // 
+            this.b_donorContactable.BackColor = System.Drawing.Color.Firebrick;
+            this.b_donorContactable.FlatAppearance.BorderSize = 0;
+            this.b_donorContactable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_donorContactable.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_donorContactable.ForeColor = System.Drawing.Color.White;
+            this.b_donorContactable.Location = new System.Drawing.Point(63, 4);
+            this.b_donorContactable.Name = "b_donorContactable";
+            this.b_donorContactable.Size = new System.Drawing.Size(118, 33);
+            this.b_donorContactable.TabIndex = 34;
+            this.b_donorContactable.Text = "CONTACTABLE";
+            this.b_donorContactable.UseVisualStyleBackColor = false;
+            this.b_donorContactable.Click += new System.EventHandler(this.b_donorContactable_Click);
+            // 
+            // b_donorViable
+            // 
+            this.b_donorViable.BackColor = System.Drawing.Color.Firebrick;
+            this.b_donorViable.FlatAppearance.BorderSize = 0;
+            this.b_donorViable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_donorViable.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_donorViable.ForeColor = System.Drawing.Color.White;
+            this.b_donorViable.Location = new System.Drawing.Point(277, 4);
+            this.b_donorViable.Name = "b_donorViable";
+            this.b_donorViable.Size = new System.Drawing.Size(77, 33);
+            this.b_donorViable.TabIndex = 36;
+            this.b_donorViable.Text = "VIABLE";
+            this.b_donorViable.UseVisualStyleBackColor = false;
+            this.b_donorViable.Click += new System.EventHandler(this.b_donorViable_Click);
+            // 
+            // b_donorBanned
+            // 
+            this.b_donorBanned.BackColor = System.Drawing.Color.Firebrick;
+            this.b_donorBanned.FlatAppearance.BorderSize = 0;
+            this.b_donorBanned.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.b_donorBanned.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.b_donorBanned.ForeColor = System.Drawing.Color.White;
+            this.b_donorBanned.Location = new System.Drawing.Point(187, 4);
+            this.b_donorBanned.Name = "b_donorBanned";
+            this.b_donorBanned.Size = new System.Drawing.Size(83, 33);
+            this.b_donorBanned.TabIndex = 35;
+            this.b_donorBanned.Text = "BANNED";
+            this.b_donorBanned.UseVisualStyleBackColor = false;
+            this.b_donorBanned.Click += new System.EventHandler(this.b_donorBanned_Click);
+            // 
             // oSearchField
             // 
             this.oSearchField.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -732,10 +792,10 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Geogrotesque Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(7, 76);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(56, 20);
+            this.label5.Size = new System.Drawing.Size(60, 20);
             this.label5.TabIndex = 23;
             this.label5.Text = "Search";
             // 
@@ -843,6 +903,7 @@
             this.notificationsList.TabIndex = 29;
             this.notificationsList.UseCompatibleStateImageBehavior = false;
             this.notificationsList.View = System.Windows.Forms.View.List;
+            this.notificationsList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notificationsList_MouseDoubleClick);
             // 
             // label3
             // 
@@ -871,7 +932,7 @@
             // 
             // panel1
             // 
-            this.panel1.Font = new System.Drawing.Font("Geogrotesque Rg", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel1.Location = new System.Drawing.Point(-5, 65);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(255, 194);
@@ -908,69 +969,9 @@
             this.label9.TabIndex = 35;
             this.label9.Text = "GET DONORS";
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.SystemColors.Control;
-            this.label10.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(3, 2);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(158, 20);
-            this.label10.TabIndex = 35;
-            this.label10.Text = "INVENTORY SUMMARY:";
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.SystemColors.Control;
-            this.panel3.Location = new System.Drawing.Point(2, 2);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(671, 21);
-            this.panel3.TabIndex = 36;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.SystemColors.Control;
-            this.label11.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(3, 205);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(187, 20);
-            this.label11.TabIndex = 37;
-            this.label11.Text = "INVENTORY TRENDS FROM:";
-            // 
-            // panel4
-            // 
-            this.panel4.BackColor = System.Drawing.SystemColors.Control;
-            this.panel4.Controls.Add(this.label8);
-            this.panel4.Location = new System.Drawing.Point(0, 199);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(671, 38);
-            this.panel4.TabIndex = 37;
-            // 
-            // panel5
-            // 
-            this.panel5.BackColor = System.Drawing.Color.Firebrick;
-            this.panel5.Location = new System.Drawing.Point(-14, 8);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(694, 43);
-            this.panel5.TabIndex = 42;
-            // 
-            // panel6
-            // 
-            this.panel6.BackColor = System.Drawing.Color.Firebrick;
-            this.panel6.Controls.Add(this.b_donorAll);
-            this.panel6.Controls.Add(this.label4);
-            this.panel6.Controls.Add(this.b_donorContactable);
-            this.panel6.Controls.Add(this.b_donorViable);
-            this.panel6.Controls.Add(this.b_donorBanned);
-            this.panel6.Location = new System.Drawing.Point(-3, 9);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(694, 43);
-            this.panel6.TabIndex = 43;
-            // 
             // panel7
             // 
-            this.panel7.Font = new System.Drawing.Font("Geogrotesque Rg", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.249999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel7.Location = new System.Drawing.Point(908, 64);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(255, 598);
@@ -1012,18 +1013,18 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
