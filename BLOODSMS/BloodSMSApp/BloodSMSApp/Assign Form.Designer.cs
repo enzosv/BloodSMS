@@ -287,6 +287,7 @@
             this.label9.Size = new System.Drawing.Size(203, 29);
             this.label9.TabIndex = 73;
             this.label9.Text = "ASSIGN TO PATIENT";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // Assign_Form
             // 

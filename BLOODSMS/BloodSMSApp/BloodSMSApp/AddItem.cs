@@ -71,6 +71,7 @@ namespace BloodSMSApp
         private void button1_Click(object sender, EventArgs e)
         {
             //if patient
+            /*
             if (isStringValid(pLast.Text, 1) && isStringValid(pFirst.Text, 1) && isStringValid(t_patientAge.Text, 1))
             {
                 int age;
@@ -89,8 +90,9 @@ namespace BloodSMSApp
                     }
                 }
             }
+             * */
             //if no patient
-            else if (String.IsNullOrEmpty(pLast.Text) && String.IsNullOrEmpty(pFirst.Text) && String.IsNullOrEmpty(t_patientAge.Text))
+            if (String.IsNullOrEmpty(pLast.Text) && String.IsNullOrEmpty(pFirst.Text) && String.IsNullOrEmpty(t_patientAge.Text))
             {
                 Blood b;
                 if (hasDonor)
