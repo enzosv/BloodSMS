@@ -27,7 +27,6 @@ namespace BloodSMSApp
         public MainMenu()
         {
             InitializeComponent();
-            
         }
 
         private void MainMenu_Load(object sender, EventArgs e)
@@ -123,6 +122,7 @@ namespace BloodSMSApp
         void RefreshNotifications()
         {
             notifications.Clear();
+            notifications.Add("Low Supply:");
             //check low level
             bloodType blood_type;
             for (int i = 0; i < storage.bloodTypes.Length; i++)
@@ -130,14 +130,16 @@ namespace BloodSMSApp
                 blood_type = (bloodType)i;
                 if (storage.AlertLowLevel(i))
                 {
-                    notifications.Add("Low " + MyEnums.GetDescription(blood_type) + " Supply");
+                    notifications.Add(MyEnums.GetDescription(blood_type));
                 }
             }
+            notifications.Add("");
+            notifications.Add("Near Expiration:");
 
             //check near expirations
             foreach (string[] s in storage.AlertNearExpiration())
             {
-                notifications.Add(s[1] + " - " + s[0] + " near expiration");
+                notifications.Add(s[1] + " - " + s[0]);
             }
             notificationsList.Items.Clear();
             for (int i = 0; i < notifications.Count; i++)
@@ -503,10 +505,10 @@ namespace BloodSMSApp
         private void notificationsList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             string item = notificationsList.SelectedItems[0].Text;
-            if (item.Contains("expiration"))
+            if (item.Contains(" - "))
             {
                 string[] tokens = item.Split(' ');
-                Blood b = storage.findBlood(tokens[0]);
+                Blood b = storage.findBlood(tokens[0]); 
                 if (b != null)
                 {
                     ShowBlood sb = new ShowBlood(this, b.Accession_number);
