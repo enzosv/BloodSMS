@@ -19,7 +19,7 @@ namespace BloodSMSApp
             InitializeComponent();
             parent = mainmenu;
             storage = parent.storage;
-            dateTimePicker1.MaxDate = DateTime.Now;
+            dateTimePicker1.MaxDate = DateTime.Today;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -41,6 +41,7 @@ namespace BloodSMSApp
                             }
                             else if (d.Is_viable)
                             {
+                                //MessageBox.Show("Next Available: " + d.Next_available.ToString() + ". " + dateTimePicker1.Value.ToString());
                                 if (d.Next_available <= dateTimePicker1.Value)
                                 {
                                     AddItem a = new AddItem(storage, d, aNumber.Text, dateTimePicker1.Value);

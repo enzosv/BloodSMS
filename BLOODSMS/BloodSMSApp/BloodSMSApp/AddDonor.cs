@@ -315,6 +315,8 @@ namespace BloodSMSApp
                 hCity.Items.Add(MyEnums.GetDescription(x));
                 oCity.Items.Add(MyEnums.GetDescription(x));
             }
+            dateRegisteredField.MaxDate = DateTime.Today;
+            nextAvailableField.MaxDate = DateTime.Today;
             populateData();
         }
 

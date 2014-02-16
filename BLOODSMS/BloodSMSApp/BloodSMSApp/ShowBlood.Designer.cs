@@ -264,7 +264,7 @@
             this.assignButton.Name = "assignButton";
             this.assignButton.Size = new System.Drawing.Size(84, 32);
             this.assignButton.TabIndex = 35;
-            this.assignButton.Text = "ASSIGN";
+            this.assignButton.Text = "MATCH";
             this.assignButton.UseVisualStyleBackColor = false;
             this.assignButton.Click += new System.EventHandler(this.assignButton_Click);
             // 

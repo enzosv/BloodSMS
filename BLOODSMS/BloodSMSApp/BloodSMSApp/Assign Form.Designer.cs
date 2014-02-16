@@ -145,7 +145,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(88, 33);
             this.button2.TabIndex = 64;
-            this.button2.Text = "ASSIGN";
+            this.button2.Text = "MATCH";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -284,10 +284,9 @@
             this.label9.ForeColor = System.Drawing.Color.White;
             this.label9.Location = new System.Drawing.Point(11, 10);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(203, 29);
+            this.label9.Size = new System.Drawing.Size(201, 29);
             this.label9.TabIndex = 73;
-            this.label9.Text = "ASSIGN TO PATIENT";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
+            this.label9.Text = "MATCH TO PATIENT";
             // 
             // Assign_Form
             // 
