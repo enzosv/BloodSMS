@@ -114,8 +114,9 @@ namespace BloodSMSApp
                 dataGridView3.Rows[i].Cells[1].Value = MyEnums.GetDescription(d.Blood_type);
                 dataGridView3.Rows[i].Cells[2].Value = MyEnums.GetDescription(d.Home_city);
                 dataGridView3.Rows[i].Cells[3].Value = d.Date_registered.ToShortDateString();
-                dataGridView3.Rows[i].Cells[4].Value = d.Is_viable;
-                dataGridView3.Rows[i].Cells[5].Value = d.Is_contactable;
+                dataGridView3.Rows[i].Cells[4].Value = d.Next_available.ToShortDateString();
+                dataGridView3.Rows[i].Cells[5].Value = d.Is_viable;
+                dataGridView3.Rows[i].Cells[6].Value = d.Is_contactable;
             }
         }
 

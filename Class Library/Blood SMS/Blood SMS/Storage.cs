@@ -25,7 +25,7 @@ namespace Blood_SMS
         string connectionString;
 
         const int MINIMUMBLOODVALUE = 5;
-        const int MINIMUMEXPIRYALERTVALUE = 3;
+        const int MINIMUMEXPIRYALERTVALUE = 7;
         readonly string[] BLOOD_FIELDS = { "accession_number", "blood_type", "donor_id", "date_donated", "date_removed" };
         readonly string[] DONOR_FIELDS = { "last_name", "first_name", "middle_initial", "blood_type", "home_province", "home_city", "home_street", "office_province", "office_city", "office_street", "home_landline", "office_landline", "email", "cellphone", "educational_attainment", "birth_date", "date_registered", "next_available", "is_contactable", "is_viable", "reason_for_deferral" };
         readonly string[] COMPONENT_FIELDS = { "accession_number", "component_name", "removal_type", "date_processed", "date_expired", "date_assigned", "date_removed", "patient_last_name", "patient_first_name", "patient_middle_initial", "patient_age", "reason_for_removal" };
